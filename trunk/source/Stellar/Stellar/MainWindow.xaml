@@ -5,8 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Stellar"
         mc:Ignorable="d"
-        Title="Stellar" Height="450" Width="800">
+        Title="Stellar" Height="500" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" MinWidth="200" />
+            <ColumnDefinition Width="7*" />
+        </Grid.ColumnDefinitions>
 
+        <Button Content="Test 1" Grid.Column="0"/>
+        <Viewbox Grid.Column="1" Stretch="None">
+            <Canvas Height="725" Width="900">
+                <Canvas.Background>
+                    <ImageBrush ImageSource="img/fond_ciel.jpg" />
+                </Canvas.Background>
+
+
+                <Ellipse Stroke="Black" Fill="Yellow" Height="20" Width="20" Panel.ZIndex="2" 
+                    Canvas.Left="120" Canvas.Top="300"/>
+                <Ellipse Stroke="Black" Fill="Yellow" Height="20" Width="20" Panel.ZIndex="2" 
+                    Canvas.Left="170" Canvas.Top="150"/>
+                <Ellipse Stroke="Black" Fill="Yellow" Height="20" Width="20" Panel.ZIndex="2" 
+                    Canvas.Left="300" Canvas.Top="250"/>
+                <Ellipse Stroke="Black" Fill="Yellow" Height="20" Width="20" Panel.ZIndex="2" 
+                    Canvas.Left="350" Canvas.Top="100"/>
+                <Ellipse Stroke="Black" Fill="Yellow" Height="20" Width="20" Panel.ZIndex="2" 
+                    Canvas.Left="450" Canvas.Top="200"/>
+                <Line Stroke="DeepSkyBlue" StrokeThickness="2" X1="130" X2="180" Y1="310" Y2="160" />
+                <Line Stroke="DeepSkyBlue" StrokeThickness="2" X1="180" X2="310" Y1="160" Y2="260" />
+                <Line Stroke="DeepSkyBlue" StrokeThickness="2" X1="310" X2="360" Y1="260" Y2="110" />
+                <Line Stroke="DeepSkyBlue" StrokeThickness="2" X1="360" X2="460" Y1="110" Y2="210" />
+            </Canvas>
+        </Viewbox>
     </Grid>
+    
+    
+
 </Window>
