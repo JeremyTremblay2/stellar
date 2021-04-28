@@ -12,12 +12,32 @@
             <ColumnDefinition Width="7*" />
         </Grid.ColumnDefinitions>
 
-        <Button Content="Test 1" Grid.Column="0"/>
-        <Viewbox Grid.Column="1" Stretch="None">
+        <StackPanel>
+            <TextBox />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <Button Content="Test 1" Grid.Column="0"/>
+                <Button Content="Test 2" Grid.Column="1"/>
+                <Button Content="Test 3" Grid.Column="2"/>
+                <Button Content="Test 4" Grid.Column="3"/>
+            </Grid>
+            <ListBox>
+                
+            </ListBox>
+        </StackPanel>
+
+        <Image Source="img/fond_ciel.jpg" Grid.Column="1" Stretch="UniformToFill"/>
+        <Viewbox Grid.Column="1" Stretch="Uniform">
             <Canvas Height="725" Width="900">
-                <Canvas.Background>
+                <!--<Canvas.Background>
                     <ImageBrush ImageSource="img/fond_ciel.jpg" />
-                </Canvas.Background>
+                </Canvas.Background>-->
 
 
                 <Ellipse Stroke="Black" Fill="Yellow" Height="20" Width="20" Panel.ZIndex="2" 
