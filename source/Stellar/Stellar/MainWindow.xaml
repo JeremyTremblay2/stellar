@@ -33,7 +33,7 @@
         </StackPanel>
 
         <Image Source="img/fond_ciel.jpg" Grid.Column="1" Stretch="UniformToFill"/>
-        <Viewbox Grid.Column="1" Stretch="Uniform">
+        <Viewbox Grid.Column="1" Stretch="UniformToFill">
             <Canvas Height="725" Width="900">
                 <!--<Canvas.Background>
                     <ImageBrush ImageSource="img/fond_ciel.jpg" />
