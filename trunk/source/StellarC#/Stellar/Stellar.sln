@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StellarModele", "StellarModele\StellarModele.csproj", "{27C66204-C8DF-499B-9B0F-E1012699ED43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StellarModele", "StellarModele\StellarModele.csproj", "{27C66204-C8DF-499B-9B0F-E1012699ED43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StellarTest", "StellarTest\StellarTest.csproj", "{57528331-7B4A-4EDE-ADFC-EE26AE91D288}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{27C66204-C8DF-499B-9B0F-E1012699ED43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27C66204-C8DF-499B-9B0F-E1012699ED43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27C66204-C8DF-499B-9B0F-E1012699ED43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57528331-7B4A-4EDE-ADFC-EE26AE91D288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57528331-7B4A-4EDE-ADFC-EE26AE91D288}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57528331-7B4A-4EDE-ADFC-EE26AE91D288}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57528331-7B4A-4EDE-ADFC-EE26AE91D288}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
