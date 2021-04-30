@@ -6,10 +6,12 @@ namespace StellarTest
     public class testPoint
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestConstructeur() //test du constructeur + getter
         {
             Point unPoint = new Point(42,42);
-            int ptX = unPoint.x;
+            Assert.IsNotNull(unPoint.x);
+            Assert.IsNotNull(unPoint.y);
+            Assert.AreEqual(unPoint.x, 42);
         }
     }
 }
