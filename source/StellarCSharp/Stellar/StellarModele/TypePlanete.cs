@@ -4,6 +4,9 @@ using System.Text;
 
 namespace StellarModele
 {
+    /// <summary>
+    /// Énumération des différents types de planètes
+    /// </summary>
     public enum TypePlanete
     {
         Tellurique,
