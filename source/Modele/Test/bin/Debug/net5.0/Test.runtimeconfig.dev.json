@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\jtrem\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\jtrem\\.nuget\\packages"
-    ]
-  }
-}
