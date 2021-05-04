@@ -10,8 +10,11 @@ namespace UnitTests
 {
     public class UnitTest_Point
     {
+        /// <summary>
+        /// test du constructeur + getter
+        /// </summary>
         [Fact]
-        public void TestConstructeur() //test du constructeur + getter
+        public void TestConstructeur()
         {
             Point unPoint = new Point(42, 42);
             //Assert.IsNotNull(unPoint.x);
@@ -20,4 +23,4 @@ namespace UnitTests
         }
     }
 }
-}
+
