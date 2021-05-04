@@ -6,8 +6,11 @@ namespace UnitTests
 {
     public class UnitTest_Segment
     {
+        /// <summary>
+        /// test du constructeur + getter
+        /// </summary>
         [Fact]
-        public void TestConstructeur() //test du constructeur + getter
+        public void TestConstructeur()
         {
             Point pt1 = new Point(0, 0);
             Point pt2 = new Point(1, 1);

@@ -1,9 +1,17 @@
 ﻿using System;
 
 namespace Modele
-{
+{   
+    /// <summary>
+    /// Point représente les coordonnées d'un point sur la carte (l'emplacement des astres)
+    /// </summary>
     public class Point
     {
+        /// <summary>
+        /// Constructeur de Point
+        /// </summary>
+        /// <param name="x">coordonnée x</param>
+        /// <param name="y">coordonnée y</param>
         public Point(int x, int y)
         {
             X = x;

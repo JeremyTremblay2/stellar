@@ -7,8 +7,16 @@ using System.Threading.Tasks;
 
 namespace Modele
 {
+    /// <summary>
+    /// Segment représente les coordonnées de deux points reliés entre eux (liaisons entre les étoiles sur la carte)
+    /// </summary>
     public class Segment
     {
+        /// <summary>
+        /// Constructeur de Segment
+        /// </summary>
+        /// <param name="point1">coordonnées du premier point du segment</param>
+        /// <param name="point2">coordonnées du deuxième point du segment</param>
         public Segment(Point point1, Point point2)
         {
             Point1 = point1;
