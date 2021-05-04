@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{31F2D161-F8A1-49D8-93B2-B54F3D1F8922}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{95DDFF4D-F6E1-48A0-9481-3D5A693B0104}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{95DDFF4D-F6E1-48A0-9481-3D5A693B0104}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
