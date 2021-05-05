@@ -19,6 +19,11 @@ namespace Modele
             Constellation = constellation;
             Luminosite = luminosite;
         }
+
+        public Etoile()
+        {
+        }
+
         /// <summary>
         /// Constructeur de Etoile
         /// </summary>

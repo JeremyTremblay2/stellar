@@ -23,7 +23,10 @@ namespace Test
                 new Etoile("Z0-x2V", 4, 78, 127, true, false, new Point(32,36), TypeEtoile.SupergeanteRouge, "Grande Ours", 1300),
                 new Planete("Terre", 15000000, 1, 15, true, true, new Point(89, 112), TypePlanete.Tellurique, "Oui", true),
                 new Planete("Saturne", 332131681, 89, 40, false, false, null, TypePlanete.Gazeuse, "Non", false),
-                new Planete("Uranus", 541331819318, 2, -20, false, true, new Point(187, 263), TypePlanete.Naine, "Non", false)
+                new Planete("Uranus", 541331819318, 2, -20, false, true, new Point(187, 263), TypePlanete.Naine, "Non", false),
+                new Etoile()
+                        .AvecNom("Sirius")
+                        .AvecAge(45)
             };
 
             foreach(Astre astre in lesAstres)
