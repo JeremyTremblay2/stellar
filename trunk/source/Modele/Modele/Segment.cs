@@ -29,5 +29,12 @@ namespace Modele
         {
             return $"Segment entre les points {Point1} et {Point2}";
         }
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, this)) return true;
+            if (ReferenceEquals(obj, null) || !GetType().Equals(obj.GetType())) return false;
+            Segment seg = (Segment) obj;
+            return seg.Point1.Equals(this.Point1) && seg.Point2.Equals(this.Point2);
+        }
     }
 }
