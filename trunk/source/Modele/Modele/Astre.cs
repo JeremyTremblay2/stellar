@@ -12,6 +12,10 @@ namespace Modele
     /// </summary>
     public abstract class Astre
     {
+        public Astre()
+        {
+        }
+
         public Astre(string nom, ulong age = 0, byte masse = 0, int temperature = 1000, bool favori = false, bool personnalise = false, Point positionAstre = null)
         {
             Nom = nom;
@@ -31,6 +35,16 @@ namespace Modele
         public bool Personnalise { get; private set; }
         public Point PositionAstre { get; set; }
 
+        public Astre AvecNom(string nom)
+        {
+            Nom = nom;
+            return this;
+        }
+        public Astre AvecAge(ulong age)
+        {
+            Age = age;
+            return this;
+        }
         public void ModifierFavori()
         {
             if (Favori)
