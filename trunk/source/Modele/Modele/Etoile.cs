@@ -1,52 +1,47 @@
-﻿using Modele;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Modele
+﻿namespace Modele
 {
+    /// <summary>
+    /// Une étoile est un astre. Une étoile peut être dans une constellation, possède un type et une luminosité.
+    /// </summary>
     public class Etoile : Astre
     {
         /// <summary>
-        /// Étoile est un astre pouvant être reliée à d'étoiles par des segments. Étoile peut être dans une constellation et possède une luminosité
+        /// Constructeur vide, utilisé par les fabriques d'étoiles.
         /// </summary>
-        public Etoile(string nom, ulong age = 0, byte masse = 0, int temperature = 1000, bool favori = false, bool personnalise = false, Point positionAstre = null, TypeEtoile type = TypeEtoile.NaineBlanche, string constellation = "Inconnue", int luminosite = 1000)
-            : base(nom, age, masse, temperature, favori, personnalise, positionAstre)
+        public Etoile() { }
+
+        /// <summary>
+        /// Constructeur d'étoiles.
+        /// </summary>
+        /// <param name="nom">Le nom de l'étoile</param>
+        /// <param name="description">Une courte description de l'étoile</param>
+        /// <param name="age">L'âge de l'étoile</param>
+        /// <param name="masse">La masse de l'étoile (en masse solaire)</param>
+        /// <param name="temperature">La température de l'étoile (en Kelvin)</param>
+        /// <param name="personnalise">Un booléen indiquant si l'étoile est personnalisée (créée par l'utilisateur) ou non</param>
+        /// <param name="type">Le type de l'étoile</param>
+        /// <param name="constellation">Le nom de la constellation auquelle appartient l'étoile</param>
+        /// <param name="luminosite">La luminosité de l'étoile (en luminosité solaire)</param>
+        public Etoile(string nom, string description, long age = 0, float masse = 0.0f, int temperature = 1000, bool personnalise = false, TypeEtoile type = TypeEtoile.NaineBlanche, string constellation = "Inconnue", float luminosite = 1000)
+            : base(nom, description, age, masse, temperature, personnalise)
         {
             Type = type;
             Constellation = constellation;
             Luminosite = luminosite;
         }
+        
+        public TypeEtoile Type { get; set; }
 
-        public Etoile()
-        {
-        }
+        public string Constellation { get; set; }
 
-        /// <summary>
-        /// Constructeur de Etoile
-        /// </summary>
-        /// Variables pour les informations sur l'étoile
-        /// <param name="constellation">Nom de la constellation dans laquelle se trouve l'étoile</param>
-        /// <param name="luminosite">Luminosité de l'étoile</param>
-        /// <param name="nom">Nom de l'étoile</param>
-        /// <param name="age">Age de l'étoile</param>
-        /// <param name="masse">Masse de l'étoile</param>
-        /// <param name="temperature">Temperature de l'étoile</param>
-        /// Variables filtres
-        /// <param name="favoris">Etoile dans les favoris de l'utilisateur</param>
-        /// <param name="personnalise">Etoile personnalisée</param>
-        public TypeEtoile Type { get; private set; }
-        public string Constellation { get; private set; }
-        public int Luminosite { get; private set; }
+        public float Luminosite { get; set; }
 
         public override string ToString()
         {
             string chaine = base.ToString();
             chaine += $"\tType d'étoile : {Type}\n";
             chaine += $"\tConstellation : {Constellation}\n";
-            chaine += $"\tLuminosité : {Luminosite} L\n";
+            chaine += $"\tLuminosité : {Luminosite} Lo\n";
             return chaine;
         }
     }

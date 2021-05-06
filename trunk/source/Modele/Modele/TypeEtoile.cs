@@ -12,23 +12,14 @@ namespace Modele
     /// </summary>
     public enum TypeEtoile
     {
-        [EnumMember(Value = "Naine Rouge")]
-        NaineRouge,
-        [EnumMember(Value = "Naine Jaune")]
-        NaineJaune,
-        [EnumMember(Value = "Naine Blanche")]
         NaineBlanche,
-        [EnumMember(Value = "Naine Noire")]
+        NaineRouge,
+        NaineJaune,
         NaineNoire,
-        [EnumMember(Value = "Géante Rouge")]
         GeanteRouge,
-        [EnumMember(Value = "Géante Bleu")]
         GeanteBleu,
-        [EnumMember(Value = "Supergéante Rouge")]
         SupergeanteRouge,
-        [EnumMember(Value = "Etoile à Neutrons")]
         EtoileANeutrons,
-        [EnumMember(Value = "Trou Noir")]
         TrouNoir
     }
 }

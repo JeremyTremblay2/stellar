@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Modele
 {
     /// <summary>
-    /// Constellation répertorie tous les points et les segments lui faisant partie (Les étoiles et les liens entre elles)
+    /// UJne constellation est un ensemble de points reliés par des segments, le tout forme un graphe (Les étoiles et les liens entre elles)
     /// </summary>
     public class Constellation
     {
@@ -17,8 +17,8 @@ namespace Modele
         /// <summary>
         /// Constructeur de Constellation
         /// </summary>
-        /// <param name="points">Prends une liste de points</param>
-        /// <param name="segments">Prends une liste de segments</param>
+        /// <param name="points">Une liste de points qui vont tous être reliés</param>
+        /// <param name="segments">Une liste des segments qui reliront les points entre eux</param>
         public Constellation(List<Point> points, List<Segment> segments)
         {
             lesPoints = points;
@@ -37,18 +37,18 @@ namespace Modele
             lesSegments.Add(seg);
         }
         /// <summary>
-        /// Ajoute un Point dans la list lesPoints
+        /// Ajoute un Point dans la liste lesPoints
         /// </summary>
-        /// <param name="pt">Point à ajouter</param>
+        /// <param name="pt">Le point à rajouter à la constellation</param>
         public void AjoutPoint(Point pt)
         {
             lesPoints.Add(pt);
         }
 
         /// <summary>
-        /// Ajoute un Segment dans la list lesSegments
+        /// Ajoute un Segment dans la liste lesSegments
         /// </summary>
-        /// <param name="seg">Segment à ajouter</param>
+        /// <param name="seg">Le segment à rajouter à la constellation</param>
         public void AjoutSegment(Segment seg)
         {
             lesSegments.Add(seg);

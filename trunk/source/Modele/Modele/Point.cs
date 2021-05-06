@@ -10,8 +10,8 @@ namespace Modele
         /// <summary>
         /// Constructeur de Point
         /// </summary>
-        /// <param name="x">coordonnée x</param>
-        /// <param name="y">coordonnée y</param>
+        /// <param name="x">Coordonnée en x</param>
+        /// <param name="y">Coordonnée en y</param>
         public Point(int x, int y)
         {
             X = x;
@@ -23,8 +23,8 @@ namespace Modele
         /// <summary>
         /// Permets de déplacer un point 
         /// </summary>
-        /// <param name="x">Nouvelle coordonnée x</param>
-        /// <param name="y">Nouvelle coordonnée y</param>
+        /// <param name="x">Nouvelle coordonnée en abscisse qui ser affectée à x</param>
+        /// <param name="y">Nouvelle coordonnée en ordonnée qui sera affectée à y</param>
         public void Deplacer(int x, int y)
         {
             X = x;
