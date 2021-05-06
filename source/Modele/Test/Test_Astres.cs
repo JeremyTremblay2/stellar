@@ -13,62 +13,62 @@ namespace Test
             {
 
                 new FabriqueDEtoile().Initialiser(false)
-                                        .AvecNom("Sirius")
-                                        .AvecDescription("Sirius, également appelée Alpha Canis Majoris (α Canis Majoris/α CMa) par la " +
-                                        "désignation de Bayer, est l'étoile principale de la constellation du Grand Chien. Vue de la " +
-                                        "Terre, Sirius est l'étoile la plus brillante du ciel après le Soleil.")
-                                        .AvecAge(250000000)
-                                        .AvecMasse(1.03f)
-                                        .AvecTemperature(9900)
-                                        .AvecLuminosite(26.1f)
-                                        .EstDansLaConstellation("Grand Chien")
-                                        .AvecType(TypeEtoile.NaineBlanche)
-                                        .Construire(),
+                                      .AvecNom("Sirius")
+                                      .AvecDescription("Sirius, également appelée Alpha Canis Majoris (α Canis Majoris/α CMa) par la " +
+                                      "désignation de Bayer, est l'étoile principale de la constellation du Grand Chien. Vue de la " +
+                                      "Terre, Sirius est l'étoile la plus brillante du ciel après le Soleil.")
+                                      .AvecAge(250000000)
+                                      .AvecMasse(1.03f)
+                                      .AvecTemperature(9900)
+                                      .AvecLuminosite(26.1f)
+                                      .EstDansLaConstellation("Grand Chien")
+                                      .AvecType(TypeEtoile.NaineBlanche)
+                                      .Construire(),
 
                 new FabriqueDEtoile().Initialiser(false)
-                                        .AvecNom("Soleil")
-                                        .AvecDescription("Le Soleil est l’étoile du Système solaire. Dans la classification astronomique, " +
-                                        "c’est une étoile de type naine jaune d'une masse d'environ 1,989 1 × 1030 kg, composée d’hydrogène et d’hélium.")
-                                        .AvecAge(460000000)
-                                        .AvecMasse(1f)
-                                        .AvecTemperature(5773)
-                                        .AvecLuminosite(1)
-                                        .AvecType(TypeEtoile.NaineJaune)
-                                        .Construire(),
+                                      .AvecNom("Soleil")
+                                      .AvecDescription("Le Soleil est l’étoile du Système solaire. Dans la classification astronomique, " +
+                                      "c’est une étoile de type naine jaune d'une masse d'environ 1,989 1 × 1030 kg, composée d’hydrogène et d’hélium.")
+                                      .AvecAge(460000000)
+                                      .AvecMasse(1f)
+                                      .AvecTemperature(5773)
+                                      .AvecLuminosite(1)
+                                      .AvecType(TypeEtoile.NaineJaune)
+                                      .Construire(),
 
                 new FabriqueDEtoile().Initialiser(false)
-                                        .AvecNom("Bételgeuse")
-                                        .AvecDescription("Bételgeuse (α Orionis) est une étoile variable semi-régulière de type supergéante " +
-                                        "rouge, dans la constellation d’Orion, située à une distance très difficile à établir.")
-                                        .AvecAge(8000000)
-                                        .AvecMasse(15)
-                                        .AvecTemperature(3600)
-                                        .AvecLuminosite(17)
-                                        .EstDansLaConstellation("Orion")
-                                        .AvecType(TypeEtoile.SupergeanteRouge)
-                                        .Construire(),
+                                      .AvecNom("Bételgeuse")
+                                      .AvecDescription("Bételgeuse (α Orionis) est une étoile variable semi-régulière de type supergéante " +
+                                      "rouge, dans la constellation d’Orion, située à une distance très difficile à établir.")
+                                      .AvecAge(8000000)
+                                      .AvecMasse(15)
+                                      .AvecTemperature(3600)
+                                      .AvecLuminosite(17)
+                                      .EstDansLaConstellation("Orion")
+                                      .AvecType(TypeEtoile.SupergeanteRouge)
+                                      .Construire(),
 
                 new FabriqueDEtoile().Initialiser(false)
-                                        .AvecNom("Castor")
-                                        .AvecDescription("Castor (ou Alpha Geminorum) est la seconde étoile la plus brillante de la " +
-                                        "constellation des Gémeaux et une des plus brillantes étoiles du ciel nocturne.")
-                                        .AvecAge(370000000)
-                                        .AvecMasse(1.7f)
-                                        .AvecTemperature(8840)
-                                        .AvecLuminosite(14)
-                                        .EstDansLaConstellation("Gémeaux")
-                                        .Construire(),
+                                      .AvecNom("Castor")
+                                      .AvecDescription("Castor (ou Alpha Geminorum) est la seconde étoile la plus brillante de la " +
+                                      "constellation des Gémeaux et une des plus brillantes étoiles du ciel nocturne.")
+                                      .AvecAge(370000000)
+                                      .AvecMasse(1.7f)
+                                      .AvecTemperature(8840)
+                                      .AvecLuminosite(14)
+                                      .EstDansLaConstellation("Gémeaux")
+                                      .Construire(),
 
                 new FabriqueDEtoile().Initialiser(false)
-                                        .AvecNom("Rigel")
-                                        .AvecDescription("Pollux (β Gem / Beta Geminorum) est l'étoile la plus brillante de la " +
-                                        "constellation des Gémeaux et l'une des plus brillantes du ciel nocturne.")
-                                        .AvecAge(7400000000)
-                                        .AvecMasse(1.86f)
-                                        .AvecTemperature(4865)
-                                        .AvecLuminosite(32)
-                                        .EstDansLaConstellation("Gémeaux")
-                                        .Construire(),
+                                      .AvecNom("Pollux")
+                                      .AvecDescription("Pollux (β Gem / Beta Geminorum) est l'étoile la plus brillante de la " +
+                                      "constellation des Gémeaux et l'une des plus brillantes du ciel nocturne.")
+                                      .AvecAge(7400000000)
+                                      .AvecMasse(1.86f)
+                                      .AvecTemperature(4865)
+                                      .AvecLuminosite(32)
+                                      .EstDansLaConstellation("Gémeaux")
+                                      .Construire(),
             };
 
             List<Planete> lesPlanetes = new List<Planete>()
