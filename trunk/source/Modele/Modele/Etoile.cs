@@ -47,7 +47,7 @@ namespace Modele
         public override string ToString()
         {
             string chaine = base.ToString();
-            chaine += $"\tType d'étoile : {Type}\n";
+            chaine += $"\tType d'étoile : {ExtensionEnumerations.RecupererValeurEnum(Type)}\n";
             chaine += $"\tConstellation : {Constellation}\n";
             chaine += $"\tLuminosité : {Luminosite} Lo\n";
             return chaine;
@@ -74,5 +74,6 @@ namespace Modele
         {
             return (int)(base.GetHashCode() + Type.GetHashCode() + Constellation.GetHashCode() + Luminosite);
         }
+
     }
 }
