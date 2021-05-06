@@ -26,8 +26,12 @@
         {
             if (ReferenceEquals(obj, this)) return true;
             if (ReferenceEquals(obj, null) || !GetType().Equals(obj.GetType())) return false;
-            Segment seg = (Segment) obj;
-            return seg.Point1.Equals(this.Point1) && seg.Point2.Equals(this.Point2);
+            return (obj as Segment).Point1.Equals(this.Point1) && (obj as Segment).Point2.Equals(this.Point2);
+        }
+
+        public override int GetHashCode()
+        {
+            return Point1.GetHashCode() + Point2.GetHashCode();
         }
     }
 }
