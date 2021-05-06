@@ -5,7 +5,7 @@
     /// </summary>
     /// <typeparam name="T">Type de Builder</typeparam>
     /// <typeparam name="P">Type d'Astre (peut-être Etoile ou Planete)</typeparam>
-     public class FabriqueDAstre<T,P> where T : FabriqueDAstre<T,P> where P : Astre, new()
+    public class FabriqueDAstre<T,P> where T : FabriqueDAstre<T,P> where P : Astre, new()
     {
         protected P Astre { get; set; }
 
