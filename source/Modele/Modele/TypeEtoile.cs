@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Modele
 {
@@ -12,14 +7,23 @@ namespace Modele
     /// </summary>
     public enum TypeEtoile
     {
+        [Display(Name = "Naine Blanche")]
         NaineBlanche,
+        [Display(Name = "Naine Rouge")]
         NaineRouge,
+        [Display(Name = "Naine Jaune")]
         NaineJaune,
+        [Display(Name = "Naine Noire")]
         NaineNoire,
+        [Display(Name = "Géante Rouge")]
         GeanteRouge,
+        [Display(Name = "Géante Bleu")]
         GeanteBleu,
+        [Display(Name = "Supergéante Rouge")]
         SupergeanteRouge,
+        [Display(Name = "Etoile à Neutrons")]
         EtoileANeutrons,
+        [Display(Name = "Trou Noir")]
         TrouNoir
     }
 }

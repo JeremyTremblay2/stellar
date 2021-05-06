@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
@@ -142,6 +143,7 @@ namespace Modele
 
         public int CompareTo([AllowNull] Astre autre)
         {
+            Debug.WriteLine(Nom);
             return Nom.CompareTo(autre.Nom);
         }
     }

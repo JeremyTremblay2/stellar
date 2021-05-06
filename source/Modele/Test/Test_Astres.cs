@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Modele;
 
 namespace Test
@@ -78,7 +77,6 @@ namespace Test
                                        .AvecNom("Mars")
                                        .AvecDescription("Mars est la quatrième planète par ordre croissant de la distance au Soleil " +
                                        "et la deuxième par ordre croissant de la taille et de la masse.")
-                                       .AvecDescription("")
                                        .AvecAge(4500000000)
                                        .AvecMasse(0.107f)
                                        .AvecTemperature(210)
@@ -200,6 +198,11 @@ namespace Test
                                        .Construire(),
             };
 
+            lesPlanetes.Sort();
+            lesPlanetes.Reverse();
+            lesEtoiles.Sort();
+            lesEtoiles.Reverse();
+
             foreach (Planete planete in lesPlanetes)
             {
                 Console.WriteLine(planete);
@@ -230,8 +233,6 @@ namespace Test
                 //Console.WriteLine($"e{0} == e{i} ? {testEgalite[0] == testEgalite[i]}");
                 Console.WriteLine($"e{0} equals e{i} ? {testEgalite[0].Equals(testEgalite[i])}");
             }
-            
-
         }
     }
 }
