@@ -40,9 +40,13 @@ namespace Modele
         {
             if (ReferenceEquals(obj, this)) return true;
             if (ReferenceEquals(obj, null) || !GetType().Equals(obj.GetType())) return false;
-            Point pt = (Point) obj;
-            return pt.X == this.X && pt.Y == this.Y;
+            return (obj as Point).X == this.X && (obj as Point).Y == this.Y;
         }
 
+        public override int GetHashCode()
+        {
+            const int premier = 31;
+            return (premier + X) * premier + Y;
+        }
     }
 }
