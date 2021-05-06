@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Modele
 {
     /// <summary>
-    /// UJne constellation est un ensemble de points reliés par des segments, le tout forme un graphe (Les étoiles et les liens entre elles)
+    /// Une constellation est un ensemble de points reliés par des segments, le tout forme un graphe (Les étoiles et les liens entre elles)
     /// </summary>
     public class Constellation
     {
@@ -25,11 +25,11 @@ namespace Modele
             lesSegments = segments;
         }
         /// <summary>
-        /// Constructeur de Constellation
+        /// Constructeur de Constellation. C'est le constructeur minimal (une constellation est composée au minimum de deux points reliés entre eux).
         /// </summary>
-        /// <param name="pt1">Prends un premier point</param>
-        /// <param name="pt2">Prends un deuxième point</param>
-        /// <param name="seg">Prends un segment</param>
+        /// <param name="pt1">Premier point de la constellation</param>
+        /// <param name="pt2">Deuxième point de la constellation</param>
+        /// <param name="seg">Segment reliant ces deux points</param>
         public Constellation(Point pt1, Point pt2, Segment seg)
         {
             lesPoints.Add(pt1);

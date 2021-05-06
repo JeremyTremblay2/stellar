@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 namespace Modele
@@ -6,7 +7,7 @@ namespace Modele
     /// <summary>
     /// Un Astre est un objet abstrait, il s'agit d'un élément quelconque de l'Univers.
     /// </summary>
-    public abstract class Astre
+    public abstract class Astre : IEquatable<Astre>, IComparable<Astre>, IComparable
     {
         private const float constanteConversionTemperature = 273.15f;
         private string nom;
@@ -64,12 +65,14 @@ namespace Modele
         /// </summary>
         public void ModifierFavori()
         {
-            if (Favori)
-                Favori = false;
-            else
-                Favori = true;
+            Favori = Favori ? false : true;
         }
 
+        /// <summary>
+        /// Permet d'afficher un Astre sous forme de différents champs de données, tels que son nom, sa masse, sa température,
+        /// sa description, s'il est un astre personnalisé ou non, s'il est dans les favoris ou non...
+        /// </summary>
+        /// <returns>Retourne une chaîne de cracatère représentant l'Astre.</returns>
         public override string ToString()
         {
             string chaine = $"Description de {Nom} :\n\t{Description}\n";
@@ -103,6 +106,43 @@ namespace Modele
             chaine += $"\tTemperature : {Temperature} K ({GetTemperatureCelsius}° C)\n";
 
             return chaine;
+        }
+
+        public bool Equals([AllowNull] Astre autre)
+        {
+            return Nom.Equals(autre.Nom) 
+                && Age == autre.Age 
+                && Masse == autre.Masse 
+                && Temperature == autre.Temperature;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null)) return false;
+            if (ReferenceEquals(obj, this)) return true;
+            if (GetType() != obj.GetType()) return false;
+
+            return Equals(obj as Astre);
+        }
+
+        public override int GetHashCode()
+        {
+            return (int)((int) Nom.GetHashCode() + Age + Temperature + Masse);
+        }
+
+        public int CompareTo(object obj)
+        {
+            if(! (obj is Astre))
+            {
+                throw new ArgumentException("L'argument n'est pas un Astre", "obj");
+            }
+            Astre unAstre = obj as Astre;
+            return this.CompareTo(unAstre);
+        }
+
+        public int CompareTo([AllowNull] Astre autre)
+        {
+            return Nom.CompareTo(autre.Nom);
         }
     }
 }
