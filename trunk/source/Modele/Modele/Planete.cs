@@ -1,6 +1,9 @@
-﻿namespace Modele
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+
+namespace Modele
 {
-    public class Planete : Astre
+    public class Planete : Astre, IEquatable<Planete>
     {
         public Planete() { }
         /// <summary>
@@ -33,6 +36,11 @@
 
         public string Systeme { get; set; }
 
+        /// <summary>
+        /// Permet d'afficher une Planète. Pour cela, on affiche les données générale de l'astre, 
+        /// puis ensuite les données spécifiques propres à la planète (vie, eau, système stellaire, type).
+        /// </summary>
+        /// <returns>Retourne la chaîne de caratères représentant la planète.</returns>
         public override string ToString()
         {
             string chaine = base.ToString();
@@ -45,6 +53,28 @@
                 chaine += $"\tAucun signe d'eau découvert.\n";
 
             return chaine;
+        }
+
+        public bool Equals([AllowNull] Planete autre)
+        {
+            return base.Equals(autre)
+                && Vie.Equals(autre.Vie)
+                && Type == autre.Type
+                && Systeme.Equals(autre.Systeme);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null)) return false;
+            if (ReferenceEquals(obj, this)) return true;
+            if (GetType() != obj.GetType()) return false;
+
+            return Equals(obj as Planete);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() + Type.GetHashCode() + Vie.GetHashCode() + Systeme.GetHashCode();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Modele;
 
@@ -208,6 +209,29 @@ namespace Test
             {
                 Console.WriteLine(etoile);
             }
+
+            List<Etoile> testEgalite = new List<Etoile>()
+            {
+                new Etoile("Sirius", "Description 1", 20, 20, 5000, true, TypeEtoile.NaineNoire, "Grande Ours", 1000),
+                new Etoile("Sirius", "Description 1", 20, 20, 5000, true, TypeEtoile.NaineNoire, "Grande Ours", 1000),
+                new Etoile("Faux", "Description 1", 20, 20, 5000, true, TypeEtoile.NaineNoire, "Grande Ours", 1000),
+                new Etoile("Sirius", "Description 2", 20, 20, 5000, true, TypeEtoile.NaineNoire, "Grande Ours", 1000),
+                new Etoile("Sirius", "Description 1", 0, 20, 5000, true, TypeEtoile.NaineNoire, "Grande Ours", 1000),
+                new Etoile("Sirius", "Description 1", 20, 0, 5000, true, TypeEtoile.NaineNoire, "Grande Ours", 1000),
+                new Etoile("Sirius", "Description 1", 20, 20, 0, true, TypeEtoile.NaineNoire, "Grande Ours", 1000),
+                new Etoile("Sirius", "Description 1", 20, 20, 5000, false, TypeEtoile.NaineNoire, "Grande Ours", 1000),
+                new Etoile("Sirius", "Description 1", 20, 20, 5000, true, TypeEtoile.TrouNoir, "Grande Ours", 1000),
+                new Etoile("Sirius", "Description 1", 20, 20, 5000, true, TypeEtoile.NaineNoire, "Cassiopée", 1000),
+                new Etoile("Sirius", "Description 1", 20, 20, 5000, true, TypeEtoile.NaineNoire, "Grande Ours", 50),
+            };
+
+            for(int i = 0; i < testEgalite.Count(); i++)
+            {
+                //Console.WriteLine($"e{0} == e{i} ? {testEgalite[0] == testEgalite[i]}");
+                Console.WriteLine($"e{0} equals e{i} ? {testEgalite[0].Equals(testEgalite[i])}");
+            }
+            
+
         }
     }
 }
