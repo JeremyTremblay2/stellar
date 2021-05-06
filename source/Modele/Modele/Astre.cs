@@ -1,9 +1,5 @@
-﻿using Modele;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using System.Globalization;
 
 namespace Modele
 {
@@ -12,39 +8,60 @@ namespace Modele
     /// </summary>
     public abstract class Astre
     {
-        public Astre()
-        {
-        }
+        private const float constanteConversionTemperature = 273.15f;
+        private string nom;
+        
+        /// <summary>
+        /// Constructeur vide, utilisé par les fabriques d'astres.
+        /// </summary>
+        public Astre() { }
 
-        public Astre(string nom, ulong age = 0, byte masse = 0, int temperature = 1000, bool favori = false, bool personnalise = false, Point positionAstre = null)
+        /// <summary>
+        /// Constructeur d'astres.
+        /// </summary>
+        /// <param name="nom">Le nom de l'astre</param>
+        /// <param name="description">Une description courte de l'astre en question</param>
+        /// <param name="age">L'age de l'astre</param>
+        /// <param name="masse">La masse de l'astre (en masse terrestre ou solaire)</param>
+        /// <param name="temperature">La température de l'astre (en kelvin)</param>
+        /// <param name="personnalise">Un booléen indiquant si l'astre est personnalisé (créé par l'utilisateur) ou non</param>
+        /// 
+        public Astre(string nom, string description, long age = 0, float masse = 1f, int temperature = 1000, bool personnalise = false)
         {
             Nom = nom;
+            Description = description;
             Age = age;
             Masse = masse;
             Temperature = temperature;
-            Favori = favori;
             Personnalise = personnalise;
-            PositionAstre = positionAstre;
         }
+        
+        public string Nom
+        {
+            get => nom;
+            set
+            {
+                nom = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
+            }
+        }
+        
+        public long Age { get; set; }
 
-        public string Nom { get; private set; }
-        public ulong Age { get; private set; }
-        public byte Masse { get; private set; }
-        public int Temperature { get; private set; }
+        public string Description { get; set; }
+
+        public float Masse { get; set; }
+
+        public int Temperature { get; set; }
+
         public bool Favori { get; private set; }
-        public bool Personnalise { get; private set; }
-        public Point PositionAstre { get; set; }
 
-        public Astre AvecNom(string nom)
-        {
-            Nom = nom;
-            return this;
-        }
-        public Astre AvecAge(ulong age)
-        {
-            Age = age;
-            return this;
-        }
+        public bool Personnalise { get; set;  }
+
+        public float GetTemperatureCelsius => (float) Math.Round(Temperature - constanteConversionTemperature, 2);
+
+        /// <summary>
+        /// Méthode permettant la modification de l'état de l'attribut favori. On change son état actuel.
+        /// </summary>
         public void ModifierFavori()
         {
             if (Favori)
@@ -55,7 +72,8 @@ namespace Modele
 
         public override string ToString()
         {
-            string chaine = $"Caractéristiques de {Nom} :\n";
+            string chaine = $"Description de {Nom} :\n\t{Description}\n";
+            chaine += "Caractéristiques : \n";
             if (Favori)
             {
                 chaine += "\tJe suis dans les favoris.\n";
@@ -72,14 +90,18 @@ namespace Modele
             {
                 chaine += "\tJe ne suis pas un astre personnalisé.\n";
             }
-            if (PositionAstre != null)
-            {
-                chaine += $"\tJe suis placé aux coordonnées {PositionAstre}\n";
-            }
             chaine += $"\tAge : {Age} a\n";
-            chaine += $"\tMasse : {Masse} M\n";
-            chaine += $"\tTemperature : {Temperature} K\n";
-            
+            if (this is Etoile)
+            {
+                chaine += $"\tMasse : {Masse} MS\n";
+            }
+            else
+            {
+                chaine += $"\tMasse : {Masse} MT\n";
+            }
+                
+            chaine += $"\tTemperature : {Temperature} K ({GetTemperatureCelsius}° C)\n";
+
             return chaine;
         }
     }
