@@ -44,6 +44,11 @@ namespace Modele
             return Equals(obj as Segment);
         }
 
+        public bool PtEquals(Point pt)
+        {
+            return pt.Equals(this.Point1) || pt.Equals(this.Point2);
+        }
+
         public override int GetHashCode()
         {
             return Point1.GetHashCode() + Point2.GetHashCode();

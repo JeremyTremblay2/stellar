@@ -6,9 +6,9 @@ using Modele;
 
 namespace Test
 {
-    class Test_Astres
+    public class Test_Astres
     {
-        static void Main(string[] args)
+        public void Test()
         {
             List<Etoile> lesEtoiles = new List<Etoile>()
             {

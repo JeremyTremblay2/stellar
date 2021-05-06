@@ -11,65 +11,98 @@ namespace Modele
     /// </summary>
     public class Constellation
     {
-        private List<Point> lesPoints = new List<Point>();
-        private List<Segment> lesSegments = new List<Segment>();
+        private HashSet<Point> lesPoints = new HashSet<Point>();
+        private HashSet<Segment> lesSegments = new HashSet<Segment>();
 
         /// <summary>
         /// Constructeur de Constellation
         /// </summary>
-        /// <param name="points">Une liste de points qui vont tous être reliés</param>
-        /// <param name="segments">Une liste des segments qui reliront les points entre eux</param>
-        public Constellation(List<Point> points, List<Segment> segments)
-        {
-            lesPoints = points;
-            lesSegments = segments;
-        }
-        /// <summary>
-        /// Constructeur de Constellation. C'est le constructeur minimal (une constellation est composée au minimum de deux points reliés entre eux).
-        /// </summary>
-        /// <param name="pt1">Premier point de la constellation</param>
-        /// <param name="pt2">Deuxième point de la constellation</param>
-        /// <param name="seg">Segment reliant ces deux points</param>
-        public Constellation(Point pt1, Point pt2, Segment seg)
+        /// <param name="pt1">Prends un premier point</param>
+        /// <param name="pt2">Prends un deuxième point</param>
+        public Constellation(Point pt1, Point pt2)
         {
             lesPoints.Add(pt1);
             lesPoints.Add(pt2);
-            lesSegments.Add(seg);
-        }
-        /// <summary>
-        /// Ajoute un Point dans la liste lesPoints
-        /// </summary>
-        /// <param name="pt">Le point à rajouter à la constellation</param>
-        public void AjoutPoint(Point pt)
-        {
-            lesPoints.Add(pt);
+            lesSegments.Add(new Segment(pt1, pt2));
+            Vide = false;
         }
 
-        /// <summary>
-        /// Ajoute un Segment dans la liste lesSegments
-        /// </summary>
-        /// <param name="seg">Le segment à rajouter à la constellation</param>
-        public void AjoutSegment(Segment seg)
-        {
-            lesSegments.Add(seg);
-        }
+        public bool Vide { get; private set; }
 
         /// <summary>
-        /// Supprime un Point dans la list lesPoints
+        /// Permets de relier deux points
         /// </summary>
-        /// <param name="pt">Point à supprimer</param>
-        public void SupprimerPoint(Point pt)
+        /// <param name="nvPt">Nouveau point à relier dans la constellation</param>
+        /// <param name="pt">Point selectionné dans la constellation et devant être relier avec nvPt</param>
+        public void Relier(Point nvPt, Point pt) //Ajoute un Point dans la liste lesPoints
         {
-            lesPoints.Remove(pt);
+            if(!lesPoints.Contains(pt))
+            {
+                throw new ArgumentException("l'étoile selectionnée n'est pas dans la constellation");
+            } else
+            {
+                lesPoints.Add(nvPt);
+                lesPoints.Add(pt);
+                lesSegments.Add(new Segment(nvPt, pt)); 
+            }
+        }
+        /// <summary>
+        /// Permets de supprmimer les liaisons avec le point
+        /// </summary>
+        /// <param name="pt">Point à supprimer de la constellation</param>
+        public void SupprimerLesLiens(Point pt)
+        {
+            IEnumerable<Segment> tempo = lesSegments.Where(n => n.PtEquals(pt));
+            foreach(Segment seg in tempo)
+            {
+                lesSegments.Remove(seg);
+            }
+            lesPoints.Remove(pt); // le point n'est plus dans la constellation
+            CheckEtoiles();
+
+            if (lesPoints.Count == 0 || lesSegments.Count == 0)
+            {
+                Vide = true;
+            }
+        }
+        /// <summary>
+        /// Permets de supprimer les points qui n'ont pas de liaison avec d'autres points
+        /// </summary>
+        private void CheckEtoiles()
+        {
+            if (lesSegments.Count == 0)
+            {
+                lesPoints.Clear();
+            }
+            else
+            {
+                foreach (Point pt in lesPoints)
+                {
+                    foreach (Segment seg in lesSegments)
+                    {
+                        if (!seg.PtEquals(pt))
+                        {
+                            lesPoints.Remove(pt);
+                        }
+                    }
+                }
+            }
         }
 
-        /// <summary>
-        /// Supprime un Segment dans la list lesSegments
-        /// </summary>
-        /// <param name="seg">Segment à supprimer</param>
-        public void SupprimerSegment(Segment seg)
+        public override string ToString()
         {
-            lesSegments.Remove(seg);
+            string strPt = "Liste de points :\n";
+            string strSeg = "Liste de segments :\n";
+            
+            foreach (Point pt in lesPoints)
+            {
+                strPt += $"{pt.ToString()}\n";
+            }
+            foreach (Segment seg in lesSegments)
+            {
+                strSeg += $"{seg.ToString()}\n";
+            }
+            return $"{strPt}\n{strSeg}\nvide : {Vide}";
         }
     }
 }
