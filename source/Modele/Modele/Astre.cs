@@ -143,7 +143,6 @@ namespace Modele
 
         public int CompareTo([AllowNull] Astre autre)
         {
-            Debug.WriteLine(Nom);
             return Nom.CompareTo(autre.Nom);
         }
     }

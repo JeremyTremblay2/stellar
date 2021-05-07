@@ -22,7 +22,7 @@ namespace Modele
         public Point Point2 { get; private set; }
 
         /// <summary>
-        /// Permet d'afficher un segment. Pour cela, on affcihe les deux points du segment correspondant.
+        /// Permet d'afficher un segment. Pour cela, on affiche les deux points du segment correspondant.
         /// </summary>
         /// <returns>Retourne la chaîne de caractère représentant le segment.</returns>
         public override string ToString()
