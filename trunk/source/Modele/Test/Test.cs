@@ -15,6 +15,7 @@ namespace Test
             Test_Constellation test_Constellation = new Test_Constellation();
             test_Constellation.TestRelier();
             test_Constellation.TestSupprimer();
+            
         }
     }
 }

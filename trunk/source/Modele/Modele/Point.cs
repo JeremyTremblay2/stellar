@@ -6,7 +6,7 @@ namespace Modele
     /// <summary>
     /// Un point représente les coordonnées d'un point sur la carte (l'emplacement des astres)
     /// </summary>
-    public class Point : IEquatable<Point>
+    public class Point //: IEquatable<Point>
     {
         /// <summary>
         /// Constructeur de Point
@@ -43,9 +43,9 @@ namespace Modele
             return $"({X}; {Y})";
         }
 
-        public bool Equals([AllowNull] Point autre)
+        public bool Equals([AllowNull] Point autre) //NEW
         {
-            return X.Equals(autre) && Y.Equals(autre);
+            return X.Equals(autre.X) && Y.Equals(autre.Y);
         }
 
         public override bool Equals(object obj)
@@ -56,6 +56,15 @@ namespace Modele
 
             return Equals(obj as Point);
         }
+
+        /*public override bool Equals(object obj) //OLD
+        {
+            if (ReferenceEquals(obj, this)) return true;
+            if (ReferenceEquals(obj, null) || !GetType().Equals(obj.GetType())) return false;
+            return (obj as Point).X == this.X && (obj as Point).Y == this.Y;
+
+        }*/
+
 
         public override int GetHashCode()
         {
