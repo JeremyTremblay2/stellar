@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,10 +55,11 @@ namespace Modele
         public void SupprimerLesLiens(Point pt)
         {
             IEnumerable<Segment> tempo = lesSegments.Where(n => n.PtEquals(pt));
-            foreach(Segment seg in tempo)
+            lesSegments.ExceptWith(tempo);
+            /*foreach (Segment seg in tempo)
             {
                 lesSegments.Remove(seg);
-            }
+            }*/
             lesPoints.Remove(pt); // le point n'est plus dans la constellation
             CheckEtoiles();
 

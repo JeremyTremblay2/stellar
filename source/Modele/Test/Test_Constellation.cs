@@ -22,12 +22,12 @@ namespace Test
             try
             {
                 constel.Relier(new Point(85, 36), new Point(42, 42));
-                //constel.Relier(new Point(20, 31), new Point(85, 36));
+                constel.Relier(new Point(20, 31), new Point(85, 36));
                 Console.WriteLine("Relier : \n" + constel.ToString());
             }
             catch (ArgumentException a)
             {
-                Console.WriteLine("ERREUR :", a);
+                Console.WriteLine("ERREUR :", a.Message);
             }
         }
         /// <summary>
@@ -39,6 +39,5 @@ namespace Test
             constel.SupprimerLesLiens(pt);
             Console.WriteLine($"Suppression du point {pt}:\n{constel.ToString()}");
         }
-
     }
 }
