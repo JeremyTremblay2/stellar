@@ -32,22 +32,39 @@ namespace Modele
         public bool Vide { get; private set; }
 
         /// <summary>
-        /// Permets de relier deux points
+        /// Permet de relier deux points ensembles via un segment.
         /// </summary>
-        /// <param name="nvPt">Nouveau point à relier dans la constellation</param>
-        /// <param name="pt">Point selectionné dans la constellation et devant être relier avec nvPt</param>
-        public void Relier(Point nvPt, Point pt) //Ajoute un Point dans la liste lesPoints
+        /// <param name="point1">Premier point à relier dans la constellation</param>
+        /// <param name="point2">Second point à relier dans la constellation</param>
+        public void Relier(Point point1, Point point2)
         {
-            if(!lesPoints.Contains(pt))
+            if(!lesPoints.Contains(point1) || !lesPoints.Contains(point2))
             {
-                throw new ArgumentException("l'étoile selectionnée n'est pas dans la constellation");
-            } else
+                throw new ArgumentException("Un des point ne se trouve pas la constellation.");
+            } 
+            else
             {
-                lesPoints.Add(nvPt);
-                lesPoints.Add(pt);
-                lesSegments.Add(new Segment(nvPt, pt)); 
+                lesSegments.Add(new Segment(point1, point2)); 
             }
         }
+
+        public void AjouterUnPoint(Point point, Segment segment)
+        {
+            if (lesSegments.Contains(segment))
+            {
+                throw new ArgumentException("Le segment existe déjà dans la constellation.");
+            }
+            if (lesPoints.Contains(point))
+            {
+                throw new ArgumentException("Le point existe déjà dans la constellation.");
+            }
+
+            lesPoints.Add(point);
+            lesSegments.Add(segment);
+        }
+
+
+
         /// <summary>
         /// Permets de supprmimer les liaisons avec le point
         /// </summary>
@@ -92,6 +109,10 @@ namespace Modele
             }
         }
 
+        public bool ContientLePoint(Point point) => lesPoints.Contains(point) ? true : false;
+
+        public bool ContientLeSegment(Segment segment) => lesSegments.Contains(segment) ? true : false;
+
         public override string ToString()
         {
             string strPt = "Liste de points :\n";
@@ -99,11 +120,11 @@ namespace Modele
             
             foreach (Point pt in lesPoints)
             {
-                strPt += $"{pt.ToString()}\n";
+                strPt += $"\t{pt}\n";
             }
             foreach (Segment seg in lesSegments)
             {
-                strSeg += $"{seg.ToString()}\n";
+                strSeg += $"\t{seg}\n";
             }
             return $"{strPt}\n{strSeg}\nvide : {Vide}";
         }
