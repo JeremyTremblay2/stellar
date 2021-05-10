@@ -18,7 +18,9 @@ namespace Modele
             Point1 = point1;
             Point2 = point2;
         }
+
         public Point Point1 { get; private set; }
+
         public Point Point2 { get; private set; }
 
         /// <summary>
@@ -27,7 +29,7 @@ namespace Modele
         /// <returns>Retourne la chaîne de caractère représentant le segment.</returns>
         public override string ToString()
         {
-            return $"Segment entre les points {Point1} et {Point2}";
+            return $"{Point1} => {Point2}";
         }
 
         public bool Equals([AllowNull] Segment autre)
