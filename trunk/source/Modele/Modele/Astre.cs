@@ -57,7 +57,7 @@ namespace Modele
 
         public bool Favori { get; private set; }
 
-        public bool Personnalise { get; set;  }
+        public bool Personnalise { get; private set;  }
 
         public float GetTemperatureCelsius => (float) Math.Round(Temperature - constanteConversionTemperature, 2);
 

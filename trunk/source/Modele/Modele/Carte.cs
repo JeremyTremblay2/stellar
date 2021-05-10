@@ -19,15 +19,52 @@ namespace Modele
                 //Ajouter des astres et constellations.
             }
         }
-        
-        public void ajouterUneEtoile(Point position)
+                       
+        public void ajouterUnAstre(Point position, Astre astre)
         {
-            lesAstres[position] = null;
+            if (position != null && astre != null)
+                lesAstres[position] = astre;
         }
 
-        public void supprimerUneConstellation(Point position)
+        public Astre supprimerUnAstre(Point position)
         {
-            
+            if (lesAstres.ContainsKey(position))
+            {
+                Astre astreARetourner = lesAstres[position];
+                if (astreARetourner is Etoile)
+                {
+                    //traitement de l'éventuelle constellation.
+                }
+
+                lesAstres.Remove(position);
+                return astreARetourner;
+            }
+            return null;
+        }
+
+        public void SupprimerTout()
+        {
+            lesAstres.Clear();
+            lesConstellations.Clear();
+        }
+
+        public override string ToString()
+        {
+            string chaine = "Voici les astres sur la carte :\n";
+
+            foreach(KeyValuePair<Point, Astre> kvp in lesAstres)
+            {
+                chaine += $"{kvp.Key} : {kvp.Value.Nom}\n";
+            }
+
+            chaine += "\nVoici les constellations sur la carte :\n";
+
+            foreach (Constellation constellation in lesConstellations)
+            {
+                chaine += $"{constellation}\n";
+            }
+
+            return chaine;
         }
     }
 }
