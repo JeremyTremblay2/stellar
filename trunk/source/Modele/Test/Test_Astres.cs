@@ -233,6 +233,10 @@ namespace Test
                 //Console.WriteLine($"e{0} == e{i} ? {testEgalite[0] == testEgalite[i]}");
                 Console.WriteLine($"e{0} equals e{i} ? {testEgalite[0].Equals(testEgalite[i])}");
             }
+
+            FabriqueDAstre<FabriqueDEtoile, Etoile> fabrique = new FabriqueDEtoile();
+            Console.WriteLine(fabrique.Initialiser(false).AvecNom("test").AvecMasse(1.3f).EstDansLaConstellation("hého").Construire());
+            Console.WriteLine(fabrique.Initialiser(true).AvecNom("test2").AvecAge(42).Construire());
         }
     }
 }
