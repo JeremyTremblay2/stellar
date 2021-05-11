@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,11 +12,12 @@ namespace Modele
     /// <summary>
     /// Une constellation est un ensemble de points reliés par des segments, le tout forme un graphe (Les étoiles et les liens entre elles)
     /// </summary>
-    public class Constellation
+    public class Constellation : IEquatable<Constellation>
     {
         private HashSet<Point> lesPoints = new HashSet<Point>();
         private HashSet<Segment> lesSegments = new HashSet<Segment>();
-
+        /*public HashSet<Point> LesPoints { get; private set; }
+        public HashSet<Segment> LesSegments { get; private set; }*/
         /// <summary>
         /// Constructeur de Constellation
         /// </summary>
@@ -36,34 +38,18 @@ namespace Modele
         /// </summary>
         /// <param name="point1">Premier point à relier dans la constellation</param>
         /// <param name="point2">Second point à relier dans la constellation</param>
-        public void Relier(Point point1, Point point2)
+        public void Relier(Point pt, Point nvPt)
         {
-            if(!lesPoints.Contains(point1) || !lesPoints.Contains(point2))
+            if (!lesPoints.Contains(pt))
             {
                 throw new ArgumentException("Un des point ne se trouve pas la constellation.");
             } 
             else
             {
-                lesSegments.Add(new Segment(point1, point2)); 
+                lesPoints.Add(nvPt);
+                lesSegments.Add(new Segment(pt, nvPt)); 
             }
         }
-
-        public void AjouterUnPoint(Point point, Segment segment)
-        {
-            if (lesSegments.Contains(segment))
-            {
-                throw new ArgumentException("Le segment existe déjà dans la constellation.");
-            }
-            if (lesPoints.Contains(point))
-            {
-                throw new ArgumentException("Le point existe déjà dans la constellation.");
-            }
-
-            lesPoints.Add(point);
-            lesSegments.Add(segment);
-        }
-
-
 
         /// <summary>
         /// Permets de supprmimer les liaisons avec le point
@@ -71,19 +57,23 @@ namespace Modele
         /// <param name="pt">Point à supprimer de la constellation</param>
         public void SupprimerLesLiens(Point pt)
         {
-            IEnumerable<Segment> tempo = lesSegments.Where(n => n.PtEquals(pt));
-            lesSegments.ExceptWith(tempo);
-            /*foreach (Segment seg in tempo)
+            if (lesPoints.Contains(pt))
             {
-                lesSegments.Remove(seg);
-            }*/
-            lesPoints.Remove(pt); // le point n'est plus dans la constellation
-            CheckEtoiles();
+                IEnumerable<Segment> tempo = lesSegments.Where(n => n.PtEquals(pt));
+                lesSegments.ExceptWith(tempo);
+                /*foreach (Segment seg in tempo)
+                {
+                    lesSegments.Remove(seg);
+                }*/
+                lesPoints.Remove(pt); // le point n'est plus dans la constellation
+                CheckEtoiles();
 
-            if (lesPoints.Count == 0 || lesSegments.Count == 0)
-            {
-                Vide = true;
+                if (lesPoints.Count == 0 || lesSegments.Count == 0)
+                {
+                    Vide = true;
+                }
             }
+            
         }
         /// <summary>
         /// Permets de supprimer les points qui n'ont pas de liaison avec d'autres points
@@ -108,6 +98,63 @@ namespace Modele
                 }
             }
         }
+        /// <summary>
+        /// Permets de déplacer un point et les segments impliqués
+        /// </summary>
+        /// <param name="ancienPt">Point à déplacer</param>
+        /// <param name="nvPt">Nouvelles coordonnées</param>
+        public void DeplacePoint(Point ancienPt, Point nvPt)
+        {
+            IEnumerable<Segment> tempo = lesSegments.Where(n => n.PtEquals(ancienPt));
+            List<Segment> addSeg = new List<Segment>();
+            foreach (Segment seg in tempo)
+            {
+                if (seg.PtEquals(ancienPt))
+                {
+                    if (seg.Point1.Equals(ancienPt))
+                    {
+                        addSeg.Add(new Segment(nvPt, seg.Point2));
+                    }
+                    else
+                    {
+                        addSeg.Add(new Segment(seg.Point1, nvPt));
+                    }
+                }
+            }
+            lesSegments.ExceptWith(tempo);
+            lesSegments.UnionWith(addSeg);
+
+            lesPoints.Remove(ancienPt);
+            lesPoints.Add(nvPt);
+
+        }
+
+        /// <summary>
+        /// Permets de fusionner de constellation. This fait union avec la constellation passée en paramètre.
+        /// </summary>
+        /// <param name="constel">Constellation avec laquelle fusionner</param>
+        /// <param name="pt1">Premier point de liaison entre les deux constellations</param>
+        /// <param name="pt2">Second point de liaison entre les deux constellations</param>
+        public void FusionnerAvec(Constellation constel, Point pt1, Point pt2)
+        {
+            lesPoints.UnionWith(constel.lesPoints);
+            lesSegments.UnionWith(constel.lesSegments);
+            lesSegments.Add(new Segment(pt1, pt2));
+        }
+
+        public bool Equals([AllowNull] Constellation autre)
+        {
+            return lesPoints.Equals(autre.lesPoints) && lesSegments.Equals(autre.lesSegments);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null)) return false;
+            if (ReferenceEquals(obj, this)) return true;
+            if (GetType() != obj.GetType()) return false;
+
+            return Equals(obj as Constellation);
+        }
 
         public bool ContientLePoint(Point point) => lesPoints.Contains(point) ? true : false;
 
@@ -127,6 +174,11 @@ namespace Modele
                 strSeg += $"\t{seg}\n";
             }
             return $"{strPt}\n{strSeg}\nvide : {Vide}";
+        }
+
+        public override int GetHashCode()
+        {
+            return lesPoints.GetHashCode() + lesSegments.GetHashCode();
         }
     }
 }

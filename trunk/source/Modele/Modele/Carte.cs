@@ -40,7 +40,12 @@ namespace Modele
             if (position != null && astre != null)
                 lesAstres[position] = astre;
         }
-
+        
+        /// <summary>
+        /// Permets de déplacer un astre
+        /// </summary>
+        /// <param name="anciennePosition">Position de l'astre à déplacer</param>
+        /// <param name="nouvellePosition">Ca nouvelle position</param>
         public void DeplacerUnAstre(Point anciennePosition, Point nouvellePosition)
         {
             if (lesAstres.ContainsKey(anciennePosition) && nouvellePosition != null)
@@ -49,12 +54,10 @@ namespace Modele
 
                 if (astreADeplacer is Etoile)
                 {
-                    foreach(Constellation constellation in lesConstellations)
+                    Constellation tempoConstel = ParcoursConstellations(anciennePosition);
+                    if (tempoConstel != null)
                     {
-                        if (constellation.ContientLePoint(anciennePosition))
-                        {
-                            //appel d'une fonction traitant ceci
-                        }
+                        tempoConstel.DeplacePoint(anciennePosition, nouvellePosition);
                     }
                 }
 
@@ -63,29 +66,26 @@ namespace Modele
             }
         }
 
+        /// <summary>
+        /// Supprime un Astre. Si c'est une étoile dans une constellation les segments reliés à l'étoile seront supprimés.
+        /// </summary>
+        /// <param name="position">Astre à supprimer</param>
+        /// <returns></returns>
         public Astre SupprimerUnAstre(Point position)
         {
-            bool dansUneConstellation = false;
             if (lesAstres.ContainsKey(position))
             {
                 Astre astreARetourner = lesAstres[position];
-                if (astreARetourner is Etoile)
+                Constellation tempoConstel = ParcoursConstellations(position);
+                if (astreARetourner is Etoile && tempoConstel != null)
                 {
-                    foreach(Constellation constellation in lesConstellations)
-                    {
-                        if (constellation.ContientLePoint(position))
-                        {
-                            dansUneConstellation = true;
-                            SupprimerDesConstellation(position);
-                        }
-                    }
-                }
-
-                if (!dansUneConstellation)
+                    tempoConstel.SupprimerLesLiens(position);
+                } else
                 {
                     lesAstres.Remove(position);
                     return astreARetourner;
-                }                
+                }
+                                
             }
             return null;
         }
@@ -99,49 +99,48 @@ namespace Modele
         /// </summary>
         /// <param name="point1">Le premier point cliqué par l'utilisateur</param>
         /// <param name="point2">Le second point cliqué par l'utilisateur</param>
-        public void AjouterUneConstellation(Point point1, Point point2)
+        public void RelierDeuxEtoiles(Point point1, Point point2)
         {
-            bool constellationCreee = false;
-
-            if (point1 == null || point2 == null)
-                return;
-
-            Segment segment = new Segment(point1, point2);
-
-            foreach(Constellation constellation in lesConstellations)
+            Astre astre1, astre2;
+            lesAstres.TryGetValue(point1, out astre1);
+            lesAstres.TryGetValue(point2, out astre2);
+            if (astre1 is Etoile && astre1 is Etoile)
             {
-                if (!constellation.ContientLeSegment(segment))
+                Constellation const1 = ParcoursConstellations(point1);
+                Constellation const2 = ParcoursConstellations(point2);
+
+                if (const1 == null && const2 == null)
                 {
-                    if (constellation.ContientLePoint(point1))
-                    {
-                        if (constellation.ContientLePoint(point2))
-                        {
-                            constellation.Relier(point1, point2);
-                            constellationCreee = true;
-                        }
-                        else
-                        {
-                            constellation.AjouterUnPoint(point2, segment);
-                            constellationCreee = true;
-                        }
-                    }
-                    else
-                    {
-                        constellation.AjouterUnPoint(point1, segment);
-                        constellationCreee = true;
-                    }
+                    lesConstellations.Add(new Constellation(point1, point2));
+                } else if (const1 != null && const2 == null)
+                {
+                    const1.Relier(point1, point2);
+                } else if (const1 == null && const2 != null)
+                {
+                    const2.Relier(point2, point1);
+                } else if (const1 != null && const2 != null && !const1.Equals(const2))
+                {
+                    const1.FusionnerAvec(const2, point1, point2);
+                    lesConstellations.Remove(const2);
                 }
-            }
-
-            if (!constellationCreee)
-            {
-                lesConstellations.Add(new Constellation(point1, point2));
             }
         }
 
-        private void SupprimerDesConstellation(Point position)
+        /// <summary>
+        /// Parcours la liste lesConstellations et retourne la constellation qui contient le point passé en paramètre
+        /// </summary>
+        /// <param name="position">Point contenu dans la constellation retournée</param>
+        /// <returns></returns>
+        private Constellation ParcoursConstellations(Point position)
         {
-
+            foreach (Constellation constellation in lesConstellations)
+            {
+                if (constellation.ContientLePoint(position))
+                {
+                    return constellation;
+                }
+            }
+            return null;
         }
 
         /// <summary>

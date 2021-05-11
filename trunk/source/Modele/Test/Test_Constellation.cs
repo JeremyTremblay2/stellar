@@ -21,8 +21,8 @@ namespace Test
            
             try
             {
-                constel.Relier(new Point(85, 36), new Point(42, 42));
-                constel.Relier(new Point(20, 31), new Point(85, 36));
+                constel.Relier(new Point(42, 42), new Point(85, 36));
+                constel.Relier(new Point(85, 36), new Point(20, 31));
                 Console.WriteLine("Relier : \n" + constel.ToString());
             }
             catch (ArgumentException a)
@@ -35,9 +35,28 @@ namespace Test
         /// </summary>
         public void TestSupprimer()
         {
-            Point pt = new Point(42, 42);
+            Point pt = new Point(43, 43);
             constel.SupprimerLesLiens(pt);
             Console.WriteLine($"Suppression du point {pt}:\n{constel.ToString()}");
+        }
+        /// <summary>
+        /// Test de la méthode DeplaceEtoile
+        /// </summary>
+        public void TestDeplaceEtoile()
+        {
+            Point pt = new Point(42, 42);
+            Point nvPt = new Point(43, 43);
+            constel.DeplacePoint(pt, nvPt);
+            Console.WriteLine($"Déplacer le point {pt}:\n{constel.ToString()}");
+        }
+        /// <summary>
+        /// Test de la méthode FusionnerAvec
+        /// </summary>
+        public void TestFusion()
+        {
+            Constellation constel2 = new Constellation(new Point(13, 13), new Point(25, 100));
+            constel.FusionnerAvec(constel2, new Point(42,42), new Point(13, 13));
+            Console.WriteLine($"fusion :\n{constel.ToString()}");
         }
     }
 }
