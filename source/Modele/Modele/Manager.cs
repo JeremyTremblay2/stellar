@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Modele
 {
-    interface IRecherche
+    public class Manager
     {
-        public List<Astre> FaireUneRecherche();
+        List<Astre> lesAstres = new List<Astre>();
     }
 }

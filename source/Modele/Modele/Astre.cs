@@ -23,7 +23,7 @@ namespace Modele
         /// </summary>
         /// <param name="nom">Le nom de l'astre</param>
         /// <param name="description">Une description courte de l'astre en question</param>
-        /// <param name="age">L'age de l'astre</param>
+        /// <param name="age">L'age de l'astre.</param>
         /// <param name="masse">La masse de l'astre (en masse terrestre ou solaire)</param>
         /// <param name="temperature">La température de l'astre (en kelvin)</param>
         /// <param name="personnalise">Un booléen indiquant si l'astre est personnalisé (créé par l'utilisateur) ou non</param>
@@ -38,27 +38,53 @@ namespace Modele
             Personnalise = personnalise;
         }
         
+        /// <summary>
+        /// Propriété représentant le nom de l'astre sous forme d'une chaîne de caractères.
+        /// Le nom ne peut être qu'écrit sous format titre (Xxxx Xx Xxxx).
+        /// </summary>
         public string Nom
         {
             get => nom;
-            set
+            internal set
             {
                 nom = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
             }
         }
         
-        public long Age { get; set; }
+        /// <summary>
+        /// Propriété représentant l'âge de l'astre en valeur entière.
+        /// </summary>
+        public long Age { get; internal set; }
 
-        public string Description { get; set; }
+        /// <summary>
+        /// Propriété représentant une description quelconque de l'astre sous forme d'une chaîne de caractère.
+        /// </summary>
+        public string Description { get; internal set; }
 
-        public float Masse { get; set; }
+        /// <summary>
+        /// Propriété représentant la masse de l'astre en valeur flottante (en masse terrestre s'il s'agit d'une planète, 
+        /// ou en masse solaire s'il s'agit d'une étoile).
+        /// </summary>
+        public float Masse { get; internal set; }
 
-        public int Temperature { get; set; }
+        /// <summary>
+        /// Propriété représentant la température de l'astre en valeur entière (en Kelvin).
+        /// </summary>
+        public int Temperature { get; internal set; }
 
+        /// <summary>
+        /// Propriété pour savoir si l'astre est un favori de l'utilisateur ou non, représenté par un booléen.
+        /// </summary>
         public bool Favori { get; private set; }
 
+        /// <summary>
+        /// Propriété permettant de savoir si l'astre est un astre personnalisé (= crée par l'utilisateur) ou non, représente par un booléen.
+        /// </summary>
         public bool Personnalise { get; internal set;  }
 
+        /// <summary>
+        /// Méthode permettant de révupérer la température de l'astre sous forme de degrés Celsius.
+        /// </summary>
         public float GetTemperatureCelsius => (float) Math.Round(Temperature - constanteConversionTemperature, 2);
 
         /// <summary>
@@ -68,6 +94,11 @@ namespace Modele
         {
             Favori = Favori ? false : true;
         }
+
+        /// <summary>
+        /// Méthode abstraite ayant pour but de présenter l'astre, c'est à dire, d'afficher son type.
+        /// </summary>
+        public abstract void SePresenter();
 
         /// <summary>
         /// Permet d'afficher un Astre sous forme de différents champs de données, tels que son nom, sa masse, sa température,
@@ -109,6 +140,12 @@ namespace Modele
             return chaine;
         }
 
+        /// <summary>
+        /// Protocole d'égalité permettant de savoir si un astre passé en paramètre est égal à this, donc s'il possède le même nom, 
+        /// même age, même masse, même température.
+        /// </summary>
+        /// <param name="autre">Un astre que l'on souhaite comparer à this.</param>
+        /// <returns>Un booléen qui indique si l'astre passé en paramètre est le même que this ou non.</returns>
         public bool Equals([AllowNull] Astre autre)
         {
             return Nom.Equals(autre.Nom) 
@@ -117,6 +154,13 @@ namespace Modele
                 && Temperature == autre.Temperature;
         }
 
+        /// <summary>
+        /// Protocole d'égalité permettant de savoir si un objet passé en paramètre est un Astre.
+        /// Si cette vérification est faite avec succès, alors on vérifie ensuite si cet astre est égal à this, donc s'il possède le même 
+        /// nom, même age, même masse, même température, en appellant la méthode Equals de cet astre et en le castant.
+        /// </summary>
+        /// <param name="obj">Un objet quelconque, dont on veut déterminer s'il s'agit d'un astre (et s'il s'agit du même astre que this)</param>
+        /// <returns>Un booléen qui indique si l'objet passé en paramètre est le même que this ou non.</returns>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(obj, null)) return false;
@@ -126,11 +170,22 @@ namespace Modele
             return Equals(obj as Astre);
         }
 
+        /// <summary>
+        /// Permet la génération d'un HashCode, utilisé dans le cas des dictionnaires.
+        /// Ce hascode est définit par le nom, l'âge, la température et la masse de l'astre.
+        /// </summary>
+        /// <returns>Un entier représentant le hashcode de cet astre.</returns>
         public override int GetHashCode()
         {
-            return (int)((int) Nom.GetHashCode() + Age + Temperature + Masse);
+            return Nom.GetHashCode() + Age.GetHashCode() + Temperature.GetHashCode() + Masse.GetHashCode();
         }
 
+        /// <summary>
+        /// Permet la comparaison de deux objets. On vérifie que l'objet est un astre (sinon on lève une exception).
+        /// La comparaison se base en fonction du nom de l'astre (ordre alphabétique). 
+        /// </summary>
+        /// <param name="obj">Un objet quelconque que l'on souhaite comparer à cet astre.</param>
+        /// <returns>Un entier représentant la comparaison préalablement effectuée.</returns>
         public int CompareTo(object obj)
         {
             if(! (obj is Astre))
@@ -141,6 +196,11 @@ namespace Modele
             return this.CompareTo(unAstre);
         }
 
+        /// <summary>
+        /// Permet la comparaison de deux objets. La comparaison se base en fonction du nom de l'astre (ordre alphabétique). 
+        /// </summary>
+        /// <param name="autre">Un astre que l'on souhaite comparer avec this.</param>
+        /// <returns>Un entier représentant la comparaison préalablement effectuée.</returns>
         public int CompareTo([AllowNull] Astre autre)
         {
             return Nom.CompareTo(autre.Nom);

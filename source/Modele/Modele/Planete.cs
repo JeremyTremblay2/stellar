@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Modele
 {
+    /// <summary>
+    /// Une planète est une spécification d'un astre, il s'agit d'un objet plus précis qui se situe dans un système stellaire, 
+    /// possède un type, contient éventuellement de l'eau, et de la vie.
+    /// </summary>
     public class Planete : Astre, IEquatable<Planete>
     {
         public Planete() { }
         /// <summary>
-        /// Constructeur dde planètes.
+        /// Constructeur de planète. Il appele le constructeur de sa classe mère, Astre, afin qu'il soit initialisé.
         /// </summary>
         /// <param name="nom">Le nom de la planète</param>
         /// <param name="description">Une courte description de la planète</param>
@@ -28,13 +33,33 @@ namespace Modele
             Systeme = systeme;
         }
 
+        /// <summary>
+        /// Propriété représentant le type de la planète, contenu dans l'énumération TypePlanete.
+        /// </summary>
         public TypePlanete Type { get; set; }
 
+        /// <summary>
+        /// Propriété permettant de représenter la présence de vie ou non de la planète, sous forme de chaîne de caractères.
+        /// </summary>
         public string Vie { get; set; }
 
+        /// <summary>
+        /// Propriété représentant la présence d'eau sur la planète ou non, sous forme de booléen. 
+        /// </summary>
         public bool EauPresente { get; set; }
 
+        /// <summary>
+        /// Propriété permettant de représenter le système stellaire de la planète, sous forme de chaîne de caractères.
+        /// </summary>
         public string Systeme { get; set; }
+
+        /// <summary>
+        /// Méthode redéfinie depuis la classe-mère, et permettant d'afficher le type de cet Astre (une planète donc).
+        /// </summary>
+        public override void SePresenter()
+        {
+            Debug.WriteLine($"Je suis une {nameof(Planete)}");
+        }
 
         /// <summary>
         /// Permet d'afficher une Planète. Pour cela, on affiche les données générale de l'astre, 
@@ -55,6 +80,12 @@ namespace Modele
             return chaine;
         }
 
+        /// <summary>
+        /// Protocole d'égalité permettant de savoir si une planète passée en paramètre est égal à this, donc, si elle possède les mêmes 
+        /// champs que la classe mère, ainsi que le même type, le même système et la même présence de vie.
+        /// </summary>
+        /// <param name="autre">Une planète que l'on souhaite comparer à this.</param>
+        /// <returns>Un booléen qui indique si la planète passée en paramètre est la même que this ou non.</returns>
         public bool Equals([AllowNull] Planete autre)
         {
             return base.Equals(autre)
@@ -63,6 +94,13 @@ namespace Modele
                 && Systeme.Equals(autre.Systeme);
         }
 
+        /// <summary>
+        /// Protocole d'égalité permettant de savoir si un objet passé en paramètre est une Planete.
+        /// Si cette vérification est faite avec succès, alors on vérifie ensuite si cette planète est égale à this, donc si elle possède 
+        /// les mêmes champs de la classe mère, et même type, même présence de vie, même système stellaire.
+        /// </summary>
+        /// <param name="obj">Un objet quelconque, dont on veut déterminer s'il s'agit d'une planète (et s'il s'agit de la même planète que this)</param>
+        /// <returns>Un booléen qui indique si l'objet en paramètre est la même que this ou non.</returns>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(obj, null)) return false;
@@ -72,6 +110,11 @@ namespace Modele
             return Equals(obj as Planete);
         }
 
+        /// <summary>
+        /// Méthode permettant la redéfinition du Hashcode de Planete. Ce Hashcode est défini en fonction du hashcode de la classe 
+        /// mère de planète (Astre), mais aussi du type de planète, de la présence de vie, et du système stellaire.
+        /// </summary>
+        /// <returns>Un entier représentant le hashcode de la planète.</returns>
         public override int GetHashCode()
         {
             return base.GetHashCode() + Type.GetHashCode() + Vie.GetHashCode() + Systeme.GetHashCode();

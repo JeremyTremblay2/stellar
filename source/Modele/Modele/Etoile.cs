@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Modele
 {
     /// <summary>
-    /// Une étoile est un astre. Une étoile peut être dans une constellation, possède un type et une luminosité.
+    /// Une étoile est une spécification d'un astre, il s'agit d'un objet plus précis qui se situe éventuellemnt dans une constellation, 
+    /// possède un type et une luminosité.
     /// </summary>
     public class Etoile : Astre, IEquatable<Etoile>
     {
@@ -14,7 +16,7 @@ namespace Modele
         public Etoile() { }
 
         /// <summary>
-        /// Constructeur d'étoiles.
+        /// Constructeur d'étoiles. Il appele le constructeur de sa classe mère, Astre, afin qu'il soit initialisé.
         /// </summary>
         /// <param name="nom">Le nom de l'étoile</param>
         /// <param name="description">Une courte description de l'étoile</param>
@@ -33,11 +35,28 @@ namespace Modele
             Luminosite = luminosite;
         }
         
+        /// <summary>
+        /// Propriété représentant le type de l'étoile, contenu dans l'énumération TypeEtoile.
+        /// </summary>
         public TypeEtoile Type { get; set; }
 
+        /// <summary>
+        /// Propriété représentant la constellation sous forme de châine de caractères, dans laquelle se trouve l'étoile.
+        /// </summary>
         public string Constellation { get; set; }
 
+        /// <summary>
+        /// Propriété représentant la luminosité de l'étoile, sous forme d'une valeur flottante (en luminosité solaire Lo).
+        /// </summary>
         public float Luminosite { get; set; }
+
+        /// <summary>
+        /// Méthode redéfinie depuis la classe-mère, et permettant d'afficher le type de cet Astre (une étoile donc).
+        /// </summary>
+        public override void SePresenter()
+        {
+            Debug.WriteLine($"Je suis une {nameof(Etoile)}");
+        }
 
         /// <summary>
         /// Permet d'afficher une étoile sous forme de différents champs de données. On affiche les données de l'astre, puis les champs
@@ -47,12 +66,19 @@ namespace Modele
         public override string ToString()
         {
             string chaine = base.ToString();
+            //On appelle notre extension qui va venir afficher l'énumération sous forme d'une chaîne de caractères.
             chaine += $"\tType d'étoile : {ExtensionEnumerations.RecupererValeurEnum(Type)}\n";
             chaine += $"\tConstellation : {Constellation}\n";
             chaine += $"\tLuminosité : {Luminosite} Lo\n";
             return chaine;
         }
 
+        /// <summary>
+        /// Protocole d'égalité permettant de savoir si une étoile passée en paramètre est égal à this, donc si elle possède les mêmes 
+        /// champs que la classe mère, ainsi que le même type, la même constellation et la même luminosité.
+        /// </summary>
+        /// <param name="autre">Une étoile que l'on souhaite comparer à this.</param>
+        /// <returns>Un booléen qui indique si l'étoile passée en paramètre est la même que this ou non.</returns>
         public bool Equals([AllowNull] Etoile autre)
         {
             return base.Equals(autre)
@@ -61,6 +87,13 @@ namespace Modele
                 && Luminosite == autre.Luminosite;
         }
 
+        /// <summary>
+        /// Protocole d'égalité permettant de savoir si un objet passé en paramètre est une Etoile.
+        /// Si cette vérification est faite avec succès, alors on vérifie ensuite si cette étoile est égale à this, donc si elle possède 
+        /// les mêmes champs de la classe mère, et même type, même constellation et même luminosité.
+        /// </summary>
+        /// <param name="obj">Un objet quelconque, dont on veut déterminer s'il s'agit d'une étoile (et s'il s'agit de la même étoile que this)</param>
+        /// <returns>Un booléen qui indique si l'objet en paramètre est la même que this ou non.</returns>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(obj, null)) return false;
@@ -70,6 +103,11 @@ namespace Modele
             return Equals(obj as Etoile);
         }
 
+        /// <summary>
+        /// Méthode permettant la redéfinition du Hashcode de Etoile. Ce Hashcode est défini en fonction du hashcode de la classe 
+        /// mère d'étoile (Astre), mais aussi du type de cette étoile, de sa constellation et de sa luminsoité.
+        /// </summary>
+        /// <returns>Un entier représentant le hashcode de la planète.</returns>
         public override int GetHashCode()
         {
             return (int)(base.GetHashCode() + Type.GetHashCode() + Constellation.GetHashCode() + Luminosite);

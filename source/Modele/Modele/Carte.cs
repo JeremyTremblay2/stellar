@@ -80,7 +80,9 @@ namespace Modele
                 if (astreARetourner is Etoile && tempoConstel != null)
                 {
                     tempoConstel.SupprimerLesLiens(position);
-                } else                {
+                } 
+                else                
+                {
                     lesAstres.Remove(position);
                     return astreARetourner;
                 }
