@@ -15,7 +15,7 @@ namespace Modele
         /// Méthode permettant de modifier l'affichage d'une énumération, pour qu'elle apparaisse sous forme de chaîne de caractères.
         /// </summary>
         /// <param name="valeurEnumeration">L'énumération en question que l'on veut convertir en chaîne de caractères.</param>
-        /// <returns>La chaîne de caractères créée.</returns>
+        /// <returns>La chaîne de caractères créée à partir de l'énumération envoyée.</returns>
         public static string RecupererValeurEnum(this Enum valeurEnumeration)
         {
             string valeur;
