@@ -40,7 +40,7 @@ namespace Modele
         /// <param name="point2">Second point à relier dans la constellation</param>
         public void Relier(Point pt, Point nvPt)
         {
-            if (!lesPoints.Contains(pt))
+			if (!lesPoints.Contains(pt))
             {
                 throw new ArgumentException("Un des point ne se trouve pas la constellation.");
             } 
