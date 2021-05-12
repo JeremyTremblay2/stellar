@@ -74,11 +74,11 @@ namespace Test
         /// </summary>
         public void TestRelierDeuxEtoiles()
         {
-            uneCarte.RelierDeuxEtoiles(new Point(45, 67), new Point(56, 56));
+            uneCarte.RelierDeuxEtoiles(new Point(42, 42), new Point(56, 56));
             Console.WriteLine($"RelierDeuxEtoile (E, E) : {uneCarte.ToString()}");
-            uneCarte.RelierDeuxEtoiles(new Point(45, 67), new Point(20, 98));
+            uneCarte.RelierDeuxEtoiles(new Point(42, 42), new Point(20, 98));
             Console.WriteLine($"RelierDeuxEtoile (C, E) : {uneCarte.ToString()}");
-            uneCarte.RelierDeuxEtoiles(new Point(45, 67), new Point(20, 98));
+            uneCarte.RelierDeuxEtoiles(new Point(42, 42), new Point(20, 98));
             Console.WriteLine($"RelierDeuxEtoile (!) : {uneCarte.ToString()}");
         }
 

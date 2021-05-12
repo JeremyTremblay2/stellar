@@ -19,8 +19,8 @@ namespace Test
             test_Constellation.TestSupprimer();
             Test_Carte test_carte = new Test_Carte();
             test_carte.Init();
+            test_carte.TestRelierDeuxEtoiles();
             test_carte.TestDeplacerUnAstre();
-            test_carte.TestRelierDeuxEtoiles();            
         }
     }
 }
