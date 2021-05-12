@@ -1,11 +1,11 @@
-﻿<Window x:Class="Stellar.MainWindow"
+﻿<Window x:Class="Appli.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Stellar"
+        xmlns:local="clr-namespace:Appli"
         mc:Ignorable="d"
-        Title="Stellar" Height="500" Width="800">
+        Title="Stellar" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" MinWidth="200" />
@@ -21,18 +21,18 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                
+
                 <Button Content="Test 1" Grid.Column="0"/>
                 <Button Content="Test 2" Grid.Column="1"/>
                 <Button Content="Test 3" Grid.Column="2"/>
                 <Button Content="Test 4" Grid.Column="3"/>
             </Grid>
             <ListBox>
-                
+
             </ListBox>
         </StackPanel>
 
-        <Image Source="img/fond_ciel.jpg" Grid.Column="1" Stretch="UniformToFill"/>
+        <Image Source="images/fonds/fond_ciel.jpg" Grid.Column="1" Stretch="UniformToFill"/>
         <Viewbox Grid.Column="1" Stretch="UniformToFill">
             <Canvas Height="725" Width="900">
                 <!--<Canvas.Background>
@@ -57,7 +57,4 @@
             </Canvas>
         </Viewbox>
     </Grid>
-    
-    
-
 </Window>

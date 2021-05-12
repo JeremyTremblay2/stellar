@@ -7,11 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="img\fond_ciel.jpg" />
+    <None Remove="images\fonds\fond_ciel.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="img\fond_ciel.jpg">
+    <ProjectReference Include="..\Modele\Modele.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="images\fonds\fond_ciel.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
