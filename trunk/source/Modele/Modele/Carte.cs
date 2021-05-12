@@ -57,7 +57,7 @@ namespace Modele
                     Constellation tempoConstel = ParcoursConstellations(anciennePosition);
                     if (tempoConstel != null)
                     {
-                        tempoConstel.DeplacePoint(anciennePosition, nouvellePosition);
+                        lesConstellations[lesConstellations.IndexOf(tempoConstel)].DeplacePoint(anciennePosition, nouvellePosition);
                     }
                 }
 
@@ -79,8 +79,12 @@ namespace Modele
                 Constellation tempoConstel = ParcoursConstellations(position);
                 if (astreARetourner is Etoile && tempoConstel != null)
                 {
-                    tempoConstel.SupprimerLesLiens(position);
-                } 
+                    lesConstellations[lesConstellations.IndexOf(tempoConstel)].SupprimerLesLiens(position);
+                    if (tempoConstel.Vide)
+                    {
+                        lesConstellations.Remove(tempoConstel);
+                    }
+                }
                 else                
                 {
                     lesAstres.Remove(position);
@@ -115,13 +119,13 @@ namespace Modele
                     lesConstellations.Add(new Constellation(point1, point2));
                 } else if (const1 != null && const2 == null)
                 {
-                    const1.Relier(point1, point2);
+                    lesConstellations[lesConstellations.IndexOf(const1)].Relier(point1, point2);
                 } else if (const1 == null && const2 != null)
                 {
-                    const2.Relier(point2, point1);
+                    lesConstellations[lesConstellations.IndexOf(const2)].Relier(point2, point1);
                 } else if (const1 != null && const2 != null && !const1.Equals(const2))
                 {
-                    const1.FusionnerAvec(const2, point1, point2);
+                    lesConstellations[lesConstellations.IndexOf(const1)].FusionnerAvec(const2, point1, point2);
                     lesConstellations.Remove(const2);
                 }
             }
@@ -152,6 +156,7 @@ namespace Modele
             lesAstres.Clear();
             lesConstellations.Clear();
         }
+
 
         /// <summary>
         /// Méthode permettant l'affichage de la Carte. Une Carte affiche d'abord tous ses Astres (Point de l'astre et le nom de l'astre).
