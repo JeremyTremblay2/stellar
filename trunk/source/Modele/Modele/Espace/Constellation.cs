@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Espace
 {
     /// <summary>
-    /// Une constellation est un ensemble de points reliés par des segments, le tout forme un graphe (Les étoiles et les liens entre elles)
+    /// Une constellation est un ensemble de points reliés par des segments, le tout forme un graphe (Les étoiles et les liens entre elles).
     /// </summary>
     public class Constellation : IEquatable<Constellation>
     {

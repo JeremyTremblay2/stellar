@@ -9,6 +9,16 @@ namespace Geometrie
     public class Segment : IEquatable<Segment>
     {
         /// <summary>
+        /// Propriété représentant le premier point du segment, sous forme de type Point.
+        /// </summary>
+        public Point Point1 { get; private set; }
+
+        /// <summary>
+        /// Propriété représentant le second point du segment, sous forme de type Point.
+        /// </summary>
+        public Point Point2 { get; private set; }
+
+        /// <summary>
         /// Constructeur de Segment.
         /// </summary>
         /// <param name="point1">Premier point du segment.</param>
@@ -18,16 +28,6 @@ namespace Geometrie
             Point1 = point1;
             Point2 = point2;
         }
-
-        /// <summary>
-        /// Propriété représentant le premier point du segment, sous forme de type Point.
-        /// </summary>
-        public Point Point1 { get; private set; }
-
-        /// <summary>
-        /// Propriété représentant le second point du segment, sous forme de type Point.
-        /// </summary>
-        public Point Point2 { get; private set; }
 
         /// <summary>
         /// Permet d'afficher un segment. Pour cela, on affiche les deux points du segment correspondant, et une flèche 

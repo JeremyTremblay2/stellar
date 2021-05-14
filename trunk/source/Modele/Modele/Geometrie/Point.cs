@@ -9,6 +9,16 @@ namespace Geometrie
     public class Point : IEquatable<Point>
     {
         /// <summary>
+        /// Propriété contenant la position en abscisses de x, sous forme d'une valeur entière.
+        /// </summary>
+        public int X { get; private set; }
+
+        /// <summary>
+        /// Propriété contenant la position en ordonnées de y, sous forme d'une valeur entière.
+        /// </summary>
+        public int Y { get; private set; }
+
+        /// <summary>
         /// Constructeur de Point, permet d'initialiser un point aux coordonnées 0,0.
         /// </summary>
         public Point() => Deplacer(0, 0);
@@ -22,16 +32,6 @@ namespace Geometrie
         {
             Deplacer(x, y);
         }
-
-        /// <summary>
-        /// Propriété contenant la position en abscisses de x, sous forme d'une valeur entière.
-        /// </summary>
-        public int X { get; private set; }
-
-        /// <summary>
-        /// Propriété contenant la position en ordonnées de y, sous forme d'une valeur entière.
-        /// </summary>
-        public int Y { get; private set; }
 
         /// <summary>
         /// Permet de déplacer un point à de nouvelles coordonnées.

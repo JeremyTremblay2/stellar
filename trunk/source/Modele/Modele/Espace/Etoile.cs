@@ -12,6 +12,21 @@ namespace Espace
     public class Etoile : Astre, IEquatable<Etoile>
     {
         /// <summary>
+        /// Propriété représentant le type de l'étoile, contenu dans l'énumération TypeEtoile.
+        /// </summary>
+        public TypeEtoile Type { get; set; }
+
+        /// <summary>
+        /// Propriété représentant la constellation sous forme de châine de caractères, dans laquelle se trouve l'étoile.
+        /// </summary>
+        public string Constellation { get; set; }
+
+        /// <summary>
+        /// Propriété représentant la luminosité de l'étoile, sous forme d'une valeur flottante (en luminosité solaire Lo).
+        /// </summary>
+        public float Luminosite { get; set; }
+
+        /// <summary>
         /// Constructeur vide, utilisé par les fabriques d'étoiles.
         /// </summary>
         public Etoile() { }
@@ -40,21 +55,6 @@ namespace Espace
             Constellation = constellation;
             Luminosite = luminosite;
         }
-        
-        /// <summary>
-        /// Propriété représentant le type de l'étoile, contenu dans l'énumération TypeEtoile.
-        /// </summary>
-        public TypeEtoile Type { get; set; }
-
-        /// <summary>
-        /// Propriété représentant la constellation sous forme de châine de caractères, dans laquelle se trouve l'étoile.
-        /// </summary>
-        public string Constellation { get; set; }
-
-        /// <summary>
-        /// Propriété représentant la luminosité de l'étoile, sous forme d'une valeur flottante (en luminosité solaire Lo).
-        /// </summary>
-        public float Luminosite { get; set; }
 
         /// <summary>
         /// Méthode redéfinie depuis la classe-mère, et permettant d'afficher le type de cet Astre (une étoile donc).
