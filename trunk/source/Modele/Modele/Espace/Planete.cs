@@ -24,7 +24,7 @@ namespace Espace
         /// <param name="vie">Une chaîne de caractère donnant des indications sur une éventuelle vie sur la planète en question</param>
         /// <param name="eauPresente">un booléen indiquant si l'eau est présente ou non</param>
         /// <param name="systeme">Un chaîne de caractères indiquant dans quel système stellaire se trouve la planète</param>
-        public Planete(string nom, string description, long age = 0, float masse = 0, int temperature = 100, bool personnalise = false, TypePlanete type = TypePlanete.Naine, string vie = "Inconnu", bool eauPresente = false, string systeme = "Inconnu")
+        public Planete(string nom, string description, long age, float masse, int temperature, string vie, bool eauPresente, string systeme, TypePlanete type = TypePlanete.Naine, bool personnalise = false)
             : base(nom, description, age, masse, temperature, personnalise)
         {
             Type = type;

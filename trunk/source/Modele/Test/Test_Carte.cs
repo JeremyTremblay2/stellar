@@ -19,8 +19,7 @@ namespace Test
         /// </summary>
         public void Init()
         {
-            uneCarte.AjouterUnAstre(new Point(42,42), new FabriqueDEtoile().Initialiser(false)
-                                      .AvecNom("Soleil")
+            uneCarte.AjouterUnAstre(new Point(42,42), new FabriqueDEtoile().Initialiser("Soleil")
                                       .AvecDescription("Le Soleil est l’étoile du Système solaire. Dans la classification astronomique, " +
                                       "c’est une étoile de type naine jaune d'une masse d'environ 1,989 1 × 1030 kg, composée d’hydrogène et d’hélium.")
                                       .AvecAge(460000000)
@@ -29,8 +28,7 @@ namespace Test
                                       .AvecLuminosite(1)
                                       .AvecType(TypeEtoile.NaineJaune)
                                       .Construire());
-            uneCarte.AjouterUnAstre(new Point(56, 56), new FabriqueDEtoile().Initialiser(false)
-                                      .AvecNom("Sirius")
+            uneCarte.AjouterUnAstre(new Point(56, 56), new FabriqueDEtoile().Initialiser("Sirius")
                                       .AvecDescription("Sirius, également appelée Alpha Canis Majoris (α Canis Majoris/α CMa) par la " +
                                       "désignation de Bayer, est l'étoile principale de la constellation du Grand Chien. Vue de la " +
                                       "Terre, Sirius est l'étoile la plus brillante du ciel après le Soleil.")
@@ -41,8 +39,7 @@ namespace Test
                                       .EstDansLaConstellation("Grand Chien")
                                       .AvecType(TypeEtoile.NaineBlanche)
                                       .Construire());
-            uneCarte.AjouterUnAstre(new Point(20, 98), new FabriqueDEtoile().Initialiser(false)
-                                      .AvecNom("Bételgeuse")
+            uneCarte.AjouterUnAstre(new Point(20, 98), new FabriqueDEtoile().Initialiser("Bételgeuse")
                                       .AvecDescription("Bételgeuse (α Orionis) est une étoile variable semi-régulière de type supergéante " +
                                       "rouge, dans la constellation d’Orion, située à une distance très difficile à établir.")
                                       .AvecAge(8000000)
@@ -52,8 +49,7 @@ namespace Test
                                       .EstDansLaConstellation("Orion")
                                       .AvecType(TypeEtoile.SupergeanteRouge)
                                       .Construire());
-            uneCarte.AjouterUnAstre(new Point(32, 58), new FabriqueDEtoile().Initialiser(false)
-                                      .AvecNom("Castor")
+            uneCarte.AjouterUnAstre(new Point(32, 58), new FabriqueDEtoile().Initialiser("Castor")
                                       .AvecDescription("Castor (ou Alpha Geminorum) est la seconde étoile la plus brillante de la " +
                                       "constellation des Gémeaux et une des plus brillantes étoiles du ciel nocturne.")
                                       .AvecAge(370000000)
