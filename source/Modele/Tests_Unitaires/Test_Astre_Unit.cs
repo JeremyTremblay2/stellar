@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Espace;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Modele;
 using System;
 using System.Collections.Generic;

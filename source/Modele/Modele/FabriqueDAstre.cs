@@ -1,4 +1,6 @@
-﻿namespace Modele
+﻿using Espace;
+
+namespace Modele
 {
     /// <summary>
     /// Constructeur permettant de créer des Astres.
