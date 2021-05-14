@@ -1,3 +1,4 @@
+using Geometrie;
 using Modele;
 using System;
 using Xunit;

@@ -11,8 +11,8 @@ namespace Geometrie
         /// <summary>
         /// Constructeur de Segment.
         /// </summary>
-        /// <param name="point1">Coordonnées du premier point du segment.</param>
-        /// <param name="point2">Coordonnées du deuxième point du segment.</param>
+        /// <param name="point1">Premier point du segment.</param>
+        /// <param name="point2">Deuxième point du segment.</param>
         public Segment(Point point1, Point point2)
         {
             Point1 = point1;

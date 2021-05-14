@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Tests_Fonctionnels;
 
 namespace Test
 {
-    class Test
+    public class Test
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Test_Astres test_Astres = new Test_Astres();
-            test_Astres.Test();
-            Test_Constellation test_Constellation = new Test_Constellation();
+            //Test_Astres.TestAstres();
+            //Test_Geometrie.TestPoint();
+            Test_Geometrie.TestSegment();
+            /*Test_Constellation test_Constellation = new Test_Constellation();
             test_Constellation.TestRelier();
             test_Constellation.TestDeplaceEtoile();
             test_Constellation.TestFusion();
@@ -20,7 +18,7 @@ namespace Test
             Test_Carte test_carte = new Test_Carte();
             test_carte.Init();
             test_carte.TestRelierDeuxEtoiles();
-            test_carte.TestDeplacerUnAstre();
+            test_carte.TestDeplacerUnAstre();*/
         }
     }
 }

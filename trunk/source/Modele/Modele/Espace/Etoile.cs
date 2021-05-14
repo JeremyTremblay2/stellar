@@ -116,7 +116,7 @@ namespace Espace
         /// <returns>Un entier représentant le hashcode de la planète.</returns>
         public override int GetHashCode()
         {
-            return (int)(base.GetHashCode() + Type.GetHashCode() + Constellation.GetHashCode() + Luminosite);
+            return base.GetHashCode() + Type.GetHashCode() + Constellation.GetHashCode() + Luminosite.GetHashCode();
         }
 
     }

@@ -9,7 +9,12 @@ namespace Geometrie
     public class Point : IEquatable<Point>
     {
         /// <summary>
-        /// Constructeur de Point, permte d'initialiser un point avec des coordonnées.
+        /// Constructeur de Point, permet d'initialiser un point aux coordonnées 0,0.
+        /// </summary>
+        public Point() => Deplacer(0, 0);
+
+        /// <summary>
+        /// Constructeur de Point, permet d'initialiser un point avec des coordonnées.
         /// </summary>
         /// <param name="x">Coordonnées en abscisses.</param>
         /// <param name="y">Coordonnées en ordonnées.</param>

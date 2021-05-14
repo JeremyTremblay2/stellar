@@ -6,9 +6,15 @@ using Modele;
 
 namespace Test
 {
-    public class Test_Astres
+    /// <summary>
+    /// Classe de tests fonctionnels des Astres.
+    /// </summary>
+    public static class Test_Astres
     {
-        public void Test()
+        /// <summary>
+        /// Méthode de test principal, qui vient tester l'affichage des astres.
+        /// </summary>
+        public static void TestAstres()
         {
             List<Etoile> lesEtoiles = new List<Etoile>()
             {
@@ -185,43 +191,47 @@ namespace Test
                                        .Construire(),
             };
 
-            lesPlanetes.Sort();
-            lesPlanetes.Reverse();
-            lesEtoiles.Sort();
-            lesEtoiles.Reverse();
+            //Affichages.
+
+            Console.WriteLine("Affichage des planètes :");
 
             foreach (Planete planete in lesPlanetes)
             {
                 Console.WriteLine(planete);
             }
 
+            Console.WriteLine("----------------------------------------------");
+            Console.WriteLine("Affichage des étoiles :");
+
             foreach (Etoile etoile in lesEtoiles)
             {
                 Console.WriteLine(etoile);
             }
 
-            List<Etoile> testEgalite = new List<Etoile>()
-            {
-                /*new Etoile("Sirius", "Description 1", 20, 20, 5000, true, TypeEtoile.NaineNoire, "Grande Ours", 1000),
-                new Etoile("Sirius", "Description 1", 20, 20, 5000, true, TypeEtoile.NaineNoire, "Grande Ours", 1000),
-                new Etoile("Faux", "Description 1", 20, 20, 5000, true, TypeEtoile.NaineNoire, "Grande Ours", 1000),
-                new Etoile("Sirius", "Description 2", 20, 20, 5000, true, TypeEtoile.NaineNoire, "Grande Ours", 1000),
-                new Etoile("Sirius", "Description 1", 0, 20, 5000, true, TypeEtoile.NaineNoire, "Grande Ours", 1000),
-                new Etoile("Sirius", "Description 1", 20, 0, 5000, true, TypeEtoile.NaineNoire, "Grande Ours", 1000),
-                new Etoile("Sirius", "Description 1", 20, 20, 0, true, TypeEtoile.NaineNoire, "Grande Ours", 1000),
-                new Etoile("Sirius", "Description 1", 20, 20, 5000, false, TypeEtoile.NaineNoire, "Grande Ours", 1000),
-                new Etoile("Sirius", "Description 1", 20, 20, 5000, true, TypeEtoile.TrouNoir, "Grande Ours", 1000),
-                new Etoile("Sirius", "Description 1", 20, 20, 5000, true, TypeEtoile.NaineNoire, "Cassiopée", 1000),
-                new Etoile("Sirius", "Description 1", 20, 20, 5000, true, TypeEtoile.NaineNoire, "Grande Ours", 50),*/
-            };
+            Console.WriteLine("----------------------------------------------");
 
-            for(int i = 0; i < testEgalite.Count(); i++)
-            {
-                //Console.WriteLine($"e{0} == e{i} ? {testEgalite[0] == testEgalite[i]}");
-                Console.WriteLine($"e{0} equals e{i} ? {testEgalite[0].Equals(testEgalite[i])}");
-            }
+            Console.WriteLine($"Modification du favori de l'étoile {lesEtoiles[0].Nom} :");
+            lesEtoiles[0].ModifierFavori();
+            Console.WriteLine(lesEtoiles[0]);
 
-            FabriqueDAstre<FabriqueDEtoile, Etoile> fabrique = new FabriqueDEtoile();
+            Console.WriteLine("----------------------------------------------");
+
+            Console.WriteLine($"Modification une seconde fois du favori de l'étoile {lesEtoiles[0].Nom} :");
+            lesEtoiles[0].ModifierFavori();
+            Console.WriteLine(lesEtoiles[0]);
+
+            Console.WriteLine("----------------------------------------------");
+
+            Console.WriteLine($"{lesPlanetes[8].Nom} equals {lesPlanetes[3].Nom} ?  =>  {lesPlanetes[8].Equals(lesPlanetes[3])}");
+            Console.WriteLine($"{lesPlanetes[4].Nom} equals {lesPlanetes[2].Nom} ?  =>  {lesPlanetes[4].Equals(lesPlanetes[2])}");
+            Console.WriteLine($"{lesPlanetes[0].Nom} equals {lesPlanetes[1].Nom} ?  =>  {lesPlanetes[0].Equals(lesPlanetes[1])}");
+            Console.WriteLine($"{lesPlanetes[0].Nom} equals {lesPlanetes[0].Nom} ?  =>  {lesPlanetes[0].Equals(lesPlanetes[0])}");
+
+            Console.WriteLine("----------------------------------------------");
+
+            Console.WriteLine($"{lesEtoiles[4].Nom} equals {lesEtoiles[1].Nom} ?  =>  {lesEtoiles[4].Equals(lesEtoiles[1])}");
+            Console.WriteLine($"{lesEtoiles[2].Nom} equals {lesEtoiles[0].Nom} ?  =>  {lesEtoiles[2].Equals(lesEtoiles[0])}");
+            Console.WriteLine($"{lesEtoiles[3].Nom} equals {lesEtoiles[3].Nom} ?  =>  {lesEtoiles[3].Equals(lesEtoiles[3])}");
         }
     }
 }
