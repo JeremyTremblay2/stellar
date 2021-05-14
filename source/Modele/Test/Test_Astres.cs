@@ -198,6 +198,7 @@ namespace Test
             foreach (Planete planete in lesPlanetes)
             {
                 Console.WriteLine(planete);
+                planete.SePresenter();
             }
 
             Console.WriteLine("----------------------------------------------");
@@ -206,6 +207,7 @@ namespace Test
             foreach (Etoile etoile in lesEtoiles)
             {
                 Console.WriteLine(etoile);
+                etoile.SePresenter();
             }
 
             Console.WriteLine("----------------------------------------------");

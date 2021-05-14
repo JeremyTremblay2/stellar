@@ -13,40 +13,7 @@ namespace Espace
     public abstract class Astre : IEquatable<Astre>, IComparable<Astre>, IComparable
     {
         private string nom;
-        
-        /// <summary>
-        /// Constructeur vide, utilisé par les fabriques d'astres.
-        /// </summary>
-        public Astre() { }
 
-        /// <summary>
-        /// Constructeur d'astres.
-        /// </summary>
-        /// <param name="nom">Le nom de l'astre</param>
-        /// <param name="description">Une description courte de l'astre en question</param>
-        /// <param name="age">L'age de l'astre.</param>
-        /// <param name="masse">La masse de l'astre (en masse terrestre ou solaire)</param>
-        /// <param name="temperature">La température de l'astre (en kelvin)</param>
-        /// <param name="personnalise">Un booléen indiquant si l'astre est personnalisé (créé par l'utilisateur) ou non</param>
-        public Astre(string nom, string description, long age, float masse, int temperature, bool personnalise = false)
-        {
-            if (string.IsNullOrWhiteSpace(nom))
-            {
-                throw new ArgumentNullException("Le nom d'un Astre ne peut pas être vide ou null.");
-            }
-            if (age < 0 || masse < 0 || temperature < 0)
-            {
-                throw new ArgumentException("L'âge, la masse, et la température ne peuvent pas être négatives.");
-            }
-
-            Nom = nom;
-            Description = description;
-            Age = age;
-            Masse = masse;
-            Temperature = temperature;
-            Personnalise = personnalise;
-        }
-        
         /// <summary>
         /// Propriété représentant le nom de l'astre sous forme d'une chaîne de caractères.
         /// Le nom ne peut être qu'écrit sous format titre (Xxxx Xx Xxxx).
@@ -59,7 +26,7 @@ namespace Espace
                 nom = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
             }
         }
-        
+
         /// <summary>
         /// Propriété représentant l'âge de l'astre en valeur entière.
         /// </summary>
@@ -89,8 +56,42 @@ namespace Espace
         /// <summary>
         /// Propriété permettant de savoir si l'astre est un astre personnalisé (= crée par l'utilisateur) ou non, représente par un booléen.
         /// </summary>
-        public bool Personnalise { get; internal set;  }
+        public bool Personnalise { get; internal set; }
 
+        /// <summary>
+        /// Constructeur vide, utilisé par les fabriques d'astres.
+        /// </summary>
+        
+        public Astre() { }
+
+        /// <summary>
+        /// Constructeur d'astres.
+        /// </summary>
+        /// <param name="nom">Le nom de l'astre</param>
+        /// <param name="description">Une description courte de l'astre en question</param>
+        /// <param name="age">L'age de l'astre.</param>
+        /// <param name="masse">La masse de l'astre (en masse terrestre ou solaire)</param>
+        /// <param name="temperature">La température de l'astre (en kelvin)</param>
+        /// <param name="personnalise">Un booléen indiquant si l'astre est personnalisé (créé par l'utilisateur) ou non</param>
+        public Astre(string nom, string description, long age, float masse, int temperature, bool personnalise = false)
+        {
+            if (string.IsNullOrWhiteSpace(nom))
+            {
+                throw new ArgumentNullException("Le nom d'un Astre ne peut pas être vide ou null.");
+            }
+            if (age < 0 || masse < 0 || temperature < 0)
+            {
+                throw new ArgumentException("L'âge, la masse, et la température ne peuvent pas être négatives.");
+            }
+
+            Nom = nom;
+            Description = description;
+            Age = age;
+            Masse = masse;
+            Temperature = temperature;
+            Personnalise = personnalise;
+        } 
+        
         /// <summary>
         /// Méthode permettant la modification de l'état de l'attribut favori. On change son état actuel.
         /// </summary>

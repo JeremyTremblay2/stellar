@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Utilitaire
 {
@@ -72,9 +70,7 @@ namespace Utilitaire
         /// <param name="type">Le type de l'astre a conserver (Etoile ou Planete).</param>
         /// <returns>Une nouvelle liste d'astres qui ne contiennent que le type d'astre fournit en paramètre.</returns>
         public static List<Astre> RechercheParType(List<Astre> lesAstres, Type type)
-        {
-            return lesAstres.Where(astre => astre.GetType() == type).ToList();
-        }
+            => lesAstres.Where(astre => astre.GetType() == type).ToList();
 
         /// <summary>
         /// Méthode permettant de créer une liste d'astres à partir d'une liste pré-existante, ne contenant que les astres contenus dans 

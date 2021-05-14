@@ -7,8 +7,8 @@ namespace Test
     {
         public static void Main(string[] args)
         {
-            //Test_Astres.TestAstres();
-            //Test_Geometrie.TestPoint();
+            Test_Astres.TestAstres();
+            Test_Geometrie.TestPoint();
             Test_Geometrie.TestSegment();
             /*Test_Constellation test_Constellation = new Test_Constellation();
             test_Constellation.TestRelier();

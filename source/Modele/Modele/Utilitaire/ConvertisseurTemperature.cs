@@ -11,7 +11,9 @@ namespace Utilitaire
     /// </summary>
     public static class ConvertisseurTemperature
     {
+        //Constante utilisée dans la conversion de degrés Celsius en Kelvin (ou inversement).
         private const float constanteKelvin = 273.15f;
+
         /// <summary>
         /// Méthode permettant la convertion de Kelvin en degrés Celsius.
         /// </summary>
