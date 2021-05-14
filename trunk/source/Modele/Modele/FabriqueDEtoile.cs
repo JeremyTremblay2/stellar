@@ -1,4 +1,6 @@
-﻿namespace Modele
+﻿using Espace;
+
+namespace Modele
 {
     public class FabriqueDEtoile : FabriqueDAstre<FabriqueDEtoile,Etoile>
     {
