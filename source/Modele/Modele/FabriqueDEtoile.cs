@@ -1,4 +1,5 @@
 ﻿using Espace;
+using System;
 
 namespace Modele
 {
@@ -6,6 +7,10 @@ namespace Modele
     {
         public FabriqueDEtoile AvecLuminosite(float luminosite)
         {
+            if (luminosite < 0)
+            {
+                throw new ArgumentException("La luminosité d'un astre ne peut pas être négative.");
+            }
             Astre.Luminosite = luminosite;
             return this;
         }

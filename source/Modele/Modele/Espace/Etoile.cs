@@ -28,9 +28,14 @@ namespace Espace
         /// <param name="type">Le type de l'étoile</param>
         /// <param name="constellation">Le nom de la constellation auquelle appartient l'étoile</param>
         /// <param name="luminosite">La luminosité de l'étoile (en luminosité solaire)</param>
-        public Etoile(string nom, string description, long age, float masse, int temperature, bool personnalise = false, TypeEtoile type = TypeEtoile.NaineBlanche, string constellation = "Inconnue", float luminosite = 1)
+        public Etoile(string nom, string description, long age, float masse, int temperature, string constellation, float luminosite, TypeEtoile type = TypeEtoile.NaineBlanche, bool personnalise = false)
             : base(nom, description, age, masse, temperature, personnalise)
         {
+            if (luminosite < 0)
+            {
+                throw new ArgumentException("La luminosité d'un astre ne peut pas être négative.");
+            }
+
             Type = type;
             Constellation = constellation;
             Luminosite = luminosite;

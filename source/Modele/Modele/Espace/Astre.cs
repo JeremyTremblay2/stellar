@@ -34,6 +34,11 @@ namespace Espace
             {
                 throw new ArgumentNullException("Le nom d'un Astre ne peut pas être vide ou null.");
             }
+            if (age < 0 || masse < 0 || temperature < 0)
+            {
+                throw new ArgumentException("L'âge, la masse, et la température ne peuvent pas être négatives.");
+            }
+
             Nom = nom;
             Description = description;
             Age = age;
