@@ -2,6 +2,8 @@
 using Geometrie;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 
@@ -11,35 +13,43 @@ namespace Modele
     /// La carte est une entitée contenant tous les éléments disposés dessus. Cela peut être des astres, des constellations...
     /// Elle utilise un système de coordonnées.
     /// </summary>
-    public class Carte
+    public class Carte : IEquatable<Carte>
     {
+        //Générateur de constellations aléatoire à la création de la carte.
         private static Random generateurAleatoire = new Random();
 
+        //Dictionnaire de données permettant de retrouver facilement un Astre grâce à sa position.
         private Dictionary<Point, Astre> lesAstres;
+        //Les constellations présentes sur la carte (liste de données).
         private List<Constellation> lesConstellations;
 
         /// <summary>
-        /// Propriété concernant un dictionnaire permettant de retrouver un Astre facilement présent sur la Carte, à partir de son point
-        /// de coordonnées (sa position en somme).
+        /// Propriété en lecture seule concernant le dictionnaire permettant de retrouver un Astre facilement présent sur la Carte, 
+        /// à partir de son point de coordonnées (sa position en somme).
         /// </summary>
-        public Dictionary<Point, Astre> LesAstres { get; private set; }
+        public ReadOnlyDictionary<Point, Astre> LesAstres { get; private set; }
 
         /// <summary>
-        /// Propriété concernant la liste des constellations qui composent la carte, ce sont des points reliés entre eux par des segments.
+        /// Propriété en lecture seule concernant la liste des constellations qui composent la carte, ce sont des points reliés entre 
+        /// eux par des segments.
         /// </summary>
-        public List<Constellation> LesConstellations { get; private set; }
+        public ReadOnlyCollection<Constellation> LesConstellations { get; private set; }
 
         /// <summary>
         /// Constructeur de Carte. Une Carte est caractérisée par un dictionnaire d'Astres (étoiles et planètes), qui sont facilement accessibles
         /// via leur Point de coordonnées. Une carte se compose aussi d'une liste de constellations (des points reliés entre eux par des segments).
+        /// On instancie ici également les collections en lectures seules afin que les champs soient bien encapsulés.
         /// </summary>
         /// <param name="avecCreations">Paramètre permettant de créer une carte avec déjà quelques éléments aléatoires dessus (des constellations,
         /// étoiles et planètes). S'il vaut true, alors une telle carte sera générée, si false, la carte sera construite vide.
         /// </param>
-        public Carte(bool avecCreations)
+        public Carte(bool avecCreations = true)
         {
             lesAstres = new Dictionary<Point, Astre>();
             lesConstellations = new List<Constellation>();
+
+            LesAstres = new ReadOnlyDictionary<Point, Astre>(lesAstres);
+            LesConstellations = new ReadOnlyCollection<Constellation>(lesConstellations);
 
             if (avecCreations)
             {
@@ -222,6 +232,45 @@ namespace Modele
             }
 
             return chaine.ToString();
+        }
+
+        /// <summary>
+        /// Protocole d'égalité permettant de savoir si une carte passée en paramètre est égal à this, donc si elle possède les mêmes
+        /// constelations, points et astres.
+        /// </summary>
+        /// <param name="autre">Une carte que l'on souhaite comparer à this.</param>
+        /// <returns>Un booléen qui indique si la carte passée en paramètre est la même que this ou non.</returns>
+        public bool Equals([AllowNull] Carte autre)
+        {
+            return LesAstres.Equals(autre.LesAstres)
+                && LesConstellations.Equals(LesConstellations);
+        }
+
+        /// <summary>
+        /// Protocole d'égalité permettant de savoir si un objet passé en paramètre est une Carte.
+        /// Si cette vérification est faite avec succès, alors on vérifie ensuite si cette Carte est égale à this (en la castant), donc si 
+        /// elle possède les mêmes constellations, points et astres.
+        /// </summary>
+        /// <param name="obj">Un objet quelconque, dont on veut déterminer s'il s'agit d'une carte (et s'il s'agit de la même 
+        /// carte que this)</param>
+        /// <returns>Un booléen qui indique si l'objet passé en paramètre est le même que this ou non.</returns>
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null)) return false;
+            if (ReferenceEquals(obj, this)) return true;
+            if (GetType() != obj.GetType()) return false;
+
+            return Equals(obj as Carte);
+        }
+
+        /// <summary>
+        /// Permet la génération d'un HashCode, utilisé dans le cas des dictionnaires.
+        /// Ce hascode est définit par le dictionnaire de points et d'astres, ainsi que la liste de constellations de la carte.
+        /// </summary>
+        /// <returns>Un entier représentant le hashcode de cette carte.</returns>
+        public override int GetHashCode()
+        {
+            return lesAstres.GetHashCode() + lesConstellations.GetHashCode();
         }
 
         /// <summary>
