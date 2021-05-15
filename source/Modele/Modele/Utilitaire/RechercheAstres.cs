@@ -8,7 +8,7 @@ namespace Utilitaire
     /// <summary>
     /// Méthode utilitaire utilisant LINQ, et permettant le filtrage d'une liste d'astres via diverses méthodes.
     /// </summary>
-    static class RechercheAstres
+    public static class RechercheAstres
     {
         /// <summary>
         /// Méthode permettant de créer une liste d'astres ne contenant que la chaîne de caractères dans le nom passée en paramètre 
@@ -18,9 +18,7 @@ namespace Utilitaire
         /// <param name="nom">La chaîne de caractères qui va être recherchée dans le nom de tous les astres de la liste.</param>
         /// <returns>Une nouvelle liste d'astres qui ne contiennent que le nom fournit en paramètre.</returns>
         public static List<Astre> RechercheParNom(List<Astre> lesAstres, string nom)
-        {
-            return lesAstres.Where(astre => astre.Nom.ToLower().Contains(nom.ToLower())).ToList();
-        }
+            => lesAstres.Where(astre => astre.Nom.ToLower().Contains(nom.ToLower())).ToList();
 
         /// <summary>
         /// Méthode permettant d'ordonner une liste d'astres par ordre alphabétique de leurs noms, en fonction de la valeur passée en 
@@ -33,9 +31,7 @@ namespace Utilitaire
         /// </param>
         /// <returns>Une nouvelle liste d'astres triée par ordre alphabétique du nom des astres.</returns>
         public static List<Astre> TriParOrdreAlphabetique(List<Astre> lesAstres, bool ordre)
-        {
-            return ordre ? lesAstres.OrderBy(astre => astre.Nom).ToList() : lesAstres.OrderByDescending(astre => astre.Nom).ToList();
-        }
+            => ordre ? lesAstres.OrderBy(astre => astre.Nom).ToList() : lesAstres.OrderByDescending(astre => astre.Nom).ToList();
 
         /// <summary>
         /// Méthode permettant de créer une liste d'astres à partir d'une liste pré-existante, et ne contenant que les astres personnalisés, 
@@ -83,8 +79,6 @@ namespace Utilitaire
         /// </param>
         /// <returns>Une nouvelle liste d'astres qui ne contiennent que les astres favoris, ou tous les astres.</returns>
         public static List<Astre> RechercheParFavoris(List<Astre> lesAstres, bool favori)
-        {
-            return favori ? lesAstres.Where(astre => astre.Favori).ToList() : lesAstres;
-        }
+            => favori ? lesAstres.Where(astre => astre.Favori).ToList() : lesAstres;
     }
 }
