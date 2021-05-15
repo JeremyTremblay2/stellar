@@ -1,17 +1,15 @@
 ﻿using Geometrie;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Espace
 {
     /// <summary>
-    /// Une constellation est un ensemble de points reliés par des segments, le tout forme un graphe (Les étoiles et les liens entre elles).
+    /// Une constellation est un ensemble de points reliés par des segments, le tout forme un graphe (les étoiles et les liens entre elles).
     /// </summary>
     public class Constellation : IEquatable<Constellation>
     {
@@ -143,6 +141,11 @@ namespace Espace
             lesSegments.Add(new Segment(pt1, pt2));
         }
 
+        public bool ContientLePoint(Point point) => lesPoints.Contains(point) ? true : false;
+
+        public bool ContientLeSegment(Segment segment) => lesSegments.Contains(segment) ? true : false;
+
+
         public bool Equals([AllowNull] Constellation autre)
         {
             return lesPoints.Equals(autre.lesPoints) && lesSegments.Equals(autre.lesSegments);
@@ -157,24 +160,24 @@ namespace Espace
             return Equals(obj as Constellation);
         }
 
-        public bool ContientLePoint(Point point) => lesPoints.Contains(point) ? true : false;
-
-        public bool ContientLeSegment(Segment segment) => lesSegments.Contains(segment) ? true : false;
-
         public override string ToString()
         {
-            string strPt = "Liste de points :\n";
-            string strSeg = "Liste de segments :\n";
+            StringBuilder chaine = new StringBuilder("Les points de la constellation :\n");
+
+            foreach (Point point in lesPoints)
+            {
+                chaine.AppendFormat("\t{0}\n", point);
+            }
+
+            chaine.Append("Les segments de la constellation :\n");
             
-            foreach (Point pt in lesPoints)
+            
+            foreach (Segment segment in lesSegments)
             {
-                strPt += $"\t{pt}\n";
+                chaine.AppendFormat("\t{0}\n", segment);
             }
-            foreach (Segment seg in lesSegments)
-            {
-                strSeg += $"\t{seg}\n";
-            }
-            return $"{strPt}\n{strSeg}\nvide : {Vide}";
+
+            return chaine.ToString();
         }
 
         public override int GetHashCode()

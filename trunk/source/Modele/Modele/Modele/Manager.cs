@@ -2,6 +2,7 @@
 using Geometrie;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -14,18 +15,20 @@ namespace Modele
     public class Manager
     {
         //Données contenues dans le Manager.
-        //La liste d'astres -> le menu déroulant avec les informations.
-        //La carte -> les points et constellations qui se trouvent sur la partie éditeur.
+        //La liste d'astres correspond au menu déroulant avec les informations des astres.
+        //La carte correspond à l'ensemble des points et constellations qui se trouvent sur la partie éditeur.
         private List<Astre> lesAstres;
         private Carte carte;
 
         /// <summary>
-        /// Propriété concernant la liste d'astres, qui est l'ensembles de toutes les données (les astres) de l'application.
+        /// Propriété en lecture seule concernant la liste d'astres, qui est l'ensembles de toutes les données (les astres) 
+        /// de l'application.
         /// </summary>
-        public List<Astre> LesAstres { get; private set; }
+        public ReadOnlyCollection<Astre> LesAstres { get; private set; }
 
         /// <summary>
-        /// Propriété concernant la Carte, qui est l'endroit sur lequel se trouve tous les points (les astres), et constellations de l'application.
+        /// Propriété concernant la Carte, qui est l'endroit sur lequel se trouve tous les points (les astres), et 
+        /// constellations de l'application.
         /// </summary>
         public Carte Carte { get; private set; }
 
@@ -36,7 +39,8 @@ namespace Modele
         public Manager()
         {
             lesAstres = new List<Astre>();
-            carte = new Carte(true);
+            LesAstres = new ReadOnlyCollection<Astre>(lesAstres);
+            carte = new Carte();
         }
 
         /// <summary>
