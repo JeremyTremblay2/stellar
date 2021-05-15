@@ -14,7 +14,7 @@ namespace Test
         /// <summary>
         /// Méthode de test principal, qui vient tester l'affichage des astres.
         /// </summary>
-        public static void TestAstres()
+        public static void TestCreationAstres()
         {
             List<Etoile> lesEtoiles = new List<Etoile>()
             {
@@ -234,6 +234,8 @@ namespace Test
             Console.WriteLine($"{lesEtoiles[4].Nom} equals {lesEtoiles[1].Nom} ?  =>  {lesEtoiles[4].Equals(lesEtoiles[1])}");
             Console.WriteLine($"{lesEtoiles[2].Nom} equals {lesEtoiles[0].Nom} ?  =>  {lesEtoiles[2].Equals(lesEtoiles[0])}");
             Console.WriteLine($"{lesEtoiles[3].Nom} equals {lesEtoiles[3].Nom} ?  =>  {lesEtoiles[3].Equals(lesEtoiles[3])}");
+
+            Console.WriteLine("----------------------------------------------");
         }
     }
 }
