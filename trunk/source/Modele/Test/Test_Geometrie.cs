@@ -27,10 +27,14 @@ namespace Tests_Fonctionnels
                 new Point(),
             };
 
+            Console.WriteLine("Affichage des points :");
+
             foreach (Point point in lesPoints)
             {
                 Console.WriteLine(point);
             }
+
+            Console.WriteLine("-----------------------------------------------");
 
             //Déplacement de deux unités en abscisses pour chaque point, puis affcihage.
             for (int i = 0; i < lesPoints.Count(); i++)
@@ -38,7 +42,7 @@ namespace Tests_Fonctionnels
                 lesPoints[i].Deplacer(lesPoints[i].X + 2, lesPoints[i].Y);
             }
 
-            Console.WriteLine("Après déplacement des points, voici leur valeur :");
+            Console.WriteLine("Après déplacement des points de +2 unités en x, voici leur valeur :");
 
             foreach (Point point in lesPoints)
             {
@@ -69,6 +73,8 @@ namespace Tests_Fonctionnels
             Console.WriteLine($"{lesPoints[2]} hashcode similaire à {lesPoints[2]} ?  =>  {lesPoints[2].GetHashCode() == (lesPoints[2].GetHashCode())}");
             Console.WriteLine($"{lesPoints[3]} hashcode similaire à {lesPoints[3]} ?  =>  {lesPoints[3].GetHashCode() == (lesPoints[3].GetHashCode())}");
             Console.WriteLine($"{lesPoints[4]} hashcode similaire à {lesPoints[4]} ?  =>  {lesPoints[4].GetHashCode() == (lesPoints[4].GetHashCode())}");
+
+            Console.WriteLine("----------------------------------------------");
         }
 
         /// <summary>
@@ -86,7 +92,10 @@ namespace Tests_Fonctionnels
                 new Segment(new Point(2, 0), new Point(6, 2)),
             };
 
-            foreach(Segment seg in lesSegments)
+            Console.WriteLine("Affichage des segments :");
+
+
+            foreach (Segment seg in lesSegments)
             {
                 Console.WriteLine(seg);
             }
@@ -115,6 +124,7 @@ namespace Tests_Fonctionnels
             Console.WriteLine($"{lesSegments[4]} hashcode similaire à {lesSegments[3]} ?  =>  {lesSegments[4].GetHashCode() == lesSegments[3].GetHashCode()}");
             Console.WriteLine($"{lesSegments[0]} hashcode similaire à {lesSegments[4]} ?  =>  {lesSegments[0].GetHashCode() == lesSegments[4].GetHashCode()}");
 
+            Console.WriteLine("----------------------------------------------");
         }
     }
 }

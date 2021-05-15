@@ -18,7 +18,6 @@ namespace Modele
         //La liste d'astres correspond au menu déroulant avec les informations des astres.
         //La carte correspond à l'ensemble des points et constellations qui se trouvent sur la partie éditeur.
         private List<Astre> lesAstres;
-        private Carte carte;
 
         /// <summary>
         /// Propriété en lecture seule concernant la liste d'astres, qui est l'ensembles de toutes les données (les astres) 
@@ -40,7 +39,7 @@ namespace Modele
         {
             lesAstres = new List<Astre>();
             LesAstres = new ReadOnlyCollection<Astre>(lesAstres);
-            carte = new Carte();
+            Carte = new Carte();
         }
 
         /// <summary>
@@ -55,7 +54,20 @@ namespace Modele
             if (astre != null && position != null)
             {
                 lesAstres.Add(astre);
-                carte.AjouterUnAstre(position, astre);
+                Carte.AjouterUnAstre(position, astre);
+            }
+        }
+
+        /// <summary>
+        /// Méthode permettant l'ajout d'un astre uniquement dans la liste d'astres (pas sur la carte).
+        /// Pour cela, on vérifie que l'astre fournit en paramètre n'est pas null, et on l'ajoute à la liste.
+        /// </summary>
+        /// <param name="astre">L'astre à ajouter à la liste.</param>
+        public void AjouterUnAstre(Astre astre)
+        {
+            if (astre != null)
+            {
+                lesAstres.Add(astre);
             }
         }
 
@@ -66,10 +78,10 @@ namespace Modele
         /// et qu'il s'agit d'un astre personnalisé (les astres pré-existants dans le logiciel ne peuvent jamais être effacés), et on peut
         /// alors le supprimer.
         /// </summary>
-        /// <param name="position"></param>
+        /// <param name="position">Le Point correspondant à la position de l'astre a supprimer.</param>
         public void SupprimerUnAstre(Point position)
         {
-            Astre astreASupprimer = carte.SupprimerUnAstre(position);
+            Astre astreASupprimer = Carte.SupprimerUnAstre(position);
             if (astreASupprimer != null && !astreASupprimer.Personnalise)
             {
                 lesAstres.Remove(astreASupprimer);
@@ -83,7 +95,7 @@ namespace Modele
         public void SupprimerTout()
         {
             lesAstres.Clear();
-            carte.SupprimerTout();
+            Carte.SupprimerTout();
         }
 
         /// <summary>
@@ -93,7 +105,7 @@ namespace Modele
         /// <param name="anciennePosition">Un Point représentant l'ancienne position de l'astre.</param>
         /// <param name="nouvellPosition">Un Point représentant la nouvelle position de l'astre.</param>
         public void DeplacerUnAstre(Point anciennePosition, Point nouvellPosition)
-            => carte.DeplacerUnAstre(anciennePosition, nouvellPosition);
+            => Carte.DeplacerUnAstre(anciennePosition, nouvellPosition);
 
         /// <summary>
         /// Méthode permettant de relier deux étoiles qui se trouvent sur la Carte.
@@ -102,7 +114,7 @@ namespace Modele
         /// <param name="point1">Le point de la première étoile à relier.</param>
         /// <param name="point2">Le point de la seconde étoile à relier.</param>
         public void RelierDeuxEtoiles(Point point1, Point point2)
-            => carte.RelierDeuxEtoiles(point1, point2);
+            => Carte.RelierDeuxEtoiles(point1, point2);
 
         /// <summary>
         /// Méthode permettant l'affichage du Manager.
@@ -127,6 +139,9 @@ namespace Modele
             {
                 chaine.AppendFormat("\t{0}\n", astre.Nom);
             }
+
+            chaine.AppendLine("Voici la carte :");
+            chaine.AppendFormat("{0}", Carte);
 
             return chaine.ToString();
         }
