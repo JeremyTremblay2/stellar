@@ -7,21 +7,30 @@ namespace Test
     {
         public static void Main(string[] args)
         {
-            Test_Astres.TestCreationAstres();
-            Test_Geometrie.TestPoint();
-			Test_Geometrie.TestSegment();
-            Test_Constellation.TestRelier();
-            Test_Constellation.TestSupprimer();
-            Test_Constellation.TestParcours();
-            /*test_Constellation.TestDeplaceEtoile();
-            Test_Constellation.TestFusion();
-			Test_Constellation.TestSupprimer();
-            Test_Carte.Init();
-            Test_Carte.TestRelierDeuxEtoiles();
-            Test_Carte.TestDeplacerUnAstre();*/
+            //Test_Astres.TestCreationAstres();
 
-            Test_Manager.TestCreationManager();
-            Test_Manager.TestAjoutEtSuppressionAstre();
+            //Test_Geometrie.TestPoint();
+            //Test_Geometrie.TestSegment();
+
+            //Test_Constellation.TestRelier();
+            //Test_Constellation.TestSupprimer();
+            //Test_Constellation.TestParcours();
+            //test_Constellation.TestDeplaceEtoile();
+            //Test_Constellation.TestFusion();
+			//Test_Constellation.TestSupprimer();
+
+            //Test_Carte.TestRelierDeuxEtoiles();
+            //Test_Carte.TestDeplacerUnAstre();
+
+            //Test_Manager.TestCreationManager();
+            //Test_Manager.TestAjoutEtSuppressionAstre();
+
+            //Test_Recherche.TestOrdreAlphabetique();
+            //Test_Recherche.TestRechercheFavori();
+            //Test_Recherche.TestRechercheParType();
+            //Test_Recherche.TestRechercheParPersonnalisation();
+            Test_Recherche.TestRechercheParNom();
+
         }
     }
 }
