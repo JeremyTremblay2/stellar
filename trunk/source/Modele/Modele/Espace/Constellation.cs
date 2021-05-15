@@ -30,6 +30,13 @@ namespace Espace
             Vide = false;
         }
 
+        public Constellation(IEnumerable<Point> pt, IEnumerable<Segment> seg)
+        {
+            lesPoints.UnionWith(pt);
+            lesSegments.UnionWith(seg);
+            Vide = false;
+        }
+
         public bool Vide { get; private set; }
 
         /// <summary>
@@ -64,7 +71,7 @@ namespace Espace
                 {
                     lesSegments.Remove(seg);
                 }*/
-                lesPoints.Remove(pt); // le point n'est plus dans la constellation
+                //lesPoints.Remove(pt); // le point n'est plus dans la constellation
                 CheckEtoiles();
 
                 if (lesPoints.Count == 0 || lesSegments.Count == 0)
@@ -79,6 +86,8 @@ namespace Espace
         /// </summary>
         private void CheckEtoiles()
         {
+            HashSet<Point> pointsASupprimer = new HashSet<Point>();
+            bool ptDansLesSegment = false;
             if (lesSegments.Count == 0)
             {
                 lesPoints.Clear();
@@ -89,12 +98,18 @@ namespace Espace
                 {
                     foreach (Segment seg in lesSegments)
                     {
-                        if (!seg.PtEquals(pt))
+                        if (seg.PtEquals(pt))
                         {
-                            lesPoints.Remove(pt);
+                            ptDansLesSegment = true;
                         }
                     }
+                    if(!ptDansLesSegment)
+                    {
+                        pointsASupprimer.Add(pt);
+                    }
+                    ptDansLesSegment = false;
                 }
+                lesPoints.ExceptWith(pointsASupprimer);
             }
         }
         /// <summary>
@@ -126,6 +141,74 @@ namespace Espace
             lesPoints.Remove(ancienPt);
             lesPoints.Add(nvPt);
 
+        }
+        /// <summary>
+        /// Permets de diviser une constellation en deux en utilisant un algorithme de parcours en largeur.
+        /// </summary>
+        /// <returns>Retourne une nouvelle constellation</returns>
+        public Constellation DiviserConstellation()
+        {
+            //initialisation
+            int i=0, tailleLogique = 1, TaillePhysique = lesPoints.Count; //gestion de la pile
+            Point[] pilePt = new Point[TaillePhysique]; //pile
+            Point ptDeb = new Point(); //point de départ
+            HashSet<Point> visite = new HashSet<Point>(); // les points déjà visités
+            HashSet<Segment> visiteSeg = new HashSet<Segment>(); // les points déjà visités
+            foreach (Point pt in lesPoints) //sélection d'un point de départ
+            {
+                ptDeb = pt;
+                break;
+            }
+            //parcours en largeur
+            pilePt[i] = ptDeb;
+            tailleLogique++;
+            while(pilePt[i] != null)
+            {
+                
+                IEnumerable<Segment> tempoSeg = lesSegments.Where(n => n.PtEquals(pilePt[i]));
+                foreach(Segment seg in tempoSeg)
+                {
+                    if(seg.Point1.Equals(pilePt[i]))
+                    {
+                        if (!visite.Contains(seg.Point2))
+                        {
+                            pilePt[tailleLogique - 1] = seg.Point2;
+                            tailleLogique++;
+                        }
+                    } else
+                    {
+                        if (!visite.Contains(seg.Point1))
+                        {
+                            pilePt[tailleLogique - 1] = seg.Point1;
+                        tailleLogique++;
+                        }
+                    }
+                }
+                visiteSeg.UnionWith(tempoSeg);
+                visite.Add(pilePt[i]);
+                if (i == TaillePhysique - 1)
+                {
+                    break;
+                }
+                i++;
+            }
+
+            //resultat
+            if (visite.Count < lesPoints.Count)
+            {
+                HashSet<Point> lesPt = new HashSet<Point>();
+                HashSet<Segment> lesSeg = new HashSet<Segment>();
+                lesPt.UnionWith(lesPoints);
+                lesSeg.UnionWith(lesSegments);
+                lesPoints.IntersectWith(visite);
+                lesSegments.IntersectWith(visiteSeg);
+                lesPt.ExceptWith(visite);
+                lesSeg.ExceptWith(visiteSeg);
+                return new Constellation(lesPt, lesSeg);
+            } else
+            {
+                return null;
+            }
         }
 
         /// <summary>
