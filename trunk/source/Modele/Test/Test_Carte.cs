@@ -11,13 +11,13 @@ namespace Test
     /// <summary>
     /// Test de la classe Carte
     /// </summary>
-    public class Test_Carte
+    public static class Test_Carte
     {
-        Carte uneCarte = new Carte(true);
+        static Carte uneCarte = new Carte(true);
         /// <summary>
         /// Initialisation : ajout des étoiles dans uneCarte
         /// </summary>
-        public void Init()
+        public static void Init()
         {
             uneCarte.AjouterUnAstre(new Point(42,42), 
                  new FabriqueDEtoile().Initialiser("Soleil")
@@ -66,7 +66,7 @@ namespace Test
         /// <summary>
         /// Test de la méthode DeplacerUnAstre
         /// </summary>
-        public void TestDeplacerUnAstre()
+        public static void TestDeplacerUnAstre()
         {
             uneCarte.DeplacerUnAstre(new Point(42, 42), new Point(45, 67));
             Console.WriteLine($"DeplacerUnAstre : {uneCarte.ToString()}");
@@ -74,7 +74,7 @@ namespace Test
         /// <summary>
         /// Test de la méthode RelierDeuxEtoiles
         /// </summary>
-        public void TestRelierDeuxEtoiles()
+        public static void TestRelierDeuxEtoiles()
         {
             uneCarte.RelierDeuxEtoiles(new Point(42, 42), new Point(56, 56));
             Console.WriteLine($"RelierDeuxEtoile (E, E) : {uneCarte.ToString()}");

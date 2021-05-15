@@ -30,7 +30,7 @@ namespace Espace
             Vide = false;
         }
 
-        public Constellation(IEnumerable<Point> pt, IEnumerable<Segment> seg)
+        private Constellation(IEnumerable<Point> pt, IEnumerable<Segment> seg)
         {
             lesPoints.UnionWith(pt);
             lesSegments.UnionWith(seg);
@@ -149,7 +149,7 @@ namespace Espace
         public Constellation DiviserConstellation()
         {
             //initialisation
-            int i=0, tailleLogique = 1, TaillePhysique = lesPoints.Count; //gestion de la pile
+            int i=0, tailleLogique = 0, TaillePhysique = lesPoints.Count; //gestion de la pile
             Point[] pilePt = new Point[TaillePhysique]; //pile
             Point ptDeb = new Point(); //point de départ
             HashSet<Point> visite = new HashSet<Point>(); // les points déjà visités
@@ -172,21 +172,21 @@ namespace Espace
                     {
                         if (!visite.Contains(seg.Point2))
                         {
-                            pilePt[tailleLogique - 1] = seg.Point2;
+                            pilePt[tailleLogique] = seg.Point2;
                             tailleLogique++;
                         }
                     } else
                     {
                         if (!visite.Contains(seg.Point1))
                         {
-                            pilePt[tailleLogique - 1] = seg.Point1;
+                            pilePt[tailleLogique] = seg.Point1;
                         tailleLogique++;
                         }
                     }
                 }
                 visiteSeg.UnionWith(tempoSeg);
                 visite.Add(pilePt[i]);
-                if (i == TaillePhysique - 1)
+                if (i == TaillePhysique-1)
                 {
                     break;
                 }

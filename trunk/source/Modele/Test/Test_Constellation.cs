@@ -12,13 +12,13 @@ namespace Test
     /// <summary>
     /// Permets de tester la classe Constellation
     /// </summary>
-    public class Test_Constellation
+    public static class Test_Constellation
     {
-        Constellation constel = new Constellation(new Point(42, 42), new Point(56, 56));
+        static Constellation constel = new Constellation(new Point(42, 42), new Point(56, 56));
         /// <summary>
         /// Test de la méthode Relier
         /// </summary>
-        public void TestRelier()
+        public static void TestRelier()
         {
            
             try
@@ -40,7 +40,7 @@ namespace Test
         /// <summary>
         /// Test de la méthode Supprimer
         /// </summary>
-        public void TestSupprimer()
+        public static void TestSupprimer()
         {
             Point pt = new Point(42, 42);
             constel.SupprimerLesLiens(pt);
@@ -49,7 +49,7 @@ namespace Test
         /// <summary>
         /// Test de la méthode DeplaceEtoile
         /// </summary>
-        public void TestDeplaceEtoile()
+        public static void TestDeplaceEtoile()
         {
             Point pt = new Point(42, 42);
             Point nvPt = new Point(43, 43);
@@ -59,14 +59,14 @@ namespace Test
         /// <summary>
         /// Test de la méthode FusionnerAvec
         /// </summary>
-        public void TestFusion()
+        public static void TestFusion()
         {
             Constellation constel2 = new Constellation(new Point(13, 13), new Point(25, 100));
             constel.FusionnerAvec(constel2, new Point(42,42), new Point(13, 13));
             Console.WriteLine($"fusion :\n{constel.ToString()}");
         }
 
-        public void TestParcours()
+        public static void TestParcours()
         {
             Constellation constel3 = constel.DiviserConstellation();
             Console.WriteLine($"Parcours :\n{constel.ToString()}");
