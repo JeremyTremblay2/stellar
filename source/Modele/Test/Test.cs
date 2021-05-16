@@ -17,9 +17,11 @@ namespace Test
             //Test_Constellation.TestParcours();
             //test_Constellation.TestDeplaceEtoile();
             //Test_Constellation.TestFusion();
-			//Test_Constellation.TestSupprimer();
+            //Test_Constellation.TestSupprimer();
 
-            //Test_Carte.TestRelierDeuxEtoiles();
+            Test_Carte.Init();
+            Test_Carte.TestRelierDeuxEtoiles();
+            Test_Carte.TestSupprimer();
             //Test_Carte.TestDeplacerUnAstre();
 
             //Test_Manager.TestCreationManager();
@@ -29,7 +31,7 @@ namespace Test
             //Test_Recherche.TestRechercheFavori();
             //Test_Recherche.TestRechercheParType();
             //Test_Recherche.TestRechercheParPersonnalisation();
-            Test_Recherche.TestRechercheParNom();
+            //Test_Recherche.TestRechercheParNom();
         }
     }
 }
