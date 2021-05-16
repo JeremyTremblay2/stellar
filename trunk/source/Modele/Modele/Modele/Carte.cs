@@ -123,7 +123,15 @@ namespace Modele
                 Constellation tempoConstel = ParcoursConstellations(position);
                 if (astreARetourner is Etoile && tempoConstel != null)
                 {
-                    lesConstellations[lesConstellations.IndexOf(tempoConstel)].SupprimerLesLiens(position);
+                    int indexConstel = lesConstellations.IndexOf(tempoConstel);
+                    lesConstellations[indexConstel].SupprimerLesLiens(position);
+                    Constellation nConstel = lesConstellations[indexConstel].DiviserConstellation();
+                    while (nConstel != null)
+                    {
+                        lesConstellations.Add(nConstel);
+                        nConstel = nConstel.DiviserConstellation();
+                    }
+
                     if (tempoConstel.Vide)
                     {
                         lesConstellations.Remove(tempoConstel);
@@ -162,7 +170,7 @@ namespace Modele
             lesAstres.TryGetValue(point2, out astre2);
 
             //Il faut que les deux points soient des étoiles !
-            if (astre1 is Etoile && astre1 is Etoile)
+            if (astre1 is Etoile && astre2 is Etoile)
             {
                 Constellation const1 = ParcoursConstellations(point1);
                 Constellation const2 = ParcoursConstellations(point2);
@@ -187,7 +195,7 @@ namespace Modele
             }
             else
             {
-                throw new InvalidOperationException("Il n'est possible de relier ques des étoiles, pas des planètes.");
+                throw new InvalidOperationException("Il n'est possible de relier que des étoiles, pas des planètes.");
             }
         }
 
