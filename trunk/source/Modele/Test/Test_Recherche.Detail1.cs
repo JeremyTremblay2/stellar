@@ -44,7 +44,7 @@ namespace Tests_Fonctionnels
             Console.WriteLine("-------------------------------------------------");
 
             //Appel du tri par ordre descendant.
-            lesAstresTries = RechercheAstres.TriParOrdreAlphabetique(lesAstres, true);
+            lesAstresTries = lesAstres.TriParOrdreAlphabetique(true);
 
             Console.WriteLine("Voici la liste d'astres après le tri par ordre alphabétique décroissant :");
             AfficherResultat(lesAstresTries);
@@ -56,7 +56,7 @@ namespace Tests_Fonctionnels
             Console.WriteLine("-------------------------------------------------");
 
             //Appel du tri par ordre ascendant.
-            lesAstresTries = RechercheAstres.TriParOrdreAlphabetique(lesAstres, false);
+            lesAstresTries = lesAstres.TriParOrdreAlphabetique(false);
 
             Console.WriteLine("Voici la liste d'astres après le tri par ordre alphabétique croissant :");
             AfficherResultat(lesAstresTries);
@@ -77,7 +77,7 @@ namespace Tests_Fonctionnels
                 lesAstres[i].ModifierFavori();
             }
 
-            lesAstresTries = RechercheAstres.RechercheParFavoris(lesAstres, false);
+            lesAstresTries = lesAstres.RechercheParFavoris(false);
 
             //Affichage par défaut.
             Console.WriteLine("Voici la liste d'astres dans laquelle est affiché tous les astres :");
@@ -89,7 +89,7 @@ namespace Tests_Fonctionnels
 
             Console.WriteLine("-------------------------------------------------");
 
-            lesAstresTries = RechercheAstres.RechercheParFavoris(lesAstres, true);
+            lesAstresTries = lesAstres.RechercheParFavoris(true);
 
             //Affichage des favoris.
             Console.WriteLine("Voici la liste d'astres dans laquelle est affiché uniquement les favoris :");
@@ -114,7 +114,7 @@ namespace Tests_Fonctionnels
 
             Console.WriteLine("------------------------------------------------");
 
-            lesAstresTries = RechercheAstres.RechercheParType(lesAstres, typeof(Etoile));
+            lesAstresTries = lesAstres.RechercheParType(typeof(Etoile));
 
             Console.WriteLine("Voici la liste d'astres dans laquelle est affiché seulement les étoiles :");
             AfficherResultat(lesAstresTries);
@@ -125,7 +125,7 @@ namespace Tests_Fonctionnels
 
             Console.WriteLine("-------------------------------------------------");
 
-            lesAstresTries = RechercheAstres.RechercheParType(lesAstres, typeof(Planete));
+            lesAstresTries = lesAstres.RechercheParType(typeof(Planete));
 
             Console.WriteLine("Voici la liste d'astres dans laquelle est affiché seulement les planètes :");
             AfficherResultat(lesAstresTries);
@@ -140,7 +140,7 @@ namespace Tests_Fonctionnels
         {
             var lesAstresTries = new List<Astre>();
 
-            lesAstresTries = RechercheAstres.RechercheParPersonnalisation(lesAstres, 0);
+            lesAstresTries = lesAstres.RechercheParPersonnalisation(0);
 
             Console.WriteLine("Voici la liste d'astres dans laquelle est affiché tous les astres (personnalisés ou non) :");
             AfficherResultat(lesAstresTries);
@@ -152,7 +152,7 @@ namespace Tests_Fonctionnels
             Console.WriteLine("------------------------------------------------");
 
             //Uniquement les astres personnalisés.
-            lesAstresTries = RechercheAstres.RechercheParPersonnalisation(lesAstres, 1);
+            lesAstresTries = lesAstres.RechercheParPersonnalisation(1);
 
             Console.WriteLine("Voici la liste d'astres dans laquelle est affiché seulement les astres personnalisés :");
             AfficherResultat(lesAstresTries);
@@ -164,7 +164,7 @@ namespace Tests_Fonctionnels
             Console.WriteLine("-------------------------------------------------");
 
             //Uniquement les astres non personnalisés.
-            lesAstresTries = RechercheAstres.RechercheParPersonnalisation(lesAstres, 2);
+            lesAstresTries = lesAstres.RechercheParPersonnalisation(2);
 
             Console.WriteLine("Voici la liste d'astres dans laquelle est affiché seulement les astres non personnalisés :");
             AfficherResultat(lesAstresTries);
@@ -188,7 +188,7 @@ namespace Tests_Fonctionnels
 
             Console.WriteLine("------------------------------------------------");
 
-            lesAstresTries = RechercheAstres.RechercheParNom(lesAstres, entree);
+            lesAstresTries = lesAstres.RechercheParNom(entree);
 
             if (lesAstresTries.Count == 0)
             {

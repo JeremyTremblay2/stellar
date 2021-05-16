@@ -14,17 +14,17 @@ namespace Espace
         /// <summary>
         /// Propriété représentant le type de l'étoile, contenu dans l'énumération TypeEtoile.
         /// </summary>
-        public TypeEtoile Type { get; set; }
+        public TypeEtoile Type { get; internal set; }
 
         /// <summary>
         /// Propriété représentant la constellation sous forme de châine de caractères, dans laquelle se trouve l'étoile.
         /// </summary>
-        public string Constellation { get; set; }
+        public string Constellation { get; internal set; }
 
         /// <summary>
         /// Propriété représentant la luminosité de l'étoile, sous forme d'une valeur flottante (en luminosité solaire Lo).
         /// </summary>
-        public float Luminosite { get; set; }
+        public float Luminosite { get; internal set; }
 
         /// <summary>
         /// Constructeur vide, utilisé par les fabriques d'étoiles.
@@ -73,7 +73,7 @@ namespace Espace
         {
             string chaine = base.ToString();
             //On appelle notre extension qui va venir afficher l'énumération sous forme d'une chaîne de caractères.
-            chaine += $"\tType d'étoile : {ExtensionEnumerations.RecupererValeurEnum(Type)}\n";
+            chaine += $"\tType d'étoile : {Type.RecupererValeurEnum()}\n";
             chaine += $"\tConstellation : {Constellation}\n";
             chaine += $"\tLuminosité : {Luminosite} Lo\n";
             return chaine;
