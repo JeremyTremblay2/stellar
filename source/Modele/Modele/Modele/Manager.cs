@@ -103,9 +103,9 @@ namespace Modele
         /// Le manager ne fait que déléguer le travail à la Carte.
         /// </summary>
         /// <param name="anciennePosition">Un Point représentant l'ancienne position de l'astre.</param>
-        /// <param name="nouvellPosition">Un Point représentant la nouvelle position de l'astre.</param>
-        public void DeplacerUnAstre(Point anciennePosition, Point nouvellPosition)
-            => Carte.DeplacerUnAstre(anciennePosition, nouvellPosition);
+        /// <param name="nouvellePosition">Un Point représentant la nouvelle position de l'astre.</param>
+        public void DeplacerUnAstre(Point anciennePosition, Point nouvellePosition)
+            => Carte.DeplacerUnAstre(anciennePosition, nouvellePosition);
 
         /// <summary>
         /// Méthode permettant de relier deux étoiles qui se trouvent sur la Carte.

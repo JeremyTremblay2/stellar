@@ -17,7 +17,7 @@ namespace Utilitaire
         /// <param name="lesAstres">La liste d'astres à filtrer.</param>
         /// <param name="nom">La chaîne de caractères qui va être recherchée dans le nom de tous les astres de la liste.</param>
         /// <returns>Une nouvelle liste d'astres qui ne contiennent que le nom fournit en paramètre.</returns>
-        public static List<Astre> RechercheParNom(List<Astre> lesAstres, string nom)
+        public static List<Astre> RechercheParNom(this List<Astre> lesAstres, string nom)
             => lesAstres.Where(astre => astre.Nom.ToLower().Contains(nom.ToLower())).ToList();
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Utilitaire
         ///                     -false -> descandant
         /// </param>
         /// <returns>Une nouvelle liste d'astres triée par ordre alphabétique du nom des astres.</returns>
-        public static List<Astre> TriParOrdreAlphabetique(List<Astre> lesAstres, bool ordre)
+        public static List<Astre> TriParOrdreAlphabetique(this List<Astre> lesAstres, bool ordre)
             => ordre ? lesAstres.OrderBy(astre => astre.Nom).ToList() : lesAstres.OrderByDescending(astre => astre.Nom).ToList();
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Utilitaire
         /// </param>
         /// <returns>Une nouvelle liste d'astres qui ne contiennent que les astres personnalisés, que les astres non personnalisés, 
         /// ou une liste inchangée.</returns>
-        public static List<Astre> RechercheParPersonnalisation(List<Astre> lesAstres, byte personnalise)
+        public static List<Astre> RechercheParPersonnalisation(this List<Astre> lesAstres, byte personnalise)
         {
             switch(personnalise)
             {
@@ -65,7 +65,7 @@ namespace Utilitaire
         /// <param name="lesAstres">La liste d'astres à filtrer.</param>
         /// <param name="type">Le type de l'astre a conserver (Etoile ou Planete).</param>
         /// <returns>Une nouvelle liste d'astres qui ne contiennent que le type d'astre fournit en paramètre.</returns>
-        public static List<Astre> RechercheParType(List<Astre> lesAstres, Type type)
+        public static List<Astre> RechercheParType(this List<Astre> lesAstres, Type type)
             => lesAstres.Where(astre => astre.GetType() == type).ToList();
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Utilitaire
         ///                       -false -> on garde la liste telle quelle.
         /// </param>
         /// <returns>Une nouvelle liste d'astres qui ne contiennent que les astres favoris, ou tous les astres.</returns>
-        public static List<Astre> RechercheParFavoris(List<Astre> lesAstres, bool favori)
+        public static List<Astre> RechercheParFavoris(this List<Astre> lesAstres, bool favori)
             => favori ? lesAstres.Where(astre => astre.Favori).ToList() : lesAstres;
     }
 }

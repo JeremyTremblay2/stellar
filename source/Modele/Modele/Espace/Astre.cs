@@ -142,7 +142,7 @@ namespace Espace
                 chaine.AppendFormat("\tMasse : {0} MT\n", Masse);
             }
                 
-            chaine.AppendFormat("\tTemperature : {0} K ({1}° C)\n", Temperature, ConvertisseurTemperature.ToCelsius(Temperature));
+            chaine.AppendFormat("\tTemperature : {0} K ({1}° C)\n", Temperature, ((float) Temperature).ToCelsius());
 
             return chaine.ToString();
         }

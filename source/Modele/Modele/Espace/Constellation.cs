@@ -44,16 +44,16 @@ namespace Espace
         /// </summary>
         /// <param name="point1">Premier point à relier dans la constellation</param>
         /// <param name="point2">Second point à relier dans la constellation</param>
-        public void Relier(Point pt, Point nvPt)
+        public void Relier(Point point, Point nouveauPoint)
         {
-			if (!lesPoints.Contains(pt))
+			if (!lesPoints.Contains(point))
             {
                 throw new ArgumentException("Un des point ne se trouve pas la constellation.");
             } 
             else
             {
-                lesPoints.Add(nvPt);
-                lesSegments.Add(new Segment(pt, nvPt)); 
+                lesPoints.Add(nouveauPoint);
+                lesSegments.Add(new Segment(point, nouveauPoint)); 
             }
         }
 
@@ -61,11 +61,11 @@ namespace Espace
         /// Permets de supprmimer les liaisons avec le point
         /// </summary>
         /// <param name="pt">Point à supprimer de la constellation</param>
-        public void SupprimerLesLiens(Point pt)
+        public void SupprimerLesLiens(Point point)
         {
-            if (lesPoints.Contains(pt))
+            if (lesPoints.Contains(point))
             {
-                IEnumerable<Segment> tempo = lesSegments.Where(n => n.PtEquals(pt));
+                IEnumerable<Segment> tempo = lesSegments.Where(n => n.PtEquals(point));
                 lesSegments.ExceptWith(tempo);
                 /*foreach (Segment seg in tempo)
                 {
@@ -112,34 +112,35 @@ namespace Espace
                 lesPoints.ExceptWith(pointsASupprimer);
             }
         }
+
         /// <summary>
         /// Permets de déplacer un point et les segments impliqués
         /// </summary>
         /// <param name="ancienPt">Point à déplacer</param>
         /// <param name="nvPt">Nouvelles coordonnées</param>
-        public void DeplacePoint(Point ancienPt, Point nvPt)
+        public void DeplacePoint(Point ancienPoint, Point nouveauPoint)
         {
-            IEnumerable<Segment> tempo = lesSegments.Where(n => n.PtEquals(ancienPt));
+            IEnumerable<Segment> tempo = lesSegments.Where(n => n.PtEquals(ancienPoint));
             List<Segment> addSeg = new List<Segment>();
             foreach (Segment seg in tempo)
             {
-                if (seg.PtEquals(ancienPt))
+                if (seg.PtEquals(ancienPoint))
                 {
-                    if (seg.Point1.Equals(ancienPt))
+                    if (seg.Point1.Equals(ancienPoint))
                     {
-                        addSeg.Add(new Segment(nvPt, seg.Point2));
+                        addSeg.Add(new Segment(nouveauPoint, seg.Point2));
                     }
                     else
                     {
-                        addSeg.Add(new Segment(seg.Point1, nvPt));
+                        addSeg.Add(new Segment(seg.Point1, nouveauPoint));
                     }
                 }
             }
             lesSegments.ExceptWith(tempo);
             lesSegments.UnionWith(addSeg);
 
-            lesPoints.Remove(ancienPt);
-            lesPoints.Add(nvPt);
+            lesPoints.Remove(ancienPoint);
+            lesPoints.Add(nouveauPoint);
 
         }
         /// <summary>
@@ -217,11 +218,11 @@ namespace Espace
         /// <param name="constel">Constellation avec laquelle fusionner</param>
         /// <param name="pt1">Premier point de liaison entre les deux constellations</param>
         /// <param name="pt2">Second point de liaison entre les deux constellations</param>
-        public void FusionnerAvec(Constellation constel, Point pt1, Point pt2)
+        public void FusionnerAvec(Constellation constel, Point point1, Point point2)
         {
             lesPoints.UnionWith(constel.lesPoints);
             lesSegments.UnionWith(constel.lesSegments);
-            lesSegments.Add(new Segment(pt1, pt2));
+            lesSegments.Add(new Segment(point1, point2));
         }
 
         public bool ContientLePoint(Point point) => lesPoints.Contains(point) ? true : false;

@@ -30,6 +30,16 @@ namespace Geometrie
         }
 
         /// <summary>
+        /// Méthode permettant de savoir si le point passé en paramètre est contenu dans le segment (si c'est un des deux points).
+        /// </summary>
+        /// <param name="pt">Le point dont on veut savoir s'il se trouve dans le segment.</param>
+        /// <returns>Un booléen indiquant si le point se trouvait dans le segment ou non.</returns>
+        public bool PtEquals(Point point)
+        {
+            return point.Equals(this.Point1) || point.Equals(this.Point2);
+        }
+
+        /// <summary>
         /// Permet d'afficher un segment. Pour cela, on affiche les deux points du segment correspondant, et une flèche 
         /// entre eux (pour marquer la liaison).
         /// </summary>
@@ -64,16 +74,6 @@ namespace Geometrie
             if (GetType() != obj.GetType()) return false;
 
             return Equals(obj as Segment);
-        }
-
-        /// <summary>
-        /// Méthode permettant de savoir si le point passé en paramètre est contenu dans le segment (si c'est un des deux points).
-        /// </summary>
-        /// <param name="pt">Le point dont on veut savoir s'il se trouve dans le segment.</param>
-        /// <returns>Un booléen indiquant si le point se trouvait dans le segment ou non.</returns>
-        public bool PtEquals(Point pt)
-        {
-            return pt.Equals(this.Point1) || pt.Equals(this.Point2);
         }
 
         /// <summary>

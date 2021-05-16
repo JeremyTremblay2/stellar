@@ -30,7 +30,6 @@ namespace Test
             //Test_Recherche.TestRechercheParType();
             //Test_Recherche.TestRechercheParPersonnalisation();
             Test_Recherche.TestRechercheParNom();
-
         }
     }
 }
