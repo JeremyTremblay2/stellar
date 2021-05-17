@@ -129,7 +129,7 @@ namespace Modele
                     while (nConstel != null)
                     {
                         lesConstellations.Add(nConstel);
-                        nConstel = nConstel.DiviserConstellation();
+                        nConstel = lesConstellations[lesConstellations.IndexOf(nConstel)].DiviserConstellation();
                     }
 
                     if (tempoConstel.Vide)
