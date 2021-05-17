@@ -65,7 +65,7 @@ namespace Test
 
 
             uneCarte.AjouterUnAstre(new Point(75, 56),
-                 new FabriqueDEtoile().Initialiser("etoile")
+                 new FabriqueDEtoile().Initialiser("Alpha Virginis")
                                       .AvecDescription("Castor (ou Alpha Geminorum) est la seconde étoile la plus brillante de la " +
                                       "constellation des Gémeaux et une des plus brillantes étoiles du ciel nocturne.")
                                       .AvecAge(370000000)
@@ -75,7 +75,7 @@ namespace Test
                                       .EstDansLaConstellation("Gémeaux")
                                       .Construire());
             uneCarte.AjouterUnAstre(new Point(45, 98),
-                 new FabriqueDEtoile().Initialiser("fdsfesdf")
+                 new FabriqueDEtoile().Initialiser("UY-Scuti")
                                       .AvecDescription("Castor (ou Alpha Geminorum) est la seconde étoile la plus brillante de la " +
                                       "constellation des Gémeaux et une des plus brillantes étoiles du ciel nocturne.")
                                       .AvecAge(370000000)
@@ -85,7 +85,7 @@ namespace Test
                                       .EstDansLaConstellation("Gémeaux")
                                       .Construire());
             uneCarte.AjouterUnAstre(new Point(58, 12),
-                 new FabriqueDEtoile().Initialiser("esfesfes")
+                 new FabriqueDEtoile().Initialiser("VY-Canis-Majoris")
                                       .AvecDescription("Castor (ou Alpha Geminorum) est la seconde étoile la plus brillante de la " +
                                       "constellation des Gémeaux et une des plus brillantes étoiles du ciel nocturne.")
                                       .AvecAge(370000000)
@@ -95,7 +95,7 @@ namespace Test
                                       .EstDansLaConstellation("Gémeaux")
                                       .Construire());
             uneCarte.AjouterUnAstre(new Point(78, 64),
-                 new FabriqueDEtoile().Initialiser("htfhtf")
+                 new FabriqueDEtoile().Initialiser("Pollux")
                                       .AvecDescription("Castor (ou Alpha Geminorum) est la seconde étoile la plus brillante de la " +
                                       "constellation des Gémeaux et une des plus brillantes étoiles du ciel nocturne.")
                                       .AvecAge(370000000)

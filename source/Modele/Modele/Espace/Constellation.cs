@@ -154,7 +154,8 @@ namespace Espace
             Point[] pilePt = new Point[TaillePhysique]; //pile
             Point ptDeb = new Point(); //point de départ
             HashSet<Point> visite = new HashSet<Point>(); // les points déjà visités
-            HashSet<Segment> visiteSeg = new HashSet<Segment>(); // les points déjà visités
+            HashSet<Segment> segmentsConstel = new HashSet<Segment>(); // les segments dans la constellation actuelle
+
             foreach (Point pt in lesPoints) //sélection d'un point de départ
             {
                 ptDeb = pt;
@@ -181,11 +182,11 @@ namespace Espace
                         if (!visite.Contains(seg.Point1))
                         {
                             pilePt[tailleLogique] = seg.Point1;
-                        tailleLogique++;
+                            tailleLogique++;
                         }
                     }
                 }
-                visiteSeg.UnionWith(tempoSeg);
+                segmentsConstel.UnionWith(tempoSeg);
                 visite.Add(pilePt[i]);
                 if (i == TaillePhysique-1)
                 {
@@ -202,9 +203,9 @@ namespace Espace
                 lesPt.UnionWith(lesPoints);
                 lesSeg.UnionWith(lesSegments);
                 lesPoints.IntersectWith(visite);
-                lesSegments.IntersectWith(visiteSeg);
+                lesSegments.IntersectWith(segmentsConstel);
                 lesPt.ExceptWith(visite);
-                lesSeg.ExceptWith(visiteSeg);
+                lesSeg.ExceptWith(segmentsConstel);
                 return new Constellation(lesPt, lesSeg);
             } else
             {
