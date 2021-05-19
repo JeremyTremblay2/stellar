@@ -11,6 +11,9 @@ namespace Espace
     /// </summary>
     public class Etoile : Astre, IEquatable<Etoile>
     {
+        //La luminosité de l'étoile.
+        private float luminosite;
+
         /// <summary>
         /// Propriété représentant le type de l'étoile, contenu dans l'énumération TypeEtoile.
         /// </summary>
@@ -23,8 +26,20 @@ namespace Espace
 
         /// <summary>
         /// Propriété représentant la luminosité de l'étoile, sous forme d'une valeur flottante (en luminosité solaire Lo).
+        /// Elle ne peut pas être négative sinon une exception est levée.
         /// </summary>
-        public float Luminosite { get; internal set; }
+        public float Luminosite 
+        {
+            get => luminosite;
+            internal set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException($"La luminosité de l'astre ne peut pas être négative, valeur donnée : {value}");
+                }
+                luminosite = value;
+            }
+        }
 
         /// <summary>
         /// Constructeur vide, utilisé par les fabriques d'étoiles.
@@ -34,23 +49,18 @@ namespace Espace
         /// <summary>
         /// Constructeur d'étoiles. Il appele le constructeur de sa classe mère, Astre, afin qu'il soit initialisé.
         /// </summary>
-        /// <param name="nom">Le nom de l'étoile</param>
-        /// <param name="description">Une courte description de l'étoile</param>
-        /// <param name="age">L'âge de l'étoile</param>
-        /// <param name="masse">La masse de l'étoile (en masse solaire)</param>
-        /// <param name="temperature">La température de l'étoile (en Kelvin)</param>
-        /// <param name="personnalise">Un booléen indiquant si l'étoile est personnalisée (créée par l'utilisateur) ou non</param>
-        /// <param name="type">Le type de l'étoile</param>
-        /// <param name="constellation">Le nom de la constellation auquelle appartient l'étoile</param>
-        /// <param name="luminosite">La luminosité de l'étoile (en luminosité solaire)</param>
+        /// <param name="nom">Le nom de l'étoile.</param>
+        /// <param name="description">Une courte description de l'étoile.</param>
+        /// <param name="age">L'âge de l'étoile.</param>
+        /// <param name="masse">La masse de l'étoile (en masse solaire).</param>
+        /// <param name="temperature">La température de l'étoile (en Kelvin).</param>
+        /// <param name="constellation">Le nom de la constellation auquelle appartient l'étoile.</param>
+        /// <param name="luminosite">La luminosité de l'étoile (en luminosité solaire).</param>
+        /// <param name="type">Le type de l'étoile (par défaut c'est une naine blanche).</param>
+        /// <param name="personnalise">Un booléen indiquant si l'étoile est personnalisée (créée par l'utilisateur) ou non.</param>
         public Etoile(string nom, string description, long age, float masse, int temperature, string constellation, float luminosite, TypeEtoile type = TypeEtoile.NaineBlanche, bool personnalise = false)
             : base(nom, description, age, masse, temperature, personnalise)
         {
-            if (luminosite < 0)
-            {
-                throw new ArgumentException("La luminosité d'un astre ne peut pas être négative.");
-            }
-
             Type = type;
             Constellation = constellation;
             Luminosite = luminosite;

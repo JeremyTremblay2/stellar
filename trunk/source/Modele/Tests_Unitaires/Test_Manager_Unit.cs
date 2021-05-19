@@ -3,6 +3,7 @@ using FluentAssertions;
 using Geometrie;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Modele;
+using System;
 
 namespace Tests_Unitaires
 {
@@ -57,10 +58,6 @@ namespace Tests_Unitaires
                                       .EstDansLaConstellation("Gémeaux")
                                       .Construire());
 
-            manager.LesAstres.Should().HaveCount(2);
-
-            //Ne devrait pas ajouter un astre null.
-            manager.AjouterUnAstre(null);
             manager.LesAstres.Should().HaveCount(2);
 
             //Il ne devrait plus rien rester dans la liste.

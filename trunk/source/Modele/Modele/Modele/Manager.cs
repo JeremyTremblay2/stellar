@@ -51,24 +51,23 @@ namespace Modele
         /// <param name="astre">L'astre à ajouter à l'application.</param>
         public void AjouterUnAstre(Point position, Astre astre)
         {
-            if (astre != null && position != null)
-            {
-                lesAstres.Add(astre);
-                Carte.AjouterUnAstre(position, astre);
-            }
+            Carte.AjouterUnAstre(position, astre);
+            lesAstres.Add(astre);
         }
 
         /// <summary>
         /// Méthode permettant l'ajout d'un astre uniquement dans la liste d'astres (pas sur la carte).
-        /// Pour cela, on vérifie que l'astre fournit en paramètre n'est pas null, et on l'ajoute à la liste.
+        /// Pour cela, on vérifie que l'astre fournit en paramètre n'est pas null (sinon on lève une exception), et on l'ajoute à la liste.
         /// </summary>
         /// <param name="astre">L'astre à ajouter à la liste.</param>
         public void AjouterUnAstre(Astre astre)
         {
-            if (astre != null)
+            if (astre == null)
             {
-                lesAstres.Add(astre);
+                throw new ArgumentException($"L'astre ne peut pas être crée car l'astre passé en paramètre est null. " +
+                $"Astre : {astre}");
             }
+            lesAstres.Add(astre);
         }
 
         /// <summary>
@@ -126,13 +125,13 @@ namespace Modele
         {
             StringBuilder chaine = new StringBuilder();
 
-            if (lesAstres.Count() == 0)
+            if (lesAstres.Count == 0)
             {
                 chaine.Append("\tAucun astre dans l'application.\n");
             }
             else
             {
-                chaine.AppendFormat("{0} Astre(s) au total :\n", lesAstres.Count());
+                chaine.AppendFormat("{0} Astre(s) au total :\n", lesAstres.Count);
             }
 
             foreach (Astre astre in lesAstres)

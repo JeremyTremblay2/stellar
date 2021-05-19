@@ -37,6 +37,7 @@ namespace Test
                 Console.WriteLine("ERREUR :", a.Message);
             }
         }
+
         /// <summary>
         /// Test de la méthode Supprimer
         /// </summary>
@@ -46,6 +47,7 @@ namespace Test
             constel.SupprimerLesLiens(pt);
             Console.WriteLine($"Suppression du point {pt}:\n{constel.ToString()}");
         }
+
         /// <summary>
         /// Test de la méthode DeplaceEtoile
         /// </summary>
@@ -56,6 +58,7 @@ namespace Test
             constel.DeplacePoint(pt, nvPt);
             Console.WriteLine($"Déplacer le point {pt}:\n{constel.ToString()}");
         }
+
         /// <summary>
         /// Test de la méthode FusionnerAvec
         /// </summary>

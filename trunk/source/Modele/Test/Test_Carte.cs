@@ -13,9 +13,11 @@ namespace Test
     /// </summary>
     public static class Test_Carte
     {
-        static Carte uneCarte = new Carte(true);
+        //La carte utilisée par les tests.
+        static Carte uneCarte = new Carte(false);
+
         /// <summary>
-        /// Initialisation : ajout des étoiles dans uneCarte
+        /// Initialisation : ajout d'étoiles dans la carte.
         /// </summary>
         public static void Init()
         {
@@ -62,8 +64,6 @@ namespace Test
                                       .AvecLuminosite(14)
                                       .EstDansLaConstellation("Gémeaux")
                                       .Construire());
-
-
             uneCarte.AjouterUnAstre(new Point(75, 56),
                  new FabriqueDEtoile().Initialiser("Alpha Virginis")
                                       .AvecDescription("Castor (ou Alpha Geminorum) est la seconde étoile la plus brillante de la " +
@@ -105,37 +105,61 @@ namespace Test
                                       .EstDansLaConstellation("Gémeaux")
                                       .Construire());
         }
+
         /// <summary>
-        /// Test de la méthode DeplacerUnAstre
+        /// Méthode de test d'affichage de la carte.
+        /// </summary>
+        public static void TestAffichageCarte()
+        {
+            Console.WriteLine($"Voici la carte actuelle : {uneCarte}");
+        }
+
+        /// <summary>
+        /// Méthode de test de la méthode DeplacerUnAstre contenue dans Carte.
         /// </summary>
         public static void TestDeplacerUnAstre()
         {
+            Console.WriteLine("Nous allons déplacer quelques astres de la carte.");
+            Console.WriteLine("On déplace le point (42, 42) aux coordonnées (45, 67).");
             uneCarte.DeplacerUnAstre(new Point(42, 42), new Point(45, 67));
             Console.WriteLine($"DeplacerUnAstre : {uneCarte.ToString()}");
+            Console.WriteLine("----------------------------------------------");
         }
+
         /// <summary>
-        /// Test de la méthode RelierDeuxEtoiles
+        /// Méthode de test de la méthode RelierDeuxEtoiles contenue dans Carte.
         /// </summary>
         public static void TestRelierDeuxEtoiles()
         {
+            Console.WriteLine("Nous allons relier plusieurs étoiles.");
             uneCarte.RelierDeuxEtoiles(new Point(42, 42), new Point(56, 56));
-            Console.WriteLine($"RelierDeuxEtoile (E, E) : {uneCarte.ToString()}");
+            Console.WriteLine($"On relie deux étoiles aux positions (42, 42) et (56, 56). Voici la carte : {uneCarte.ToString()}");
             uneCarte.RelierDeuxEtoiles(new Point(42, 42), new Point(20, 98));
-            Console.WriteLine($"RelierDeuxEtoile (C, E) : {uneCarte.ToString()}");
+            Console.WriteLine($"On relie deux étoiles aux positions (42, 42) et (20, 98). Voici la carte : {uneCarte.ToString()}");
             uneCarte.RelierDeuxEtoiles(new Point(20, 98), new Point(75, 56));
+            Console.WriteLine($"On relie deux étoiles aux positions (20, 98) et (75, 56). Voici la carte : {uneCarte.ToString()}");
             uneCarte.RelierDeuxEtoiles(new Point(56, 56), new Point(45, 98));
+            Console.WriteLine($"On relie deux étoiles aux positions (56, 56) et (45, 98). Voici la carte : {uneCarte.ToString()}");
             uneCarte.RelierDeuxEtoiles(new Point(75, 56), new Point(58, 12));
+            Console.WriteLine($"On relie deux étoiles aux positions (75, 56) et (58, 12). Voici la carte : {uneCarte.ToString()}");
             uneCarte.RelierDeuxEtoiles(new Point(45, 98), new Point(78, 64));
-            Console.WriteLine($"RelierDeuxEtoile : {uneCarte.ToString()}");
-            //uneCarte.RelierDeuxEtoiles(new Point(42, 42), new Point(20, 98));
-            //Console.WriteLine($"RelierDeuxEtoile (!) : {uneCarte.ToString()}");
+            Console.WriteLine($"On relie deux étoiles aux positions (45, 98) et (78, 64). Voici la carte : {uneCarte.ToString()}");
 
 
+            Console.WriteLine($"Voici la carte finale : {uneCarte.ToString()}");
+            Console.WriteLine("----------------------------------------------");
         }
+
+        /// <summary>
+        /// Méthode de test permettant de vérifier si un astre a bien été supprimé .
+        /// </summary>
         public static void TestSupprimer()
         {
+            Point p = new Point(42, 42);
+            Console.WriteLine($"Suppression d'un astre se trouvant à la positon {p}");
             uneCarte.SupprimerUnAstre(new Point(42, 42));
-            Console.WriteLine($"SupprimerAstre : {uneCarte.ToString()}");
+            Console.WriteLine($"Voici la carte après suppression du point : {uneCarte.ToString()}");
+            Console.WriteLine("----------------------------------------------");
         }
     }
 }
