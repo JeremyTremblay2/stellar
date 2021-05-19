@@ -152,7 +152,7 @@ namespace Modele
 
         public void ChargeDonnees()
         {
-            AjouterUnAstre(new FabriqueDEtoile().Initialiser("Sirius")
+            AjouterUnAstre(new Point(42, 89), new FabriqueDEtoile().Initialiser("Sirius")
                                       .AvecDescription("Sirius, également appelée Alpha Canis Majoris (α Canis Majoris/α CMa) par la " +
                                       "désignation de Bayer, est l'étoile principale de la constellation du Grand Chien. Vue de la " +
                                       "Terre, Sirius est l'étoile la plus brillante du ciel après le Soleil.")
@@ -164,7 +164,7 @@ namespace Modele
                                       .AvecType(TypeEtoile.NaineBlanche)
                                       .Construire());
 
-            AjouterUnAstre(new FabriqueDEtoile().Initialiser("Soleil")
+            AjouterUnAstre(new Point(90, 120), new FabriqueDEtoile().Initialiser("Soleil")
                                       .AvecDescription("Le Soleil est l’étoile du Système solaire. Dans la classification astronomique, " +
                                       "c’est une étoile de type naine jaune d'une masse d'environ 1,989 1 × 1030 kg, composée d’hydrogène et d’hélium.")
                                       .AvecAge(460000000)
@@ -244,7 +244,7 @@ namespace Modele
                                        .AvecType(TypePlanete.Tellurique)
                                        .Construire());
 
-            AjouterUnAstre(new FabriqueDePlanete().Initialiser("Mercure")
+            AjouterUnAstre(new Point(120, 235), new FabriqueDePlanete().Initialiser("Mercure")
                                        .AvecDescription("Mercure est la planète la plus proche du Soleil et la moins massive du Système " +
                                        "solaire. Son éloignement au Soleil est compris entre 0,31 et 0,47 unité astronomique.")
                                        .AvecAge(4000000000)
