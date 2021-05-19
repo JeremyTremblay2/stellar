@@ -41,6 +41,7 @@
             </Grid>
 
             <usersControls:UCAstres/>
+            
         </StackPanel>
 
         <Image Source="images/fonds/fond_ciel.jpg" Grid.Column="1" Stretch="UniformToFill"/>
@@ -62,6 +63,10 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        <ContentControl Grid.Column="1" Width="225" Height="300" Margin="-300 0 0 0" x:Name="Popup"  VirtualizingPanel.IsVirtualizing="true">
+            <usersControls:UCPopup/>
+        </ContentControl>
+        
     </Grid>
     <!--<ItemsControl ItemsSource="{Binding Carte.LesAstres}">
         <ItemsControl.ItemTemplate>
