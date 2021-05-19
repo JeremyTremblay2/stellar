@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Modele;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,13 @@ namespace Appli.usersControls
     /// </summary>
     public partial class UCAstres : UserControl
     {
+
+        public Manager Manager => (App.Current as App).LeManager;
+
         public UCAstres()
         {
             InitializeComponent();
+            DataContext = Manager;
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
