@@ -6,6 +6,10 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>D:\Cours\2020-2021\S2\Conception Orientée Objet\Projet Tuteuré\trunk\source\Modele\StellarBin\</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="images\etoiles\blanche.png" />
     <None Remove="images\fonds\fond_ciel.jpg" />

@@ -58,8 +58,10 @@ namespace Espace
         /// <param name="luminosite">La luminosité de l'étoile (en luminosité solaire).</param>
         /// <param name="type">Le type de l'étoile (par défaut c'est une naine blanche).</param>
         /// <param name="personnalise">Un booléen indiquant si l'étoile est personnalisée (créée par l'utilisateur) ou non.</param>
-        public Etoile(string nom, string description, long age, float masse, int temperature, string constellation, float luminosite, TypeEtoile type = TypeEtoile.NaineBlanche, bool personnalise = false)
-            : base(nom, description, age, masse, temperature, personnalise)
+        /// <param name="image">Une image de la planète sous forme de chemin en chaîne de caractères.</param>
+        public Etoile(string nom, string description, long age, float masse, int temperature, string constellation, float luminosite, 
+            TypeEtoile type = TypeEtoile.NaineBlanche, bool personnalise = false, string image = "étoile.jpg")
+            : base(nom, description, age, masse, temperature, personnalise, image)
         {
             Type = type;
             Constellation = constellation;

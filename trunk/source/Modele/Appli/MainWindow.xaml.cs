@@ -21,12 +21,9 @@ namespace Appli
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Manager Manager => (App.Current as App).LeManager;
-
         public MainWindow()
         { 
             InitializeComponent();
-            DataContext = Manager;
         }
     }
 }

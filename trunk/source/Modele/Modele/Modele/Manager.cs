@@ -3,8 +3,10 @@ using Geometrie;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+
 
 namespace Modele
 {
@@ -12,12 +14,14 @@ namespace Modele
     /// Le Manager est le coeur de l'application, c'est lui qui vient déléguer et gérer les diverses actions de l'application.
     /// Il se compose d'une Carte et d'une liste d'astres.
     /// </summary>
-    public class Manager
+    public class Manager : INotifyPropertyChanged
     {
         //Données contenues dans le Manager.
         //La liste d'astres correspond au menu déroulant avec les informations des astres.
         //La carte correspond à l'ensemble des points et constellations qui se trouvent sur la partie éditeur.
         private List<Astre> lesAstres;
+
+        private Astre astreSelectionne;
 
         /// <summary>
         /// Propriété en lecture seule concernant la liste d'astres, qui est l'ensembles de toutes les données (les astres) 
@@ -30,6 +34,24 @@ namespace Modele
         /// constellations de l'application.
         /// </summary>
         public Carte Carte { get; private set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public Astre AstreSelectionne
+        {
+            get => astreSelectionne;
+            set
+            {
+                if (astreSelectionne != value)
+                {
+                    astreSelectionne = value;
+                    OnPropertyChanged(nameof(AstreSelectionne));
+                }
+            }
+        }
+
+        void OnPropertyChanged(string nomPropriete)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropriete));
 
         /// <summary>
         /// Constructeur de Manager. Il ne prend pas de paramètre.
@@ -162,6 +184,7 @@ namespace Modele
                                       .AvecLuminosite(26.1f)
                                       .EstDansLaConstellation("Grand Chien")
                                       .AvecType(TypeEtoile.NaineBlanche)
+                                      .AvecImage("sirius.jpeg")
                                       .Construire());
 
             AjouterUnAstre(new Point(90, 120), new FabriqueDEtoile().Initialiser("Soleil")
@@ -173,6 +196,7 @@ namespace Modele
                                       .EstDansLaConstellation("Aucune")
                                       .AvecLuminosite(1)
                                       .AvecType(TypeEtoile.NaineJaune)
+                                      .AvecImage("soleil.jpg")
                                       .Construire()); ;
 
             AjouterUnAstre(new FabriqueDEtoile().Initialiser("Bételgeuse")
@@ -184,6 +208,7 @@ namespace Modele
                                       .AvecLuminosite(17)
                                       .EstDansLaConstellation("Orion")
                                       .AvecType(TypeEtoile.SupergeanteRouge)
+                                      .AvecImage("bételgeuse.jpg")
                                       .Construire());
 
             AjouterUnAstre(new FabriqueDEtoile().Initialiser("Castor")
@@ -194,6 +219,7 @@ namespace Modele
                                       .AvecTemperature(8840)
                                       .AvecLuminosite(14)
                                       .EstDansLaConstellation("Gémeaux")
+                                      .AvecImage("castor.jpg")
                                       .Construire());
 
             AjouterUnAstre(new FabriqueDEtoile().Initialiser("Pollux")
@@ -204,6 +230,7 @@ namespace Modele
                                       .AvecTemperature(4865)
                                       .AvecLuminosite(32)
                                       .EstDansLaConstellation("Gémeaux")
+                                      .AvecImage("pollux.jpg")
                                       .Construire());
 
             AjouterUnAstre(new FabriqueDePlanete().Initialiser("Mars")
@@ -216,6 +243,7 @@ namespace Modele
                                        .EstDansLeSysteme("Solaire")
                                        .EauEstPresente(false)
                                        .AvecType(TypePlanete.Tellurique)
+                                       .AvecImage("mars.jpg")
                                        .Construire());
 
             AjouterUnAstre(new FabriqueDePlanete().Initialiser("Vénus")
@@ -229,6 +257,7 @@ namespace Modele
                                        .EstDansLeSysteme("Solaire")
                                        .EauEstPresente(false)
                                        .AvecType(TypePlanete.Tellurique)
+                                       .AvecImage("vénus.jpg")
                                        .Construire());
 
             AjouterUnAstre(new FabriqueDePlanete().Initialiser("Terre")
@@ -242,6 +271,7 @@ namespace Modele
                                        .EstDansLeSysteme("Solaire")
                                        .EauEstPresente(true)
                                        .AvecType(TypePlanete.Tellurique)
+                                       .AvecImage("terre.jpg")
                                        .Construire());
 
             AjouterUnAstre(new Point(120, 235), new FabriqueDePlanete().Initialiser("Mercure")
@@ -254,6 +284,7 @@ namespace Modele
                                        .EstDansLeSysteme("Solaire")
                                        .EauEstPresente(false)
                                        .AvecType(TypePlanete.Tellurique)
+                                       .AvecImage("mercure.jpg")
                                        .Construire());
 
             AjouterUnAstre(new FabriqueDePlanete().Initialiser("Jupiter")
@@ -267,6 +298,7 @@ namespace Modele
                                        .EstDansLeSysteme("Solaire")
                                        .EauEstPresente(false)
                                        .AvecType(TypePlanete.Gazeuse)
+                                       .AvecImage("jupiter.jpg")
                                        .Construire());
 
             AjouterUnAstre(new FabriqueDePlanete().Initialiser("Saturne")
@@ -280,6 +312,7 @@ namespace Modele
                                        .EstDansLeSysteme("Solaire")
                                        .EauEstPresente(false)
                                        .AvecType(TypePlanete.Gazeuse)
+                                       .AvecImage("saturne.jpg")
                                        .Construire());
 
             AjouterUnAstre(new FabriqueDePlanete().Initialiser("Uranus")
@@ -293,6 +326,7 @@ namespace Modele
                                        .EstDansLeSysteme("Solaire")
                                        .EauEstPresente(false)
                                        .AvecType(TypePlanete.Gazeuse)
+                                       .AvecImage("uranus.jpg")
                                        .Construire());
 
             AjouterUnAstre(new FabriqueDePlanete().Initialiser("Neptune")
@@ -306,6 +340,7 @@ namespace Modele
                                        .EstDansLeSysteme("Solaire")
                                        .EauEstPresente(false)
                                        .AvecType(TypePlanete.Gazeuse)
+                                       .AvecImage("neptune.jpg")
                                        .Construire());
 
             AjouterUnAstre(new FabriqueDePlanete().Initialiser("Pluton")
@@ -319,6 +354,7 @@ namespace Modele
                                        .EstDansLeSysteme("Solaire externe")
                                        .EauEstPresente(false)
                                        .AvecType(TypePlanete.Naine)
+                                       .AvecImage("pluton.jpg")
                                        .Construire());
         }
     }
