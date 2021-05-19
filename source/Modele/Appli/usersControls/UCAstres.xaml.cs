@@ -1,5 +1,4 @@
-﻿using Modele;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,19 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Appli
+namespace Appli.usersControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logique d'interaction pour UCAstres.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UCAstres : UserControl
     {
-        public Manager Manager => (App.Current as App).LeManager;
-
-        public MainWindow()
-        { 
+        public UCAstres()
+        {
             InitializeComponent();
-            DataContext = Manager;
         }
     }
 }

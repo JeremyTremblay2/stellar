@@ -1,9 +1,10 @@
-﻿<Window x:Class="Appli.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Appli"
+        xmlns:usersControls="clr-namespace:Appli.usersControls" x:Class="Appli.MainWindow"
         mc:Ignorable="d"
         Title="Stellar" Height="450" Width="800">
     <Grid>
@@ -27,9 +28,8 @@
                 <Button Content="Test 3" Grid.Column="2"/>
                 <Button Content="Test 4" Grid.Column="3"/>
             </Grid>
-            <ListBox>
-
-            </ListBox>
+            
+            <usersControls:UCAstres/>
         </StackPanel>
 
         <Image Source="images/fonds/fond_ciel.jpg" Grid.Column="1" Stretch="UniformToFill"/>
