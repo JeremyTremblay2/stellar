@@ -32,7 +32,7 @@ namespace Geometrie
         /// <summary>
         /// Méthode permettant de savoir si le point passé en paramètre est contenu dans le segment (si c'est un des deux points).
         /// </summary>
-        /// <param name="pt">Le point dont on veut savoir s'il se trouve dans le segment.</param>
+        /// <param name="point">Le point dont on veut savoir s'il se trouve dans le segment.</param>
         /// <returns>Un booléen indiquant si le point se trouvait dans le segment ou non.</returns>
         public bool PtEquals(Point point)
         {

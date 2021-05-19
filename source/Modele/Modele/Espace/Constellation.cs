@@ -1,6 +1,7 @@
 ﻿using Geometrie;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -9,144 +10,142 @@ using System.Text;
 namespace Espace
 {
     /// <summary>
-    /// Une constellation est un ensemble de points reliés par des segments, le tout forme un graphe (les étoiles et les liens entre elles).
+    /// Une constellation est un ensemble de points reliés par des segments, le tout forme un graphe connexe (les étoiles et les 
+    /// liens entre elles).
     /// </summary>
     public class Constellation : IEquatable<Constellation>
     {
+        //Les hashsets de points et segments permettent de ne pas avoir de coordonnées en double.
         private HashSet<Point> lesPoints = new HashSet<Point>();
         private HashSet<Segment> lesSegments = new HashSet<Segment>();
-        /*public HashSet<Point> LesPoints { get; private set; }
-        public HashSet<Segment> LesSegments { get; private set; }*/
+
         /// <summary>
-        /// Constructeur de Constellation
+        /// Propriété à changer en méthode de vérification des collections vides.
         /// </summary>
-        /// <param name="pt1">Prends un premier point</param>
-        /// <param name="pt2">Prends un deuxième point</param>
-        public Constellation(Point pt1, Point pt2)
-        {
-            lesPoints.Add(pt1);
-            lesPoints.Add(pt2);
-            lesSegments.Add(new Segment(pt1, pt2));
-            Vide = false;
-        }
-
-        private Constellation(IEnumerable<Point> pt, IEnumerable<Segment> seg)
-        {
-            lesPoints.UnionWith(pt);
-            lesSegments.UnionWith(seg);
-            Vide = false;
-        }
-
         public bool Vide { get; private set; }
 
         /// <summary>
-        /// Permet de relier deux points ensembles via un segment.
+        /// Constructeur de Constellations. Prend deux points en paramètre et trace un segment.
         /// </summary>
-        /// <param name="point1">Premier point à relier dans la constellation</param>
-        /// <param name="point2">Second point à relier dans la constellation</param>
+        /// <param name="point1">Premier point de la constellation.</param>
+        /// <param name="point2">Seconde point de la constellation.</param>
+        public Constellation(Point point1, Point point2)
+        {
+            lesPoints.Add(point1);
+            lesPoints.Add(point2);
+            lesSegments.Add(new Segment(point1, point2));
+            Vide = false;
+        }
+
+        /// <summary>
+        /// Constructeur de Constellations. Prend plusieurs points en paramètre et plusieurs segments. 
+        /// Les ajoute ensuites aux ensembles.
+        /// </summary>
+        /// <param name="points"></param>
+        /// <param name="segments"></param>
+        public Constellation(IEnumerable<Point> points, IEnumerable<Segment> segments)
+        {
+            lesPoints.UnionWith(points);
+            lesSegments.UnionWith(segments);
+            Vide = false;
+        }
+
+        /// <summary>
+        /// Méthode permettant de relier deux points ensembles via un segment.
+        /// Si le point passé en paramètre ne se trouve pas dans la constellation, alors une exception est levée.
+        /// </summary>
+        /// <param name="point">Premier point à contenu dans la constellation.</param>
+        /// <param name="nouveauPoint">Second point qui va être ajouté à la constellation.</param>
         public void Relier(Point point, Point nouveauPoint)
         {
 			if (!lesPoints.Contains(point))
             {
-                throw new ArgumentException("Un des point ne se trouve pas la constellation.");
+                throw new ArgumentException($"Le point donné en paramètre ne se trouve ps dans la constellation : {point}.");
             } 
-            else
-            {
-                lesPoints.Add(nouveauPoint);
-                lesSegments.Add(new Segment(point, nouveauPoint)); 
-            }
+
+            lesPoints.Add(nouveauPoint);
+            lesSegments.Add(new Segment(point, nouveauPoint)); 
         }
 
         /// <summary>
-        /// Permets de supprmimer les liaisons avec le point
+        /// Permet de supprmimer tous les segments d'un point, et ce même point (dans le cas d'une suppression par exemple).
+        /// Lève une exception si le point passé en paramètre ne se trouve pas dans la constellation.
         /// </summary>
-        /// <param name="pt">Point à supprimer de la constellation</param>
+        /// <param name="point">Le point pour lequel on veut supprimer les liaisons.</param>
         public void SupprimerLesLiens(Point point)
         {
-            if (lesPoints.Contains(point))
+            if (!lesPoints.Contains(point))
             {
-                IEnumerable<Segment> tempo = lesSegments.Where(n => n.PtEquals(point));
-                lesSegments.ExceptWith(tempo);
-                /*foreach (Segment seg in tempo)
-                {
-                    lesSegments.Remove(seg);
-                }*/
-                //lesPoints.Remove(pt); // le point n'est plus dans la constellation
-                CheckEtoiles();
+                throw new ArgumentException($"Le point donné en paramètre pour la suppression ne se trouve pas dans la constellation. " +
+                    $"Point donné : {point}");
+            }
 
-                if (lesPoints.Count == 0 || lesSegments.Count == 0)
-                {
-                    Vide = true;
-                }
-            }
-            
-        }
-        /// <summary>
-        /// Permets de supprimer les points qui n'ont pas de liaison avec d'autres points
-        /// </summary>
-        private void CheckEtoiles()
-        {
-            HashSet<Point> pointsASupprimer = new HashSet<Point>();
-            bool ptDansLesSegment = false;
-            if (lesSegments.Count == 0)
+            //On récupère tous les segments qui contenaient ce point, puis on les supprime du HashSet.
+            IEnumerable<Segment> tempo = lesSegments.Where(n => n.PtEquals(point));
+            lesSegments.ExceptWith(tempo);
+
+            //Appel d'une méthode permettant de retirer de la constellation les étoiles seules (pas reliées).
+            SuppressionPoints();
+
+            if (lesPoints.Count == 0 || lesSegments.Count == 0)
             {
-                lesPoints.Clear();
-            }
-            else
-            {
-                foreach (Point pt in lesPoints)
-                {
-                    foreach (Segment seg in lesSegments)
-                    {
-                        if (seg.PtEquals(pt))
-                        {
-                            ptDansLesSegment = true;
-                        }
-                    }
-                    if(!ptDansLesSegment)
-                    {
-                        pointsASupprimer.Add(pt);
-                    }
-                    ptDansLesSegment = false;
-                }
-                lesPoints.ExceptWith(pointsASupprimer);
+                Vide = true;
             }
         }
 
         /// <summary>
-        /// Permets de déplacer un point et les segments impliqués
+        /// Permet de déplacer un point et les segments impliqués à un nouveau point de position.
+        /// Si un des point est null ou que le point à déplacer ne se trouve pas dans la constellation, alors on lève une exception.
+        /// On récupère ensuite tous les segments qui contenaient l'ancien point dans une collection puis on les parcours. 
+        /// Pour chaque segment, on crée un nouveau segment en fonction des coordonnées du nouveau point cette fois-ci.
+        /// A la fin, on l'ajoute dans nos données, et on supprime les anciens segments. On fait de même pour le nouveau point.
         /// </summary>
-        /// <param name="ancienPt">Point à déplacer</param>
-        /// <param name="nvPt">Nouvelles coordonnées</param>
+        /// <param name="ancienPoint">Ancienne position du point.</param>
+        /// <param name="nouveauPoint">Nouvelle position du point.</param>
         public void DeplacePoint(Point ancienPoint, Point nouveauPoint)
         {
+            if (ancienPoint == null || nouveauPoint == null)
+            {
+                throw new ArgumentException($"Les points donnés en paramètre pour le déplacement ne peuvent pas être null. " +
+                    $"Point de l'ancienne position : {ancienPoint}, point de la nouvelle position : {nouveauPoint}.");
+            }
+            if (!lesPoints.Contains(ancienPoint))
+            {
+                throw new ArgumentException($"Le point donné en paramètre pour le déplacement ne se trouve pas dans la constellation. " +
+                    $"Point donné : {ancienPoint}.");
+            }
+
+            //On récupère tous les segments qui contiennent le point à déplacer.
             IEnumerable<Segment> tempo = lesSegments.Where(n => n.PtEquals(ancienPoint));
             List<Segment> addSeg = new List<Segment>();
+
+            //On parcours les segments récupérés précédemment, et on les recrée en fonction du nouveau point.
             foreach (Segment seg in tempo)
             {
-                if (seg.PtEquals(ancienPoint))
+                if (seg.Point1.Equals(ancienPoint))
                 {
-                    if (seg.Point1.Equals(ancienPoint))
-                    {
-                        addSeg.Add(new Segment(nouveauPoint, seg.Point2));
-                    }
-                    else
-                    {
-                        addSeg.Add(new Segment(seg.Point1, nouveauPoint));
-                    }
+                    addSeg.Add(new Segment(nouveauPoint, seg.Point2));
+                }
+                else
+                {
+                    addSeg.Add(new Segment(seg.Point1, nouveauPoint));
                 }
             }
+            //On supprime les anciens segments, et on ajoute les nouveaux.
             lesSegments.ExceptWith(tempo);
             lesSegments.UnionWith(addSeg);
 
+            //On supprime l'ancien point et on ajoute le nouveau.
             lesPoints.Remove(ancienPoint);
             lesPoints.Add(nouveauPoint);
-
         }
+
         /// <summary>
-        /// Permets de diviser une constellation en deux en utilisant un algorithme de parcours en largeur.
+        /// Permet de diviser une constellation en deux en utilisant un algorithme de parcours en largeur.
+        /// Ne garde dans this qu'une seule composante connexe, et une retourne une constellation pouvant contenir plusieurs composantes
+        /// connexes.
         /// </summary>
-        /// <returns>Retourne une nouvelle constellation</returns>
+        /// <returns>Retourne une nouvelle constellation.</returns>
         public Constellation DiviserConstellation()
         {
             //initialisation
@@ -156,11 +155,8 @@ namespace Espace
             HashSet<Point> visite = new HashSet<Point>(); // les points déjà visités
             HashSet<Segment> segmentsConstel = new HashSet<Segment>(); // les segments dans la constellation actuelle
 
-            foreach (Point pt in lesPoints) //sélection d'un point de départ
-            {
-                ptDeb = pt;
-                break;
-            }
+            ptDeb = lesPoints.First();
+
             //parcours en largeur
             pilePt[i] = ptDeb;
             tailleLogique++;
@@ -214,11 +210,12 @@ namespace Espace
         }
 
         /// <summary>
-        /// Permets de fusionner de constellation. This fait union avec la constellation passée en paramètre.
+        /// Permet de fusionner deux constellations. This fait union avec la constellation passée en paramètre.
+        /// On les lie par l'intermédiaire de deux points, et on crée un nouveau segment via ces deux points.
         /// </summary>
-        /// <param name="constel">Constellation avec laquelle fusionner</param>
-        /// <param name="pt1">Premier point de liaison entre les deux constellations</param>
-        /// <param name="pt2">Second point de liaison entre les deux constellations</param>
+        /// <param name="constel">Constellation avec laquelle fusionner.</param>
+        /// <param name="pt1">Premier point de liaison entre les deux constellations.</param>
+        /// <param name="pt2">Second point de liaison entre les deux constellations.</param>
         public void FusionnerAvec(Constellation constel, Point point1, Point point2)
         {
             lesPoints.UnionWith(constel.lesPoints);
@@ -226,16 +223,32 @@ namespace Espace
             lesSegments.Add(new Segment(point1, point2));
         }
 
+        /// <summary>
+        /// Méthode permettant de savoir si une constelaltion contient le point passé en paramètre.
+        /// </summary>
+        /// <param name="point">Le point dont on veut savoir s'il est contenu dans la constellation.</param>
+        /// <returns>Un booléen indiquant si le point est contenu dans la constellation ou non.</returns>
         public bool ContientLePoint(Point point) => lesPoints.Contains(point) ? true : false;
 
-        public bool ContientLeSegment(Segment segment) => lesSegments.Contains(segment) ? true : false;
-
-
+        /// <summary>
+        /// Protocole d'égalité permettant de savoir si une constellation passée en paramètre est égal à this, donc si elle possède 
+        /// les mêmes points, mêmes segments au sein de ses collections.
+        /// </summary>
+        /// <param name="autre">Une constellation que l'on souhaite comparer à this, afin de voir si elles sont égales.</param>
+        /// <returns>Un booléen qui indique si la constellation passée en paramètre est la même que this ou non.</returns>
         public bool Equals([AllowNull] Constellation autre)
         {
             return lesPoints.Equals(autre.lesPoints) && lesSegments.Equals(autre.lesSegments);
         }
 
+        /// <summary>
+        /// Protocole d'égalité permettant de savoir si un objet passé en paramètre est une constellation.
+        /// Si cette vérification est faite avec succès, alors on vérifie ensuite si cette constellation est égale à this, donc si elle 
+        /// possède les mêmes points, les mêmes segments dans ses collections, en appellant la méthode Equals de cette constellation
+        /// et en la castant en tant que tel.
+        /// </summary>
+        /// <param name="obj">Un objet quelconque, dont on veut déterminer s'il s'agit d'une constellation</param>
+        /// <returns>Un booléen qui indique si l'objet passé en paramètre est le même que this ou non.</returns>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(obj, null)) return false;
@@ -245,6 +258,10 @@ namespace Espace
             return Equals(obj as Constellation);
         }
 
+        /// <summary>
+        /// Permet d'afficher une constellation sous format textuel. On affiche ses points et ses segments.
+        /// </summary>
+        /// <returns>Une chaîne de caractères représentant les données de la constellation.</returns>
         public override string ToString()
         {
             StringBuilder chaine = new StringBuilder("Les points de la constellation :\n");
@@ -265,9 +282,55 @@ namespace Espace
             return chaine.ToString();
         }
 
+        /// <summary>
+        /// Permet la génération d'un hashcode, utilisé dans le cas des dictionnaire.
+        /// Ce hashcode est définit par les points et segments contenus dans les collections de la constellation.
+        /// </summary>
+        /// <returns>Un entier représentatif du hashcode de cette constellation.</returns>
         public override int GetHashCode()
         {
             return lesPoints.GetHashCode() + lesSegments.GetHashCode();
+        }
+
+        /// <summary>
+        /// Méthode permettant de supprimer les points qui n'ont pas de liaison avec d'autres points.
+        /// Pour cela, on vérifie s'il n'y a plus de segments dans la constellation, et si c'est le cas, on peut effacer tous les points.
+        /// Sinon, pour chaque point on parcours tous les segments, et on vérifie que le point est au moins contenu dans un segement.
+        /// Si ce n'est pas le as, alors on l'ajoute à une collection.
+        /// A la fin du traitement de tous les points, on supprime de notre hashset tous les points qui se trouvent dans la collection.
+        /// </summary>
+        private void SuppressionPoints()
+        {
+            //Les points qui seront effacés après le parcour se trouveront dans cette collection.
+            HashSet<Point> pointsASupprimer = new HashSet<Point>();
+            bool ptDansLesSegment = false;
+
+            //S'il n'y a plus de segments, on peut effacer tous les points.
+            if (lesSegments.Count == 0)
+            {
+                lesPoints.Clear();
+            }
+
+            foreach (Point pt in lesPoints)
+            {
+                foreach (Segment seg in lesSegments)
+                {
+                    //Si le point est contenu dans au moins un segment, alors on le mémorise dans une booléen.
+                    if (seg.PtEquals(pt))
+                    {
+                        ptDansLesSegment = true;
+                    }
+                }
+
+                //Si le point n'est contenu dans aucun segment, alors on l'ajoute à la liste des points à effacer.
+                if (!ptDansLesSegment)
+                {
+                    pointsASupprimer.Add(pt);
+                }
+                ptDansLesSegment = false;
+            }
+            //On efface les points isolés que l'on a dans notre collection.
+            lesPoints.ExceptWith(pointsASupprimer);
         }
     }
 }

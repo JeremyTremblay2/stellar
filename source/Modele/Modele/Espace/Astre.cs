@@ -12,10 +12,17 @@ namespace Espace
     /// </summary>
     public abstract class Astre : IEquatable<Astre>, IComparable<Astre>, IComparable
     {
+        //Nom de l'astre.
         private string nom;
 
+        //Age de l'astre.
+        private long age;
+
+        //Masse de l'astre.
+        private float masse;
+
         /// <summary>
-        /// Propriété représentant le nom de l'astre sous forme d'une chaîne de caractères.
+        /// Propriété représentant le nom de l'astre sous forme d'une chaîne de caractères. Il ne peut pas être vide.
         /// Le nom ne peut être qu'écrit sous format titre (Xxxx Xx Xxxx).
         /// </summary>
         public string Nom
@@ -23,14 +30,29 @@ namespace Espace
             get => nom;
             internal set
             {
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException($"Le nom de l'astre ne peut pas être vide ou rempli de blanc, valeur donnée : {value}");
+                }
                 nom = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
             }
         }
 
         /// <summary>
-        /// Propriété représentant l'âge de l'astre en valeur entière.
+        /// Propriété représentant l'âge de l'astre en valeur entière. Il ne peut pas être négatif, sinon une exception est levée.
         /// </summary>
-        public long Age { get; internal set; }
+        public long Age 
+        {
+            get => age; 
+            internal set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException($"L'âge de l'astre ne peut pas être inférieur à 0 ans. Valeur donnée : {value}");
+                }
+                age = value;
+            }
+        }
 
         /// <summary>
         /// Propriété représentant une description quelconque de l'astre sous forme d'une chaîne de caractère.
@@ -39,9 +61,20 @@ namespace Espace
 
         /// <summary>
         /// Propriété représentant la masse de l'astre en valeur flottante (en masse terrestre s'il s'agit d'une planète, 
-        /// ou en masse solaire s'il s'agit d'une étoile).
+        /// ou en masse solaire s'il s'agit d'une étoile). Elle ne peut pas être négative sinon une exception est levée.
         /// </summary>
-        public float Masse { get; internal set; }
+        public float Masse
+        {
+            get => masse;
+            internal set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException($"La masse de l'astre ne peut pas être inférieure à 0. Valeur donnée : {value}");
+                }
+                masse = value;
+            }
+        }
 
         /// <summary>
         /// Propriété représentant la température de l'astre en valeur entière (en Kelvin).
@@ -67,23 +100,14 @@ namespace Espace
         /// <summary>
         /// Constructeur d'astres.
         /// </summary>
-        /// <param name="nom">Le nom de l'astre</param>
-        /// <param name="description">Une description courte de l'astre en question</param>
+        /// <param name="nom">Le nom de l'astre.</param>
+        /// <param name="description">Une description courte de l'astre en question.</param>
         /// <param name="age">L'age de l'astre.</param>
-        /// <param name="masse">La masse de l'astre (en masse terrestre ou solaire)</param>
-        /// <param name="temperature">La température de l'astre (en kelvin)</param>
-        /// <param name="personnalise">Un booléen indiquant si l'astre est personnalisé (créé par l'utilisateur) ou non</param>
+        /// <param name="masse">La masse de l'astre (en masse terrestre ou solaire).</param>
+        /// <param name="temperature">La température de l'astre (en kelvin).</param>
+        /// <param name="personnalise">Un booléen indiquant si l'astre est personnalisé (créé par l'utilisateur) ou non.</param>
         public Astre(string nom, string description, long age, float masse, int temperature, bool personnalise = false)
         {
-            if (string.IsNullOrWhiteSpace(nom))
-            {
-                throw new ArgumentNullException("Le nom d'un Astre ne peut pas être vide ou null.");
-            }
-            if (age < 0 || masse < 0 || temperature < 0)
-            {
-                throw new ArgumentException("L'âge, la masse, et la température ne peuvent pas être négatives.");
-            }
-
             Nom = nom;
             Description = description;
             Age = age;
