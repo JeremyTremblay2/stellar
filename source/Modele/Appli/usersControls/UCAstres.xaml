@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <ListBox ItemsSource="{Binding LesAstres}">
+    <ListBox ItemsSource="{Binding LesAstres}" SelectionChanged="ListBox_SelectionChanged">
         <ListBox.ItemTemplate>
             <DataTemplate>
                 <WrapPanel >

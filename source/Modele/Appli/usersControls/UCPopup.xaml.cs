@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace Appli.usersControls
 {
     /// <summary>
-    /// Logique d'interaction pour UCAstres.xaml
+    /// Logique d'interaction pour UCPopup.xaml
     /// </summary>
-    public partial class UCAstres : UserControl
+    public partial class UCPopup : UserControl
     {
-        public UCAstres()
+        public UCPopup()
         {
             InitializeComponent();
-        }
-
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-           //truc à faire ici pour rendre la popup visible
         }
     }
 }
