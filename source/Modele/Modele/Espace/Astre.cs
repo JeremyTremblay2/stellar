@@ -92,6 +92,11 @@ namespace Espace
         public bool Personnalise { get; internal set; }
 
         /// <summary>
+        /// Propriété permettant d'associer une image à l'astre (il s'agit d'une chaîne de caractères).
+        /// </summary>
+        public string Image { get; internal set; }
+
+        /// <summary>
         /// Constructeur vide, utilisé par les fabriques d'astres.
         /// </summary>
         
@@ -106,7 +111,8 @@ namespace Espace
         /// <param name="masse">La masse de l'astre (en masse terrestre ou solaire).</param>
         /// <param name="temperature">La température de l'astre (en kelvin).</param>
         /// <param name="personnalise">Un booléen indiquant si l'astre est personnalisé (créé par l'utilisateur) ou non.</param>
-        public Astre(string nom, string description, long age, float masse, int temperature, bool personnalise = false)
+        /// <param name="image">Une image de l'astre sous forme de chemin en chaîne de caractères.</param>
+        public Astre(string nom, string description, long age, float masse, int temperature, bool personnalise = false, string image = null)
         {
             Nom = nom;
             Description = description;
@@ -114,6 +120,7 @@ namespace Espace
             Masse = masse;
             Temperature = temperature;
             Personnalise = personnalise;
+            Image = image;
         } 
         
         /// <summary>

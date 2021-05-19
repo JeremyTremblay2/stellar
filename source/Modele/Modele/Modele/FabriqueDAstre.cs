@@ -77,6 +77,18 @@ namespace Modele
         }
 
         /// <summary>
+        /// Méthode permettant d'ajouter une image à un astre. Appelle le mutateur de l'image de l'astre pour modifier 
+        /// sa valeur.
+        /// </summary>
+        /// <param name="image">Une chaîne de caractère représentant le fichier qui contient l'image de l'astre.</param>
+        /// <returns>Une fabrique d'astre de type T.</returns>
+        public T AvecImage(string image)
+        {
+            Astre.Image = image;
+            return (T)this;
+        }
+
+        /// <summary>
         /// Méthode permettant de construire un astre, et donc de retourner cette fois-ci non pas une fabrique de type T, mais un astre P.
         /// </summary>
         /// <returns>Un astre P correspondant au type générique que l'on a décidé de construire jusqu'à maintenant (Etoile ou Planete).</returns>

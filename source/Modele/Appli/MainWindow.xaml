@@ -9,12 +9,12 @@
         Title="Stellar" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*" MinWidth="200" />
-            <ColumnDefinition Width="7*" />
+            <ColumnDefinition Width="3*" MinWidth="200" />
+            <ColumnDefinition Width="8*" />
         </Grid.ColumnDefinitions>
 
         <StackPanel>
-            <Grid  Height="20" Margin="3 3 3 3">
+            <Grid Height="20" Margin="3 3 3 3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="7*"/>
                     <ColumnDefinition Width="1*"/>
@@ -39,7 +39,7 @@
                 <Button Content="Test 3" Grid.Column="2"/>
                 <Button Content="Test 4" Grid.Column="3"/>
             </Grid>
-
+            
             <usersControls:UCAstres/>
             
         </StackPanel>
