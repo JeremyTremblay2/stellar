@@ -32,7 +32,7 @@ namespace Appli.usersControls
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           //truc à faire ici pour rendre la popup visible
+            (Application.Current.MainWindow as MainWindow).Popup.Visibility = Visibility.Hidden;
         }
     }
 }
