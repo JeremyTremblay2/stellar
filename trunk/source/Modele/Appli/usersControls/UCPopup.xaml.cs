@@ -23,6 +23,12 @@ namespace Appli.usersControls
         public UCPopup()
         {
             InitializeComponent();
+            (Application.Current.MainWindow as MainWindow).Popup.Visibility = Visibility.Hidden;
+        }
+
+        private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            (Application.Current.MainWindow as MainWindow).Popup.Visibility = Visibility.Hidden;
         }
     }
 }
