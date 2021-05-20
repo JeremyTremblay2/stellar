@@ -964,7 +964,7 @@
 							"top": 448,
 							"width": 169,
 							"height": 77,
-							"text": "Le modèle est la base de notre application, c'est lui qui contient nos classes et opérations qui seront réalisés."
+							"text": "Le modèle est la base de notre application, c'est lui qui contient nos classes et opérations qui seront réalisées."
 						},
 						{
 							"_type": "UMLNoteLinkView",
@@ -992,8 +992,8 @@
 							"left": 88,
 							"top": 56,
 							"width": 177,
-							"height": 77,
-							"text": "Note : nous utiliserons la couleur bleu sur les bibliothèques externe qui seront utilisés et importées dans cette application."
+							"height": 90,
+							"text": "Note : nous utiliserons la couleur bleu sur les bibliothèques externes qui seront utilisées et importées dans cette application."
 						},
 						{
 							"_type": "UMLNoteView",
