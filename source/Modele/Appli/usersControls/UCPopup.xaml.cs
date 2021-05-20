@@ -30,5 +30,20 @@ namespace Appli.usersControls
         {
             (Application.Current.MainWindow as MainWindow).Popup.Visibility = Visibility.Hidden;
         }
+
+        private void buttonPopupClicCroix(object sender, MouseButtonEventArgs e)
+        {
+            (Application.Current.MainWindow as MainWindow).Popup.Visibility = Visibility.Hidden;
+        }
+
+        private void buttonPopupDessusCroix(object sender, MouseEventArgs e)
+        {
+            QuitterPopup.Fill = Brushes.Gray;
+        }
+
+        private void buttonPopupHorsCroix(object sender, MouseEventArgs e)
+        {
+            QuitterPopup.Fill = Brushes.AliceBlue;
+        }
     }
 }
