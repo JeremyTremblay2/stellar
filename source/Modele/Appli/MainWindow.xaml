@@ -63,7 +63,7 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <ContentControl Grid.Column="1" Width="225" Height="300" Margin="-300 0 0 0" x:Name="Popup" VirtualizingPanel.IsVirtualizing="true">
+        <ContentControl Grid.Column="1"  x:Name="Popup" VirtualizingPanel.IsVirtualizing="true" >
             <usersControls:UCPopup/>
         </ContentControl>
 
