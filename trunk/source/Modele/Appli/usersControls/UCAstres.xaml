@@ -13,7 +13,7 @@
     </UserControl.Resources>
 
     <ScrollViewer>
-        <ListBox ItemsSource="{Binding LesAstres}" SelectedItem="AstreSelectionne" Background="Black">
+        <ListBox ItemsSource="{Binding LesAstres}" SelectedItem="AstreSelectionne" Background="Black" SelectionChanged="ListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel >

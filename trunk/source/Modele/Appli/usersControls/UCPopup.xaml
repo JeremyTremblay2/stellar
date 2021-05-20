@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <StackPanel Background="Gray" Visibility="Hidden" x:Name="visibility">
+    <StackPanel Background="Gray" x:Name="visibility">
             <Image Source="/images/etoiles/blanche.png" Width="60"/>
             
             <TextBlock >
