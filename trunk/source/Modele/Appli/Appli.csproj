@@ -13,6 +13,7 @@
   <ItemGroup>
     <None Remove="images\etoiles\blanche.png" />
     <None Remove="images\fonds\fond_ciel.jpg" />
+    <None Remove="images\UI\popup.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +25,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="images\fonds\fond_ciel.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="images\UI\popup.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

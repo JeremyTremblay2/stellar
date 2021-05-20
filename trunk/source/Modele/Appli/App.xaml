@@ -20,5 +20,20 @@
             <Setter Property="Foreground" Value="Gray"/>
             <Setter Property="Margin" Value="5, 0, 0, 0"/>
         </Style>
+        <Style TargetType="TextBlock" x:Key="texteInfosPopup">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Foreground" Value="#d5e5fc"/>
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="15, 0, 0, 0"/>
+        </Style>
+        <Style TargetType="Path" x:Key="PathPopup">
+            <Setter Property="Fill" Value="AliceBlue"/>
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Stretch" Value="Fill"/>
+        </Style>
+       
     </Application.Resources>
+
 </Application>
