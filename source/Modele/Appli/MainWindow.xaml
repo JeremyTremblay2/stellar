@@ -94,18 +94,15 @@
         <ContentControl  Grid.Column="1" x:Name="Popup" VirtualizingPanel.IsVirtualizing="true" Content="{Binding AstreSelectionne}">
             <ContentControl.ContentTemplate>
                 <DataTemplate>
-                    <usersControls:UCPopup NomAstre="{Binding Nom}"/>
+                    <usersControls:UCPopup ImageAstre="{Binding Image, Converter={StaticResource convertisseurDeTexteEnImage}}"
+                                           NomAstre="{Binding Nom}"
+                                           DescriptionAstre="{Binding Description}"
+                                           AgeAstre="{Binding Age}"
+                                           MasseAstre="{Binding Masse}"
+                                           TemperatureAstre="{Binding Temperature}"/>
                 </DataTemplate>
             </ContentControl.ContentTemplate>
         </ContentControl>
 
     </Grid>
-    <!--<ItemsControl ItemsSource="{Binding Carte.LesAstres}">
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <Ellipse Stroke="Black" Fill="Yellow" Height="20" Width="20" Panel.ZIndex="2" 
-                    Canvas.Left="560" Canvas.Top="600"/>
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-    </ItemsControl>-->
 </Window>

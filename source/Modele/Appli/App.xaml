@@ -25,7 +25,7 @@
             <Setter Property="Foreground" Value="#d5e5fc"/>
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Margin" Value="15, 0, 0, 0"/>
+            <Setter Property="Margin" Value="50, 0, 0, 0"/>
         </Style>
         <Style TargetType="Path" x:Key="PathPopup">
             <Setter Property="Fill" Value="AliceBlue"/>
