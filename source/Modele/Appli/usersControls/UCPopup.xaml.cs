@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Modele;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,9 @@ namespace Appli.usersControls
     /// </summary>
     public partial class UCPopup : UserControl
     {
+
+        public Manager LeManager => (Application.Current as App).LeManager;
+
         public UCPopup()
         {
             InitializeComponent();
@@ -45,5 +49,15 @@ namespace Appli.usersControls
         {
             QuitterPopup.Fill = Brushes.AliceBlue;
         }
+
+        public string NomAstre
+        {
+            get { return (string)GetValue(NomAstrePropriete); }
+            set { SetValue(NomAstrePropriete, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for NomNounours.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NomAstrePropriete =
+            DependencyProperty.Register("NomAstre", typeof(string), typeof(UCPopup), new PropertyMetadata("Astre"));
     }
 }

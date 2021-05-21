@@ -21,9 +21,18 @@ namespace Appli
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public Manager Manager => (Application.Current as App).LeManager;
+
         public MainWindow()
         { 
             InitializeComponent();
+            DataContext = Manager;
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            (Application.Current.MainWindow as MainWindow).Popup.Visibility = Visibility.Visible;
         }
     }
 }
