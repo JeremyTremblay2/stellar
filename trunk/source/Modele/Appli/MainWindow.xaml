@@ -4,9 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Appli"
-        xmlns:usersControls="clr-namespace:Appli.usersControls" x:Class="Appli.MainWindow"
+        xmlns:usersControls="clr-namespace:Appli.usersControls" 
+        xmlns:conv="clr-namespace:Appli.convertisseurs" x:Class="Appli.MainWindow"
         mc:Ignorable="d"
         Title="Stellar" Height="450" Width="800">
+
+    <Window.Resources>
+        <conv:ConvertisseurDeTexteEnImage x:Key="convertisseurDeTexteEnImage"/>
+    </Window.Resources>
+
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" MinWidth="200" />
@@ -40,7 +47,27 @@
                 <Button Content="Test 4" Grid.Column="3"/>
             </Grid>
 
-            <usersControls:UCAstres x:Name="astreControle"/>
+            <ScrollViewer>
+                <ListBox ItemsSource="{Binding LesAstres}" SelectedValue="{Binding AstreSelectionne, Mode=TwoWay}" 
+                    Background="Black" SelectionChanged="ListBox_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel >
+                                <Ellipse Width="70" Height="70">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{Binding Image, Converter={StaticResource convertisseurDeTexteEnImage}}" 
+                                        Stretch="UniformToFill"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Nom}" Style="{StaticResource texteNomAstre}"/>
+                                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Style="{StaticResource texteInfosAstre}"/>
+                                </StackPanel>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
 
         </StackPanel>
 
@@ -63,8 +90,13 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <ContentControl Grid.Column="1"  x:Name="Popup" VirtualizingPanel.IsVirtualizing="true" >
-            <usersControls:UCPopup/>
+
+        <ContentControl  Grid.Column="1" x:Name="Popup" VirtualizingPanel.IsVirtualizing="true" Content="{Binding AstreSelectionne}">
+            <ContentControl.ContentTemplate>
+                <DataTemplate>
+                    <usersControls:UCPopup NomAstre="{Binding Nom}"/>
+                </DataTemplate>
+            </ContentControl.ContentTemplate>
         </ContentControl>
 
     </Grid>

@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Appli.usersControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="root">
     
     <Grid>
         <Rectangle Fill="Black" Opacity="0.3" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown"/>
@@ -15,12 +16,12 @@
 
             <Image Source="/images/etoiles/blanche.png" Width="60" Margin="0,20,0,0"/>
 
-            <TextBlock FontFamily="Comic Sans MS" HorizontalAlignment="Center" FontSize="20" Foreground="#97befa"  TextAlignment="Center">
-                Nom
-            </TextBlock>
-            <TextBlock FontFamily="Comic Sans MS" Foreground="#97befa" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 0">
-                Ceci est une description. J'essaye de combler un maximum, pour montrer qu'on peut mettre beaucoup de textes.
-            </TextBlock>
+            <TextBlock FontFamily="Comic Sans MS" HorizontalAlignment="Center" FontSize="20" Foreground="#97befa" 
+                       TextAlignment="Center" Text="{Binding NomAstre, ElementName=root}" />
+                       
+            <TextBlock FontFamily="Comic Sans MS" Foreground="#97befa" HorizontalAlignment="Center" TextAlignment="Center" 
+                       TextWrapping="Wrap" Margin="10 0 10 0"/>
+
             <TextBlock FontFamily="Comic Sans MS" Foreground="#d5e5fc" HorizontalAlignment="Left" TextAlignment="Center" TextWrapping="Wrap" Margin="10 20 0 0" FontSize="15">
                 Infos :
             </TextBlock>
@@ -42,9 +43,8 @@
             <TextBlock Style="{StaticResource texteInfosPopup}">
                 Rayon : blablabla
             </TextBlock>
-            <TextBlock Style="{StaticResource texteInfosPopup}">
-                Luminosité : blablabla
-            </TextBlock>
+            <TextBlock Style="{StaticResource texteInfosPopup}" />
+            
             <TextBlock Style="{StaticResource texteInfosPopup}">
                 Température : blablabla
             </TextBlock>

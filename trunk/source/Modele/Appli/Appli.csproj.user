@@ -7,18 +7,12 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="usersControls\UCAstres.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="usersControls\UCPopup.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="usersControls\UCAstres.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="usersControls\UCPopup.xaml">

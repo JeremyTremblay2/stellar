@@ -9,10 +9,10 @@ using System.Windows.Data;
 
 namespace Appli.convertisseurs
 {
-    public class ConvertisseurDImageEnTexte : IValueConverter
+    public class ConvertisseurDeTexteEnImage : IValueConverter
     {
         private static string cheminImages;
-        static ConvertisseurDImageEnTexte()
+        static ConvertisseurDeTexteEnImage()
         {
             cheminImages = Path.Combine(Directory.GetCurrentDirectory(), @"..\images\");
         }
