@@ -50,14 +50,58 @@ namespace Appli.usersControls
             QuitterPopup.Fill = Brushes.AliceBlue;
         }
 
+        public string ImageAstre
+        {
+            get { return (string)GetValue(ImageAstrePropriete); }
+            set { SetValue(ImageAstrePropriete, value); }
+        }
+
+        public static readonly DependencyProperty ImageAstrePropriete =
+            DependencyProperty.Register("ImageAstre", typeof(string), typeof(UCPopup), new PropertyMetadata("etoile.jpg"));
+
         public string NomAstre
         {
             get { return (string)GetValue(NomAstrePropriete); }
             set { SetValue(NomAstrePropriete, value); }
         }
 
-        // Using a DependencyProperty as the backing store for NomNounours.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty NomAstrePropriete =
             DependencyProperty.Register("NomAstre", typeof(string), typeof(UCPopup), new PropertyMetadata("Astre"));
+
+        public string DescriptionAstre
+        {
+            get { return (string)GetValue(DescriptionAstrePropriete); }
+            set { SetValue(DescriptionAstrePropriete, value); }
+        }
+
+        public static readonly DependencyProperty DescriptionAstrePropriete =
+            DependencyProperty.Register("DescriptionAstre", typeof(string), typeof(UCPopup), new PropertyMetadata("Aucune description pour cet astre."));
+
+        public long AgeAstre
+        {
+            get { return (long)GetValue(AgeAstrePropriete); }
+            set { SetValue(AgeAstrePropriete, value); }
+        }
+
+        public static readonly DependencyProperty AgeAstrePropriete =
+            DependencyProperty.Register("AgeAstre", typeof(long), typeof(UCPopup), new PropertyMetadata(4500000000));
+
+        public float MasseAstre
+        {
+            get { return (float)GetValue(MasseAstrePropriete); }
+            set { SetValue(MasseAstrePropriete, value); }
+        }
+
+        public static readonly DependencyProperty MasseAstrePropriete =
+            DependencyProperty.Register("MasseAstre", typeof(float), typeof(UCPopup), new PropertyMetadata(1.0f));
+
+        public int TemperatureAstre
+        {
+            get { return (int)GetValue(TemperatureAstrePropriete); }
+            set { SetValue(TemperatureAstrePropriete, value); }
+        }
+
+        public static readonly DependencyProperty TemperatureAstrePropriete =
+            DependencyProperty.Register("TemperatureAstre", typeof(int), typeof(UCPopup), new PropertyMetadata(273));
     }
 }

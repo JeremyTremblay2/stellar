@@ -13,44 +13,39 @@
         <Image Source="/images/UI/popup.png" Height="420" Width="320" HorizontalAlignment="Left" Margin="50,0,0,0"/>
 
         <StackPanel x:Name="visibility" Height="420" Width="320" HorizontalAlignment="Left" Margin="50,0,0,0">
-
-            <Image Source="/images/etoiles/blanche.png" Width="60" Margin="0,20,0,0"/>
+            <Ellipse Width="120" Height="120" Margin="0 10 0 0">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{Binding ImageAstre, ElementName=root}" Stretch="Uniform" />
+                </Ellipse.Fill>
+            </Ellipse>
 
             <TextBlock FontFamily="Comic Sans MS" HorizontalAlignment="Center" FontSize="20" Foreground="#97befa" 
-                       TextAlignment="Center" Text="{Binding NomAstre, ElementName=root}" />
-                       
-            <TextBlock FontFamily="Comic Sans MS" Foreground="#97befa" HorizontalAlignment="Center" TextAlignment="Center" 
-                       TextWrapping="Wrap" Margin="10 0 10 0"/>
+                           TextAlignment="Center" Text="{Binding NomAstre, ElementName=root}" />
 
-            <TextBlock FontFamily="Comic Sans MS" Foreground="#d5e5fc" HorizontalAlignment="Left" TextAlignment="Center" TextWrapping="Wrap" Margin="10 20 0 0" FontSize="15">
-                Infos :
-            </TextBlock>
+            <TextBlock FontFamily="Comic Sans MS" HorizontalAlignment="Center" Foreground="#97befa" TextAlignment="Justify" 
+                       TextWrapping="Wrap" Margin="20 5 20 0" Text="{Binding DescriptionAstre, ElementName=root}" />
+
+            <TextBlock FontFamily="Comic Sans MS" Foreground="#d5e5fc" HorizontalAlignment="Left" TextAlignment="Center" TextWrapping="Wrap" 
+                           Margin="20 20 0 0" FontSize="15" Text="Infos :" />
+
             <TextBlock Style="{StaticResource texteInfosPopup}">
-                Type : blablabla
+                <Run Text="Age : "/>
+                <Run Text="{Binding AgeAstre, ElementName=root}" />
+                <Run Text="a"/>
             </TextBlock>
+
             <TextBlock Style="{StaticResource texteInfosPopup}">
-                Constellation : blablabla
+                <Run Text="Masse : " />
+                <Run Text="{Binding MasseAstre, ElementName=root}" />
+                <Run Text="MS" />
             </TextBlock>
+
             <TextBlock Style="{StaticResource texteInfosPopup}">
-                Age : blablabla
+                <Run Text="Température : " />
+                <Run Text="{Binding TemperatureAstre, ElementName=root}" />
+                <Run Text="Kelvins" />
             </TextBlock>
-            <TextBlock Style="{StaticResource texteInfosPopup}">
-                Distance : blablabla
-            </TextBlock>
-            <TextBlock Style="{StaticResource texteInfosPopup}">
-                Masse : blablabla
-            </TextBlock>
-            <TextBlock Style="{StaticResource texteInfosPopup}">
-                Rayon : blablabla
-            </TextBlock>
-            <TextBlock Style="{StaticResource texteInfosPopup}" />
-            
-            <TextBlock Style="{StaticResource texteInfosPopup}">
-                Température : blablabla
-            </TextBlock>
-            <TextBlock Style="{StaticResource texteInfosPopup}">
-                Rotation : blablabla
-            </TextBlock>
+
         </StackPanel>
         <Grid Background="Transparent" MouseDown="buttonPopupClicCroix" MouseEnter="buttonPopupDessusCroix" MouseLeave="buttonPopupHorsCroix" HorizontalAlignment="Left" Margin="340 0 0 380" Width="20" Height="20">
             <Path Style="{StaticResource PathPopup}" x:Name="QuitterPopup"
