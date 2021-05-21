@@ -1,6 +1,7 @@
 ﻿using Modele;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,16 +24,43 @@ namespace Appli
     {
 
         public Manager Manager => (Application.Current as App).LeManager;
-
         public MainWindow()
         { 
             InitializeComponent();
             DataContext = Manager;
+            SpectateurOn.Visibility = Visibility.Hidden;
+            
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void popupClicMenu(object sender, MouseButtonEventArgs e)
         {
-            (Application.Current.MainWindow as MainWindow).Popup.Visibility = Visibility.Visible;
+            Popup.Visibility = Visibility.Visible; //(Application.Current.MainWindow as MainWindow).
+            
+        }
+
+        private void SpecEnter(object sender, MouseEventArgs e)
+        {
+            SpectateurOn.Fill = Brushes.Gray;
+            SpectateurOff.Fill = Brushes.Gray;
+        }
+
+        private void SpecLeave(object sender, MouseEventArgs e)
+        {
+            SpectateurOn.Fill = Brushes.AliceBlue;
+            SpectateurOff.Fill = Brushes.AliceBlue;
+        }
+
+        private void SpecDown(object sender, MouseButtonEventArgs e)
+        {
+            if (SpectateurOff.Visibility == Visibility.Visible)
+            {
+                SpectateurOn.Visibility = Visibility.Visible;
+                SpectateurOff.Visibility = Visibility.Hidden;
+            } else
+            {
+                SpectateurOff.Visibility = Visibility.Visible;
+                SpectateurOn.Visibility = Visibility.Hidden;
+            }
         }
     }
 }

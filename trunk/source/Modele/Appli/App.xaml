@@ -29,8 +29,6 @@
         </Style>
         <Style TargetType="Path" x:Key="PathPopup">
             <Setter Property="Fill" Value="AliceBlue"/>
-            <Setter Property="Width" Value="20"/>
-            <Setter Property="Height" Value="20"/>
             <Setter Property="Stretch" Value="Fill"/>
         </Style>
        
