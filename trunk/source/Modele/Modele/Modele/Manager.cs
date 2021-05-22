@@ -356,6 +356,13 @@ namespace Modele
                                        .AvecType(TypePlanete.Naine)
                                        .AvecImage("pluton.jpg")
                                        .Construire());
+
+            for(int i = 0; i < lesAstres.Count; i++)
+            {
+                if (i%2 == 0)
+                    lesAstres[i].ModifierFavori();
+            }
+
             Carte.RelierDeuxEtoiles(new Point(130, 89), new Point(180, 89));
             Carte.RelierDeuxEtoiles(new Point(130, 89), new Point(250, 89));
             Carte.RelierDeuxEtoiles(new Point(90, 120), new Point(10, 10));
