@@ -7,11 +7,6 @@
     <Application.Resources>
         <conv:ConvertisseurDeTexteEnImage x:Key="convertisseurDeTexteEnImage"/>
 
-        <Style TargetType="Ellipse" x:Key="imageAstreMiniature">
-            <Setter Property="Width" Value="80" />
-            <Setter Property="Height" Value="80" />
-        </Style>
-        
         <Style TargetType="TextBlock" x:Key="texteNomAstre">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Foreground" Value="White"/>
@@ -42,6 +37,5 @@
             <Setter Property="Fill" Value="AliceBlue"/>
             <Setter Property="Stretch" Value="Fill"/>
         </Style>
-
     </Application.Resources>
 </Application>
