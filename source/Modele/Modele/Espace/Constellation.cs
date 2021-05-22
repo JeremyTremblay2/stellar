@@ -1,6 +1,7 @@
 ﻿using Geometrie;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -20,6 +21,16 @@ namespace Espace
         private HashSet<Segment> lesSegments = new HashSet<Segment>();
 
         /// <summary>
+        /// Propriété en lecture seule concernant l'hashset de points, qui sont l'ensemble des points contenus dans une constellation.
+        /// </summary>
+        public HashSet<Point> LesPoints { get; private set; } 
+
+        /// <summary>
+        /// Propriété en lecture seule concernant l'hashset de segments, qui sont l'ensembles des liens qui relient les étoiles entres elles.
+        /// </summary>
+        public HashSet<Segment> LesSegments { get; private set; }
+
+        /// <summary>
         /// Propriété à changer en méthode de vérification des collections vides.
         /// </summary>
         public bool Vide { get; private set; }
@@ -35,6 +46,8 @@ namespace Espace
             lesPoints.Add(point2);
             lesSegments.Add(new Segment(point1, point2));
             Vide = false;
+            LesPoints = new HashSet<Point>(lesPoints);
+            LesSegments = new HashSet<Segment>(lesSegments);
         }
 
         /// <summary>

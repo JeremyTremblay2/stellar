@@ -174,7 +174,7 @@ namespace Modele
 
         public void ChargeDonnees()
         {
-            AjouterUnAstre(new Point(42, 89), new FabriqueDEtoile().Initialiser("Sirius")
+            AjouterUnAstre(new Point(10, 10), new FabriqueDEtoile().Initialiser("Sirius")
                                       .AvecDescription("Sirius, également appelée Alpha Canis Majoris (α Canis Majoris/α CMa) par la " +
                                       "désignation de Bayer, est l'étoile principale de la constellation du Grand Chien. Vue de la " +
                                       "Terre, Sirius est l'étoile la plus brillante du ciel après le Soleil.")
@@ -199,7 +199,7 @@ namespace Modele
                                       .AvecImage("soleil.jpg")
                                       .Construire()); ;
 
-            AjouterUnAstre(new FabriqueDEtoile().Initialiser("Bételgeuse")
+            AjouterUnAstre(new Point(130, 89), new FabriqueDEtoile().Initialiser("Bételgeuse")
                                       .AvecDescription("Bételgeuse (α Orionis) est une étoile variable semi-régulière de type supergéante " +
                                       "rouge, dans la constellation d’Orion, située à une distance très difficile à établir.")
                                       .AvecAge(8000000)
@@ -211,7 +211,7 @@ namespace Modele
                                       .AvecImage("bételgeuse.jpg")
                                       .Construire());
 
-            AjouterUnAstre(new FabriqueDEtoile().Initialiser("Castor")
+            AjouterUnAstre(new Point(180, 89), new FabriqueDEtoile().Initialiser("Castor", true)
                                       .AvecDescription("Castor (ou Alpha Geminorum) est la seconde étoile la plus brillante de la " +
                                       "constellation des Gémeaux et une des plus brillantes étoiles du ciel nocturne.")
                                       .AvecAge(370000000)
@@ -222,7 +222,7 @@ namespace Modele
                                       .AvecImage("castor.jpg")
                                       .Construire());
 
-            AjouterUnAstre(new FabriqueDEtoile().Initialiser("Pollux")
+            AjouterUnAstre(new Point(250, 89), new FabriqueDEtoile().Initialiser("Pollux", true)
                                       .AvecDescription("Pollux (β Gem / Beta Geminorum) est l'étoile la plus brillante de la " +
                                       "constellation des Gémeaux et l'une des plus brillantes du ciel nocturne.")
                                       .AvecAge(7400000000)
@@ -233,7 +233,7 @@ namespace Modele
                                       .AvecImage("pollux.jpg")
                                       .Construire());
 
-            AjouterUnAstre(new FabriqueDePlanete().Initialiser("Mars")
+            AjouterUnAstre(new FabriqueDePlanete().Initialiser("Mars", true)
                                        .AvecDescription("Mars est la quatrième planète par ordre croissant de la distance au Soleil " +
                                        "et la deuxième par ordre croissant de la taille et de la masse.")
                                        .AvecAge(4500000000)
@@ -301,7 +301,7 @@ namespace Modele
                                        .AvecImage("jupiter.jpg")
                                        .Construire());
 
-            AjouterUnAstre(new FabriqueDePlanete().Initialiser("Saturne")
+            AjouterUnAstre(new Point(500, 235), new FabriqueDePlanete().Initialiser("Saturne")
                                        .AvecDescription("Saturne est la sixième planète du Système solaire par ordre d'éloignement " +
                                        "au Soleil, et la deuxième plus grande par la taille et la masse après Jupiter, qui est " +
                                        "comme elle une planète géante gazeuse.")
@@ -329,7 +329,7 @@ namespace Modele
                                        .AvecImage("uranus.jpg")
                                        .Construire());
 
-            AjouterUnAstre(new FabriqueDePlanete().Initialiser("Neptune")
+            AjouterUnAstre(new Point(120, 450), new FabriqueDePlanete().Initialiser("Neptune")
                                        .AvecDescription("Neptune est la huitième planète par ordre d'éloignement au Soleil et la plus éloignée " +
                                        "connue du Système solaire. La distance de la planète à la Terre lui donnant une très faible taille apparente, " +
                                        "son étude est difficile avec des télescopes situés sur la Terre.")
@@ -343,7 +343,7 @@ namespace Modele
                                        .AvecImage("neptune.jpg")
                                        .Construire());
 
-            AjouterUnAstre(new FabriqueDePlanete().Initialiser("Pluton")
+            AjouterUnAstre(new Point(630, 120), new FabriqueDePlanete().Initialiser("Pluton", true)
                                        .AvecDescription("Pluton, officiellement désigné par (134340) Pluton, est une planète naine, la plus volumineuse " +
                                        "connue dans le Système solaire, et la deuxième en ce qui concerne sa masse. Après sa découverte par l'astronome " +
                                        "américain Clyde Tombaugh en 1930, Pluton était considérée comme la neuvième planète du Système solaire.")
@@ -356,6 +356,10 @@ namespace Modele
                                        .AvecType(TypePlanete.Naine)
                                        .AvecImage("pluton.jpg")
                                        .Construire());
+            Carte.RelierDeuxEtoiles(new Point(130, 89), new Point(180, 89));
+            Carte.RelierDeuxEtoiles(new Point(130, 89), new Point(250, 89));
+            Carte.RelierDeuxEtoiles(new Point(90, 120), new Point(10, 10));
+
         }
     }
 }
