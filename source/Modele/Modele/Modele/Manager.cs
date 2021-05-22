@@ -120,7 +120,14 @@ namespace Modele
         /// </summary>
         public void SupprimerTout()
         {
-            lesAstres.Clear();
+            //lesAstres = lesAstres.Where(astre => !astre.Personnalise).ToList();
+            for(int i = 0; i < lesAstres.Count; ++i)
+            {
+                if (lesAstres[i].Personnalise)
+                {
+                    lesAstres.RemoveAt(i);
+                }
+            }
             Carte.SupprimerTout();
         }
 
