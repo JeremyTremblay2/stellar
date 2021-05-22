@@ -19,7 +19,7 @@ namespace Modele
         //Données contenues dans le Manager.
         //La liste d'astres correspond au menu déroulant avec les informations des astres.
         //La carte correspond à l'ensemble des points et constellations qui se trouvent sur la partie éditeur.
-        private List<Astre> lesAstres;
+        private ObservableCollection<Astre> lesAstres;
 
         private Astre astreSelectionne;
 
@@ -27,7 +27,7 @@ namespace Modele
         /// Propriété en lecture seule concernant la liste d'astres, qui est l'ensembles de toutes les données (les astres) 
         /// de l'application.
         /// </summary>
-        public ReadOnlyCollection<Astre> LesAstres { get; private set; }
+        public ReadOnlyObservableCollection<Astre> LesAstres { get; private set; }
 
         /// <summary>
         /// Propriété concernant la Carte, qui est l'endroit sur lequel se trouve tous les points (les astres), et 
@@ -59,8 +59,8 @@ namespace Modele
         /// </summary>
         public Manager()
         {
-            lesAstres = new List<Astre>();
-            LesAstres = new ReadOnlyCollection<Astre>(lesAstres);
+            lesAstres = new ObservableCollection<Astre>();
+            LesAstres = new ReadOnlyObservableCollection<Astre>(lesAstres);
             Carte = new Carte();
         }
 

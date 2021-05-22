@@ -49,15 +49,15 @@
                 </StackPanel>
 
                 <Button Grid.Column="2" DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                        BorderBrush="Transparent" Background="Transparent" Click="Button_Click">
+                        BorderBrush="Transparent" Background="Transparent" Click="ModifierFavori">
                     <Button.Content>
-                        <Image Source="/images/icones/coeurVide.png" MaxWidth="40" MaxHeight="40" x:Name="favori1"/>
+                        <Image Source="/images/icones/coeurVide.png" MaxWidth="40" MaxHeight="40" x:Name="favori"/>
                     </Button.Content>
                 </Button>
             </Grid>
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding Path=Favori}" Value="true">
-                    <Setter TargetName="favori1" Property="Source" Value="/images/icones/coeurPlein.png"/>
+                    <Setter TargetName="favori" Property="Source" Value="/images/icones/coeurPlein.png"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Personnalise}" Value="true">
                     <Setter TargetName="personnalise" Property="Text" Value=" (Personnalisé)"/>
@@ -95,15 +95,15 @@
                 </StackPanel>
 
                 <Button Grid.Column="2" DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Right" 
-                        BorderBrush="Transparent" Background="Transparent" Click="Button_Click">
+                        BorderBrush="Transparent" Background="Transparent" Click="ModifierFavori">
                     <Button.Content>
-                        <Image Source="/images/icones/coeurVide.png" MaxWidth="40" MaxHeight="40" x:Name="favori2"/>
+                        <Image Source="/images/icones/coeurVide.png" MaxWidth="40" MaxHeight="40" x:Name="favori"/>
                     </Button.Content>
                 </Button>
             </Grid>
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding Path=Favori}" Value="true">
-                    <Setter TargetName="favori2" Property="Source" Value="/images/icones/coeurPlein.png"/>
+                    <Setter TargetName="favori" Property="Source" Value="/images/icones/coeurPlein.png"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Personnalise}" Value="true">
                     <Setter TargetName="personnalise" Property="Text" Value=" (Personnalisé)"/>
@@ -139,7 +139,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Button Content="Test 1" Grid.Column="0" Click="Button_Click" />
+            <Button Content="Test 1" Grid.Column="0"/>
             <Button Content="Test 2" Grid.Column="1"/>
             <Button Content="Test 3" Grid.Column="2"/>
             <Button Content="Test 4" Grid.Column="3"/>
@@ -180,7 +180,7 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <ContentControl  Grid.Column="1" x:Name="Popup" VirtualizingPanel.IsVirtualizing="true" Content="{Binding AstreSelectionne}">
+        <ContentControl  Grid.Column="1" x:Name="Popup" Content="{Binding AstreSelectionne}">
             <ContentControl.ContentTemplate>
                 <DataTemplate>
                     <usersControls:UCPopup ImageAstre="{Binding Image}"
