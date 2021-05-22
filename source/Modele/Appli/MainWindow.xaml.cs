@@ -38,19 +38,11 @@ namespace Appli
             
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ModifierFavori(object sender, RoutedEventArgs e)
         {
             Button bouton = sender as Button;
             Astre astre = bouton.DataContext as Astre;
-
-            //Manager.ModifierFavori(astre);
-
-            foreach(Astre astr in Manager.LesAstres)
-            {
-                Debug.WriteLine(astr);
-            }
-
-            DataContext = Manager;
+            astre.ModifierFavori();
         }
     }
 }

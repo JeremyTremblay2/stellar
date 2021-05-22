@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -10,7 +11,7 @@ namespace Espace
     /// <summary>
     /// Un Astre est un objet abstrait, il s'agit d'un élément quelconque de l'Univers.
     /// </summary>
-    public abstract class Astre : IEquatable<Astre>, IComparable<Astre>, IComparable
+    public abstract class Astre : IEquatable<Astre>, IComparable<Astre>, IComparable, INotifyPropertyChanged
     {
         //Nom de l'astre.
         private string nom;
@@ -20,6 +21,15 @@ namespace Espace
 
         //Masse de l'astre.
         private float masse;
+
+        //Permet de savoir si l'astre se trouve dans les favoris.
+        private bool favori;
+
+        //Sert à envoyer des notifications quand des données sont modifiées.
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        void OnPropertyChanged(string nomPropriete)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropriete));
 
         /// <summary>
         /// Propriété représentant le nom de l'astre sous forme d'une chaîne de caractères. Il ne peut pas être vide.
@@ -84,7 +94,16 @@ namespace Espace
         /// <summary>
         /// Propriété pour savoir si l'astre est un favori de l'utilisateur ou non, représenté par un booléen.
         /// </summary>
-        public bool Favori { get; private set; }
+        public bool Favori
+        {
+            get => favori;
+            private set
+            {
+                if (favori == value) return;
+                favori = value;
+                OnPropertyChanged(nameof(Favori));
+            }
+        }
 
         /// <summary>
         /// Propriété permettant de savoir si l'astre est un astre personnalisé (= crée par l'utilisateur) ou non, représente par un booléen.
