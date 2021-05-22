@@ -57,7 +57,7 @@ namespace Appli.usersControls
         }
 
         public static readonly DependencyProperty ImageAstrePropriete =
-            DependencyProperty.Register("ImageAstre", typeof(string), typeof(UCPopup), new PropertyMetadata("etoile.jpg"));
+            DependencyProperty.Register("ImageAstre", typeof(string), typeof(UCPopup), new PropertyMetadata("astre.jpg"));
 
         public string NomAstre
         {

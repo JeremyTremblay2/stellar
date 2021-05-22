@@ -1,4 +1,6 @@
-﻿using Modele;
+﻿using Espace;
+using Modele;
+using Geometrie;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,9 +29,7 @@ namespace Appli
         public MainWindow()
         { 
             InitializeComponent();
-            DataContext = Manager;
-            SpectateurOn.Visibility = Visibility.Hidden;
-            
+            DataContext = Manager;            
         }
 
         private void popupClicMenu(object sender, MouseButtonEventArgs e)
@@ -38,29 +38,22 @@ namespace Appli
             
         }
 
-        private void SpecEnter(object sender, MouseEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SpectateurOn.Fill = Brushes.Gray;
-            SpectateurOff.Fill = Brushes.Gray;
-        }
-
-        private void SpecLeave(object sender, MouseEventArgs e)
-        {
-            SpectateurOn.Fill = Brushes.AliceBlue;
-            SpectateurOff.Fill = Brushes.AliceBlue;
-        }
-
-        private void SpecDown(object sender, MouseButtonEventArgs e)
-        {
-            if (SpectateurOff.Visibility == Visibility.Visible)
-            {
-                SpectateurOn.Visibility = Visibility.Visible;
-                SpectateurOff.Visibility = Visibility.Hidden;
-            } else
-            {
-                SpectateurOff.Visibility = Visibility.Visible;
-                SpectateurOn.Visibility = Visibility.Hidden;
-            }
+            Manager.ChargeDonnees();
+            Manager.AjouterUnAstre(new Geometrie.Point(12, 23), new FabriqueDePlanete().Initialiser("Terre")
+                                       .AvecDescription("La Terre est la troisième planète par ordre d'éloignement au Soleil et la cinquième " +
+                                       "plus grande du Système solaire aussi bien par la masse que le diamètre. Par ailleurs, elle est le seul " +
+                                       "objet céleste connu pour abriter la vie.")
+                                       .AvecAge(4500000000)
+                                       .AvecMasse(1)
+                                       .AvecTemperature(288)
+                                       .PresenceDeVie("Oui")
+                                       .EstDansLeSysteme("Solaire")
+                                       .EauEstPresente(true)
+                                       .AvecType(TypePlanete.Tellurique)
+                                       .AvecImage("terre.jpg")
+                                       .Construire());
         }
     }
 }
