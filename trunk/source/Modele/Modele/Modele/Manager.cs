@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-
+using Utilitaire;
 
 namespace Modele
 {
@@ -21,6 +21,9 @@ namespace Modele
         //La carte correspond à l'ensemble des points et constellations qui se trouvent sur la partie éditeur.
         private ObservableCollection<Astre> lesAstres;
 
+        private ObservableCollection<Astre> lesAstresTries;
+
+
         private Astre astreSelectionne;
 
         /// <summary>
@@ -28,6 +31,9 @@ namespace Modele
         /// de l'application.
         /// </summary>
         public ReadOnlyObservableCollection<Astre> LesAstres { get; private set; }
+
+        public ReadOnlyObservableCollection<Astre> LesAstresTries { get; private set; }
+
 
         /// <summary>
         /// Propriété concernant la Carte, qui est l'endroit sur lequel se trouve tous les points (les astres), et 
@@ -61,6 +67,8 @@ namespace Modele
         {
             lesAstres = new ObservableCollection<Astre>();
             LesAstres = new ReadOnlyObservableCollection<Astre>(lesAstres);
+            lesAstresTries = new ObservableCollection<Astre>();
+            LesAstresTries = new ReadOnlyObservableCollection<Astre>(lesAstresTries);
             Carte = new Carte();
         }
 
@@ -115,20 +123,16 @@ namespace Modele
         }
 
         /// <summary>
-        /// Méthode permettant de vider la manager de ses données, et donc d'effacer la liste d'astres et la Carte de ses données.
+        /// Méthode permettant de vider la manager de ses données, et donc d'effacer la liste d'astres personnalisés et la Carte de ses données.
         /// Elle appelle la méthode contenue dans la Carte, qui va venir effacer son dictionnaire d'astres et sa liste de constellations.
         /// </summary>
         public void SupprimerTout()
         {
-            //lesAstres = lesAstres.Where(astre => !astre.Personnalise).ToList();
-            for(int i = 0; i < lesAstres.Count; ++i)
-            {
-                if (lesAstres[i].Personnalise)
-                {
-                    lesAstres.RemoveAt(i);
-                }
-            }
+            var liste = lesAstres.Where(astre => !astre.Personnalise);
+            lesAstres = new ObservableCollection<Astre>(liste);
+            LesAstres = new ReadOnlyObservableCollection<Astre>(lesAstres);
             Carte.SupprimerTout();
+            OnPropertyChanged(nameof(AstreSelectionne));
         }
 
         /// <summary>
@@ -148,6 +152,24 @@ namespace Modele
         /// <param name="point2">Le point de la seconde étoile à relier.</param>
         public void RelierDeuxEtoiles(Point point1, Point point2)
             => Carte.RelierDeuxEtoiles(point1, point2);
+
+        public void Filtrage(bool favori, byte personnalise, Type type, bool alphabetique, string nom)
+        {
+            var listeTriee = lesAstres.ToList();
+
+            if (!string.IsNullOrWhiteSpace(nom))
+                listeTriee.RechercheParNom(nom);
+
+            if (favori)
+                listeTriee = RechercheAstres.RechercheParFavoris(lesAstres.ToList(), favori);
+
+            if (!(type == typeof(Astre)))
+                listeTriee.RechercheParType(type);
+
+            listeTriee.RechercheParPersonnalisation(personnalise);
+            listeTriee.TriParOrdreAlphabetique(alphabetique);
+        }
+
 
         /// <summary>
         /// Méthode permettant l'affichage du Manager.

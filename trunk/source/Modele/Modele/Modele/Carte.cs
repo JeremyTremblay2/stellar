@@ -6,6 +6,8 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+using Swordfish.NET.Collections;
+using System.ComponentModel;
 
 namespace Modele
 {
@@ -13,7 +15,7 @@ namespace Modele
     /// La carte est une entitée contenant tous les éléments disposés dessus. Cela peut être des astres, des constellations...
     /// Elle utilise un système de coordonnées.
     /// </summary>
-    public class Carte : IEquatable<Carte>
+    public class Carte : IEquatable<Carte>, INotifyPropertyChanged
     {
         //Générateur de constellations aléatoire à la création de la carte.
         private static Random generateurAleatoire = new Random();
@@ -23,11 +25,16 @@ namespace Modele
         //Les constellations présentes sur la carte (liste de données).
         private List<Constellation> lesConstellations;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        void OnPropertyChanged(string nomPropriete)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropriete));
+
         /// <summary>
         /// Propriété en lecture seule concernant le dictionnaire permettant de retrouver un Astre facilement présent sur la Carte, 
         /// à partir de son point de coordonnées (sa position en somme).
         /// </summary>
-        public ReadOnlyDictionary<Point, Astre> LesAstres { get; private set; }
+        public Dictionary<Point, Astre> LesAstres { get; private set; }
 
         /// <summary>
         /// Propriété en lecture seule concernant la liste des constellations qui composent la carte, ce sont des points reliés entre 
@@ -48,7 +55,7 @@ namespace Modele
             lesAstres = new Dictionary<Point, Astre>();
             lesConstellations = new List<Constellation>();
 
-            LesAstres = new ReadOnlyDictionary<Point, Astre>(lesAstres);
+            LesAstres = new Dictionary<Point, Astre>(lesAstres);
             LesConstellations = new ReadOnlyCollection<Constellation>(lesConstellations);
 
             if (avecCreations)

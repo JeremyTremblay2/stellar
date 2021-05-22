@@ -21,7 +21,6 @@ namespace Appli.usersControls
     /// </summary>
     public partial class UCPopup : UserControl
     {
-
         public Manager LeManager => (Application.Current as App).LeManager;
 
         public UCPopup()

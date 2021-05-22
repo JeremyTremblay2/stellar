@@ -4,13 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Appli.usersControls" 
-             xmlns:conv="clr-namespace:Appli.convertisseurs"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              x:Name="root">
 
     <UserControl.Resources>
-        <conv:ConvertisseurDeTexteEnImage x:Key="convertisseurDeTexteEnImage"/>
+        
     </UserControl.Resources>
 
     <Grid>
@@ -18,12 +17,8 @@
         <Image Source="/images/UI/popup.png" Height="420" Width="320" HorizontalAlignment="Left" Margin="50 0 0 0"/>
 
         <StackPanel x:Name="visibility" Height="420" Width="320" HorizontalAlignment="Left" Margin="50,0,0,0">
-            <Ellipse Width="120" Height="120" Margin="0 10 0 0">
-                <Ellipse.Fill>
-                    <ImageBrush ImageSource="{Binding ImageAstre, ElementName=root, Converter={StaticResource convertisseurDeTexteEnImage}}" 
-                                Stretch="Uniform" />
-                </Ellipse.Fill>
-            </Ellipse>
+            <local:UCImageAstre ImageAstre="{Binding ImageAstre, ElementName=root}" Margin="0 10 0 5" 
+                Largeur="110" Hauteur="110"/>
 
             <TextBlock FontFamily="Comic Sans MS" HorizontalAlignment="Center" FontSize="20" Foreground="#97befa" 
                            TextAlignment="Center" Text="{Binding NomAstre, ElementName=root}" />
