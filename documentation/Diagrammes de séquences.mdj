@@ -50,7 +50,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF5RsbQcd4BSgk="
 									},
-									"name": "Constellation",
+									"name": "Relier deux étoiles",
 									"ownedViews": [
 										{
 											"_type": "UMLFrameView",
@@ -71,9 +71,9 @@
 													"font": "Arial;13;0",
 													"left": 24.72998046875,
 													"top": 5,
-													"width": 76.15625,
+													"width": 107.9453125,
 													"height": 13,
-													"text": "Constellation"
+													"text": "Relier deux étoiles"
 												},
 												{
 													"_type": "LabelView",
@@ -339,8 +339,8 @@
 												"$ref": "AAAAAAF5RsbQcd4CaQc="
 											},
 											"font": "Arial;13;0",
-											"left": 72,
-											"top": 160,
+											"left": 96,
+											"top": 152,
 											"width": 161,
 											"height": 90,
 											"text": "Ce diagramme précise les  séquences utilisées lorsque deux étoiles sont reliées entre elles"
@@ -2509,7 +2509,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF5RwRbYeKkjso="
 									},
-									"name": "Constellation2",
+									"name": "Supprimer une étoile",
 									"ownedViews": [
 										{
 											"_type": "UMLFrameView",
@@ -2530,9 +2530,9 @@
 													"font": "Arial;13;0",
 													"left": 24.72998046875,
 													"top": 5,
-													"width": 83.38623046875,
+													"width": 120.9580078125,
 													"height": 13,
-													"text": "Constellation2"
+													"text": "Supprimer une étoile"
 												},
 												{
 													"_type": "LabelView",
@@ -5414,7 +5414,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF5RwRbYOKjjAc="
 							},
-							"name": "Role5"
+							"name": "Role5",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -5422,7 +5423,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF5RwRbYOKjjAc="
 							},
-							"name": "Role6"
+							"name": "Role6",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -5430,7 +5432,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF5RwRbYOKjjAc="
 							},
-							"name": "Role7"
+							"name": "Role7",
+							"type": ""
 						}
 					]
 				},
@@ -5456,7 +5459,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF5YI9jReL13Y0="
 									},
-									"name": "Manager",
+									"name": "Relier deux étoiles (vue d'ensemble)",
 									"ownedViews": [
 										{
 											"_type": "UMLFrameView",
@@ -5477,9 +5480,9 @@
 													"font": "Arial;13;0",
 													"left": 32.72998046875,
 													"top": 5,
-													"width": 52.30810546875,
+													"width": 210.8662109375,
 													"height": 13,
-													"text": "Manager"
+													"text": "Relier deux étoiles (vue d'ensemble)"
 												},
 												{
 													"_type": "LabelView",
