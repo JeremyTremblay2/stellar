@@ -6,7 +6,6 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <conv:ConvertisseurDeTexteEnImage x:Key="convertisseurDeTexteEnImage"/>
-        <conv:AstrePersonnaliseDataTemplateSelector x:Key="astrePersonnaliseDataTemplateSelector" />
 
         <Style TargetType="Ellipse" x:Key="imageAstreMiniature">
             <Setter Property="Width" Value="80" />

@@ -128,7 +128,7 @@ namespace Espace
         /// </summary>
         public void ModifierFavori()
         {
-            Favori = Favori ? false : true;
+            Favori = !Favori;
         }
 
         /// <summary>
