@@ -78,7 +78,7 @@ namespace Appli
         {
            Manager.SupprimerTout();
         }
-        
+
         private void FaireLaRecherche()
         {
             Manager.Filtrage(filtreFavoris, filtrePersonnalisation, filtreType, triOrdreAlphabetique, filtreNom);
