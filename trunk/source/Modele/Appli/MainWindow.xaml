@@ -43,8 +43,8 @@
                     </TextBlock>
                 </StackPanel>
 
-                <Button Grid.Column="2" DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                        BorderBrush="Transparent" Background="Transparent" Click="ModifierFavori">
+                <Button Grid.Column="2" DockPanel.Dock="Right" Click="ModifierFavori"  MouseEnter="SurvolBouton" 
+                        MouseLeave="FinSurvolBouton">
                     <Button.Content >
                         <Path Style="{StaticResource PathPopup}" MaxWidth="30" MaxHeight="25" x:Name="favori" Data="m256 455.515625c-7.289062 0-14.316406-2.640625-19.792969-7.4375-20.683593-18.085937-40.625-35.082031-58.21875-50.074219l-.089843-.078125c-51.582032-43.957031-96.125-81.917969-127.117188-119.3125-34.644531-41.804687-50.78125-81.441406-50.78125-124.742187 0-42.070313 14.425781-80.882813 40.617188-109.292969 26.503906-28.746094 62.871093-44.578125 102.414062-44.578125 29.554688 0 56.621094 9.34375 80.445312 27.769531 12.023438 9.300781 22.921876 20.683594 32.523438 33.960938 9.605469-13.277344 20.5-24.660157 32.527344-33.960938 23.824218-18.425781 50.890625-27.769531 80.445312-27.769531 39.539063 0 75.910156 15.832031 102.414063 44.578125 26.191406 28.410156 40.613281 67.222656 40.613281 109.292969 0 43.300781-16.132812 82.9375-50.777344 124.738281-30.992187 37.398437-75.53125 75.355469-127.105468 119.308594-17.625 15.015625-37.597657 32.039062-58.328126 50.167969-5.472656 4.789062-12.503906 7.429687-19.789062 7.429687zm-112.96875-425.523437c-31.066406 0-59.605469 12.398437-80.367188 34.914062-21.070312 22.855469-32.675781 54.449219-32.675781 88.964844 0 36.417968 13.535157 68.988281 43.882813 105.605468 29.332031 35.394532 72.960937 72.574219 123.476562 115.625l.09375.078126c17.660156 15.050781 37.679688 32.113281 58.515625 50.332031 20.960938-18.253907 41.011719-35.34375 58.707031-50.417969 50.511719-43.050781 94.136719-80.222656 123.46875-115.617188 30.34375-36.617187 43.878907-69.1875 43.878907-105.605468 0-34.515625-11.605469-66.109375-32.675781-88.964844-20.757813-22.515625-49.300782-34.914062-80.363282-34.914062-22.757812 0-43.652344 7.234374-62.101562 21.5-16.441406 12.71875-27.894532 28.796874-34.609375 40.046874-3.453125 5.785157-9.53125 9.238282-16.261719 9.238282s-12.808594-3.453125-16.261719-9.238282c-6.710937-11.25-18.164062-27.328124-34.609375-40.046874-18.449218-14.265626-39.34375-21.5-62.097656-21.5zm0 0"/>
                     </Button.Content>
@@ -90,9 +90,9 @@
                     </TextBlock>
                 </StackPanel>
 
-                <Button Grid.Column="2" DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Right" 
-                        BorderBrush="Transparent" Background="Transparent"  BorderThickness="0"  Click="ModifierFavori">
-                    <Button.Content>
+                <Button Grid.Column="2" DockPanel.Dock="Right" Click="ModifierFavori"  MouseEnter="SurvolBouton" 
+                        MouseLeave="FinSurvolBouton">
+                    <Button.Content >
                         <Path Style="{StaticResource PathPopup}" MaxWidth="30" MaxHeight="25" x:Name="favori" Data="m256 455.515625c-7.289062 0-14.316406-2.640625-19.792969-7.4375-20.683593-18.085937-40.625-35.082031-58.21875-50.074219l-.089843-.078125c-51.582032-43.957031-96.125-81.917969-127.117188-119.3125-34.644531-41.804687-50.78125-81.441406-50.78125-124.742187 0-42.070313 14.425781-80.882813 40.617188-109.292969 26.503906-28.746094 62.871093-44.578125 102.414062-44.578125 29.554688 0 56.621094 9.34375 80.445312 27.769531 12.023438 9.300781 22.921876 20.683594 32.523438 33.960938 9.605469-13.277344 20.5-24.660157 32.527344-33.960938 23.824218-18.425781 50.890625-27.769531 80.445312-27.769531 39.539063 0 75.910156 15.832031 102.414063 44.578125 26.191406 28.410156 40.613281 67.222656 40.613281 109.292969 0 43.300781-16.132812 82.9375-50.777344 124.738281-30.992187 37.398437-75.53125 75.355469-127.105468 119.308594-17.625 15.015625-37.597657 32.039062-58.328126 50.167969-5.472656 4.789062-12.503906 7.429687-19.789062 7.429687zm-112.96875-425.523437c-31.066406 0-59.605469 12.398437-80.367188 34.914062-21.070312 22.855469-32.675781 54.449219-32.675781 88.964844 0 36.417968 13.535157 68.988281 43.882813 105.605468 29.332031 35.394532 72.960937 72.574219 123.476562 115.625l.09375.078126c17.660156 15.050781 37.679688 32.113281 58.515625 50.332031 20.960938-18.253907 41.011719-35.34375 58.707031-50.417969 50.511719-43.050781 94.136719-80.222656 123.46875-115.617188 30.34375-36.617187 43.878907-69.1875 43.878907-105.605468 0-34.515625-11.605469-66.109375-32.675781-88.964844-20.757813-22.515625-49.300782-34.914062-80.363282-34.914062-22.757812 0-43.652344 7.234374-62.101562 21.5-16.441406 12.71875-27.894532 28.796874-34.609375 40.046874-3.453125 5.785157-9.53125 9.238282-16.261719 9.238282s-12.808594-3.453125-16.261719-9.238282c-6.710937-11.25-18.164062-27.328124-34.609375-40.046874-18.449218-14.265626-39.34375-21.5-62.097656-21.5zm0 0"/>
                     </Button.Content>
                 </Button>
@@ -107,71 +107,86 @@
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
+
+        <ControlTemplate x:Key="TextBoxRecherche" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" x:Name="Bordure" BorderBrush="Black"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bordure"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Window.Resources>
 
 
-    <Grid>
+    <Grid FocusManager.FocusedElement="{Binding ElementName=BarreRecherche}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="350" x:Name="MasterGrid"/>
             <ColumnDefinition Width="8*" />
         </Grid.ColumnDefinitions>
 
-        <Grid VerticalAlignment="Top" Height="20" Margin="5 5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="7*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0" TextChanged="barreRecherche" x:Name="BarreRecherche"/>
-            <Path Fill="Black" Opacity="0.5" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                            Data="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23
-	                    s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92
-	                    c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
-	                    s-17-7.626-17-17S14.61,6,23.984,6z" Grid.Column="1" Height="15" Stretch="Fill" Width="15"/>
+        <Grid Background="Black">
+            <Grid VerticalAlignment="Top" Height="20" Margin="5 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Border CornerRadius="8 8 3 3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Path Fill="AliceBlue" Height="15" Width="15" Stretch="Fill" Margin="20 0 0 0"
+                                Data="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23
+	                        s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92
+	                        c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
+	                        s-17-7.626-17-17S14.61,6,23.984,6z" />
+                        <TextBox Grid.Column="1" x:Name="BarreRecherche" TextChanged="barreRecherche"
+                                 Template="{StaticResource TextBoxRecherche}" Margin="20 0 0 0"/>
+                    </Grid>
+                </Border>
+            </Grid>
+            
+            <Grid VerticalAlignment="Top" Height="60" Margin="0 30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <usersControls:UCPathButton MaxWidth="25" MaxHeight="20" x:Name="Bouton1" MouseLeftButtonDown="BoutonTriAlphabetique" Path="M286.935,69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952,0-9.233,1.807-12.85,5.424 C1.807,72.998,0,77.279,0,82.228c0,4.948,1.807,9.229,5.424,12.847l127.907,127.907c3.621,3.617,7.902,5.428,12.85,5.428  s9.233-1.811,12.847-5.428L286.935,95.074c3.613-3.617,5.427-7.898,5.427-12.847C292.362,77.279,290.548,72.998,286.935,69.377z"/>
+                <usersControls:UCPathButton MaxWidth="30" MaxHeight="30" Grid.Column="1" x:Name="Bouton2" MouseLeftButtonDown="BoutonFiltreFavori" Path="m256 455.515625c-7.289062 0-14.316406-2.640625-19.792969-7.4375-20.683593-18.085937-40.625-35.082031-58.21875-50.074219l-.089843-.078125c-51.582032-43.957031-96.125-81.917969-127.117188-119.3125-34.644531-41.804687-50.78125-81.441406-50.78125-124.742187 0-42.070313 14.425781-80.882813 40.617188-109.292969 26.503906-28.746094 62.871093-44.578125 102.414062-44.578125 29.554688 0 56.621094 9.34375 80.445312 27.769531 12.023438 9.300781 22.921876 20.683594 32.523438 33.960938 9.605469-13.277344 20.5-24.660157 32.527344-33.960938 23.824218-18.425781 50.890625-27.769531 80.445312-27.769531 39.539063 0 75.910156 15.832031 102.414063 44.578125 26.191406 28.410156 40.613281 67.222656 40.613281 109.292969 0 43.300781-16.132812 82.9375-50.777344 124.738281-30.992187 37.398437-75.53125 75.355469-127.105468 119.308594-17.625 15.015625-37.597657 32.039062-58.328126 50.167969-5.472656 4.789062-12.503906 7.429687-19.789062 7.429687zm-112.96875-425.523437c-31.066406 0-59.605469 12.398437-80.367188 34.914062-21.070312 22.855469-32.675781 54.449219-32.675781 88.964844 0 36.417968 13.535157 68.988281 43.882813 105.605468 29.332031 35.394532 72.960937 72.574219 123.476562 115.625l.09375.078126c17.660156 15.050781 37.679688 32.113281 58.515625 50.332031 20.960938-18.253907 41.011719-35.34375 58.707031-50.417969 50.511719-43.050781 94.136719-80.222656 123.46875-115.617188 30.34375-36.617187 43.878907-69.1875 43.878907-105.605468 0-34.515625-11.605469-66.109375-32.675781-88.964844-20.757813-22.515625-49.300782-34.914062-80.363282-34.914062-22.757812 0-43.652344 7.234374-62.101562 21.5-16.441406 12.71875-27.894532 28.796874-34.609375 40.046874-3.453125 5.785157-9.53125 9.238282-16.261719 9.238282s-12.808594-3.453125-16.261719-9.238282c-6.710937-11.25-18.164062-27.328124-34.609375-40.046874-18.449218-14.265626-39.34375-21.5-62.097656-21.5zm0 0"/>
+                <Button Click="BoutonFiltrePersonnalisation" Grid.Column="2" MouseEnter="SurvolBouton" MouseLeave="FinSurvolBouton">
+                    <Button.Content>
+                        <TextBlock Text="Tous les astres" Style="{StaticResource texteInfosAstre}" x:Name="Bouton3" 
+                                   TextWrapping="Wrap"/>
+                    </Button.Content>
+                </Button>
+                <Button Click="BoutonFiltreType" Grid.Column="3" MouseEnter="SurvolBouton" MouseLeave="FinSurvolBouton">
+                    <Button.Content>
+                        <Image Source="/images/icones/tousLesAstres.png" x:Name="Bouton4" MaxWidth="40"/>
+                    </Button.Content>
+                </Button>
+            </Grid>
         </Grid>
-        <Grid VerticalAlignment="Top" Height="60" Margin="0 30" Background="Black">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        
+        <ListBox ItemsSource="{Binding LesAstresTries}" SelectedValue="{Binding AstreSelectionne, Mode=TwoWay}" 
+            Background="#181818" Margin="0,90,0,0" BorderThickness="0 2 0 0" BorderBrush="AliceBlue">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
 
-            <usersControls:UCPathButton MaxWidth="25" MaxHeight="20" x:Name="Bouton1" MouseLeftButtonDown="BoutonTriAlphabetique" Path="M286.935,69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952,0-9.233,1.807-12.85,5.424 C1.807,72.998,0,77.279,0,82.228c0,4.948,1.807,9.229,5.424,12.847l127.907,127.907c3.621,3.617,7.902,5.428,12.85,5.428  s9.233-1.811,12.847-5.428L286.935,95.074c3.613-3.617,5.427-7.898,5.427-12.847C292.362,77.279,290.548,72.998,286.935,69.377z"/>
-            <usersControls:UCPathButton MaxWidth="30" MaxHeight="30" Grid.Column="1" x:Name="Bouton2" MouseLeftButtonDown="BoutonFiltreFavori" Path="m256 455.515625c-7.289062 0-14.316406-2.640625-19.792969-7.4375-20.683593-18.085937-40.625-35.082031-58.21875-50.074219l-.089843-.078125c-51.582032-43.957031-96.125-81.917969-127.117188-119.3125-34.644531-41.804687-50.78125-81.441406-50.78125-124.742187 0-42.070313 14.425781-80.882813 40.617188-109.292969 26.503906-28.746094 62.871093-44.578125 102.414062-44.578125 29.554688 0 56.621094 9.34375 80.445312 27.769531 12.023438 9.300781 22.921876 20.683594 32.523438 33.960938 9.605469-13.277344 20.5-24.660157 32.527344-33.960938 23.824218-18.425781 50.890625-27.769531 80.445312-27.769531 39.539063 0 75.910156 15.832031 102.414063 44.578125 26.191406 28.410156 40.613281 67.222656 40.613281 109.292969 0 43.300781-16.132812 82.9375-50.777344 124.738281-30.992187 37.398437-75.53125 75.355469-127.105468 119.308594-17.625 15.015625-37.597657 32.039062-58.328126 50.167969-5.472656 4.789062-12.503906 7.429687-19.789062 7.429687zm-112.96875-425.523437c-31.066406 0-59.605469 12.398437-80.367188 34.914062-21.070312 22.855469-32.675781 54.449219-32.675781 88.964844 0 36.417968 13.535157 68.988281 43.882813 105.605468 29.332031 35.394532 72.960937 72.574219 123.476562 115.625l.09375.078126c17.660156 15.050781 37.679688 32.113281 58.515625 50.332031 20.960938-18.253907 41.011719-35.34375 58.707031-50.417969 50.511719-43.050781 94.136719-80.222656 123.46875-115.617188 30.34375-36.617187 43.878907-69.1875 43.878907-105.605468 0-34.515625-11.605469-66.109375-32.675781-88.964844-20.757813-22.515625-49.300782-34.914062-80.363282-34.914062-22.757812 0-43.652344 7.234374-62.101562 21.5-16.441406 12.71875-27.894532 28.796874-34.609375 40.046874-3.453125 5.785157-9.53125 9.238282-16.261719 9.238282s-12.808594-3.453125-16.261719-9.238282c-6.710937-11.25-18.164062-27.328124-34.609375-40.046874-18.449218-14.265626-39.34375-21.5-62.097656-21.5zm0 0"/>
-            <!--<Button Click="BoutonTriAlphabetique" Background="Black">
-                <Button.Content>
-                    <Image Source="/images/icones/ordreAlphabetiqueDecroissant.png" x:Name="Bouton1" MaxWidth="60" />
-                </Button.Content>
-            </Button>-->
-            <!--<Button Click="BoutonFiltreFavori" Grid.Column="1" Background="Black">
-                <Button.Content>
-                    <Image Source="/images/icones/coeurVide.png" x:Name="Bouton2" MaxWidth="60"/>
-                </Button.Content>
-            </Button>-->
-            <Button Click="BoutonFiltrePersonnalisation" Grid.Column="2" Background="Black"
-                        HorizontalAlignment="Center" VerticalAlignment="Center" >
-                <Button.Content>
-                    <TextBlock Text="Tous les astres" Style="{StaticResource texteInfosAstre}" x:Name="Bouton3" 
-                                       TextWrapping="Wrap"/>
-                </Button.Content>
-            </Button>
-            <Button Click="BoutonFiltreType" Grid.Column="3" Background="Black">
-                <Button.Content>
-                    <Image Source="/images/icones/tousLesAstres.png" x:Name="Bouton4" MaxWidth="60"/>
-                </Button.Content>
-            </Button>
-        </Grid>
-        <ListBox  ItemsSource="{Binding LesAstresTries}" SelectedValue="{Binding AstreSelectionne, Mode=TwoWay}" 
-                        Background="Black" Margin="0,90,0,0" >
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
-
-
-        <Image Source="images/fonds/fond_ciel.jpg" Grid.Column="1" Stretch="UniformToFill"/>
+            <Image Source="images/fonds/fondCarte1.jpg" Grid.Column="1" Stretch="UniformToFill"/>
         <ItemsControl ItemsSource="{Binding Carte.LesAstres}" Grid.Column="1">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -186,7 +201,8 @@
             </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Ellipse Stroke="Black" Fill="Yellow" Height="15" Width="15" Panel.ZIndex="50" x:Name="EtoileCercle"/>
+					<Ellipse Stroke="Black" Fill="Yellow" Height="15" Width="15" Panel.ZIndex="50" 
+                             MouseLeftButtonDown="PointClique" MouseEnter="SurvolBouton" MouseLeave="FinSurvolBouton"/>                
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
