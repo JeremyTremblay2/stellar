@@ -23,7 +23,7 @@ namespace Modele
         //Dictionnaire de données permettant de retrouver facilement un Astre grâce à sa position.
         private Dictionary<Point, Astre> lesAstres;
         //Les constellations présentes sur la carte (liste de données).
-        private List<Constellation> lesConstellations;
+        private ObservableCollection<Constellation> lesConstellations;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -40,7 +40,7 @@ namespace Modele
         /// Propriété en lecture seule concernant la liste des constellations qui composent la carte, ce sont des points reliés entre 
         /// eux par des segments.
         /// </summary>
-        public ReadOnlyCollection<Constellation> LesConstellations { get; private set; }
+        public ReadOnlyObservableCollection<Constellation> LesConstellations { get; private set; }
 
         /// <summary>
         /// Constructeur de Carte. Une Carte est caractérisée par un dictionnaire d'Astres (étoiles et planètes), qui sont facilement accessibles
@@ -53,10 +53,10 @@ namespace Modele
         public Carte(bool avecCreations = true)
         {
             lesAstres = new Dictionary<Point, Astre>();
-            lesConstellations = new List<Constellation>();
+            lesConstellations = new ObservableCollection<Constellation>();
 
             LesAstres = new ReadOnlyDictionary<Point, Astre>(lesAstres);
-            LesConstellations = new ReadOnlyCollection<Constellation>(lesConstellations);
+            LesConstellations = new ReadOnlyObservableCollection<Constellation>(lesConstellations);
 
             if (avecCreations)
             {
