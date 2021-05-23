@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Utilitaire;
@@ -21,9 +22,10 @@ namespace Modele
         //La carte correspond à l'ensemble des points et constellations qui se trouvent sur la partie éditeur.
         private ObservableCollection<Astre> lesAstres;
 
+        //Cette collection observable est la liste d'astres triés, elle ne contient pas forcément tous les astres de l'autre liste.
         private ObservableCollection<Astre> lesAstresTries;
 
-
+        //L'astre sélectionné dans l'application.
         private Astre astreSelectionne;
 
         /// <summary>
@@ -32,6 +34,9 @@ namespace Modele
         /// </summary>
         public ReadOnlyObservableCollection<Astre> LesAstres { get; private set; }
 
+        /// <summary>
+        /// Propriété en lecture seule concernant la liste triée d'astre qui se trouve dans l'application.
+        /// </summary>
         public ReadOnlyObservableCollection<Astre> LesAstresTries { get; private set; }
 
 
@@ -56,6 +61,11 @@ namespace Modele
             }
         }
 
+        /// <summary>
+        /// Méthode permettant de notifier l'application d'un changement de propriété dans les données, afin qu'elle puisse se
+        /// mettre à jour.
+        /// </summary>
+        /// <param name="nomPropriete">Le nom de la propriété changée sous forme de chaîne de caractères.</param>
         void OnPropertyChanged(string nomPropriete)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropriete));
 
@@ -67,7 +77,7 @@ namespace Modele
         {
             lesAstres = new ObservableCollection<Astre>();
             LesAstres = new ReadOnlyObservableCollection<Astre>(lesAstres);
-            lesAstresTries = new ObservableCollection<Astre>();
+            lesAstresTries = new ObservableCollection<Astre>(lesAstres);
             LesAstresTries = new ReadOnlyObservableCollection<Astre>(lesAstresTries);
             Carte = new Carte();
         }
@@ -83,6 +93,7 @@ namespace Modele
         {
             Carte.AjouterUnAstre(position, astre);
             lesAstres.Add(astre);
+            lesAstresTries.Add(astre);
         }
 
         /// <summary>
@@ -102,6 +113,7 @@ namespace Modele
             if (!lesAstres.Contains(astre))
             {
                 lesAstres.Add(astre);
+                lesAstresTries.Add(astre);
             }
         }
 
@@ -119,6 +131,7 @@ namespace Modele
             if (astreASupprimer != null && !astreASupprimer.Personnalise)
             {
                 lesAstres.Remove(astreASupprimer);
+                lesAstresTries.Remove(astreASupprimer);
             }
         }
 
@@ -128,11 +141,26 @@ namespace Modele
         /// </summary>
         public void SupprimerTout()
         {
-            var liste = lesAstres.Where(astre => !astre.Personnalise);
-            lesAstres = new ObservableCollection<Astre>(liste);
-            LesAstres = new ReadOnlyObservableCollection<Astre>(lesAstres);
+            for (int i = 0; i < lesAstres.Count; i++)
+            {
+                if (lesAstres[i].Personnalise)
+                {
+                    lesAstres.Remove(lesAstres[i]);
+                    i--;
+                }
+            }
+
+            for (int i = 0; i < lesAstresTries.Count; i++)
+            {
+                if (lesAstresTries[i].Personnalise)
+                {
+                    lesAstresTries.Remove(lesAstresTries[i]);
+                    i--;
+                }
+            }
+
             Carte.SupprimerTout();
-            OnPropertyChanged(nameof(AstreSelectionne));
+            OnPropertyChanged(nameof(LesAstresTries));
         }
 
         /// <summary>
@@ -153,21 +181,34 @@ namespace Modele
         public void RelierDeuxEtoiles(Point point1, Point point2)
             => Carte.RelierDeuxEtoiles(point1, point2);
 
+        /// <summary>
+        /// Permet de trier la liste d'astres en appellant des méthodes de tris, et donc de mettre à jour la liste triée.
+        /// </summary>
+        /// <param name="favori">Un booléen indiquant si l'on veut afficher uniquement les favoris ou non.</param>
+        /// <param name="personnalise">Un entier indiquant si l'on veut uniquement les astres personnalisés ou non.</param>
+        /// <param name="type">Un type permettant de filtrer les astres par celui-ci.</param>
+        /// <param name="alphabetique">Un booléen indiquant l'ordre alphabétique.</param>
+        /// <param name="nom">Une chaîne de caractères à rechercher dans le nom des astres.</param>
         public void Filtrage(bool favori, byte personnalise, Type type, bool alphabetique, string nom)
         {
             var listeTriee = lesAstres.ToList();
 
             if (!string.IsNullOrWhiteSpace(nom))
-                listeTriee.RechercheParNom(nom);
+                listeTriee = listeTriee.RechercheParNom(nom);
 
             if (favori)
                 listeTriee = RechercheAstres.RechercheParFavoris(lesAstres.ToList(), favori);
 
             if (!(type == typeof(Astre)))
-                listeTriee.RechercheParType(type);
+                listeTriee = listeTriee.RechercheParType(type);
 
-            listeTriee.RechercheParPersonnalisation(personnalise);
-            listeTriee.TriParOrdreAlphabetique(alphabetique);
+            listeTriee = listeTriee.RechercheParPersonnalisation(personnalise);
+            listeTriee = listeTriee.TriParOrdreAlphabetique(alphabetique);
+
+            lesAstresTries = new ObservableCollection<Astre>(listeTriee);
+            LesAstresTries = new ReadOnlyObservableCollection<Astre>(lesAstresTries);
+
+            OnPropertyChanged(nameof(LesAstresTries));
         }
 
 

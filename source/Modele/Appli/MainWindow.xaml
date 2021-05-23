@@ -133,36 +133,38 @@
 
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Click="BoutonTriAlphabetique" MaxWidth="60" MaxHeight="60" Background="Black">
+                    <Button Click="BoutonTriAlphabetique" Background="Black">
                         <Button.Content>
-                            <Image Source="/images/icones/ordreAlphabetiqueDecroissant.png" x:Name="Image1"/>
+                            <Image Source="/images/icones/ordreAlphabetiqueDecroissant.png" x:Name="Bouton1" MaxWidth="60" />
                         </Button.Content>
                     </Button>
-                    <Button Click="BoutonFiltreFavori" Grid.Column="1" MaxWidth="60">
+                    <Button Click="BoutonFiltreFavori" Grid.Column="1" Background="Black">
                         <Button.Content>
-                            <Image Source="/images/icones/coeurVide.png" x:Name="Image2"/>
+                            <Image Source="/images/icones/coeurVide.png" x:Name="Bouton2" MaxWidth="60"/>
                         </Button.Content>
                     </Button>
-                    <Button Click="BoutonFiltrePersonnalisation" Grid.Column="2" MaxWidth="60">
+                    <Button Click="BoutonFiltrePersonnalisation" Grid.Column="2" Background="Black"
+                        HorizontalAlignment="Center" VerticalAlignment="Center" >
                         <Button.Content>
-                            <Image Source="/images/icones/ordreAlphabetiqueDecroissant.png" x:Name="Image3"/>
+                            <TextBlock Text="Tous les astres" Style="{StaticResource texteInfosAstre}" x:Name="Bouton3" 
+                                       TextWrapping="Wrap"/>
                         </Button.Content>
                     </Button>
-                    <Button Click="BoutonFiltreType" Grid.Column="3" MaxWidth="60">
+                    <Button Click="BoutonFiltreType" Grid.Column="3" Background="Black">
                         <Button.Content>
-                            <Image Source="/images/icones/ordreAlphabetiqueDecroissant.png" x:Name="Image4"/>
+                            <Image Source="/images/icones/tousLesAstres.png" x:Name="Bouton4" MaxWidth="60"/>
                         </Button.Content>
                     </Button>
                 </Grid>
 
                 <Grid>
-                    <ListBox ItemsSource="{Binding LesAstres}" SelectedValue="{Binding AstreSelectionne, Mode=TwoWay}" 
+                    <ListBox ItemsSource="{Binding LesAstresTries}" SelectedValue="{Binding AstreSelectionne, Mode=TwoWay}" 
                         Background="Black" >
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
@@ -180,7 +182,7 @@
         <ItemsControl ItemsSource="{Binding Carte.LesAstres}" Grid.Column="1">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas />
+                    <Canvas MouseLeftButtonDown="ClicSourisCanvas" Background="Transparent" Grid.Column="1"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemContainerStyle>
@@ -191,7 +193,7 @@
             </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Ellipse Stroke="Black" Fill="Yellow" Height="15" Width="15" Panel.ZIndex="2"/>
+                    <Ellipse Stroke="Black" Fill="Yellow" Height="15" Width="15" Panel.ZIndex="50"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

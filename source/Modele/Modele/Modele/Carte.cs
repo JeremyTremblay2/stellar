@@ -34,7 +34,7 @@ namespace Modele
         /// Propriété en lecture seule concernant le dictionnaire permettant de retrouver un Astre facilement présent sur la Carte, 
         /// à partir de son point de coordonnées (sa position en somme).
         /// </summary>
-        public Dictionary<Point, Astre> LesAstres { get; private set; }
+        public ReadOnlyDictionary<Point, Astre> LesAstres { get; private set; }
 
         /// <summary>
         /// Propriété en lecture seule concernant la liste des constellations qui composent la carte, ce sont des points reliés entre 
@@ -55,7 +55,7 @@ namespace Modele
             lesAstres = new Dictionary<Point, Astre>();
             lesConstellations = new List<Constellation>();
 
-            LesAstres = new Dictionary<Point, Astre>(lesAstres);
+            LesAstres = new ReadOnlyDictionary<Point, Astre>(lesAstres);
             LesConstellations = new ReadOnlyCollection<Constellation>(lesConstellations);
 
             if (avecCreations)
