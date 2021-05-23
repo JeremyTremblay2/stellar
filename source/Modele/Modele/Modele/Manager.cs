@@ -197,7 +197,7 @@ namespace Modele
                 listeTriee = listeTriee.RechercheParNom(nom);
 
             if (favori)
-                listeTriee = RechercheAstres.RechercheParFavoris(lesAstres.ToList(), favori);
+                listeTriee = listeTriee.RechercheParFavoris(favori);
 
             if (!(type == typeof(Astre)))
                 listeTriee = listeTriee.RechercheParType(type);
