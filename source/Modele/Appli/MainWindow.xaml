@@ -112,7 +112,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*" x:Name="MasterGrid"/>
+            <ColumnDefinition Width="350" x:Name="MasterGrid"/>
             <ColumnDefinition Width="8*" />
         </Grid.ColumnDefinitions>
 
@@ -186,7 +186,7 @@
             </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Ellipse Stroke="Black" Fill="Yellow" Height="15" Width="15" Panel.ZIndex="50"/>
+                    <Ellipse Stroke="Black" Fill="Yellow" Height="15" Width="15" Panel.ZIndex="50" x:Name="EtoileCercle"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
