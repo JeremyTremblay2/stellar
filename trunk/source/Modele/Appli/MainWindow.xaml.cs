@@ -195,7 +195,7 @@ namespace Appli
         {
             foreach(Geometrie.Point pt in Manager.Carte.LesAstres.Keys) 
             {
-                if (ptSelect.X-350 >= pt.X && ptSelect.Y >= pt.Y)
+                if (ptSelect.X+350 >= pt.X && ptSelect.Y >= pt.Y && ptSelect.X <= pt.X+350+15 && ptSelect.Y <= pt.Y+15)
                 {
                     return pt;
                 }
