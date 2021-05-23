@@ -44,5 +44,13 @@ namespace Appli.usersControls
             }
         }
 
+        public string Fill
+        {
+            set
+            {
+                PathButton.Fill = new SolidColorBrush((Color) ColorConverter.ConvertFromString(value));
+            }
+        }
+
     }
 }
