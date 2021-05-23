@@ -19,6 +19,8 @@
     <None Remove="images\icones\ordreAlphabetiqueCroissant.png" />
     <None Remove="images\icones\ordreAlphabetiqueDecroissant.png" />
     <None Remove="images\icones\planete.png" />
+    <None Remove="images\icones\recherche.png" />
+    <None Remove="images\icones\tousLesAstres.png" />
     <None Remove="images\UI\popup.png" />
   </ItemGroup>
 
@@ -49,6 +51,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="images\icones\planete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\icones\recherche.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\icones\tousLesAstres.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -84,24 +84,30 @@ namespace Appli
         {
            Manager.SupprimerTout();
         }
-
+        
         private void FaireLaRecherche()
         {
             Manager.Filtrage(filtreFavoris, filtrePersonnalisation, filtreType, triOrdreAlphabetique, filtreNom);
         }
+
+        private void ClicSourisCanvas(object sender, MouseButtonEventArgs e)
+        {
+            var point = new Geometrie.Point((int)e.GetPosition(this).X, (int)e.GetPosition(this).Y);
+            Debug.WriteLine(point);
+        }
+
 
         private void BoutonTriAlphabetique(object sender, RoutedEventArgs e)
         {
             if (triOrdreAlphabetique)
             {
                 triOrdreAlphabetique = false;
-                Image1.Source = new BitmapImage(new Uri("/images/icones/ordreAlphabetiqueDecroissant.png", UriKind.Relative));
+                Bouton1.Source = new BitmapImage(new Uri("/images/icones/ordreAlphabetiqueCroissant.png", UriKind.Relative));
             }
             else
             {
                 triOrdreAlphabetique = true;
-                Image1.Source = new BitmapImage(new Uri("/images/icones/ordreAlphabetiqueCroissant.png", UriKind.Relative));
-
+                Bouton1.Source = new BitmapImage(new Uri("/images/icones/ordreAlphabetiqueDecroissant.png", UriKind.Relative));
             }
             FaireLaRecherche();
         }
@@ -111,12 +117,12 @@ namespace Appli
             if (filtreFavoris)
             {
                 filtreFavoris = false;
-                Image2.Source = new BitmapImage(new Uri("/images/icones/coeurVide.png", UriKind.Relative));
+                Bouton2.Source = new BitmapImage(new Uri("/images/icones/coeurVide.png", UriKind.Relative));
             }
             else
             {
                 filtreFavoris = true;
-                Image2.Source = new BitmapImage(new Uri("/images/icones/coeurPlein.png", UriKind.Relative));
+                Bouton2.Source = new BitmapImage(new Uri("/images/icones/coeurPlein.png", UriKind.Relative));
 
             }
             FaireLaRecherche();
@@ -127,17 +133,17 @@ namespace Appli
             if (filtrePersonnalisation == 1)
             {
                 filtrePersonnalisation = 3;
-                Image3.Source = new BitmapImage(new Uri("/images/icones/planete.png", UriKind.Relative));
+                Bouton3.Text = "Tous les astres";
             }
             else if (filtrePersonnalisation == 2)
             {
                 filtrePersonnalisation = 1;
-                Image3.Source = new BitmapImage(new Uri("/images/icones/coeurVide.png", UriKind.Relative));
+                Bouton3.Text = "Mes créations uniquement";
             }
             else
             {
                 filtrePersonnalisation = 2;
-                Image3.Source = new BitmapImage(new Uri("/images/icones/etoile.png", UriKind.Relative));
+                Bouton3.Text = "Astres existants uniquement";
             }
             FaireLaRecherche();
         }
@@ -147,17 +153,17 @@ namespace Appli
             if (filtreType == typeof(Etoile))
             {
                 filtreType = typeof(Planete);
-                Image4.Source = new BitmapImage(new Uri("/images/icones/planete.png", UriKind.Relative));
+                Bouton4.Source = new BitmapImage(new Uri("/images/icones/planete.png", UriKind.Relative));
             }
             else if (filtreType == typeof(Planete))
             {
                 filtreType = typeof(Astre);
-                Image4.Source = new BitmapImage(new Uri("/images/icones/coeurVide.png", UriKind.Relative));
+                Bouton4.Source = new BitmapImage(new Uri("/images/icones/tousLesAstres.png", UriKind.Relative));
             }
             else
             {
                 filtreType = typeof(Etoile);
-                Image4.Source = new BitmapImage(new Uri("/images/icones/etoile.png", UriKind.Relative));
+                Bouton4.Source = new BitmapImage(new Uri("/images/icones/etoile.png", UriKind.Relative));
             }
             FaireLaRecherche();
         }
