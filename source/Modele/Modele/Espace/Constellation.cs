@@ -24,12 +24,12 @@ namespace Espace
         /// <summary>
         /// Propriété en lecture seule concernant l'hashset de points, qui sont l'ensemble des points contenus dans une constellation.
         /// </summary>
-        public HashSet<Point> LesPoints { get; private set; } 
+        public HashSet<Point> LesPoints { get; private set; } = new HashSet<Point>();
 
         /// <summary>
         /// Propriété en lecture seule concernant l'hashset de segments, qui sont l'ensembles des liens qui relient les étoiles entres elles.
         /// </summary>
-        public HashSet<Segment> LesSegments { get; private set; }
+        public HashSet<Segment> LesSegments { get; private set; } = new HashSet<Segment>();
 
         /// <summary>
         /// Propriété à changer en méthode de vérification des collections vides.
@@ -47,8 +47,8 @@ namespace Espace
             lesPoints.Add(point2);
             lesSegments.Add(new Segment(point1, point2));
             Vide = false;
-            LesPoints = new HashSet<Point>(lesPoints);
-            LesSegments = new HashSet<Segment>(lesSegments);
+            LesPoints = lesPoints;
+            LesSegments = lesSegments;
         }
 
         /// <summary>
@@ -162,6 +162,7 @@ namespace Espace
         /// <returns>Retourne une nouvelle constellation.</returns>
         public Constellation DiviserConstellation()
         {
+            if (lesPoints.Count == 0) return null;
             //initialisation
             int i=0, tailleLogique = 0, TaillePhysique = lesPoints.Count; //gestion de la pile
             Point[] pilePt = new Point[TaillePhysique]; //pile
