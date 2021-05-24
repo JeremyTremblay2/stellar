@@ -67,7 +67,7 @@ namespace Modele
         /// <summary>
         /// Méthode permettant d'ajouter un astre à la carte (il peut s'agir d'une étoile ou d'une planète).
         /// Pour cela, si le point ou l'astre n'est pas null (on lève un exception le cas échéant), on vient l'ajouter au dictionnaire 
-        /// déjà existant.
+        /// déjà existant. Si c'est une planète, on vient lui fixer une couleur verte.
         /// </summary>
         /// <param name="position">Le Point de l'Astre qui va être positionné sur la carte.</param>
         /// <param name="astre">L'astre qui va être positionné sur la carte.</param>
@@ -79,6 +79,10 @@ namespace Modele
                     $"Voici le point : {position}, voici l'astre : {astre}");
             }
 
+            if (astre is Planete)
+            {
+                position.MettreCouleurVerte();
+            }
             lesAstres[position] = astre;
         }
         

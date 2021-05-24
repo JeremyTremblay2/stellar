@@ -57,11 +57,13 @@ namespace Espace
         /// </summary>
         /// <param name="points"></param>
         /// <param name="segments"></param>
-        public Constellation(IEnumerable<Point> points, IEnumerable<Segment> segments)
+        private Constellation(IEnumerable<Point> points, IEnumerable<Segment> segments)
         {
             lesPoints.UnionWith(points);
             lesSegments.UnionWith(segments);
             Vide = false;
+            LesPoints = lesPoints;
+            LesSegments = lesSegments;
         }
 
         /// <summary>

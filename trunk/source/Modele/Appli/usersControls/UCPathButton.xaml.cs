@@ -26,13 +26,13 @@ namespace Appli.usersControls
         }
         private void SpecEnter(object sender, MouseEventArgs e)
         {
-            PathButton.Fill = Brushes.Gray;
+            PathButton.Opacity = 0.6;
             Mouse.OverrideCursor = Cursors.Hand;
         }
 
         private void SpecLeave(object sender, MouseEventArgs e)
         {
-            PathButton.Fill = Brushes.AliceBlue;
+            PathButton.Opacity = 1;
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 

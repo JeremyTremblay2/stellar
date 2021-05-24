@@ -167,7 +167,7 @@ namespace Appli
         private void PointClique(object sender, MouseButtonEventArgs e)
         {
             var point = new Geometrie.Point((int)e.GetPosition(this).X, (int)e.GetPosition(this).Y);
-            Geometrie.Point pointSurCarte = RechercheEtoileCarte(point);
+            Geometrie.Point pointSurCarte = RecupererPointClique(point);
 
             //Debug.WriteLine($"Le point le plus proche de l'endroit cliqué est à {pointSurCarte}");
 
@@ -224,7 +224,7 @@ namespace Appli
             if (boutonsCarteActifs["deplacer"] && lesPointsCliques.Count == 1)
             {
                 var point = new Geometrie.Point((int)e.GetPosition(this).X, (int)e.GetPosition(this).Y);
-                if (!lesPointsCliques[0].Equals(point) && point.X > 15)
+                if (!lesPointsCliques[0].Equals(point) && !RecherchePointAProximite(point))
                 {
                     point.Deplacer(point.X - 15, point.Y);
                     Manager.DeplacerUnAstre(lesPointsCliques[0], point);
@@ -232,7 +232,19 @@ namespace Appli
             }
         }
 
-        private Geometrie.Point RechercheEtoileCarte(Geometrie.Point ptSelect)
+        private bool RecherchePointAProximite(Geometrie.Point ptSelect)
+        {
+            foreach (Geometrie.Point pt in Manager.Carte.LesAstres.Keys)
+            {
+                if (ptSelect.X + 350 - 25 >= pt.X && ptSelect.Y + 50 - 25 >= pt.Y && ptSelect.X <= pt.X + 350 + 25 && ptSelect.Y <= pt.Y + 50 + 25)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private Geometrie.Point RecupererPointClique(Geometrie.Point ptSelect)
         {
             foreach (Geometrie.Point pt in Manager.Carte.LesAstres.Keys)
             {
