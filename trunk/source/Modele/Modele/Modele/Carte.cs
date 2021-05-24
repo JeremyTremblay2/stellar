@@ -15,7 +15,7 @@ namespace Modele
     /// La carte est une entitée contenant tous les éléments disposés dessus. Cela peut être des astres, des constellations...
     /// Elle utilise un système de coordonnées.
     /// </summary>
-    public class Carte : IEquatable<Carte>, INotifyPropertyChanged
+    public class Carte : IEquatable<Carte>
     {
         //Générateur de constellations aléatoire à la création de la carte.
         private static Random generateurAleatoire = new Random();
@@ -24,11 +24,6 @@ namespace Modele
         private Dictionary<Point, Astre> lesAstres;
         //Les constellations présentes sur la carte (liste de données).
         private ObservableCollection<Constellation> lesConstellations;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        void OnPropertyChanged(string nomPropriete)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropriete));
 
         /// <summary>
         /// Propriété en lecture seule concernant le dictionnaire permettant de retrouver un Astre facilement présent sur la Carte, 
@@ -41,6 +36,8 @@ namespace Modele
         /// eux par des segments.
         /// </summary>
         public ReadOnlyObservableCollection<Constellation> LesConstellations { get; private set; }
+
+        public ConcurrentObservableDictionary<Point, Astre> LesAstresObservables { get; private set; }
 
         /// <summary>
         /// Constructeur de Carte. Une Carte est caractérisée par un dictionnaire d'Astres (étoiles et planètes), qui sont facilement accessibles
@@ -57,6 +54,8 @@ namespace Modele
 
             LesAstres = new ReadOnlyDictionary<Point, Astre>(lesAstres);
             LesConstellations = new ReadOnlyObservableCollection<Constellation>(lesConstellations);
+
+            LesAstresObservables = new ConcurrentObservableDictionary<Point, Astre>();
 
             if (avecCreations)
             {
@@ -84,6 +83,7 @@ namespace Modele
                 position.MettreCouleurVerte();
             }
             lesAstres[position] = astre;
+            LesAstresObservables[position] = astre;
         }
         
         /// <summary>
@@ -128,7 +128,9 @@ namespace Modele
             }
 
             lesAstres.Remove(anciennePosition);
+            LesAstresObservables.Remove(anciennePosition);
             lesAstres[nouvellePosition] = astreADeplacer;
+            LesAstresObservables[nouvellePosition] = astreADeplacer;
         }
 
         /// <summary>
@@ -181,9 +183,9 @@ namespace Modele
             else                
             {
                 lesAstres.Remove(position);
+                LesAstresObservables.Remove(position);
                 return astreARetourner;
             }
-                                
             return null;
         }
 
@@ -238,7 +240,11 @@ namespace Modele
             {
                 lesConstellations[lesConstellations.IndexOf(const2)].Relier(point2, point1);
             } 
-            else if (const1 != null && const2 != null && !const1.Equals(const2))
+            else if (const1.Equals(const2))
+            {
+                lesConstellations[lesConstellations.IndexOf(const1)].Relier(point1, point2);
+            }
+            else if (const1 != null && const2 != null)
             {
                 lesConstellations[lesConstellations.IndexOf(const1)].FusionnerAvec(const2, point1, point2);
                 lesConstellations.Remove(const2);
@@ -252,6 +258,7 @@ namespace Modele
         {
             lesAstres.Clear();
             lesConstellations.Clear();
+            LesAstresObservables.Clear();
         }
 
         /// <summary>

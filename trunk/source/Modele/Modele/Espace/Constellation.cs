@@ -24,12 +24,12 @@ namespace Espace
         /// <summary>
         /// Propriété en lecture seule concernant l'hashset de points, qui sont l'ensemble des points contenus dans une constellation.
         /// </summary>
-        public HashSet<Point> LesPoints { get; private set; } = new HashSet<Point>();
+        public ConcurrentObservableHashSet<Point> LesPoints { get; private set; } = new ConcurrentObservableHashSet<Point>();
 
         /// <summary>
         /// Propriété en lecture seule concernant l'hashset de segments, qui sont l'ensembles des liens qui relient les étoiles entres elles.
         /// </summary>
-        public HashSet<Segment> LesSegments { get; private set; } = new HashSet<Segment>();
+        public ConcurrentObservableHashSet<Segment> LesSegments { get; private set; } = new ConcurrentObservableHashSet<Segment>();
 
         /// <summary>
         /// Propriété à changer en méthode de vérification des collections vides.
@@ -43,12 +43,23 @@ namespace Espace
         /// <param name="point2">Seconde point de la constellation.</param>
         public Constellation(Point point1, Point point2)
         {
+            if (point1 == null || point2 == null)
+            {
+                throw new ArgumentException($"Un des point fournit lors de la création de la constellation est null." +
+                    $"Le premier point : {point1}, le second : {point2}");
+            }
+
+            Segment s = new Segment(point1, point2);
+
             lesPoints.Add(point1);
             lesPoints.Add(point2);
-            lesSegments.Add(new Segment(point1, point2));
+            lesSegments.Add(s);
+            
+            LesPoints.Add(point1);
+            LesPoints.Add(point1);
+            LesSegments.Add(s);
+
             Vide = false;
-            LesPoints = lesPoints;
-            LesSegments = lesSegments;
         }
 
         /// <summary>
@@ -59,11 +70,19 @@ namespace Espace
         /// <param name="segments"></param>
         private Constellation(IEnumerable<Point> points, IEnumerable<Segment> segments)
         {
+            if (points.Contains(null) || segments.Contains(null))
+            {
+                throw new ArgumentException($"Un des point ou segment fournit lors de la création de la constellation est null." +
+                    $"Les points : {points}, les segments : {segments}");
+            }
+
             lesPoints.UnionWith(points);
             lesSegments.UnionWith(segments);
+
+            LesPoints.Union(points);
+            LesSegments.Union(segments);
+
             Vide = false;
-            LesPoints = lesPoints;
-            LesSegments = lesSegments;
         }
 
         /// <summary>
@@ -77,10 +96,14 @@ namespace Espace
             if (!lesPoints.Contains(point))
             {
                 throw new ArgumentException($"Le point donné en paramètre ne se trouve ps dans la constellation : {point}.");
-            } 
+            }
 
+            Segment seg = new Segment(point, nouveauPoint);
             lesPoints.Add(nouveauPoint);
-            lesSegments.Add(new Segment(point, nouveauPoint)); 
+            lesSegments.Add(seg);
+
+            LesPoints.Add(nouveauPoint);
+            LesSegments.Add(seg);
         }
 
         /// <summary>
@@ -99,6 +122,14 @@ namespace Espace
             //On récupère tous les segments qui contenaient ce point, puis on les supprime du HashSet.
             IEnumerable<Segment> tempo = lesSegments.Where(n => n.PtEquals(point));
             lesSegments.ExceptWith(tempo);
+
+            foreach (Segment seg in tempo)
+            {
+                if (LesSegments.Contains(seg))
+                {
+                    LesSegments.Remove(seg);
+                }
+            }
 
             //Appel d'une méthode permettant de retirer de la constellation les étoiles seules (pas reliées).
             SuppressionPoints();
@@ -151,9 +182,21 @@ namespace Espace
             lesSegments.ExceptWith(tempo);
             lesSegments.UnionWith(addSeg);
 
+            foreach (Segment seg in tempo)
+            {
+                if (LesSegments.Contains(seg))
+                {
+                    LesSegments.Remove(seg);
+                }
+            }
+            LesSegments.AddRange(addSeg);
+
             //On supprime l'ancien point et on ajoute le nouveau.
             lesPoints.Remove(ancienPoint);
             lesPoints.Add(nouveauPoint);
+
+            LesPoints.Remove(ancienPoint);
+            LesPoints.Remove(nouveauPoint);
         }
 
         /// <summary>
@@ -211,6 +254,8 @@ namespace Espace
             //resultat
             if (visite.Count < lesPoints.Count)
             {
+                bool passage;
+
                 HashSet<Point> lesPt = new HashSet<Point>();
                 HashSet<Segment> lesSeg = new HashSet<Segment>();
                 lesPt.UnionWith(lesPoints);
@@ -220,7 +265,8 @@ namespace Espace
                 lesPt.ExceptWith(visite);
                 lesSeg.ExceptWith(segmentsConstel);
                 return new Constellation(lesPt, lesSeg);
-            } else
+            } 
+            else
             {
                 return null;
             }
@@ -235,9 +281,15 @@ namespace Espace
         /// <param name="pt2">Second point de liaison entre les deux constellations.</param>
         public void FusionnerAvec(Constellation constel, Point point1, Point point2)
         {
+            Segment seg = new Segment(point1, point2);
+
             lesPoints.UnionWith(constel.lesPoints);
             lesSegments.UnionWith(constel.lesSegments);
-            lesSegments.Add(new Segment(point1, point2));
+            lesSegments.Add(seg);
+
+            LesPoints.AddRange(constel.lesPoints);
+            LesSegments.AddRange(constel.lesSegments);
+            LesSegments.Add(seg);
         }
 
         /// <summary>
@@ -348,6 +400,14 @@ namespace Espace
             }
             //On efface les points isolés que l'on a dans notre collection.
             lesPoints.ExceptWith(pointsASupprimer);
+
+            foreach (Point point in pointsASupprimer)
+            {
+                if (LesPoints.Contains(point))
+                {
+                    LesPoints.Remove(point);
+                }
+            }
         }
     }
 }
