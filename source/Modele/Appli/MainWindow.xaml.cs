@@ -188,12 +188,23 @@ namespace Appli
                         {
                             lesPointsCliques.Add(pointSurCarte);
                         }
+                        else
+                        {
+                            messageErreur.Text = "Seules des étoiles peuvent être reliées entre elles.";
+                        }
                     }
 
-                    else if (!lesPointsCliques[0].Equals(pointSurCarte) && Manager.Carte.LesAstres[pointSurCarte] is Etoile)
+                    else if (!lesPointsCliques[0].Equals(pointSurCarte))
                     {
-                        Manager.RelierDeuxEtoiles(lesPointsCliques[0], pointSurCarte);
-                        lesPointsCliques.Clear();
+                        if (Manager.Carte.LesAstres[pointSurCarte] is Etoile)
+                        {
+                            Manager.RelierDeuxEtoiles(lesPointsCliques[0], pointSurCarte);
+                            lesPointsCliques.Clear();
+                        }
+                        else
+                        {
+                            messageErreur.Text = "Seules des étoiles peuvent être reliées entre elles.";
+                        }
                     }
                 }
                 else if (boutonsCarteActifs["deplacer"])
@@ -221,6 +232,8 @@ namespace Appli
 
         private void CanevaClic(object sender, MouseButtonEventArgs e)
         {
+            messageErreur.Text = "";
+
             if (boutonsCarteActifs["deplacer"] && lesPointsCliques.Count == 1)
             {
                 var point = new Geometrie.Point((int)e.GetPosition(this).X, (int)e.GetPosition(this).Y);
