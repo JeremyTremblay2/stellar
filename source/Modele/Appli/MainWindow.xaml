@@ -15,7 +15,7 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type espace:Etoile}">
-            <Grid Background="Transparent" MouseLeftButtonDown="popupClicMenu">
+            <Grid Background="Transparent" MouseLeftButtonDown="PopupClicMenu">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -56,13 +56,13 @@
                     <Setter TargetName="favori" Property="Fill" Value="Red"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Personnalise}" Value="true">
-                    <Setter TargetName="personnalise" Property="Text" Value=" (Personnalisé)"/>
+                    <Setter TargetName="personnalise" Property="Text" Value="(Personnalisé)"/>
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type espace:Planete}">
-            <Grid Background="Transparent" MouseLeftButtonDown="popupClicMenu">
+            <Grid Background="Transparent" MouseLeftButtonDown="PopupClicMenu">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -103,7 +103,7 @@
                     <Setter TargetName="favori" Property="Fill" Value="Red"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Personnalise}" Value="true">
-                    <Setter TargetName="personnalise" Property="Text" Value=" (Personnalisé)"/>
+                    <Setter TargetName="personnalise" Property="Text" Value="(Personnalisé)"/>
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
@@ -144,9 +144,9 @@
 
                         <Path Fill="AliceBlue" Height="15" Width="15" Stretch="Fill" Margin="20 0 0 0"
                                 Data="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23
-	                        s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92
-	                        c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
-	                        s-17-7.626-17-17S14.61,6,23.984,6z" />
+                            s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92
+                            c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
+                            s-17-7.626-17-17S14.61,6,23.984,6z" />
                         <TextBox Grid.Column="1" x:Name="BarreRecherche" TextChanged="barreRecherche"
                                  Template="{StaticResource TextBoxRecherche}" Margin="20 0 0 0"/>
                     </Grid>
@@ -176,7 +176,7 @@
                 </Button>
             </Grid>
         </Grid>
-        
+
         <ListBox ItemsSource="{Binding LesAstresTries}" SelectedValue="{Binding AstreSelectionne, Mode=TwoWay}" 
             Background="#181818" Margin="0,90,0,0" BorderThickness="0 2 0 0" BorderBrush="AliceBlue">
             <ListBox.ItemContainerStyle>
@@ -186,44 +186,106 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-            <Image Source="images/fonds/fondCarte1.jpg" Grid.Column="1" Stretch="UniformToFill"/>
-        <ItemsControl ItemsSource="{Binding Carte.LesAstres}" Grid.Column="1">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Canvas MouseLeftButtonDown="ClicSourisCanvas" Background="Transparent" Grid.Column="1"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemContainerStyle>
-                <Style>
-                    <Setter Property="Canvas.Left" Value="{Binding Key.X}"/>
-                    <Setter Property="Canvas.Top" Value="{Binding Key.Y}"/>
-                </Style>
-            </ItemsControl.ItemContainerStyle>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-					<Ellipse Stroke="Black" Fill="Yellow" Height="15" Width="15" Panel.ZIndex="50" 
-                             MouseLeftButtonDown="PointClique" MouseEnter="SurvolBouton" MouseLeave="FinSurvolBouton"/>                
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <Image Source="images/fonds/fondCarte2.jpg" Grid.Column="1" Stretch="UniformToFill"/>
 
-        <usersControls:UCPathButton Grid.Column="1" 
-                                    VerticalAlignment="Top" 
-                                    HorizontalAlignment="Right" 
-                                    Width="30" 
-                                    Height="25" 
-                                    Margin="0 10 10 0" 
-                                    MouseLeftButtonDown="SpecClic" 
-                                    x:Name="SpecBouton"/>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
 
-        <usersControls:UCPathButton Background="Transparent" 
-                                    Grid.Column="1" VerticalAlignment="Bottom" 
+            <Grid VerticalAlignment="Top">
+                <WrapPanel HorizontalAlignment="Right">
+                    <usersControls:UCPathButton  Width="30" Height="25" Margin="10 10 10 0" 
+                                    MouseLeftButtonDown="DeplacerClic" x:Name="deplacer"
+                                    Path="m424 64h-88v-16c0-26.467-21.533-48-48-48h-64c-26.467 0-48 21.533-48 48v16h-88c-22.056 0-40 17.944-40 40v56c0 8.836 7.164 16 16 16h8.744l13.823 290.283c1.221 25.636 22.281 45.717 47.945 45.717h242.976c25.665 0 46.725-20.081 47.945-45.717l13.823-290.283h8.744c8.836 0 16-7.164 16-16v-56c0-22.056-17.944-40-40-40zm-216-16c0-8.822 7.178-16 16-16h64c8.822 0 16 7.178 16 16v16h-96zm-128 56c0-4.411 3.589-8 8-8h336c4.411 0 8 3.589 8 8v40c-4.931 0-331.567 0-352 0zm313.469 360.761c-.407 8.545-7.427 15.239-15.981 15.239h-242.976c-8.555 0-15.575-6.694-15.981-15.239l-13.751-288.761h302.44z"/>
+
+                    <usersControls:UCPathButton Width="30" Height="25" Margin="10 10 10 0" 
+                                    MouseLeftButtonDown="EffacerClic" x:Name="effacer"
+                                    Path="m424 64h-88v-16c0-26.467-21.533-48-48-48h-64c-26.467 0-48 21.533-48 48v16h-88c-22.056 0-40 17.944-40 40v56c0 8.836 7.164 16 16 16h8.744l13.823 290.283c1.221 25.636 22.281 45.717 47.945 45.717h242.976c25.665 0 46.725-20.081 47.945-45.717l13.823-290.283h8.744c8.836 0 16-7.164 16-16v-56c0-22.056-17.944-40-40-40zm-216-16c0-8.822 7.178-16 16-16h64c8.822 0 16 7.178 16 16v16h-96zm-128 56c0-4.411 3.589-8 8-8h336c4.411 0 8 3.589 8 8v40c-4.931 0-331.567 0-352 0zm313.469 360.761c-.407 8.545-7.427 15.239-15.981 15.239h-242.976c-8.555 0-15.575-6.694-15.981-15.239l-13.751-288.761h302.44z"/>
+
+                    <usersControls:UCPathButton Width="30" Height="25" Margin="10 10 10 0" 
+                                    MouseLeftButtonDown="RelierClic" x:Name="relier"
+                                    Path="m424 64h-88v-16c0-26.467-21.533-48-48-48h-64c-26.467 0-48 21.533-48 48v16h-88c-22.056 0-40 17.944-40 40v56c0 8.836 7.164 16 16 16h8.744l13.823 290.283c1.221 25.636 22.281 45.717 47.945 45.717h242.976c25.665 0 46.725-20.081 47.945-45.717l13.823-290.283h8.744c8.836 0 16-7.164 16-16v-56c0-22.056-17.944-40-40-40zm-216-16c0-8.822 7.178-16 16-16h64c8.822 0 16 7.178 16 16v16h-96zm-128 56c0-4.411 3.589-8 8-8h336c4.411 0 8 3.589 8 8v40c-4.931 0-331.567 0-352 0zm313.469 360.761c-.407 8.545-7.427 15.239-15.981 15.239h-242.976c-8.555 0-15.575-6.694-15.981-15.239l-13.751-288.761h302.44z"/>
+
+                    <usersControls:UCPathButton Width="30" Height="25" Margin="10 10 10 0" 
+                                    MouseLeftButtonDown="PlaneteClic" x:Name="ajouterPlanete"
+                                    Path="m424 64h-88v-16c0-26.467-21.533-48-48-48h-64c-26.467 0-48 21.533-48 48v16h-88c-22.056 0-40 17.944-40 40v56c0 8.836 7.164 16 16 16h8.744l13.823 290.283c1.221 25.636 22.281 45.717 47.945 45.717h242.976c25.665 0 46.725-20.081 47.945-45.717l13.823-290.283h8.744c8.836 0 16-7.164 16-16v-56c0-22.056-17.944-40-40-40zm-216-16c0-8.822 7.178-16 16-16h64c8.822 0 16 7.178 16 16v16h-96zm-128 56c0-4.411 3.589-8 8-8h336c4.411 0 8 3.589 8 8v40c-4.931 0-331.567 0-352 0zm313.469 360.761c-.407 8.545-7.427 15.239-15.981 15.239h-242.976c-8.555 0-15.575-6.694-15.981-15.239l-13.751-288.761h302.44z"/>
+
+                    <usersControls:UCPathButton Width="30" Height="25" Margin="10 10 10 0"  
+                                    MouseLeftButtonDown="EtoileClic" x:Name="ajouterEtoile"
+                                    Path="m424 64h-88v-16c0-26.467-21.533-48-48-48h-64c-26.467 0-48 21.533-48 48v16h-88c-22.056 0-40 17.944-40 40v56c0 8.836 7.164 16 16 16h8.744l13.823 290.283c1.221 25.636 22.281 45.717 47.945 45.717h242.976c25.665 0 46.725-20.081 47.945-45.717l13.823-290.283h8.744c8.836 0 16-7.164 16-16v-56c0-22.056-17.944-40-40-40zm-216-16c0-8.822 7.178-16 16-16h64c8.822 0 16 7.178 16 16v16h-96zm-128 56c0-4.411 3.589-8 8-8h336c4.411 0 8 3.589 8 8v40c-4.931 0-331.567 0-352 0zm313.469 360.761c-.407 8.545-7.427 15.239-15.981 15.239h-242.976c-8.555 0-15.575-6.694-15.981-15.239l-13.751-288.761h302.44z"/>
+
+                    <usersControls:UCPathButton  Width="30" Height="25" Margin="10 10 10 0"  
+                                    MouseLeftButtonDown="SpectateurClic" x:Name="modeSpectateur"
+                                    Path="m424 64h-88v-16c0-26.467-21.533-48-48-48h-64c-26.467 0-48 21.533-48 48v16h-88c-22.056 0-40 17.944-40 40v56c0 8.836 7.164 16 16 16h8.744l13.823 290.283c1.221 25.636 22.281 45.717 47.945 45.717h242.976c25.665 0 46.725-20.081 47.945-45.717l13.823-290.283h8.744c8.836 0 16-7.164 16-16v-56c0-22.056-17.944-40-40-40zm-216-16c0-8.822 7.178-16 16-16h64c8.822 0 16 7.178 16 16v16h-96zm-128 56c0-4.411 3.589-8 8-8h336c4.411 0 8 3.589 8 8v40c-4.931 0-331.567 0-352 0zm313.469 360.761c-.407 8.545-7.427 15.239-15.981 15.239h-242.976c-8.555 0-15.575-6.694-15.981-15.239l-13.751-288.761h302.44z"/>
+                </WrapPanel>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <ItemsControl ItemsSource="{Binding Path=Carte.LesConstellations}" Grid.Column="1">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type espace:Constellation}">
+                            <ItemsControl ItemsSource="{Binding Path=LesSegments}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <Canvas/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Line Stroke="Yellow" StrokeThickness="2"
+                                      X1="{Binding Path=Point1.X, Converter={StaticResource convertisseurDeValeurs}, ConverterParameter=8}" 
+                                      Y1="{Binding Path=Point1.Y, Converter={StaticResource convertisseurDeValeurs}, ConverterParameter=8}" 
+                                      X2="{Binding Path=Point2.X, Converter={StaticResource convertisseurDeValeurs}, ConverterParameter=8}" 
+                                      Y2="{Binding Path=Point2.Y, Converter={StaticResource convertisseurDeValeurs}, ConverterParameter=8}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <ItemsControl ItemsSource="{Binding Carte.LesAstres}" Grid.Column="1">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas Background="Transparent" MouseLeftButtonDown="CanevaClic"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style>
+                            <Setter Property="Canvas.Left" Value="{Binding Key.X}"/>
+                            <Setter Property="Canvas.Top" Value="{Binding Key.Y}"/>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Ellipse Stroke="Black" Fill="{Binding Key.Couleur}" Height="15" Width="15" Panel.ZIndex="2" 
+                             MouseLeftButtonDown="PointClique" MouseEnter="SurvolBouton" MouseLeave="FinSurvolBouton"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <usersControls:UCPathButton Background="Transparent" 
+                                    VerticalAlignment="Bottom" 
                                     HorizontalAlignment="Right" 
                                     Width="25" Height="40" 
                                     Margin="0 0 10 10" 
                                     MouseLeftButtonDown="PoubelleClic" 
-                                    x:Name="Poubelle"
+                                    x:Name="poubelle"
                                     Path="m424 64h-88v-16c0-26.467-21.533-48-48-48h-64c-26.467 0-48 21.533-48 48v16h-88c-22.056 0-40 17.944-40 40v56c0 8.836 7.164 16 16 16h8.744l13.823 290.283c1.221 25.636 22.281 45.717 47.945 45.717h242.976c25.665 0 46.725-20.081 47.945-45.717l13.823-290.283h8.744c8.836 0 16-7.164 16-16v-56c0-22.056-17.944-40-40-40zm-216-16c0-8.822 7.178-16 16-16h64c8.822 0 16 7.178 16 16v16h-96zm-128 56c0-4.411 3.589-8 8-8h336c4.411 0 8 3.589 8 8v40c-4.931 0-331.567 0-352 0zm313.469 360.761c-.407 8.545-7.427 15.239-15.981 15.239h-242.976c-8.555 0-15.575-6.694-15.981-15.239l-13.751-288.761h302.44z"/>
+            </Grid>
+        </Grid>
 
         
         <ContentControl  Grid.Column="1" x:Name="Popup" Content="{Binding AstreSelectionne}">
@@ -234,7 +296,7 @@
                                            DescriptionAstre="{Binding Description}"
                                            AgeAstre="{Binding Age}"
                                            MasseAstre="{Binding Masse}"
-                                           TemperatureAstre="{Binding Temperature}"/>
+                                           TemperatureAstre="{Binding Temperature}" x:Name="test"/>
                 </DataTemplate>
             </ContentControl.ContentTemplate>
         </ContentControl>
