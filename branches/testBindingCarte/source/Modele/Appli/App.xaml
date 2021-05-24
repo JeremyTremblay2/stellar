@@ -6,10 +6,10 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <conv:ConvertisseurDeTexteEnImage x:Key="convertisseurDeTexteEnImage"/>
+        <conv:ConvertisseurDeValeurs x:Key="convertisseurDeValeurs"/>
 
         <SolidColorBrush Color="AliceBlue" x:Key="couleurBouton" />
         <SolidColorBrush Color="Gray" x:Key="couleurBoutonPresse" />
-
         <FontFamily x:Key="policeParDefaut">Comic Sans MS</FontFamily>
         
 
@@ -17,7 +17,7 @@
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontFamily" Value="{StaticResource policeParDefaut}"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Margin" Value="5, 5, 0, 5"/>
         </Style>
@@ -25,7 +25,7 @@
         <Style TargetType="TextBlock" x:Key="texteInfosAstre">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontFamily" Value="{StaticResource policeParDefaut}"/>
             <Setter Property="FontSize" Value="10"/>
             <Setter Property="Foreground" Value="Gray"/>
             <Setter Property="Margin" Value="7, 0, 0, 3"/>
@@ -34,13 +34,13 @@
         <Style TargetType="TextBlock" x:Key="texteInfosPopup">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Foreground" Value="#d5e5fc"/>
-            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontFamily" Value="{StaticResource policeParDefaut}"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Margin" Value="50, 0, 0, 0"/>
         </Style>
 
         <Style TargetType="Path" x:Key="PathPopup">
-            <Setter Property="Fill" Value="AliceBlue"/>
+            <Setter Property="Fill" Value="{StaticResource couleurBouton}"/>
             <Setter Property="Stretch" Value="Fill"/>
         </Style>
 
@@ -49,7 +49,7 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontFamily" Value="{StaticResource policeParDefaut}"/>
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -73,15 +73,15 @@
 
         <Style TargetType="TextBox">
             <Setter Property="BorderBrush" Value="Black" />
-            <Setter Property="Background" Value="AliceBlue"/>
+            <Setter Property="Background" Value="{StaticResource couleurBouton}"/>
             <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontFamily" Value="{StaticResource policeParDefaut}"/>
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Style.Triggers>
                 <Trigger Property="IsFocused" Value="True">
-                    <Setter Property="Background" Value="LightGray"/>
-                    <Setter Property="Foreground" Value="DarkCyan"/>
+                    <Setter Property="Background" Value="{StaticResource couleurBoutonPresse}"/>
+                    <Setter Property="Foreground" Value="Orange"/>
                 </Trigger>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Cursor" Value="Hand" />

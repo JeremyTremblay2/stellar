@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:Appli.usersControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Transparent" MouseEnter="SpecEnter" MouseLeave="SpecLeave" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0">
+    <Grid Background="Transparent" MouseEnter="SpecEnter" MouseLeave="SpecLeave" VerticalAlignment="Center" 
+          HorizontalAlignment="Center" Margin="0,0,0,0">
         <Path Style="{StaticResource PathPopup}" x:Name="PathButton"
               Grid.Column="1" Margin="-6,-2,-6,-2" Stretch="Fill">
         </Path>

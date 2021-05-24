@@ -128,7 +128,7 @@ namespace Modele
         public void SupprimerUnAstre(Point position)
         {
             Astre astreASupprimer = Carte.SupprimerUnAstre(position);
-            if (astreASupprimer != null && !astreASupprimer.Personnalise)
+            if (astreASupprimer != null && astreASupprimer.Personnalise)
             {
                 lesAstres.Remove(astreASupprimer);
                 lesAstresTries.Remove(astreASupprimer);
@@ -269,7 +269,7 @@ namespace Modele
                                       .AvecImage("soleil.jpg")
                                       .Construire()); ;
 
-            AjouterUnAstre(new Point(130, 89), new FabriqueDEtoile().Initialiser("Bételgeuse")
+            AjouterUnAstre(new Point(130, 104), new FabriqueDEtoile().Initialiser("Bételgeuse")
                                       .AvecDescription("Bételgeuse (α Orionis) est une étoile variable semi-régulière de type supergéante " +
                                       "rouge, dans la constellation d’Orion, située à une distance très difficile à établir.")
                                       .AvecAge(8000000)
@@ -303,7 +303,7 @@ namespace Modele
                                       .AvecImage("pollux.jpg")
                                       .Construire());
 
-            AjouterUnAstre(new FabriqueDePlanete().Initialiser("Mars", true)
+            AjouterUnAstre(new Point(400, 400), new FabriqueDePlanete().Initialiser("Mars", true)
                                        .AvecDescription("Mars est la quatrième planète par ordre croissant de la distance au Soleil " +
                                        "et la deuxième par ordre croissant de la taille et de la masse.")
                                        .AvecAge(4500000000)
@@ -433,8 +433,9 @@ namespace Modele
                     lesAstres[i].ModifierFavori();
             }
 
-            Carte.RelierDeuxEtoiles(new Point(130, 89), new Point(180, 89));
-            Carte.RelierDeuxEtoiles(new Point(130, 89), new Point(250, 89));
+            Carte.RelierDeuxEtoiles(new Point(130, 104), new Point(180, 89));
+            Carte.RelierDeuxEtoiles(new Point(130, 104), new Point(250, 89));
+            Carte.RelierDeuxEtoiles(new Point(180, 89), new Point(250, 89));
             Carte.RelierDeuxEtoiles(new Point(90, 120), new Point(10, 10));
 
         }

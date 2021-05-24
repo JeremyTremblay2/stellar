@@ -19,18 +19,28 @@ namespace Geometrie
         public int Y { get; private set; }
 
         /// <summary>
-        /// Constructeur de Point, permet d'initialiser un point aux coordonnées 0,0.
+        /// Propriété concernant la couleur d'un point, sous forme de chaîne de caractères, en anglais.
         /// </summary>
-        public Point() => Deplacer(0, 0);
+        public string Couleur { get; private set; }
 
         /// <summary>
-        /// Constructeur de Point, permet d'initialiser un point avec des coordonnées.
+        /// Constructeur de Point, permet d'initialiser un point aux coordonnées 0,0. La couleur par défaut est jaune.
+        /// </summary>
+        public Point()
+        {
+            Deplacer(0, 0);
+            Couleur = "Yellow";
+        }
+
+        /// <summary>
+        /// Constructeur de Point, permet d'initialiser un point avec des coordonnées. La couleur par défaut est jaune.
         /// </summary>
         /// <param name="x">Coordonnées en abscisses.</param>
         /// <param name="y">Coordonnées en ordonnées.</param>
         public Point(int x, int y)
         {
             Deplacer(x, y);
+            Couleur = "Yellow";
         }
 
         /// <summary>
@@ -43,6 +53,16 @@ namespace Geometrie
             X = x;
             Y = y;
         }
+
+        /// <summary>
+        /// Méthode permettant de mettre un point à la couleur verte.
+        /// </summary>
+        public void MettreCouleurVerte()
+        {
+            Couleur = "Green";
+        }
+
+
         /// <summary>
         /// Permet d'afficher un point sous forme d'une paire de coordonées (x; y).
         /// </summary>
