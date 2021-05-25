@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using Swordfish.NET.Collections;
+using System.ComponentModel;
 
 namespace Espace
 {
@@ -15,11 +16,16 @@ namespace Espace
     /// Une constellation est un ensemble de points reliés par des segments, le tout forme un graphe connexe (les étoiles et les 
     /// liens entre elles).
     /// </summary>
-    public class Constellation : IEquatable<Constellation>
+    public class Constellation : IEquatable<Constellation>, INotifyPropertyChanged
     {
         //Les hashsets de points et segments permettent de ne pas avoir de coordonnées en double.
         private HashSet<Point> lesPoints = new HashSet<Point>();
         private HashSet<Segment> lesSegments = new HashSet<Segment>();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        void OnPropertyChanged(string nomPropriete)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropriete));
 
         /// <summary>
         /// Propriété en lecture seule concernant l'hashset de points, qui sont l'ensemble des points contenus dans une constellation.
@@ -56,7 +62,7 @@ namespace Espace
             lesSegments.Add(s);
             
             LesPoints.Add(point1);
-            LesPoints.Add(point1);
+            LesPoints.Add(point2);
             LesSegments.Add(s);
 
             Vide = false;
@@ -178,10 +184,8 @@ namespace Espace
                     addSeg.Add(new Segment(seg.Point1, nouveauPoint));
                 }
             }
-            //On supprime les anciens segments, et on ajoute les nouveaux.
-            lesSegments.ExceptWith(tempo);
-            lesSegments.UnionWith(addSeg);
 
+            //On supprime les anciens segments, et on ajoute les nouveaux.
             foreach (Segment seg in tempo)
             {
                 if (LesSegments.Contains(seg))
@@ -191,12 +195,38 @@ namespace Espace
             }
             LesSegments.AddRange(addSeg);
 
+            lesSegments.ExceptWith(tempo);
+            lesSegments.UnionWith(addSeg);
+
             //On supprime l'ancien point et on ajoute le nouveau.
             lesPoints.Remove(ancienPoint);
             lesPoints.Add(nouveauPoint);
 
             LesPoints.Remove(ancienPoint);
-            LesPoints.Remove(nouveauPoint);
+            LesPoints.Add(nouveauPoint);
+
+            Debug.WriteLine("Affichage des segments de la collection observable :");
+            foreach(Segment seg in LesSegments)
+            {
+                Debug.WriteLine(seg);
+            }
+            Debug.WriteLine("Affichage des segments de la collection privée :");
+            foreach (Segment seg in lesSegments)
+            {
+                Debug.WriteLine(seg);
+            }
+            Debug.WriteLine("Affichage des points de la collection observable :");
+            foreach (Point pt in LesPoints)
+            {
+                Debug.WriteLine(pt);
+            }
+            Debug.WriteLine("Affichage des points de la collection privée :");
+            foreach (Point pt in lesPoints)
+            {
+                Debug.WriteLine(pt);
+            }
+
+            OnPropertyChanged(nameof(LesSegments));
         }
 
         /// <summary>

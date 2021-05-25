@@ -127,6 +127,11 @@ namespace Modele
                 }
             }
 
+            if (astreADeplacer is Planete)
+            {
+                nouvellePosition.MettreCouleurVerte();
+            }
+
             lesAstres.Remove(anciennePosition);
             LesAstresObservables.Remove(anciennePosition);
             lesAstres[nouvellePosition] = astreADeplacer;
