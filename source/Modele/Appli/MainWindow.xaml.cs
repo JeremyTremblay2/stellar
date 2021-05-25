@@ -40,7 +40,9 @@ namespace Appli
             ["effacer"] = false,
             ["deplacer"] = false,
         };
-        private List<Geometrie.Point> lesPointsCliques = new List<Geometrie.Point>();
+        private Geometrie.Point pointClique;
+
+        public string TexteMessageErreurCarte { get; private set; }
 
 
         public Manager Manager => (Application.Current as App).LeManager;
@@ -76,7 +78,7 @@ namespace Appli
         private void EffacerDonneesCliquees()
         {
             boutonsCarteActifs = boutonsCarteActifs.ToDictionary(p => p.Key, p => false);
-            lesPointsCliques.Clear();
+            pointClique = null;
             ajouterEtoile.Fill = "AliceBlue";
             ajouterPlanete.Fill = "AliceBlue";
             effacer.Fill = "AliceBlue";
@@ -182,36 +184,41 @@ namespace Appli
 
                 else if (boutonsCarteActifs["relier"])
                 {
-                    if (lesPointsCliques.Count == 0)
+                    if (pointClique == null)
                     {
                         if (Manager.Carte.LesAstres[pointSurCarte] is Etoile)
                         {
-                            lesPointsCliques.Add(pointSurCarte);
+                            pointClique = pointSurCarte;
                         }
                         else
                         {
-                            messageErreur.Text = "Seules des étoiles peuvent être reliées entre elles.";
+                            TexteMessageErreurCarte = "dsjfkdh";
                         }
                     }
 
-                    else if (!lesPointsCliques[0].Equals(pointSurCarte))
+                    else if (!pointClique.Equals(pointSurCarte))
                     {
                         if (Manager.Carte.LesAstres[pointSurCarte] is Etoile)
                         {
-                            Manager.RelierDeuxEtoiles(lesPointsCliques[0], pointSurCarte);
-                            lesPointsCliques.Clear();
+                            Manager.RelierDeuxEtoiles(pointClique, pointSurCarte);
+                            pointClique = null;
                         }
                         else
                         {
-                            messageErreur.Text = "Seules des étoiles peuvent être reliées entre elles.";
+                            TexteMessageErreurCarte = "dsjfkdh";
                         }
                     }
                 }
                 else if (boutonsCarteActifs["deplacer"])
                 {
-                    if (lesPointsCliques.Count == 0)
+                    if (pointClique == null)
                     {
-                        lesPointsCliques.Add(pointSurCarte);
+                        pointClique = pointSurCarte;
+                    }
+                    else
+                    {
+                        pointClique = null;
+                        pointClique = pointSurCarte;
                     }
                 }
                 else
@@ -225,15 +232,17 @@ namespace Appli
 
         private void CanevaClic(object sender, MouseButtonEventArgs e)
         {
-            messageErreur.Text = "";
+            TexteMessageErreurCarte = "qef";
 
-            if (boutonsCarteActifs["deplacer"] && lesPointsCliques.Count == 1)
+            if (boutonsCarteActifs["deplacer"] && pointClique != null)
             {
                 var point = new Geometrie.Point((int)e.GetPosition(this).X, (int)e.GetPosition(this).Y);
-                if (!lesPointsCliques[0].Equals(point) && !RecherchePointAProximite(point))
+                if (!RecherchePointAProximite(point) && !point.Equals(pointClique))
                 {
-                    point.Deplacer(point.X - 15, point.Y);
-                    Manager.DeplacerUnAstre(lesPointsCliques[0], point);
+                    Debug.WriteLine(point);
+                    point.Deplacer(point.X - 15 - 350, point.Y - 50);
+                    Manager.DeplacerUnAstre(pointClique, point);
+                    pointClique = null;
                 }
             }
         }
@@ -242,11 +251,13 @@ namespace Appli
         {
             foreach (Geometrie.Point pt in Manager.Carte.LesAstres.Keys)
             {
-                if (ptSelect.X + 350 - 25 >= pt.X && ptSelect.Y + 50 - 25 >= pt.Y && ptSelect.X <= pt.X + 350 + 25 && ptSelect.Y <= pt.Y + 50 + 25)
+                if (ptSelect.X - 350 + 15 >= pt.X && ptSelect.Y - 50 + 25 >= pt.Y && ptSelect.X - 350 <= pt.X + 40 && ptSelect.Y - 50 <= pt.Y + 25)
                 {
+                    Debug.WriteLine("ko");
                     return true;
                 }
             }
+            Debug.WriteLine("ok");
             return false;
         }
 
@@ -254,7 +265,7 @@ namespace Appli
         {
             foreach (Geometrie.Point pt in Manager.Carte.LesAstres.Keys)
             {
-                if (ptSelect.X + 350 >= pt.X && ptSelect.Y + 50 >= pt.Y && ptSelect.X <= pt.X + 350 + 15 && ptSelect.Y <= pt.Y + 50 + 15)
+                if (ptSelect.X - 350 >= pt.X && ptSelect.Y - 50 >= pt.Y && ptSelect.X - 350 <= pt.X + 15 && ptSelect.Y - 50 <= pt.Y + 15)
                 {
                     return pt;
                 }
