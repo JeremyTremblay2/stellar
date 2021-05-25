@@ -253,7 +253,7 @@ namespace Espace
             while(pilePt[i] != null)
             {
                 
-                IEnumerable<Segment> tempoSeg = lesSegments.Where(n => n.PtEquals(pilePt[i]));
+                IEnumerable<Segment> tempoSeg = lesSegments.Where(seg => seg.PtEquals(pilePt[i]));
                 foreach(Segment seg in tempoSeg)
                 {
                     if(seg.Point1.Equals(pilePt[i]))
