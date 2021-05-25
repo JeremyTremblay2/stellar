@@ -47,6 +47,10 @@ namespace Appli
 
         public Manager Manager => (Application.Current as App).LeManager;
 
+        public Geometrie.Point PointClique1 { get => pointClique; private set => pointClique = value; }
+
+        public Geometrie.Point ClicCanvas { get; private set; }
+
         public MainWindow()
         { 
             InitializeComponent();
@@ -78,7 +82,7 @@ namespace Appli
         private void EffacerDonneesCliquees()
         {
             boutonsCarteActifs = boutonsCarteActifs.ToDictionary(p => p.Key, p => false);
-            pointClique = null;
+            PointClique1 = null;
             ajouterEtoile.Fill = "AliceBlue";
             ajouterPlanete.Fill = "AliceBlue";
             effacer.Fill = "AliceBlue";
@@ -184,11 +188,11 @@ namespace Appli
 
                 else if (boutonsCarteActifs["relier"])
                 {
-                    if (pointClique == null)
+                    if (PointClique1 == null)
                     {
                         if (Manager.Carte.LesAstres[pointSurCarte] is Etoile)
                         {
-                            pointClique = pointSurCarte;
+                            PointClique1 = pointSurCarte;
                         }
                         else
                         {
@@ -196,12 +200,12 @@ namespace Appli
                         }
                     }
 
-                    else if (!pointClique.Equals(pointSurCarte))
+                    else if (!PointClique1.Equals(pointSurCarte))
                     {
                         if (Manager.Carte.LesAstres[pointSurCarte] is Etoile)
                         {
-                            Manager.RelierDeuxEtoiles(pointClique, pointSurCarte);
-                            pointClique = null;
+                            Manager.RelierDeuxEtoiles(PointClique1, pointSurCarte);
+                            PointClique1 = null;
                         }
                         else
                         {
@@ -211,14 +215,14 @@ namespace Appli
                 }
                 else if (boutonsCarteActifs["deplacer"])
                 {
-                    if (pointClique == null)
+                    if (PointClique1 == null)
                     {
-                        pointClique = pointSurCarte;
+                        PointClique1 = pointSurCarte;
                     }
                     else
                     {
-                        pointClique = null;
-                        pointClique = pointSurCarte;
+                        PointClique1 = null;
+                        PointClique1 = pointSurCarte;
                     }
                 }
                 else
@@ -234,16 +238,21 @@ namespace Appli
         {
             TexteMessageErreurCarte = "qef";
 
-            if (boutonsCarteActifs["deplacer"] && pointClique != null)
+            if (boutonsCarteActifs["deplacer"] && PointClique1 != null)
             {
                 var point = new Geometrie.Point((int)e.GetPosition(this).X, (int)e.GetPosition(this).Y);
-                if (!RecherchePointAProximite(point) && !point.Equals(pointClique))
+                if (!RecherchePointAProximite(point) && !point.Equals(PointClique1))
                 {
                     Debug.WriteLine(point);
                     point.Deplacer(point.X - 15 - 350, point.Y - 50);
-                    Manager.DeplacerUnAstre(pointClique, point);
-                    pointClique = null;
+                    Manager.DeplacerUnAstre(PointClique1, point);
+                    PointClique1 = null;
                 }
+            }
+            else if (boutonsCarteActifs["ajouterEtoile"])
+            {
+                PopupEtoile.Visibility = Visibility.Visible;
+                ClicCanvas = new Geometrie.Point((int)e.GetPosition(this).X-350, (int)e.GetPosition(this).Y-50);
             }
         }
 

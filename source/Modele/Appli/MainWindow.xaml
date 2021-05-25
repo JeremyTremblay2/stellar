@@ -80,18 +80,7 @@
             </DataTemplate.Triggers>
         </DataTemplate>
         
-        <ControlTemplate x:Key="TextBoxRecherche" TargetType="{x:Type TextBoxBase}">
-            <Border Background="{TemplateBinding Background}" x:Name="Bordure" BorderBrush="Black"
-                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
-                <ScrollViewer x:Name="PART_ContentHost"/>
-            </Border>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bordure"/>
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
+        
 
     </Window.Resources>
 
@@ -121,7 +110,7 @@
                             c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
                             s-17-7.626-17-17S14.61,6,23.984,6z" />
                         <TextBox Grid.Column="1" x:Name="BarreRecherche" TextChanged="barreRecherche"
-                                 Template="{StaticResource TextBoxRecherche}" Margin="20 0 0 0"/>
+                                 Template="{StaticResource TextBoxRecherche}" Margin="20 0 0 0" Cursor="Arrow"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -319,5 +308,10 @@
                 </DataTemplate>
             </ContentControl.ContentTemplate>
         </ContentControl>
+        <Grid Grid.Column="1" x:Name="PopupEtoile">
+            <usersControls:UCPopupEtoile Grid.Column="1" />
+        </Grid>
+            
+
     </Grid>
 </Window>
