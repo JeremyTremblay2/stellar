@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Appli.usersControls" 
+             xmlns:espace="clr-namespace:Espace;assembly=Modele"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              x:Name="root">
@@ -46,6 +47,48 @@
                 <Run Text="{Binding TemperatureAstre, ElementName=root}" />
                 <Run Text="Kelvins" />
             </TextBlock>
+            <StackPanel>
+                <StackPanel.Resources>
+                    <DataTemplate DataType="{x:Type espace:Etoile}">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource texteInfosPopup}">
+                                <Run Text="Constellation : " />
+                                <Run Text="{Binding ConstellationEtoile, ElementName=root}" />
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource texteInfosPopup}">
+                                <Run Text="Etoile de type " />
+                                <Run Text="{Binding TypeEtoile, ElementName=root}" />
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource texteInfosPopup}">
+                                <Run Text="Luminosité de " />
+                                <Run Text="{Binding LuminositeEtoile, ElementName=root}" />
+                                <Run Text="Lo" />
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type espace:Planete}">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource texteInfosPopup}">
+                                <Run Text="Système stellaire : " />
+                                <Run Text="{Binding SystemePlanete, ElementName=root}" />
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource texteInfosPopup}">
+                                <Run Text="Planète de type " />
+                                <Run Text="{Binding TypePlanete, ElementName=root}" />
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource texteInfosPopup}">
+                                <Run Text="Eau présente : " />
+                                <Run Text="{Binding EauPresentePlanete, ElementName=root}" />
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource texteInfosPopup}">
+                                <Run Text="Présence de vie : " />
+                                <Run Text="{Binding PresenceDeViePlanete, ElementName=root}" />
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </StackPanel.Resources>
+                <ContentPresenter Content="{Binding}"/>
+            </StackPanel>
 
         </StackPanel>
         <Grid Background="Transparent" MouseDown="buttonPopupClicCroix" MouseEnter="buttonPopupDessusCroix" MouseLeave="buttonPopupHorsCroix" HorizontalAlignment="Left" Margin="340 0 0 380" Width="20" Height="20">

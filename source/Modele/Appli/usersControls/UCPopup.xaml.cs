@@ -1,4 +1,5 @@
 ﻿using Modele;
+using Espace;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -102,5 +103,68 @@ namespace Appli.usersControls
 
         public static readonly DependencyProperty TemperatureAstrePropriete =
             DependencyProperty.Register("TemperatureAstre", typeof(int), typeof(UCPopup), new PropertyMetadata(273));
+
+        public int ConstellationEtoile
+        {
+            get { return (int)GetValue(ConstellationEtoilePropriete); }
+            set { SetValue(ConstellationEtoilePropriete, value); }
+        }
+
+        public static readonly DependencyProperty ConstellationEtoilePropriete =
+            DependencyProperty.Register("ConstellationEtoile", typeof(string), typeof(UCPopup), new PropertyMetadata("Aucune"));
+
+        public int TypeEtoile
+        {
+            get { return (int)GetValue(TypeEtoilePropriete); }
+            set { SetValue(TypeEtoilePropriete, value); }
+        }
+
+        public static readonly DependencyProperty TypeEtoilePropriete =
+            DependencyProperty.Register("TypeEtoile", typeof(TypeEtoile), typeof(UCPopup), new PropertyMetadata());
+
+        public int LuminositeEtoile
+        {
+            get { return (int)GetValue(LuminositeEtoilePropriete); }
+            set { SetValue(LuminositeEtoilePropriete, value); }
+        }
+
+        public static readonly DependencyProperty LuminositeEtoilePropriete =
+            DependencyProperty.Register("LuminositeEtoile", typeof(float), typeof(UCPopup), new PropertyMetadata(1.0f));
+
+        public int SystemePlanete
+        {
+            get { return (int)GetValue(SystemePlanetePropriete); }
+            set { SetValue(SystemePlanetePropriete, value); }
+        }
+
+        public static readonly DependencyProperty SystemePlanetePropriete =
+            DependencyProperty.Register("SystemePlanete", typeof(string), typeof(UCPopup), new PropertyMetadata("Inconnu"));
+
+        public int TypePlanete
+        {
+            get { return (int)GetValue(TypePlanetePropriete); }
+            set { SetValue(TypePlanetePropriete, value); }
+        }
+
+        public static readonly DependencyProperty TypePlanetePropriete =
+            DependencyProperty.Register("TypePlanete", typeof(TypePlanete), typeof(UCPopup), new PropertyMetadata());
+
+        public int EauPresentePlanete
+        {
+            get { return (int)GetValue(EauPresentePlanetePropriete); }
+            set { SetValue(EauPresentePlanetePropriete, value); }
+        }
+
+        public static readonly DependencyProperty EauPresentePlanetePropriete =
+            DependencyProperty.Register("EauPresentePlanete", typeof(bool), typeof(UCPopup), new PropertyMetadata(false));
+
+        public int PresenceDeViePlanete
+        {
+            get { return (int)GetValue(PresenceDeViePlanetePropriete); }
+            set { SetValue(PresenceDeViePlanetePropriete, value); }
+        }
+
+        public static readonly DependencyProperty PresenceDeViePlanetePropriete =
+            DependencyProperty.Register("PresenceDeViePlanete", typeof(string), typeof(UCPopup), new PropertyMetadata("Inconnu"));
     }
 }
