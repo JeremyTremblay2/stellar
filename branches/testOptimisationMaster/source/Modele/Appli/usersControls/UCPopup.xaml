@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Appli.usersControls.UCPopup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Appli.usersControls" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="root">
+
+    <UserControl.Resources>
+        
+    </UserControl.Resources>
+
+    <Grid>
+        <Rectangle Fill="Black" Opacity="0.5" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown"/>
+        <Image Source="/images/UI/popup.png" Height="420" Width="320" HorizontalAlignment="Left" Margin="50 0 0 0"/>
+
+        <StackPanel x:Name="visibility" Height="420" Width="320" HorizontalAlignment="Left" Margin="50,0,0,0">
+            <local:UCImageAstre ImageAstre="{Binding ImageAstre, ElementName=root}" Margin="0 10 0 5" 
+                Largeur="110" Hauteur="110"/>
+
+            <TextBlock FontFamily="Comic Sans MS" HorizontalAlignment="Center" FontSize="20" Foreground="#97befa" 
+                           TextAlignment="Center" Text="{Binding NomAstre, ElementName=root}" />
+
+            <TextBlock FontFamily="Comic Sans MS" HorizontalAlignment="Center" Foreground="#97befa" TextAlignment="Justify" 
+                       TextWrapping="Wrap" Margin="20 5 20 0" Text="{Binding DescriptionAstre, ElementName=root}" />
+
+            <TextBlock FontFamily="Comic Sans MS" Foreground="#d5e5fc" HorizontalAlignment="Left" TextAlignment="Center" TextWrapping="Wrap" 
+                           Margin="20 20 0 0" FontSize="15" Text="Infos :" />
+
+            <TextBlock Style="{StaticResource texteInfosPopup}">
+                <Run Text="Age : "/>
+                <Run Text="{Binding AgeAstre, ElementName=root}" />
+                <Run Text="a"/>
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource texteInfosPopup}">
+                <Run Text="Masse : " />
+                <Run Text="{Binding MasseAstre, ElementName=root}" />
+                <Run Text="MS" />
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource texteInfosPopup}">
+                <Run Text="Température : " />
+                <Run Text="{Binding TemperatureAstre, ElementName=root}" />
+                <Run Text="Kelvins" />
+            </TextBlock>
+
+        </StackPanel>
+        <Grid Background="Transparent" MouseDown="buttonPopupClicCroix" MouseEnter="buttonPopupDessusCroix" MouseLeave="buttonPopupHorsCroix" HorizontalAlignment="Left" Margin="340 0 0 380" Width="20" Height="20">
+            <Path Style="{StaticResource PathPopup}" x:Name="QuitterPopup"
+             Data="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0" Grid.Column="1"/>
+        </Grid>
+    </Grid>
+</UserControl>

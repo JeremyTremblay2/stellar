@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="Appli.usersControls.UCImageAstre"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Appli.usersControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="80" d:DesignWidth="80"
+             x:Name="root">
+    
+    <Ellipse Width="80" Height="80" x:Name="Dimensions">
+        <Ellipse.Fill>
+            <ImageBrush ImageSource="{Binding ImageAstre, ElementName=root, Converter={StaticResource convertisseurDeTexteEnImage}}" 
+                        Stretch="UniformToFill" x:Name="Image"/>
+        </Ellipse.Fill>
+    </Ellipse>
+</UserControl>
