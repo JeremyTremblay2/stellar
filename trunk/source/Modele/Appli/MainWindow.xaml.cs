@@ -218,14 +218,7 @@ namespace Appli
                 {
                     Popup.Visibility = Visibility.Visible;
 
-                    var astreClique = new Binding("Nom")
-                    {
-                        Source = Manager.Carte.LesAstres[pointSurCarte]
-                    };
-
-                    //Debug.WriteLine(astreClique);
-                    //astreClique.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-                    //Popup.SetBinding(TextBlock.TextProperty, astreClique);
+                    Manager.AstreSelectionne = Manager.Carte.LesAstres[pointSurCarte];
                 }
             }
         }
