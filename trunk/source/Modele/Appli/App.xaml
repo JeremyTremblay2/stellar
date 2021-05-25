@@ -81,7 +81,8 @@
             <Style.Triggers>
                 <Trigger Property="IsFocused" Value="True">
                     <Setter Property="Background" Value="{StaticResource couleurBoutonPresse}"/>
-                    <Setter Property="Foreground" Value="Orange"/>
+                    <Setter Property="Foreground" Value="AliceBlue"/>
+                    <Setter Property="BorderBrush" Value="blue" />
                 </Trigger>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Cursor" Value="Hand" />
@@ -91,5 +92,28 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Style TargetType="TextBox" x:Key="PopupTextBox">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Foreground" Value="DarkBlue"/>
+            <Setter Property="Opacity" Value="0.6"/>
+            <Setter Property="BorderBrush" Value="LightBlue"/>
+            <Setter Property="FontFamily" Value="{StaticResource policeParDefaut}"/>
+            <Setter Property="FontSize" Value="13"/>
+
+        </Style>
+
+        <ControlTemplate x:Key="TextBoxRecherche" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" x:Name="Bordure" BorderBrush="Black"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bordure"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Application.Resources>
 </Application>
