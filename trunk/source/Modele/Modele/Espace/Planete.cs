@@ -13,22 +13,22 @@ namespace Espace
         /// <summary>
         /// Propriété représentant le type de la planète, contenu dans l'énumération TypePlanete.
         /// </summary>
-        public TypePlanete Type { get; internal set; }
+        public TypePlanete Type { get; set; }
 
         /// <summary>
         /// Propriété permettant de représenter la présence de vie ou non de la planète, sous forme de chaîne de caractères.
         /// </summary>
-        public string Vie { get; internal set; }
+        public string Vie { get; set; }
 
         /// <summary>
         /// Propriété représentant la présence d'eau sur la planète ou non, sous forme de booléen. 
         /// </summary>
-        public bool EauPresente { get; internal set; }
+        public bool EauPresente { get; set; }
 
         /// <summary>
         /// Propriété permettant de représenter le système stellaire de la planète, sous forme de chaîne de caractères.
         /// </summary>
-        public string Systeme { get; internal set; }
+        public string Systeme { get; set; }
 
         /// <summary>
         /// Constructeur de planète. Il appele le constructeur de sa classe mère, Astre, afin qu'il soit initialisé.

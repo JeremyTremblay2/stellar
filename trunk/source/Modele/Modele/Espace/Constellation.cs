@@ -22,25 +22,17 @@ namespace Espace
         private HashSet<Point> lesPoints = new HashSet<Point>();
         private HashSet<Segment> lesSegments = new HashSet<Segment>();
 
-        private ObservableCollection<Segment> lesSegments2 = new ObservableCollection<Segment>();
-
         /// <summary>
-        /// Propriété en lecture seule concernant l'hashset de points, qui sont l'ensemble des points contenus dans une constellation.
+        /// Propriété observable en lecture seule concernant l'hashset de points, qui sont l'ensemble des points 
+        /// contenus dans une constellation.
         /// </summary>
         public ObservableCollection<Point> LesPoints { get; private set; } = new ObservableCollection<Point>();
 
         /// <summary>
-        /// Propriété en lecture seule concernant l'hashset de segments, qui sont l'ensembles des liens qui relient les étoiles entres elles.
+        /// Propriété observable en lecture seule concernant l'hashset de segments, qui sont l'ensembles des liens 
+        /// qui relient les étoiles entres elles.
         /// </summary>
-        public ObservableCollection<Segment> LesSegments
-        {
-            get => lesSegments2;
-            private set
-            {
-                if (value == lesSegments2) return;
-                lesSegments2 = value;
-            }
-        } 
+        public ObservableCollection<Segment> LesSegments { get; private set; } = new ObservableCollection<Segment>();
 
         /// <summary>
         /// Propriété à changer en méthode de vérification des collections vides.
@@ -66,7 +58,7 @@ namespace Espace
             lesPoints.Add(point2);
             lesSegments.Add(s);
 
-            MAJObservable();
+            MiseAJourCollections();
 
             Vide = false;
         }
@@ -88,7 +80,7 @@ namespace Espace
             lesPoints.UnionWith(points);
             lesSegments.UnionWith(segments);
 
-            MAJObservable();
+            MiseAJourCollections();
 
             Vide = false;
         }
@@ -114,7 +106,7 @@ namespace Espace
             {
                 LesPoints.Add(nouveauPoint);
             }
-            MAJObservable();
+            MiseAJourCollections();
         }
 
         /// <summary>
@@ -134,7 +126,7 @@ namespace Espace
             IEnumerable<Segment> tempo = lesSegments.Where(n => n.PtEquals(point));
             lesSegments.ExceptWith(tempo);
 
-            MAJObservable();
+            MiseAJourCollections();
 
             //Appel d'une méthode permettant de retirer de la constellation les étoiles seules (pas reliées).
             SuppressionPoints();
@@ -192,27 +184,7 @@ namespace Espace
             lesPoints.Remove(ancienPoint);
             lesPoints.Add(nouveauPoint);
 
-            MAJObservable();
-            Debug.WriteLine("Affichage des segments de la collection observable :");
-            foreach(Segment seg in LesSegments)
-            {
-                Debug.WriteLine(seg);
-            }
-            Debug.WriteLine("Affichage des segments de la collection privée :");
-            foreach (Segment seg in lesSegments)
-            {
-                Debug.WriteLine(seg);
-            }
-            Debug.WriteLine("Affichage des points de la collection observable :");
-            foreach (Point pt in LesPoints)
-            {
-                Debug.WriteLine(pt);
-            }
-            Debug.WriteLine("Affichage des points de la collection privée :");
-            foreach (Point pt in lesPoints)
-            {
-                Debug.WriteLine(pt);
-            }
+            MiseAJourCollections();
         }
 
         /// <summary>
@@ -282,7 +254,7 @@ namespace Espace
                 lesSegments.IntersectWith(segmentsConstel);
                 lesPt.ExceptWith(visite);
                 lesSeg.ExceptWith(segmentsConstel);
-                MAJObservable();
+                MiseAJourCollections();
                 return new Constellation(lesPt, lesSeg);
             }
         }
@@ -302,7 +274,7 @@ namespace Espace
             lesSegments.UnionWith(constel.lesSegments);
             lesSegments.Add(seg);
 
-            MAJObservable();
+            MiseAJourCollections();
         }
 
         /// <summary>
@@ -422,16 +394,18 @@ namespace Espace
                 }
             }
         }
+
         /// <summary>
-        /// Mets à jour les collections observables.
+        /// Méthode permettant la mise à jour des collections observables, en les vidant et en recopiant les données
+        /// des hashsets.
         /// </summary>
-        private void MAJObservable()
+        private void MiseAJourCollections()
         {
-            lesSegments2.Clear();
+            LesSegments.Clear();
             LesPoints.Clear();
             foreach (Segment seg in lesSegments)
             {
-                lesSegments2.Add(seg);
+                LesSegments.Add(seg);
             }
             foreach (Point pt in lesPoints)
             {

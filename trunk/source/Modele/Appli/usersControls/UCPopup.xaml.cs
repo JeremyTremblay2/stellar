@@ -24,6 +24,8 @@ namespace Appli.usersControls
     {
         public Manager LeManager => (Application.Current as App).LeManager;
 
+        public Astre AstreSelectionne { get; set; }
+
         public UCPopup()
         {
             InitializeComponent();
@@ -39,6 +41,37 @@ namespace Appli.usersControls
         {
             (Application.Current.MainWindow as MainWindow).Popup.Visibility = Visibility.Hidden;
         }
+
+        private void AjouterAstre(object sender, MouseButtonEventArgs e)
+        {
+            bool astreExistantSurCarte = false;
+            AstreSelectionne = LeManager.AstreSelectionne;
+
+            if (AstreSelectionne == null) return;
+
+            if (!AstreSelectionne.Personnalise)
+            {
+                foreach (KeyValuePair<Geometrie.Point, Astre> kvp in LeManager.Carte.LesAstres)
+                {
+                    if (kvp.Value.Equals(AstreSelectionne))
+                    {
+                        astreExistantSurCarte = true;
+                    }
+                }
+                if (!astreExistantSurCarte)
+                {
+                    return;
+                }
+                AstreSelectionne = null;
+            }
+            MessageBox.Show("Impossible d'ajouter l'astre sélectionné sur la carte, il est déjà présent.",
+                            "L'astre ne peut être ajouté sur la carte",
+                            MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+
+
+        /****************************************************************************************************/
+
 
         public string ImageAstre
         {

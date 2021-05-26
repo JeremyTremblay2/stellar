@@ -17,12 +17,12 @@ namespace Espace
         /// <summary>
         /// Propriété représentant le type de l'étoile, contenu dans l'énumération TypeEtoile.
         /// </summary>
-        public TypeEtoile Type { get; internal set; }
+        public TypeEtoile Type { get; set; }
 
         /// <summary>
         /// Propriété représentant la constellation sous forme de châine de caractères, dans laquelle se trouve l'étoile.
         /// </summary>
-        public string Constellation { get; internal set; }
+        public string Constellation { get; set; }
 
         /// <summary>
         /// Propriété représentant la luminosité de l'étoile, sous forme d'une valeur flottante (en luminosité solaire Lo).
@@ -31,7 +31,7 @@ namespace Espace
         public float Luminosite 
         {
             get => luminosite;
-            internal set
+            set
             {
                 if (value < 0)
                 {

@@ -7,39 +7,17 @@ namespace Geometrie
     /// <summary>
     /// Un point représente les coordonnées (x et y) d'un point sur la carte (l'emplacement des astres).
     /// </summary>
-    public class Point : IEquatable<Point>, INotifyPropertyChanged
+    public class Point : IEquatable<Point>
     {
-
-        private int x;
-        private int y;
-
         /// <summary>
         /// Propriété contenant la position en abscisses de x, sous forme d'une valeur entière.
         /// </summary>
-        public int X
-        {
-            get => x;
-            private set
-            {
-                if (value == x) return;
-                x = value;
-                OnPropertyChanged(nameof(X));
-            }
-        }
+        public int X { get; private set; }
 
-    /// <summary>
-    /// Propriété contenant la position en ordonnées de y, sous forme d'une valeur entière.
-    /// </summary>
-        public int Y 
-        {
-            get => y;
-            private set
-            {
-                if (value == y) return;
-                y = value;
-                OnPropertyChanged(nameof(Y));
-            }
-        }
+        /// <summary>
+        /// Propriété contenant la position en ordonnées de y, sous forme d'une valeur entière.
+        /// </summary>
+        public int Y { get; private set; }
 
         /// <summary>
         /// Propriété concernant la couleur d'un point, sous forme de chaîne de caractères, en anglais.
@@ -66,11 +44,6 @@ namespace Geometrie
             Couleur = "Yellow";
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        void OnPropertyChanged(string nomPropriete)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropriete));
-
         /// <summary>
         /// Permet de déplacer un point à de nouvelles coordonnées.
         /// </summary>
@@ -89,7 +62,6 @@ namespace Geometrie
         {
             Couleur = "Green";
         }
-
 
         /// <summary>
         /// Permet d'afficher un point sous forme d'une paire de coordonées (x; y).

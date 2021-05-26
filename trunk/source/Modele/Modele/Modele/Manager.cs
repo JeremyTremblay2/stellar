@@ -39,7 +39,6 @@ namespace Modele
         /// </summary>
         public ReadOnlyObservableCollection<Astre> LesAstresTries { get; private set; }
 
-
         /// <summary>
         /// Propriété concernant la Carte, qui est l'endroit sur lequel se trouve tous les points (les astres), et 
         /// constellations de l'application.
@@ -218,7 +217,6 @@ namespace Modele
         {
             return lesAstres.SingleOrDefault(astre => astre.Nom.Equals(nom));
         }
-
 
         /// <summary>
         /// Méthode permettant l'affichage du Manager.
