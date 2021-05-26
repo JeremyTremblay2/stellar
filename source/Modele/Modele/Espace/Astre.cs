@@ -28,6 +28,7 @@ namespace Espace
         //Sert à envoyer des notifications quand des données sont modifiées.
         public event PropertyChangedEventHandler PropertyChanged;
 
+        //Méthode permettant de notifier la vue que des données ont été mises à jour.
         void OnPropertyChanged(string nomPropriete)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropriete));
 
@@ -38,7 +39,7 @@ namespace Espace
         public string Nom
         {
             get => nom;
-            internal set
+            set
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
@@ -54,7 +55,7 @@ namespace Espace
         public long Age 
         {
             get => age; 
-            internal set
+            set
             {
                 if (value < 0)
                 {
@@ -67,7 +68,7 @@ namespace Espace
         /// <summary>
         /// Propriété représentant une description quelconque de l'astre sous forme d'une chaîne de caractère.
         /// </summary>
-        public string Description { get; internal set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// Propriété représentant la masse de l'astre en valeur flottante (en masse terrestre s'il s'agit d'une planète, 
@@ -76,7 +77,7 @@ namespace Espace
         public float Masse
         {
             get => masse;
-            internal set
+            set
             {
                 if (value < 0)
                 {
@@ -89,10 +90,11 @@ namespace Espace
         /// <summary>
         /// Propriété représentant la température de l'astre en valeur entière (en Kelvin).
         /// </summary>
-        public int Temperature { get; internal set; }
+        public int Temperature { get; set; }
 
         /// <summary>
         /// Propriété pour savoir si l'astre est un favori de l'utilisateur ou non, représenté par un booléen.
+        /// Une notification de changement est envoyé quand l'état du favori est modifié.
         /// </summary>
         public bool Favori
         {
@@ -113,12 +115,11 @@ namespace Espace
         /// <summary>
         /// Propriété permettant d'associer une image à l'astre (il s'agit d'une chaîne de caractères).
         /// </summary>
-        public string Image { get; internal set; }
+        public string Image { get; set; }
 
         /// <summary>
         /// Constructeur vide, utilisé par les fabriques d'astres.
         /// </summary>
-        
         public Astre() { }
 
         /// <summary>
