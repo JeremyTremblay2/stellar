@@ -39,6 +39,14 @@
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Margin" Value="50, 0, 0, 0"/>
         </Style>
+        
+        <Style TargetType="TextBlock" x:Key="texteInfosPopupCreation">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="#d5e5fc"/>
+            <Setter Property="FontFamily" Value="{StaticResource policeParDefaut}"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
 
         <Style TargetType="Path" x:Key="PathPopup">
             <Setter Property="Fill" Value="{StaticResource couleurBouton}"/>
@@ -79,6 +87,7 @@
             <Setter Property="FontFamily" Value="{StaticResource policeParDefaut}"/>
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="25"/>
             <Style.Triggers>
                 <Trigger Property="IsFocused" Value="True">
                     <Setter Property="Background" Value="{StaticResource couleurBoutonPresse}"/>

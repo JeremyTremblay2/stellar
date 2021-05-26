@@ -188,7 +188,18 @@ namespace Appli
 
         private void PoubelleClic(object sender, MouseButtonEventArgs e)
         {
-           Manager.SupprimerTout();
+
+            MessageBoxResult resultat = MessageBox.Show("Voulez-vous vraiment tout supprimer ?",
+                                        "Supprimer",
+                                        MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            switch (resultat)
+            {
+                case MessageBoxResult.Yes:
+                    Manager.SupprimerTout();
+                    break;
+                case MessageBoxResult.No:
+                    break;
+            }
         }
 
         private void PointClique(object sender, MouseButtonEventArgs e)
