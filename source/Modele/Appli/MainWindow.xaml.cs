@@ -317,8 +317,8 @@ namespace Appli
 
         private void PopupClicMenu(object sender, MouseButtonEventArgs e)
         {
-            Popup.Visibility = Visibility.Visible; //(Application.Current.MainWindow as MainWindow).
-            ajouterEtoileDetail.Visibility = Visibility.Visible;
+            Popup.Visibility = Visibility.Visible; 
+            /*ajouterEtoileDetail.Visibility = Visibility.Visible;
             astreSelectionne = Manager.AstreSelectionne;
             if (astreSelectionne != null && !astreSelectionne.Personnalise)
             {
@@ -334,7 +334,7 @@ namespace Appli
             else
             {
                 ajouterEtoileDetail.Visibility = Visibility.Hidden;
-            }
+            }*/
         }
 
         private void AjouterEtoileDetail(object sender, MouseButtonEventArgs e)

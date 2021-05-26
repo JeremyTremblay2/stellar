@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Geometrie
@@ -6,17 +7,39 @@ namespace Geometrie
     /// <summary>
     /// Un point représente les coordonnées (x et y) d'un point sur la carte (l'emplacement des astres).
     /// </summary>
-    public class Point : IEquatable<Point>
+    public class Point : IEquatable<Point>, INotifyPropertyChanged
     {
+
+        private int x;
+        private int y;
+
         /// <summary>
         /// Propriété contenant la position en abscisses de x, sous forme d'une valeur entière.
         /// </summary>
-        public int X { get; private set; }
+        public int X
+        {
+            get => x;
+            private set
+            {
+                if (value == x) return;
+                x = value;
+                OnPropertyChanged(nameof(X));
+            }
+        }
 
-        /// <summary>
-        /// Propriété contenant la position en ordonnées de y, sous forme d'une valeur entière.
-        /// </summary>
-        public int Y { get; private set; }
+    /// <summary>
+    /// Propriété contenant la position en ordonnées de y, sous forme d'une valeur entière.
+    /// </summary>
+        public int Y 
+        {
+            get => y;
+            private set
+            {
+                if (value == y) return;
+                y = value;
+                OnPropertyChanged(nameof(Y));
+            }
+        }
 
         /// <summary>
         /// Propriété concernant la couleur d'un point, sous forme de chaîne de caractères, en anglais.
@@ -42,6 +65,11 @@ namespace Geometrie
             Deplacer(x, y);
             Couleur = "Yellow";
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        void OnPropertyChanged(string nomPropriete)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropriete));
 
         /// <summary>
         /// Permet de déplacer un point à de nouvelles coordonnées.
