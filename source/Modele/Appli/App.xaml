@@ -90,7 +90,7 @@
             <Setter Property="Height" Value="25"/>
             <Style.Triggers>
                 <Trigger Property="IsFocused" Value="True">
-                    <Setter Property="Background" Value="{StaticResource couleurBoutonPresse}"/>
+                    <Setter Property="Background" Value="LightGray"/>
                     <Setter Property="Foreground" Value="AliceBlue"/>
                     <Setter Property="BorderBrush" Value="blue" />
                 </Trigger>
