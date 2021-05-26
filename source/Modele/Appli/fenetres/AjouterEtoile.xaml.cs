@@ -35,11 +35,6 @@ namespace Appli.fenetres
             DataContext = this;
         }
 
-        private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Close();
-        }
-
         /*private void buttonPopupClicCroix(object sender, MouseButtonEventArgs e)
         {
             (Application.Current.MainWindow as MainWindow).PopupEtoile.Visibility = Visibility.Hidden;
@@ -68,6 +63,17 @@ namespace Appli.fenetres
             LeManager.AjouterUnAstre(LEtoile);
             //PopupEtoile.Visibility = Visibility.Hidden;
             Close();
+        }
+
+        private void Fermer(object sender, MouseButtonEventArgs e)
+        {
+            Close();
+        }
+
+        private void Deplacer(object sender, MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+            this.DragMove();
         }
     }
 }
