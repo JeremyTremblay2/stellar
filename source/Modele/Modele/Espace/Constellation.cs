@@ -267,7 +267,7 @@ namespace Espace
                 }
                 segmentsConstel.UnionWith(tempoSeg);
                 visite.Add(pilePt[i]);
-                if (i == TaillePhysique-1)
+                if (i == TaillePhysique-1 || tailleLogique >= TaillePhysique)
                 {
                     break;
                 }
@@ -275,7 +275,11 @@ namespace Espace
             }
 
             //resultat
-            if (visite.Count < lesPoints.Count)
+            if (tailleLogique >= TaillePhysique)
+            {
+                return null;
+            } 
+            else
             {
                 HashSet<Point> lesPt = new HashSet<Point>();
                 HashSet<Segment> lesSeg = new HashSet<Segment>();
@@ -292,10 +296,6 @@ namespace Espace
                 lesPt.ExceptWith(visite);
                 lesSeg.ExceptWith(segmentsConstel);
                 return new Constellation(lesPt, lesSeg);
-            } 
-            else
-            {
-                return null;
             }
         }
 
