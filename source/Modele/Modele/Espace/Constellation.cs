@@ -65,10 +65,8 @@ namespace Espace
             lesPoints.Add(point1);
             lesPoints.Add(point2);
             lesSegments.Add(s);
-            
-            LesPoints.Add(point1);
-            LesPoints.Add(point2);
-            LesSegments.Add(s);
+
+            MAJObservable();
 
             Vide = false;
         }
@@ -90,8 +88,7 @@ namespace Espace
             lesPoints.UnionWith(points);
             lesSegments.UnionWith(segments);
 
-            LesPoints.Union(points);
-            LesSegments.Union(segments);
+            MAJObservable();
 
             Vide = false;
         }
@@ -117,7 +114,7 @@ namespace Espace
             {
                 LesPoints.Add(nouveauPoint);
             }
-            LesSegments.Add(seg);
+            MAJObservable();
         }
 
         /// <summary>
@@ -137,13 +134,7 @@ namespace Espace
             IEnumerable<Segment> tempo = lesSegments.Where(n => n.PtEquals(point));
             lesSegments.ExceptWith(tempo);
 
-            foreach (Segment seg in tempo)
-            {
-                if (LesSegments.Contains(seg))
-                {
-                    LesSegments.Remove(seg);
-                }
-            }
+            MAJObservable();
 
             //Appel d'une méthode permettant de retirer de la constellation les étoiles seules (pas reliées).
             SuppressionPoints();
@@ -201,17 +192,7 @@ namespace Espace
             lesPoints.Remove(ancienPoint);
             lesPoints.Add(nouveauPoint);
 
-            LesPoints.Clear();
-            LesSegments.Clear();
-            foreach(Point p in lesPoints)
-            {
-                LesPoints.Add(p);
-            }
-            foreach (Segment seg in lesSegments)
-            {
-                LesSegments.Add(seg);
-            }
-
+            MAJObservable();
             Debug.WriteLine("Affichage des segments de la collection observable :");
             foreach(Segment seg in LesSegments)
             {
@@ -299,20 +280,9 @@ namespace Espace
                 lesSeg.UnionWith(lesSegments);
                 lesPoints.IntersectWith(visite);
                 lesSegments.IntersectWith(segmentsConstel);
-
-                LesSegments.Clear();
-                LesPoints.Clear();
-                foreach (Point p in lesPoints)
-                {
-                    LesPoints.Add(p);
-                }
-                foreach (Segment seg in lesSegments)
-                {
-                    LesSegments.Add(seg);
-                }
-                
                 lesPt.ExceptWith(visite);
                 lesSeg.ExceptWith(segmentsConstel);
+                MAJObservable();
                 return new Constellation(lesPt, lesSeg);
             }
         }
@@ -332,15 +302,7 @@ namespace Espace
             lesSegments.UnionWith(constel.lesSegments);
             lesSegments.Add(seg);
 
-            foreach (Point p in lesPoints)
-            {
-                LesPoints.Add(p);
-            }
-            foreach (Segment segment in lesSegments)
-            {
-                LesSegments.Add(segment);
-            }
-            LesSegments.Add(seg);
+            MAJObservable();
         }
 
         /// <summary>
@@ -458,6 +420,22 @@ namespace Espace
                 {
                     LesPoints.Remove(point);
                 }
+            }
+        }
+        /// <summary>
+        /// Mets à jour les collections observables.
+        /// </summary>
+        private void MAJObservable()
+        {
+            lesSegments2.Clear();
+            LesPoints.Clear();
+            foreach (Segment seg in lesSegments)
+            {
+                lesSegments2.Add(seg);
+            }
+            foreach (Point pt in lesPoints)
+            {
+                LesPoints.Add(pt);
             }
         }
     }
