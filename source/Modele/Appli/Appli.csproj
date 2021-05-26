@@ -21,6 +21,7 @@
     <None Remove="images\icones\coeurPlein.png" />
     <None Remove="images\icones\coeurVide.png" />
     <None Remove="images\icones\etoile.png" />
+    <None Remove="images\icones\icone.png" />
     <None Remove="images\icones\ordreAlphabetiqueCroissant.png" />
     <None Remove="images\icones\ordreAlphabetiqueDecroissant.png" />
     <None Remove="images\icones\planete.png" />
@@ -53,6 +54,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="images\icones\etoile.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\icones\icone.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="images\icones\ordreAlphabetiqueCroissant.png">

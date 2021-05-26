@@ -40,16 +40,6 @@ namespace Appli.usersControls
             (Application.Current.MainWindow as MainWindow).Popup.Visibility = Visibility.Hidden;
         }
 
-        private void buttonPopupDessusCroix(object sender, MouseEventArgs e)
-        {
-            QuitterPopup.Fill = Brushes.Gray;
-        }
-
-        private void buttonPopupHorsCroix(object sender, MouseEventArgs e)
-        {
-            QuitterPopup.Fill = Brushes.AliceBlue;
-        }
-
         public string ImageAstre
         {
             get { return (string)GetValue(ImageAstrePropriete); }
@@ -104,63 +94,63 @@ namespace Appli.usersControls
         public static readonly DependencyProperty TemperatureAstrePropriete =
             DependencyProperty.Register("TemperatureAstre", typeof(int), typeof(UCPopup), new PropertyMetadata(273));
 
-        public int ConstellationEtoile
+        public string ConstellationEtoile
         {
-            get { return (int)GetValue(ConstellationEtoilePropriete); }
+            get { return (string)GetValue(ConstellationEtoilePropriete); }
             set { SetValue(ConstellationEtoilePropriete, value); }
         }
 
         public static readonly DependencyProperty ConstellationEtoilePropriete =
             DependencyProperty.Register("ConstellationEtoile", typeof(string), typeof(UCPopup), new PropertyMetadata("Aucune"));
 
-        public int TypeEtoile
+        public TypeEtoile TypeEtoile
         {
-            get { return (int)GetValue(TypeEtoilePropriete); }
+            get { return (TypeEtoile)GetValue(TypeEtoilePropriete); }
             set { SetValue(TypeEtoilePropriete, value); }
         }
 
         public static readonly DependencyProperty TypeEtoilePropriete =
-            DependencyProperty.Register("TypeEtoile", typeof(TypeEtoile), typeof(UCPopup), new PropertyMetadata());
+            DependencyProperty.Register("TypeEtoile", typeof(TypeEtoile), typeof(UCPopup), new PropertyMetadata(TypeEtoile.NaineBlanche));
 
-        public int LuminositeEtoile
+        public float LuminositeEtoile
         {
-            get { return (int)GetValue(LuminositeEtoilePropriete); }
+            get { return (float)GetValue(LuminositeEtoilePropriete); }
             set { SetValue(LuminositeEtoilePropriete, value); }
         }
 
         public static readonly DependencyProperty LuminositeEtoilePropriete =
             DependencyProperty.Register("LuminositeEtoile", typeof(float), typeof(UCPopup), new PropertyMetadata(1.0f));
 
-        public int SystemePlanete
+        public string SystemePlanete
         {
-            get { return (int)GetValue(SystemePlanetePropriete); }
+            get { return (string)GetValue(SystemePlanetePropriete); }
             set { SetValue(SystemePlanetePropriete, value); }
         }
 
         public static readonly DependencyProperty SystemePlanetePropriete =
             DependencyProperty.Register("SystemePlanete", typeof(string), typeof(UCPopup), new PropertyMetadata("Inconnu"));
 
-        public int TypePlanete
+        public TypePlanete TypePlanete
         {
-            get { return (int)GetValue(TypePlanetePropriete); }
+            get { return (TypePlanete)GetValue(TypePlanetePropriete); }
             set { SetValue(TypePlanetePropriete, value); }
         }
 
         public static readonly DependencyProperty TypePlanetePropriete =
-            DependencyProperty.Register("TypePlanete", typeof(TypePlanete), typeof(UCPopup), new PropertyMetadata());
+            DependencyProperty.Register("TypePlanete", typeof(TypePlanete), typeof(UCPopup), new PropertyMetadata(TypePlanete.Tellurique));
 
-        public int EauPresentePlanete
+        public bool EauPresentePlanete
         {
-            get { return (int)GetValue(EauPresentePlanetePropriete); }
+            get { return (bool)GetValue(EauPresentePlanetePropriete); }
             set { SetValue(EauPresentePlanetePropriete, value); }
         }
 
         public static readonly DependencyProperty EauPresentePlanetePropriete =
             DependencyProperty.Register("EauPresentePlanete", typeof(bool), typeof(UCPopup), new PropertyMetadata(false));
 
-        public int PresenceDeViePlanete
+        public string PresenceDeViePlanete
         {
-            get { return (int)GetValue(PresenceDeViePlanetePropriete); }
+            get { return (string)GetValue(PresenceDeViePlanetePropriete); }
             set { SetValue(PresenceDeViePlanetePropriete, value); }
         }
 

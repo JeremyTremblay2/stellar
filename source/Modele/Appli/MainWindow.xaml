@@ -7,7 +7,7 @@
         xmlns:usersControls="clr-namespace:Appli.usersControls" 
         xmlns:espace="clr-namespace:Espace;assembly=Modele" 
         x:Class="Appli.MainWindow"
-        mc:Ignorable="d"
+        mc:Ignorable="d" Icon="/images/icones/icone.png"
         Title="Stellar" Height="600" Width="1100">
 
     <Window.Resources>
@@ -22,10 +22,35 @@
                 <usersControls:UCImageAstre ImageAstre="{Binding Image}"/>
 
                 <StackPanel Grid.Column="1">
-                    <TextBlock Style="{StaticResource texteNomAstre}" Foreground="Orange" x:Name="nomAstre">
-                        <Run Text="{Binding Nom, Mode=OneWay}" />
-                        <Run Text="" x:Name="personnalise" />
-                    </TextBlock>
+                    <StackPanel>
+                        <StackPanel.Resources>
+                            <DataTemplate DataType="{x:Type espace:Etoile}">
+                                <TextBlock Style="{StaticResource texteNomAstre}" Foreground="Orange">
+                                    <Run Text="{Binding Nom, Mode=OneWay}" />
+                                    <Run Text="" x:Name="personnalise" />
+                                </TextBlock>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Path=Personnalise}" Value="true">
+                                        <Setter TargetName="personnalise" Property="Text" Value="(Personnalisé)"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type espace:Planete}">
+                                <TextBlock Style="{StaticResource texteNomAstre}" Foreground="DarkGreen">
+                                    <Run Text="{Binding Nom, Mode=OneWay}" />
+                                    <Run Text="" x:Name="personnalise" />
+                                </TextBlock>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Path=Personnalise}" Value="true">
+                                        <Setter TargetName="personnalise" Property="Text" Value="(Personnalisé)"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </StackPanel.Resources>
+                        <ContentPresenter Content="{Binding}"/>
+                    </StackPanel>
+                    
+                    
                     <TextBlock Style="{StaticResource texteInfosAstre}">
                         <Run Text="{Binding Age, Mode=OneWay}"/>
                         <Run Text=" an(s)."/>
@@ -40,8 +65,8 @@
                                         <Run Text="{Binding Systeme, Mode=OneWay}" />
                                     </TextBlock>
                                     <TextBlock  Style="{StaticResource texteInfosAstre}">
-                                        <Run Text="Planète de type " />
-                                        <Run Text="{Binding Type, Mode=OneWay}"/>
+                                        <Run Text="Planète de type" />
+                                        <Run Text="{Binding Type, Mode=OneWay, Converter={StaticResource convertisseurDEnumerationsEnTexte}}"/>
                                     </TextBlock>
                                 </StackPanel>
                             </DataTemplate>
@@ -52,8 +77,8 @@
                                     <Run Text="{Binding Constellation, Mode=OneWay}" />
                                     </TextBlock>
                                     <TextBlock Style="{StaticResource texteInfosAstre}">
-                                    <Run Text="Etoile de type "/>
-                                    <Run Text="{Binding Type, Mode=OneWay}"/>
+                                    <Run Text="Etoile de type"/>
+                                    <Run Text="{Binding Type, Mode=OneWay, Converter={StaticResource convertisseurDEnumerationsEnTexte}}"/>
                                     </TextBlock>
                                 </StackPanel>
                             </DataTemplate>
@@ -73,9 +98,6 @@
                 <DataTrigger Binding="{Binding Path=Favori}" Value="true">
                     <Setter TargetName="favori" Property="Data" Value="m471.382812 44.578125c-26.503906-28.746094-62.871093-44.578125-102.410156-44.578125-29.554687 0-56.621094 9.34375-80.449218 27.769531-12.023438 9.300781-22.917969 20.679688-32.523438 33.960938-9.601562-13.277344-20.5-24.660157-32.527344-33.960938-23.824218-18.425781-50.890625-27.769531-80.445312-27.769531-39.539063 0-75.910156 15.832031-102.414063 44.578125-26.1875 28.410156-40.613281 67.222656-40.613281 109.292969 0 43.300781 16.136719 82.9375 50.78125 124.742187 30.992188 37.394531 75.535156 75.355469 127.117188 119.3125 17.613281 15.011719 37.578124 32.027344 58.308593 50.152344 5.476563 4.796875 12.503907 7.4375 19.792969 7.4375 7.285156 0 14.316406-2.640625 19.785156-7.429687 20.730469-18.128907 40.707032-35.152344 58.328125-50.171876 51.574219-43.949218 96.117188-81.90625 127.109375-119.304687 34.644532-41.800781 50.777344-81.4375 50.777344-124.742187 0-42.066407-14.425781-80.878907-40.617188-109.289063zm0 0"/>
                     <Setter TargetName="favori" Property="Fill" Value="Red"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Path=Personnalise}" Value="true">
-                    <Setter TargetName="personnalise" Property="Text" Value="(Personnalisé)"/>
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
@@ -287,10 +309,32 @@
             </Grid>
         </Grid>
 
-        
+        <usersControls:UCPathButton HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Grid.Column="1" 
+                                    Width="25" Height="40" 
+                                    Margin="50 0 0 0"
+                                    MouseLeftButtonDown="AjouterEtoileDetail" 
+                                    x:Name="ajouterEtoileDetail"
+                                    Visibility="Hidden"
+                                    Panel.ZIndex="58"
+                                    Path="m424 64h-88v-16c0-26.467-21.533-48-48-48h-64c-26.467 0-48 21.533-48 48v16h-88c-22.056 0-40 17.944-40 40v56c0 8.836 7.164 16 16 16h8.744l13.823 290.283c1.221 25.636 22.281 45.717 47.945 45.717h242.976c25.665 0 46.725-20.081 47.945-45.717l13.823-290.283h8.744c8.836 0 16-7.164 16-16v-56c0-22.056-17.944-40-40-40zm-216-16c0-8.822 7.178-16 16-16h64c8.822 0 16 7.178 16 16v16h-96zm-128 56c0-4.411 3.589-8 8-8h336c4.411 0 8 3.589 8 8v40c-4.931 0-331.567 0-352 0zm313.469 360.761c-.407 8.545-7.427 15.239-15.981 15.239h-242.976c-8.555 0-15.575-6.694-15.981-15.239l-13.751-288.761h302.44z"/>
+
         <ContentControl  Grid.Column="1" x:Name="Popup" Content="{Binding AstreSelectionne}">
-            <ContentControl.ContentTemplate>
-                <DataTemplate>
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type espace:Etoile}">
+
+                    <usersControls:UCPopup ImageAstre="{Binding Image}"
+                                           NomAstre="{Binding Nom}"
+                                           DescriptionAstre="{Binding Description}"
+                                           AgeAstre="{Binding Age}"
+                                           MasseAstre="{Binding Masse}"
+                                           TemperatureAstre="{Binding Temperature}"
+                                           ConstellationEtoile="{Binding Constellation}"
+                                           TypeEtoile="{Binding Type}"
+                                           LuminositeEtoile="{Binding Luminosite}"/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type espace:Planete}">
                     <usersControls:UCPopup ImageAstre="{Binding Image}"
                                            NomAstre="{Binding Nom}"
                                            DescriptionAstre="{Binding Description}"
@@ -299,19 +343,10 @@
                                            TemperatureAstre="{Binding Temperature}"
                                            SystemePlanete="{Binding Systeme}"
                                            TypePlanete="{Binding Type}"
-                                           PresenceDeViePlanete="{Binding PresenceDeVie}"
-                                           EauPresentePlanete="{Binding EauPresente}"
-                                           ConstellationEtoile="{Binding Constellation}"
-                                           TypeEtoile="{Binding Type}"
-                                           LuminositeEtoile="{Binding Luminosite}"
-                                           x:Name="test"/>
+                                           PresenceDeViePlanete="{Binding Vie}"
+                                           EauPresentePlanete="{Binding EauPresente}"/>
                 </DataTemplate>
-            </ContentControl.ContentTemplate>
+            </ContentControl.Resources>
         </ContentControl>
-        <Grid Grid.Column="1" x:Name="PopupEtoile">
-            <usersControls:UCPopupEtoile Grid.Column="1" />
-        </Grid>
-            
-
     </Grid>
 </Window>

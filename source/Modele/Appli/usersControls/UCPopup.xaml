@@ -15,10 +15,10 @@
 
     <Grid>
         <Rectangle Fill="Black" Opacity="0.5" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown"/>
-        <Image Source="/images/UI/popup.png" Height="420" Width="320" HorizontalAlignment="Left" Margin="50 0 0 0"/>
+        <Image Source="/images/UI/popup.png" Height="470" Width="350" HorizontalAlignment="Left" Margin="50 0 0 0"/>
 
-        <StackPanel x:Name="visibility" Height="420" Width="320" HorizontalAlignment="Left" Margin="50,0,0,0">
-            <local:UCImageAstre ImageAstre="{Binding ImageAstre, ElementName=root}" Margin="0 10 0 5" 
+        <StackPanel x:Name="visibility" Height="470" Width="350" HorizontalAlignment="Left" Margin="50,0,0,0">
+            <local:UCImageAstre ImageAstre="{Binding ImageAstre, ElementName=root}" Margin="0 20 0 5" 
                 Largeur="110" Hauteur="110"/>
 
             <TextBlock FontFamily="Comic Sans MS" HorizontalAlignment="Center" FontSize="20" Foreground="#97befa" 
@@ -37,27 +37,27 @@
             </TextBlock>
 
             <TextBlock Style="{StaticResource texteInfosPopup}">
-                <Run Text="Masse : " />
-                <Run Text="{Binding MasseAstre, ElementName=root}" />
-                <Run Text="MS" />
-            </TextBlock>
-
-            <TextBlock Style="{StaticResource texteInfosPopup}">
                 <Run Text="Température : " />
                 <Run Text="{Binding TemperatureAstre, ElementName=root}" />
                 <Run Text="Kelvins" />
             </TextBlock>
+
             <StackPanel>
                 <StackPanel.Resources>
                     <DataTemplate DataType="{x:Type espace:Etoile}">
                         <StackPanel>
                             <TextBlock Style="{StaticResource texteInfosPopup}">
+                                <Run Text="Masse : " />
+                                <Run Text="{Binding MasseAstre, ElementName=root}" />
+                                <Run Text="MS" />
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource texteInfosPopup}">
                                 <Run Text="Constellation : " />
                                 <Run Text="{Binding ConstellationEtoile, ElementName=root}" />
                             </TextBlock>
                             <TextBlock Style="{StaticResource texteInfosPopup}">
-                                <Run Text="Etoile de type " />
-                                <Run Text="{Binding TypeEtoile, ElementName=root}" />
+                                <Run Text="Etoile de type" />
+                                <Run Text="{Binding TypeEtoile, ElementName=root, Converter={StaticResource convertisseurDEnumerationsEnTexte}}" />
                             </TextBlock>
                             <TextBlock Style="{StaticResource texteInfosPopup}">
                                 <Run Text="Luminosité de " />
@@ -69,31 +69,43 @@
                     <DataTemplate DataType="{x:Type espace:Planete}">
                         <StackPanel>
                             <TextBlock Style="{StaticResource texteInfosPopup}">
+                                <Run Text="Masse : " />
+                                <Run Text="{Binding MasseAstre, ElementName=root}" />
+                                <Run Text="MT" />
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource texteInfosPopup}">
                                 <Run Text="Système stellaire : " />
                                 <Run Text="{Binding SystemePlanete, ElementName=root}" />
                             </TextBlock>
                             <TextBlock Style="{StaticResource texteInfosPopup}">
-                                <Run Text="Planète de type " />
+                                <Run Text="Planète de type" />
                                 <Run Text="{Binding TypePlanete, ElementName=root}" />
                             </TextBlock>
                             <TextBlock Style="{StaticResource texteInfosPopup}">
                                 <Run Text="Eau présente : " />
-                                <Run Text="{Binding EauPresentePlanete, ElementName=root}" />
+                                <Run Text="{Binding EauPresentePlanete, ElementName=root}" x:Name="eauPresente"/>
                             </TextBlock>
                             <TextBlock Style="{StaticResource texteInfosPopup}">
                                 <Run Text="Présence de vie : " />
                                 <Run Text="{Binding PresenceDeViePlanete, ElementName=root}" />
                             </TextBlock>
                         </StackPanel>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Path=EauPresente}" Value="True">
+                                <Setter TargetName="eauPresente" Property="Text" Value="Oui" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=EauPresente}" Value="False">
+                                <Setter TargetName="eauPresente" Property="Text" Value="Non" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
                     </DataTemplate>
                 </StackPanel.Resources>
                 <ContentPresenter Content="{Binding}"/>
             </StackPanel>
 
         </StackPanel>
-        <Grid Background="Transparent" MouseDown="buttonPopupClicCroix" MouseEnter="buttonPopupDessusCroix" MouseLeave="buttonPopupHorsCroix" HorizontalAlignment="Left" Margin="340 0 0 380" Width="20" Height="20">
-            <Path Style="{StaticResource PathPopup}" x:Name="QuitterPopup"
-             Data="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0" Grid.Column="1"/>
-        </Grid>
+        <local:UCPathButton Background="Transparent" MouseDown="buttonPopupClicCroix"  Margin="375 0 0 414" HorizontalAlignment="Left"
+                            x:Name="QuitterPopup" Width="10" Height="18"
+            Path="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"/>
     </Grid>
 </UserControl>

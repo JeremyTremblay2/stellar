@@ -7,6 +7,7 @@
     <Application.Resources>
         <conv:ConvertisseurDeTexteEnImage x:Key="convertisseurDeTexteEnImage"/>
         <conv:ConvertisseurDeValeurs x:Key="convertisseurDeValeurs"/>
+        <conv:ConvertisseurDEnumerationsEnTexte x:Key="convertisseurDEnumerationsEnTexte"/>
 
         <SolidColorBrush Color="AliceBlue" x:Key="couleurBouton" />
         <SolidColorBrush Color="Gray" x:Key="couleurBoutonPresse" />
