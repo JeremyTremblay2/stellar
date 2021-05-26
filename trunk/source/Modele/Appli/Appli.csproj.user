@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="fenetres\AjouterEtoile.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="usersControls\UCImageAstre.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -16,11 +19,11 @@
     <Compile Update="usersControls\UCPopup.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="usersControls\UCPopupEtoile.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="fenetres\AjouterEtoile.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -31,9 +34,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="usersControls\UCPopup.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="usersControls\UCPopupEtoile.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

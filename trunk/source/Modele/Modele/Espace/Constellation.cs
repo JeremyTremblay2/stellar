@@ -186,15 +186,6 @@ namespace Espace
             }
 
             //On supprime les anciens segments, et on ajoute les nouveaux.
-            foreach (Segment seg in tempo)
-            {
-                if (LesSegments.Contains(seg))
-                {
-                    LesSegments.Remove(seg);
-                }
-            }
-            LesSegments.AddRange(addSeg);
-
             lesSegments.ExceptWith(tempo);
             lesSegments.UnionWith(addSeg);
 
@@ -202,8 +193,10 @@ namespace Espace
             lesPoints.Remove(ancienPoint);
             lesPoints.Add(nouveauPoint);
 
-            LesPoints.Remove(ancienPoint);
-            LesPoints.Add(nouveauPoint);
+            LesPoints.Clear();
+            LesSegments.Clear();
+            LesPoints.AddRange(lesPoints);
+            LesSegments.AddRange(lesSegments);
 
             Debug.WriteLine("Affichage des segments de la collection observable :");
             foreach(Segment seg in LesSegments)
@@ -284,14 +277,18 @@ namespace Espace
             //resultat
             if (visite.Count < lesPoints.Count)
             {
-                bool passage;
-
                 HashSet<Point> lesPt = new HashSet<Point>();
                 HashSet<Segment> lesSeg = new HashSet<Segment>();
                 lesPt.UnionWith(lesPoints);
                 lesSeg.UnionWith(lesSegments);
                 lesPoints.IntersectWith(visite);
                 lesSegments.IntersectWith(segmentsConstel);
+
+                LesSegments.Clear();
+                LesSegments.AddRange(lesSegments);
+                LesPoints.Clear();
+                LesPoints.AddRange(lesPoints);
+
                 lesPt.ExceptWith(visite);
                 lesSeg.ExceptWith(segmentsConstel);
                 return new Constellation(lesPt, lesSeg);

@@ -92,8 +92,11 @@ namespace Modele
         public void AjouterUnAstre(Point position, Astre astre)
         {
             Carte.AjouterUnAstre(position, astre);
-            lesAstres.Add(astre);
-            lesAstresTries.Add(astre);
+            if (!lesAstres.Contains(astre))
+            {
+                lesAstres.Add(astre);
+                lesAstresTries.Add(astre);
+            }
         }
 
         /// <summary>
@@ -209,6 +212,11 @@ namespace Modele
             LesAstresTries = new ReadOnlyObservableCollection<Astre>(lesAstresTries);
 
             OnPropertyChanged(nameof(LesAstresTries));
+        }
+
+        public Astre RecupererAstre(string nom)
+        {
+            return lesAstres.SingleOrDefault(astre => astre.Nom.Equals(nom));
         }
 
 
