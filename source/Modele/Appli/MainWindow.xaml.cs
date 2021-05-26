@@ -54,8 +54,6 @@ namespace Appli
 
         public Geometrie.Point PointClique1 { get => pointClique; private set => pointClique = value; }
 
-        public Geometrie.Point ClicCanvas { get; private set; }
-
         public MainWindow()
         { 
             InitializeComponent();
@@ -273,8 +271,11 @@ namespace Appli
             {
                 var nouvelleEtoile = new AjouterEtoile();
                 nouvelleEtoile.ShowDialog();
-                ClicCanvas = new Geometrie.Point((int)e.GetPosition(this).X-350, (int)e.GetPosition(this).Y-50);
+                Geometrie.Point point = new Geometrie.Point((int)e.GetPosition(this).X + decalageHorizontalCanvas, 
+                    (int)e.GetPosition(this).Y + decalageVerticalCanvas);
+                Manager.AjouterUnAstre(point, nouvelleEtoile.LEtoile);
             }			
+
             if (astreSelectionne != null)
             {
                 var point = new Geometrie.Point((int)e.GetPosition(this).X - decalageHorizontalCanvas, 
