@@ -184,6 +184,8 @@ namespace Modele
                 }
             }
 
+                
+
             //Si ce n'est pas une constellation, c'est une suppression pure et simple.
             else                
             {

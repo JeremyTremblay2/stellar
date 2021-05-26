@@ -16,26 +16,31 @@ namespace Espace
     /// Une constellation est un ensemble de points reliés par des segments, le tout forme un graphe connexe (les étoiles et les 
     /// liens entre elles).
     /// </summary>
-    public class Constellation : IEquatable<Constellation>, INotifyPropertyChanged
+    public class Constellation : IEquatable<Constellation>
     {
         //Les hashsets de points et segments permettent de ne pas avoir de coordonnées en double.
         private HashSet<Point> lesPoints = new HashSet<Point>();
         private HashSet<Segment> lesSegments = new HashSet<Segment>();
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        void OnPropertyChanged(string nomPropriete)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropriete));
+        private ObservableCollection<Segment> lesSegments2 = new ObservableCollection<Segment>();
 
         /// <summary>
         /// Propriété en lecture seule concernant l'hashset de points, qui sont l'ensemble des points contenus dans une constellation.
         /// </summary>
-        public ConcurrentObservableHashSet<Point> LesPoints { get; private set; } = new ConcurrentObservableHashSet<Point>();
+        public ObservableCollection<Point> LesPoints { get; private set; } = new ObservableCollection<Point>();
 
         /// <summary>
         /// Propriété en lecture seule concernant l'hashset de segments, qui sont l'ensembles des liens qui relient les étoiles entres elles.
         /// </summary>
-        public ConcurrentObservableHashSet<Segment> LesSegments { get; private set; } = new ConcurrentObservableHashSet<Segment>();
+        public ObservableCollection<Segment> LesSegments
+        {
+            get => lesSegments2;
+            private set
+            {
+                if (value == lesSegments2) return;
+                lesSegments2 = value;
+            }
+        } 
 
         /// <summary>
         /// Propriété à changer en méthode de vérification des collections vides.
@@ -108,7 +113,10 @@ namespace Espace
             lesPoints.Add(nouveauPoint);
             lesSegments.Add(seg);
 
-            LesPoints.Add(nouveauPoint);
+            if (!LesPoints.Contains(nouveauPoint))
+            {
+                LesPoints.Add(nouveauPoint);
+            }
             LesSegments.Add(seg);
         }
 
@@ -195,8 +203,14 @@ namespace Espace
 
             LesPoints.Clear();
             LesSegments.Clear();
-            LesPoints.AddRange(lesPoints);
-            LesSegments.AddRange(lesSegments);
+            foreach(Point p in lesPoints)
+            {
+                LesPoints.Add(p);
+            }
+            foreach (Segment seg in lesSegments)
+            {
+                LesSegments.Add(seg);
+            }
 
             Debug.WriteLine("Affichage des segments de la collection observable :");
             foreach(Segment seg in LesSegments)
@@ -218,8 +232,6 @@ namespace Espace
             {
                 Debug.WriteLine(pt);
             }
-
-            OnPropertyChanged(nameof(LesSegments));
         }
 
         /// <summary>
@@ -289,10 +301,16 @@ namespace Espace
                 lesSegments.IntersectWith(segmentsConstel);
 
                 LesSegments.Clear();
-                LesSegments.AddRange(lesSegments);
                 LesPoints.Clear();
-                LesPoints.AddRange(lesPoints);
-
+                foreach (Point p in lesPoints)
+                {
+                    LesPoints.Add(p);
+                }
+                foreach (Segment seg in lesSegments)
+                {
+                    LesSegments.Add(seg);
+                }
+                
                 lesPt.ExceptWith(visite);
                 lesSeg.ExceptWith(segmentsConstel);
                 return new Constellation(lesPt, lesSeg);
@@ -314,8 +332,14 @@ namespace Espace
             lesSegments.UnionWith(constel.lesSegments);
             lesSegments.Add(seg);
 
-            LesPoints.AddRange(constel.lesPoints);
-            LesSegments.AddRange(constel.lesSegments);
+            foreach (Point p in lesPoints)
+            {
+                LesPoints.Add(p);
+            }
+            foreach (Segment segment in lesSegments)
+            {
+                LesSegments.Add(segment);
+            }
             LesSegments.Add(seg);
         }
 

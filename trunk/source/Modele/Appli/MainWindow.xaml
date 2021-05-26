@@ -254,7 +254,7 @@
 
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="{x:Type espace:Constellation}">
-                            <ItemsControl ItemsSource="{Binding Path=LesSegments}">
+                            <ItemsControl ItemsSource="{Binding LesSegments}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <Canvas/>
