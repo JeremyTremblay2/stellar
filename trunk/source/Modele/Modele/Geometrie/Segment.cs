@@ -19,6 +19,11 @@ namespace Geometrie
         public Point Point2 { get; private set; }
 
         /// <summary>
+        /// La couleur d'un segment, permet de l'identifier et est jaune par défaut.
+        /// </summary>
+        public string Couleur { get; internal set; } = "Orange";
+
+        /// <summary>
         /// Constructeur de Segment.
         /// </summary>
         /// <param name="point1">Premier point du segment.</param>

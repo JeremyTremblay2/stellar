@@ -268,7 +268,6 @@ namespace Appli
         private void CanevaClic(object sender, MouseButtonEventArgs e)
         {
             TexteMessageErreurCarte = "qef";
-            Debug.WriteLine(UCPopup.NomAstrePropriete);
 
             if (boutonsCarteActifs["deplacer"] && PointClique1 != null)
             {
@@ -283,17 +282,21 @@ namespace Appli
             }
 			else if (boutonsCarteActifs["ajouterEtoile"])
             {
+                var point = new Geometrie.Point((int)e.GetPosition(this).X - decalageHorizontalCanvas, 
+                    (int)e.GetPosition(this).Y - decalageVerticalCanvas);
+                Debug.WriteLine(point);
                 var nouvelleEtoile = new AjouterEtoile();
                 nouvelleEtoile.ShowDialog();
-                Geometrie.Point point = new Geometrie.Point((int)e.GetPosition(this).X + decalageHorizontalCanvas, 
-                    (int)e.GetPosition(this).Y + decalageVerticalCanvas);
-                Manager.AjouterUnAstre(point, nouvelleEtoile.LEtoile);
+                if (nouvelleEtoile.LEtoile != null)
+                {
+                    Manager.AjouterUnAstre(point, nouvelleEtoile.LEtoile);
+                }
             }			
 
             if (astreSelectionne != null)
             {
-                var point = new Geometrie.Point((int)e.GetPosition(this).X - decalageHorizontalCanvas, 
-                    (int)e.GetPosition(this).Y - decalageVerticalCanvas);
+                var point = new Geometrie.Point((int)e.GetPosition(this).X, (int)e.GetPosition(this).Y);
+                Debug.WriteLine(point);
                 Manager.AjouterUnAstre(point, astreSelectionne);
                 astreSelectionne = null;
             }    

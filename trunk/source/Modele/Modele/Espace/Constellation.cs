@@ -39,6 +39,8 @@ namespace Espace
         /// </summary>
         public bool Vide { get; private set; }
 
+        public string Couleur { get; set; } = "Red";
+
         /// <summary>
         /// Constructeur de Constellations. Prend deux points en paramètre et trace un segment.
         /// </summary>
@@ -225,8 +227,8 @@ namespace Espace
                     {
                         if (!visite.Contains(seg.Point1) || !parcoursPile(pilePt, tailleLogique, seg.Point1))
                         {
-                            pilePt[tailleLogique] = seg.Point1;
-                            tailleLogique++;
+                                pilePt[tailleLogique] = seg.Point1;
+                                tailleLogique++;
                         }
                     }
                 }
@@ -258,6 +260,7 @@ namespace Espace
                 return new Constellation(lesPt, lesSeg);
             }
         }
+
         /// <summary>
         /// Permet de parcourir la pile de points lors de l'exécution de la méthode DiviserConstellation()
         /// </summary>

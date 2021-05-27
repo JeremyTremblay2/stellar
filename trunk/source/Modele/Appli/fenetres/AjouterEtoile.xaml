@@ -60,49 +60,73 @@
             <!--1-->
             <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Nom : " Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
             <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="1" Grid.Column="1"
-                     Text="{Binding LEtoile.Nom, Mode=OneWay}"/>
+                     Text="{Binding LEtoile.Nom}"/>
 
 
             <!--2-->
             <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Description : " Grid.Row="2" Margin="0,0,0,0"/>
             <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="2" Grid.Column="2"
-                         Text="{Binding LEtoile.Description, Mode=OneWay}"/>
+                         Text="{Binding LEtoile.Description}"/>
 
             <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Constellation : " Grid.Row="3" Margin="0,0,0,0"/>
             <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="3" Grid.Column="3"
-                         Text="{Binding LEtoile.Constellation, Mode=OneWay}"/>
+                         Text="{Binding LEtoile.Constellation}"/>
 
             <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Age : " Grid.Row="4" Margin="0,0,0,0"/>
             <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="4" Grid.Column="4"
-                     Text="{Binding LEtoile.Age, Mode=OneWay}"/>
+                     Text="{Binding LEtoile.Age}"/>
 
             <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Masse : " Grid.Row="5" Margin="0,0,0,0"/>
             <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="5" Grid.Column="5"
-                     Text="{Binding Masse, Mode=OneWay}"/>
+                     Text="{Binding Masse}"/>
 
             <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Luminosité : " Grid.Row="6" Margin="0,0,0,0"/>
             <TextBox Template="{StaticResource TextBoxRecherche}"  Grid.Row="6" Grid.Column="6"
-                         Text="{Binding LEtoile.Luminosite, Mode=OneWay}"/>
+                         Text="{Binding LEtoile.Luminosite}"/>
 
             <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Température : " Grid.Row="7" Margin="0,0,0,0"/>
             <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="7" Grid.Column="7"
-                         Text="{Binding LEtoile.Temperature, Mode=OneWay}"/>
+                         Text="{Binding LEtoile.Temperature}"/>
 
 
 
         </Grid>
-        <Border>
-            <Button Width="100" Height="30" Click="Valider"  Margin="0 400 0 0" Opacity="1">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border CornerRadius="5" BorderThickness="2" BorderBrush="DarkGreen" Background="Green">
-                            <TextBlock Text="Valider" HorizontalAlignment="Center" Opacity="1" Foreground="AliceBlue" />
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-        </Border>
-        <usersControls:UCPathButton Width="10" Height="18" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,17,14,0" MouseLeftButtonDown="Fermer"
-                                    Path="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Border HorizontalAlignment="Center">
+                <Button Width="100" Height="30" Click="Valider"  Margin="0 400 0 0" Opacity="1">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border CornerRadius="10" BorderThickness="2" BorderBrush="DarkGreen" Background="Green">
+                                <TextBlock Text="Valider" HorizontalAlignment="Center" Opacity="1" Foreground="AliceBlue"
+                                           Margin="0 5 0 0"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Border>
+
+            <Border Grid.Column="1" HorizontalAlignment="Center">
+                <Button Width="100" Height="30" Click="Fermer" Margin="0 400 0 0" Opacity="1">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border CornerRadius="10" BorderThickness="2" BorderBrush="DarkRed" Background="Red">
+                                <TextBlock Text="Annuler" HorizontalAlignment="Center" Opacity="1" Foreground="AliceBlue" 
+                                           Margin="0 5 0 0"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Border>
+
+        </Grid>
+        
+        <usersControls:UCPathButton Width="10" Height="18" HorizontalAlignment="Right" VerticalAlignment="Top" 
+                                    Margin="0,17,14,0" MouseLeftButtonDown="Fermer"
+            Path="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"/>
     </Grid>
 </Window>

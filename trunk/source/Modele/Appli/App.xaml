@@ -110,7 +110,6 @@
             <Setter Property="BorderBrush" Value="LightBlue"/>
             <Setter Property="FontFamily" Value="{StaticResource policeParDefaut}"/>
             <Setter Property="FontSize" Value="13"/>
-
         </Style>
 
         <ControlTemplate x:Key="TextBoxRecherche" TargetType="{x:Type TextBoxBase}">
