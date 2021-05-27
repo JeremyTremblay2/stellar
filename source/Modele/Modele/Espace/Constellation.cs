@@ -197,7 +197,7 @@ namespace Espace
         {
             if (lesPoints.Count == 0) return null;
             //initialisation
-            int i=0, tailleLogique = 0, TaillePhysique = lesPoints.Count; //gestion de la pile
+            int i = 0, tailleLogique = 0, TaillePhysique = lesPoints.Count; //gestion de la pile
             Point[] pilePt = new Point[TaillePhysique]; //pile
             Point ptDeb = new Point(); //point de départ
             HashSet<Point> visite = new HashSet<Point>(); // les points déjà visités
@@ -208,22 +208,22 @@ namespace Espace
             //parcours en largeur
             pilePt[i] = ptDeb;
             tailleLogique++;
-            while(pilePt[i] != null)
+            while (pilePt[i] != null)
             {
-                
+
                 IEnumerable<Segment> tempoSeg = lesSegments.Where(seg => seg.PtEquals(pilePt[i]));
-                foreach(Segment seg in tempoSeg)
+                foreach (Segment seg in tempoSeg)
                 {
-                    if(seg.Point1.Equals(pilePt[i]))
+                    if (seg.Point1.Equals(pilePt[i]))
                     {
-                        if (!visite.Contains(seg.Point2))
+                        if (!visite.Contains(seg.Point2) || !parcoursPile(pilePt, tailleLogique, seg.Point2))
                         {
                             pilePt[tailleLogique] = seg.Point2;
                             tailleLogique++;
                         }
                     } else
                     {
-                        if (!visite.Contains(seg.Point1))
+                        if (!visite.Contains(seg.Point1) || !parcoursPile(pilePt, tailleLogique, seg.Point1))
                         {
                             pilePt[tailleLogique] = seg.Point1;
                             tailleLogique++;
@@ -232,7 +232,7 @@ namespace Espace
                 }
                 segmentsConstel.UnionWith(tempoSeg);
                 visite.Add(pilePt[i]);
-                if (i == TaillePhysique-1 || tailleLogique >= TaillePhysique)
+                if (i == TaillePhysique - 1 || tailleLogique >= TaillePhysique)
                 {
                     break;
                 }
@@ -243,7 +243,7 @@ namespace Espace
             if (tailleLogique >= TaillePhysique)
             {
                 return null;
-            } 
+            }
             else
             {
                 HashSet<Point> lesPt = new HashSet<Point>();
@@ -257,6 +257,24 @@ namespace Espace
                 MiseAJourCollections();
                 return new Constellation(lesPt, lesSeg);
             }
+        }
+        /// <summary>
+        /// Permet de parcourir la pile de points lors de l'exécution de la méthode DiviserConstellation()
+        /// </summary>
+        /// <param name="tab">Tableau de points</param>
+        /// <param name="tailleLogique">Taille logique du tableau</param>
+        /// <param name="pt">Point à trouver dans le tableau</param>
+        /// <returns></returns>
+        private bool parcoursPile(Point[] tab, int tailleLogique, Point pt)
+        {
+            for(int i=0; i<tailleLogique; ++i)
+            {
+                if(tab[i].Equals(pt))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>
