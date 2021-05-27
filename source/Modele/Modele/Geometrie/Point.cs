@@ -27,11 +27,7 @@ namespace Geometrie
         /// <summary>
         /// Constructeur de Point, permet d'initialiser un point aux coordonnées 0,0. La couleur par défaut est jaune.
         /// </summary>
-        public Point()
-        {
-            Deplacer(0, 0);
-            Couleur = "Yellow";
-        }
+        public Point() : this(0, 0) {   }
 
         /// <summary>
         /// Constructeur de Point, permet d'initialiser un point avec des coordonnées. La couleur par défaut est jaune.

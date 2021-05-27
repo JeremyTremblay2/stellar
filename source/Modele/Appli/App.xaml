@@ -87,12 +87,12 @@
             <Setter Property="FontFamily" Value="{StaticResource policeParDefaut}"/>
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Height" Value="25"/>
+            <Setter Property="Height" Value="20"/>
             <Style.Triggers>
                 <Trigger Property="IsFocused" Value="True">
                     <Setter Property="Background" Value="LightGray"/>
-                    <Setter Property="Foreground" Value="AliceBlue"/>
-                    <Setter Property="BorderBrush" Value="blue" />
+                    <Setter Property="Foreground" Value="DarkSalmon"/>
+                    <Setter Property="BorderBrush" Value="Blue" />
                 </Trigger>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Cursor" Value="Hand" />
