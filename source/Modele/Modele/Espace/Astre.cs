@@ -94,7 +94,7 @@ namespace Espace
 
         /// <summary>
         /// Propriété pour savoir si l'astre est un favori de l'utilisateur ou non, représenté par un booléen.
-        /// Une notification de changement est envoyé quand l'état du favori est modifié.
+        /// Une notification de changement est envoyé à la vue quand l'état du favori est modifié.
         /// </summary>
         public bool Favori
         {

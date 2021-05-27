@@ -21,6 +21,9 @@ namespace Appli.fenetres
     /// </summary>
     public partial class AjouterEtoile : Window
     {
+        private const int longueurMaxNom = 18;
+        private const int longueurMaxConstellation = 20;
+        private const int longueurMaxDescription = 200;
 
         public Manager LeManager => (App.Current as App).LeManager;
 
@@ -35,11 +38,6 @@ namespace Appli.fenetres
             DataContext = this;
         }
 
-        /*private void buttonPopupClicCroix(object sender, MouseButtonEventArgs e)
-        {
-            (Application.Current.MainWindow as MainWindow).PopupEtoile.Visibility = Visibility.Hidden;
-        }*/
-
         private void Valider(object sender, RoutedEventArgs e)
         {
             if (LeManager.RecupererAstre(LEtoile.Nom) != null)
@@ -47,27 +45,65 @@ namespace Appli.fenetres
                 MessageBox.Show("Un astre avec ce nom existe déjà dans l'application, veuillez choisir un nom différent.",
                                 "Attention, ce nom est déjà utilisé !",
                                 MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (LEtoile.Nom.Length > longueurMaxNom)
+            {
+                MessageBox.Show($"Le nom de cette étoile est trop long, il doit faire au maximum {longueurMaxNom} caractères.",
+                    "Nom trop long",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (LEtoile.Description.Length > longueurMaxDescription)
+            {
+                MessageBox.Show($"La description de cette étoile est trop longue, elle doit faire au maximum " +
+                    $"{longueurMaxDescription} caractères.",
+                    "Description trop longue",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (LEtoile.Constellation.Length > longueurMaxConstellation)
+            {
+                MessageBox.Show($"La constellation de cette étoile possède un nom trop long, elle doit faire au maximum " +
+                    $"{longueurMaxConstellation} caractères.",
+                    "Constellation trop longue",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
 
-            /*main.Manager.AjouterUnAstre(main.ClicCanvas, new FabriqueDEtoile().Initialiser(Nom.Text)
-                                      .AvecDescription(Description.Text)
-                                      .AvecAge(int.Parse(Age.Text))
-                                      .AvecMasse(float.Parse(Masse.Text))
-                                      .AvecTemperature(int.Parse(Temperature.Text))
-                                      .AvecLuminosite(float.Parse(Luminosite.Text))
-                                      .EstDansLaConstellation(Constellation.Text)
+            try
+            {
+
+                /*LeManager.AjouterUnAstre(ClicCanvas, new FabriqueDEtoile().Initialiser(Nom)
+                                      .AvecDescription(Description)
+                                      .AvecAge(int.Parse(Age))
+                                      .AvecMasse(float.Parse(Masse))
+                                      .AvecTemperature(int.Parse(Temperature))
+                                      .AvecLuminosite(float.Parse(Luminosite))
+                                      .EstDansLaConstellation(Constellation)
                                       .AvecType(TypeEtoile.NaineJaune)
                                       //.AvecImage("sirius.jpeg")
                                       .Construire());*/
+                Close();
 
-            LeManager.AjouterUnAstre(LEtoile);
-            //PopupEtoile.Visibility = Visibility.Hidden;
-            Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.StackTrace + "\nVérifiez les données puis réessayez.",
+                                "Une erreur est survenue dans l'ajout",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Fermer(object sender, MouseButtonEventArgs e)
         {
+            LEtoile = null;
             Close();
+        }
+
+        private void Fermer(object sender, RoutedEventArgs e)
+        {
+            Fermer(null, null);
         }
 
         private void Deplacer(object sender, MouseButtonEventArgs e)
