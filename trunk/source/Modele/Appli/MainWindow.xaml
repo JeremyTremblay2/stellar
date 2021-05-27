@@ -263,11 +263,12 @@
 
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Line Stroke="Yellow" StrokeThickness="2"
+                                        <Line StrokeThickness="2" Stroke="Yellow"
                                       X1="{Binding Path=Point1.X, Converter={StaticResource convertisseurDeValeurs}, ConverterParameter=8}" 
                                       Y1="{Binding Path=Point1.Y, Converter={StaticResource convertisseurDeValeurs}, ConverterParameter=8}" 
                                       X2="{Binding Path=Point2.X, Converter={StaticResource convertisseurDeValeurs}, ConverterParameter=8}" 
-                                      Y2="{Binding Path=Point2.Y, Converter={StaticResource convertisseurDeValeurs}, ConverterParameter=8}"/>
+                                      Y2="{Binding Path=Point2.Y, Converter={StaticResource convertisseurDeValeurs}, ConverterParameter=8}">
+                                        </Line>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
