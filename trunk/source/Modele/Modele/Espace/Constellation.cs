@@ -218,17 +218,18 @@ namespace Espace
                 {
                     if (seg.Point1.Equals(pilePt[i]))
                     {
-                        if (!visite.Contains(seg.Point2) || !parcoursPile(pilePt, tailleLogique, seg.Point2))
+                        if (!visite.Contains(seg.Point2) && !pilePt.Contains(seg.Point2))
                         {
                             pilePt[tailleLogique] = seg.Point2;
                             tailleLogique++;
                         }
-                    } else
+                    } 
+                    else
                     {
-                        if (!visite.Contains(seg.Point1) || !parcoursPile(pilePt, tailleLogique, seg.Point1))
+                        if (!visite.Contains(seg.Point1) && !pilePt.Contains(seg.Point1))
                         {
-                                pilePt[tailleLogique] = seg.Point1;
-                                tailleLogique++;
+                            pilePt[tailleLogique] = seg.Point1;
+                            tailleLogique++;
                         }
                     }
                 }
@@ -259,25 +260,6 @@ namespace Espace
                 MiseAJourCollections();
                 return new Constellation(lesPt, lesSeg);
             }
-        }
-
-        /// <summary>
-        /// Permet de parcourir la pile de points lors de l'exécution de la méthode DiviserConstellation()
-        /// </summary>
-        /// <param name="tab">Tableau de points</param>
-        /// <param name="tailleLogique">Taille logique du tableau</param>
-        /// <param name="pt">Point à trouver dans le tableau</param>
-        /// <returns></returns>
-        private bool parcoursPile(Point[] tab, int tailleLogique, Point pt)
-        {
-            for(int i=0; i<tailleLogique; ++i)
-            {
-                if(tab[i].Equals(pt))
-                {
-                    return true;
-                }
-            }
-            return false;
         }
 
         /// <summary>
