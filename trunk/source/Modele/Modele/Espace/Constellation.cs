@@ -39,7 +39,7 @@ namespace Espace
         /// </summary>
         public bool Vide { get; private set; }
 
-        public string Couleur { get; set; } = "Red";
+        public string Couleur { get; set; }
 
         /// <summary>
         /// Constructeur de Constellations. Prend deux points en paramètre et trace un segment.
@@ -53,9 +53,9 @@ namespace Espace
                 throw new ArgumentException($"Un des point fournit lors de la création de la constellation est null." +
                     $"Le premier point : {point1}, le second : {point2}");
             }
-
+            CouleurConstel();
             Segment s = new Segment(point1, point2);
-
+            s.Couleur = Couleur;
             lesPoints.Add(point1);
             lesPoints.Add(point2);
             lesSegments.Add(s);
@@ -78,10 +78,10 @@ namespace Espace
                 throw new ArgumentException($"Un des point ou segment fournit lors de la création de la constellation est null." +
                     $"Les points : {points}, les segments : {segments}");
             }
-
+            CouleurConstel();
             lesPoints.UnionWith(points);
             lesSegments.UnionWith(segments);
-
+            AppliqueCouleur();
             MiseAJourCollections();
 
             Vide = false;
@@ -101,6 +101,7 @@ namespace Espace
             }
 
             Segment seg = new Segment(point, nouveauPoint);
+            seg.Couleur = Couleur;
             lesPoints.Add(nouveauPoint);
             lesSegments.Add(seg);
 
@@ -170,11 +171,15 @@ namespace Espace
             {
                 if (seg.Point1.Equals(ancienPoint))
                 {
-                    addSeg.Add(new Segment(nouveauPoint, seg.Point2));
+                    Segment segTempo = new Segment(nouveauPoint, seg.Point2);
+                    segTempo.Couleur = Couleur;
+                    addSeg.Add(segTempo);
                 }
                 else
                 {
-                    addSeg.Add(new Segment(seg.Point1, nouveauPoint));
+                    Segment segTempo = new Segment(nouveauPoint, seg.Point1);
+                    segTempo.Couleur = Couleur;
+                    addSeg.Add(segTempo);
                 }
             }
 
@@ -276,7 +281,7 @@ namespace Espace
             lesPoints.UnionWith(constel.lesPoints);
             lesSegments.UnionWith(constel.lesSegments);
             lesSegments.Add(seg);
-
+            AppliqueCouleur();
             MiseAJourCollections();
         }
 
@@ -413,6 +418,30 @@ namespace Espace
             foreach (Point pt in lesPoints)
             {
                 LesPoints.Add(pt);
+            }
+        }
+
+        /// <summary>
+        /// Choisis une couleur aléatoire
+        /// </summary>
+        private void CouleurConstel()
+        {
+            var alea = new Random();
+            System.Drawing.Color c = System.Drawing.Color.FromArgb(255, alea.Next(256), alea.Next(256), alea.Next(256));
+            c.ToArgb();
+            Couleur = "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2"); 
+
+            //System.Drawing.Color.FromArgb(255, alea.Next(256), alea.Next(256), alea.Next(256));
+        }
+
+        /// <summary>
+        /// Applique la couleur sur tout les segments de la constellation
+        /// </summary>
+        private void AppliqueCouleur()
+        {
+            foreach (Segment seg in lesSegments)
+            {
+                seg.Couleur = Couleur;
             }
         }
     }
