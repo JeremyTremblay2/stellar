@@ -8572,7 +8572,7 @@
 													},
 													"font": "Arial;13;0",
 													"left": 240.72998046875,
-													"top": 197,
+													"top": 189,
 													"width": 215.24609375,
 													"height": 13,
 													"text": "Astre is Etoile && Constellation!= null"
@@ -8585,7 +8585,7 @@
 													},
 													"font": "Arial;13;1",
 													"left": 221,
-													"top": 197,
+													"top": 189,
 													"width": 14.72998046875,
 													"height": 13,
 													"text": "alt"
@@ -8619,13 +8619,13 @@
 																	"visible": false,
 																	"font": "Arial;13;0",
 																	"left": 236,
-																	"top": 230,
+																	"top": 222,
 																	"height": 13
 																}
 															],
 															"font": "Arial;13;0",
 															"left": 216,
-															"top": 215,
+															"top": 207,
 															"width": 377,
 															"height": 43,
 															"guardLabel": {
@@ -8635,14 +8635,14 @@
 													],
 													"font": "Arial;13;0",
 													"left": 216,
-													"top": 215,
+													"top": 207,
 													"width": 377,
 													"height": 43
 												}
 											],
 											"font": "Arial;13;0",
 											"left": 216,
-											"top": 192,
+											"top": 184,
 											"width": 377,
 											"height": 929,
 											"nameLabel": {
@@ -9453,10 +9453,10 @@
 													},
 													"font": "Arial;13;0",
 													"left": 755.578125,
-													"top": 429,
-													"width": 44.36083984375,
+													"top": 421,
+													"width": 125.2998046875,
 													"height": 13,
-													"text": "foreach"
+													"text": "Collection<Segment>"
 												},
 												{
 													"_type": "LabelView",
@@ -9466,7 +9466,7 @@
 													},
 													"font": "Arial;13;1",
 													"left": 725,
-													"top": 429,
+													"top": 421,
 													"width": 25.578125,
 													"height": 13,
 													"text": "loop"
@@ -9500,13 +9500,13 @@
 																	"visible": false,
 																	"font": "Arial;13;0",
 																	"left": 740,
-																	"top": 462,
+																	"top": 454,
 																	"height": 13
 																}
 															],
 															"font": "Arial;13;0",
 															"left": 720,
-															"top": 447,
+															"top": 439,
 															"width": 481,
 															"height": 43,
 															"guardLabel": {
@@ -9516,14 +9516,14 @@
 													],
 													"font": "Arial;13;0",
 													"left": 720,
-													"top": 447,
+													"top": 439,
 													"width": 481,
 													"height": 43
 												}
 											],
 											"font": "Arial;13;0",
 											"left": 720,
-											"top": 424,
+											"top": 416,
 											"width": 481,
 											"height": 145,
 											"nameLabel": {
@@ -9654,8 +9654,8 @@
 														"$ref": "AAAAAAF5o9aTt0546g4="
 													},
 													"font": "Arial;13;0",
-													"left": 635.578125,
-													"top": 421,
+													"left": 643.578125,
+													"top": 397,
 													"width": 61.3408203125,
 													"height": 13,
 													"text": "Pile != null"
@@ -9667,8 +9667,8 @@
 														"$ref": "AAAAAAF5o9aTt0546g4="
 													},
 													"font": "Arial;13;1",
-													"left": 605,
-													"top": 421,
+													"left": 613,
+													"top": 397,
 													"width": 25.578125,
 													"height": 13,
 													"text": "loop"
@@ -9701,14 +9701,14 @@
 																	},
 																	"visible": false,
 																	"font": "Arial;13;0",
-																	"left": 620,
-																	"top": 454,
+																	"left": 628,
+																	"top": 430,
 																	"height": 13
 																}
 															],
 															"font": "Arial;13;0",
-															"left": 600,
-															"top": 439,
+															"left": 608,
+															"top": 415,
 															"width": 609,
 															"height": 43,
 															"guardLabel": {
@@ -9717,17 +9717,17 @@
 														}
 													],
 													"font": "Arial;13;0",
-													"left": 600,
-													"top": 439,
+													"left": 608,
+													"top": 415,
 													"width": 609,
 													"height": 43
 												}
 											],
 											"font": "Arial;13;0",
-											"left": 600,
-											"top": 416,
+											"left": 608,
+											"top": 392,
 											"width": 609,
-											"height": 521,
+											"height": 545,
 											"nameLabel": {
 												"$ref": "AAAAAAF5o9aTuE55tGU="
 											},
@@ -10751,9 +10751,9 @@
 													"font": "Arial;13;0",
 													"left": 504.72998046875,
 													"top": 1013,
-													"width": 174.7861328125,
+													"width": 320.67431640625,
 													"height": 13,
-													"text": "visite.Count < lesPoints.Count"
+													"text": "i == TaillePhysique - 1 || tailleLogique >= TaillePhysique"
 												},
 												{
 													"_type": "LabelView",
@@ -10804,7 +10804,7 @@
 															"font": "Arial;13;0",
 															"left": 480,
 															"top": 1031,
-															"width": 222.01611328125,
+															"width": 367.904296875,
 															"height": 43,
 															"guardLabel": {
 																"$ref": "AAAAAAF5o/VzLFBWb28="
@@ -10814,14 +10814,14 @@
 													"font": "Arial;13;0",
 													"left": 480,
 													"top": 1031,
-													"width": 222.01611328125,
+													"width": 367.904296875,
 													"height": 43
 												}
 											],
 											"font": "Arial;13;0",
 											"left": 480,
 											"top": 1008,
-											"width": 222.01611328125,
+											"width": 367.904296875,
 											"height": 113,
 											"nameLabel": {
 												"$ref": "AAAAAAF5o/VzFlBHOMY="
@@ -10969,7 +10969,7 @@
 											"top": 896,
 											"width": 169,
 											"height": 103,
-											"text": "Si la constellation possède des points non visités la constellation les retourne  sous forme une nouvelle constellation. Sinon elle retourne rien."
+											"text": "Si la constellation possède des points non visités la constellation les retourne  sous forme d'une nouvelle constellation. Sinon elle retourne rien."
 										},
 										{
 											"_type": "UMLNoteView",
@@ -11041,7 +11041,7 @@
 													},
 													"font": "Arial;13;0",
 													"left": 240.72998046875,
-													"top": 1125,
+													"top": 1117,
 													"width": 24.84814453125,
 													"height": 13,
 													"text": "else"
@@ -11054,7 +11054,7 @@
 													},
 													"font": "Arial;13;1",
 													"left": 221,
-													"top": 1125,
+													"top": 1117,
 													"width": 14.72998046875,
 													"height": 13,
 													"text": "alt"
@@ -11088,13 +11088,13 @@
 																	"visible": false,
 																	"font": "Arial;13;0",
 																	"left": 236,
-																	"top": 1158,
+																	"top": 1150,
 																	"height": 13
 																}
 															],
 															"font": "Arial;13;0",
 															"left": 216,
-															"top": 1143,
+															"top": 1135,
 															"width": 377,
 															"height": 43,
 															"guardLabel": {
@@ -11104,14 +11104,14 @@
 													],
 													"font": "Arial;13;0",
 													"left": 216,
-													"top": 1143,
+													"top": 1135,
 													"width": 377,
 													"height": 43
 												}
 											],
 											"font": "Arial;13;0",
 											"left": 216,
-											"top": 1120,
+											"top": 1112,
 											"width": 377,
 											"height": 105,
 											"nameLabel": {
@@ -11647,7 +11647,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF5o6oGIUoIQIA="
 									},
-									"name": "foreach",
+									"name": "Collection<Segment>",
 									"interactionOperator": "loop",
 									"operands": [
 										{
@@ -11723,7 +11723,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF5o6oGIUoIQIA="
 									},
-									"name": "visite.Count < lesPoints.Count",
+									"name": "i == TaillePhysique - 1 || tailleLogique >= TaillePhysique",
 									"interactionOperator": "alt",
 									"operands": [
 										{
@@ -11792,7 +11792,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF5o6oGIEoHwsk="
 							},
-							"name": "Role2"
+							"name": "Role2",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -11800,7 +11801,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF5o6oGIEoHwsk="
 							},
-							"name": "Role3"
+							"name": "Role3",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -11808,7 +11810,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF5o6oGIEoHwsk="
 							},
-							"name": "Role4"
+							"name": "Role4",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -11816,7 +11819,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF5o6oGIEoHwsk="
 							},
-							"name": "Role5"
+							"name": "Role5",
+							"type": ""
 						}
 					]
 				}
