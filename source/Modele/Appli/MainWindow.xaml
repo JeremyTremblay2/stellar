@@ -263,11 +263,14 @@
 
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Line Stroke="{Binding Couleur}" StrokeThickness="2"
+                                        <Line StrokeThickness="2"
                                       X1="{Binding Path=Point1.X, Converter={StaticResource convertisseurDeValeurs}, ConverterParameter=8}" 
                                       Y1="{Binding Path=Point1.Y, Converter={StaticResource convertisseurDeValeurs}, ConverterParameter=8}" 
                                       X2="{Binding Path=Point2.X, Converter={StaticResource convertisseurDeValeurs}, ConverterParameter=8}" 
                                       Y2="{Binding Path=Point2.Y, Converter={StaticResource convertisseurDeValeurs}, ConverterParameter=8}">
+                                            <Line.Stroke>
+                                                <SolidColorBrush Color="{Binding Couleur}"/>
+                                            </Line.Stroke>
                                         </Line>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>

@@ -10,9 +10,6 @@
     <Compile Update="fenetres\AjouterEtoile.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="usersControls\UCBoutonValidation.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="usersControls\UCImageAstre.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,9 +25,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="usersControls\UCBoutonValidation.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="usersControls\UCImageAstre.xaml">

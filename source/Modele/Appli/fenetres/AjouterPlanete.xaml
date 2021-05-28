@@ -1,4 +1,4 @@
-﻿<Window x:Class="Appli.fenetres.AjouterEtoile"
+﻿<Window x:Class="Appli.fenetres.AjouterPlanete"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -16,14 +16,14 @@
     <Window.Resources>
         <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type System:Enum}" x:Key="enumerationTypes">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="espace:TypeEtoile" />
+                <x:Type TypeName="espace:TypePlanete" />
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </Window.Resources>
 
     <Grid>
         <Image Source="/images/UI/popup.png" Height="470" Width="350" HorizontalAlignment="Left" MouseLeftButtonDown="Deplacer"/>
-        <TextBlock Style="{StaticResource texteNomAstre}" Text="Ajouter une étoile" HorizontalAlignment="Center"
+        <TextBlock Style="{StaticResource texteNomAstre}" Text="Ajouter une planète" HorizontalAlignment="Center"
                        Foreground="Orange" Margin="0 10 0 0" FontSize="18"/>
 
         <Grid Margin="10 50">
@@ -32,6 +32,7 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
@@ -55,39 +56,45 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <!--<local:UCImageAstre ImageAstre="{Binding LEtoile.Image}" Largeur="50" Hauteur="50"/>-->
+            <!--<local:UCImageAstre ImageAstre="{Binding LaPlanete.Image}" Largeur="50" Hauteur="50"/>-->
 
             <!--1-->
             <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Nom : " Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
             <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="1" Grid.Column="1"
-                     Text="{Binding LEtoile.Nom}" Cursor="Arrow"/>
+                     Text="{Binding LaPlanete.Nom}" Cursor="Arrow"/>
 
 
             <!--2-->
             <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Description : " Grid.Row="2" Margin="0,0,0,0"/>
             <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="2" Grid.Column="2"
-                         Text="{Binding LEtoile.Description}"/>
+                         Text="{Binding LaPlanete.Description}"/>
 
-            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Constellation : " Grid.Row="3" Margin="0,0,0,0"/>
+            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Système : " Grid.Row="3" Margin="0,0,0,0" Cursor="Arrow"/>
             <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="3" Grid.Column="3"
-                         Text="{Binding LEtoile.Constellation}"/>
+                         Text="{Binding LaPlanete.Systeme}"/>
 
             <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Age : " Grid.Row="4" Margin="0,0,0,0"/>
             <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="4" Grid.Column="4"
-                     Text="{Binding LEtoile.Age}"/>
+                     Text="{Binding LaPlanete.Age}"/>
 
             <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Masse : " Grid.Row="5" Margin="0,0,0,0"/>
             <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="5" Grid.Column="5"
                      Text="{Binding Masse}"/>
 
-            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Luminosité : " Grid.Row="6" Margin="0,0,0,0"/>
-            <TextBox Template="{StaticResource TextBoxRecherche}"  Grid.Row="6" Grid.Column="6"
-                         Text="{Binding LEtoile.Luminosite}"/>
+            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Eau : " Grid.Row="6" Margin="0,0,0,0"/>
+            <CheckBox  Grid.Row="6" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5,0,0,0"
+                       Checked="{Binding LaPlanete.EauPresente}" />
 
             <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Température : " Grid.Row="7" Margin="0,0,0,0"/>
             <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="7" Grid.Column="7"
-                         Text="{Binding LEtoile.Temperature}"/>
+                         Text="{Binding LaPlanete.Temperature}"/>
+            
 
+            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Vie : " Grid.Row="8" Margin="0,0,0,0"/>
+            <CheckBox  Grid.Row="8" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5,0,0,0" x:Name="CheckVie" Checked="CheckVie_Checked" Unchecked="CheckVie_Unchecked"
+                         />
+            <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="8" Grid.Column="8" Margin="25,0,0,0" x:Name="Vie" Background="DarkGray"
+                         Text="{Binding LaPlanete.Vie}" Cursor="Arrow"/>
 
 
         </Grid>
@@ -124,9 +131,7 @@
             </Border>
 
         </Grid>
-        
-        <usersControls:UCPathButton Width="10" Height="18" HorizontalAlignment="Right" VerticalAlignment="Top" 
-                                    Margin="0,17,14,0" MouseLeftButtonDown="Fermer"
-            Path="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"/>
+        <usersControls:UCPathButton Width="10" Height="18" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,17,14,0" MouseLeftButtonDown="Fermer"
+                                    Path="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"/>
     </Grid>
 </Window>
