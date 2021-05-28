@@ -291,7 +291,19 @@ namespace Appli
                 {
                     Manager.AjouterUnAstre(point, nouvelleEtoile.LEtoile);
                 }
-            }			
+            }
+            else if (boutonsCarteActifs["ajouterPlanete"])
+            {
+                var point = new Geometrie.Point((int)e.GetPosition(this).X - decalageHorizontalCanvas,
+                    (int)e.GetPosition(this).Y - decalageVerticalCanvas);
+                Debug.WriteLine(point);
+                var nouvellePlanete = new AjouterPlanete();
+                nouvellePlanete.ShowDialog();
+                if (nouvellePlanete.LaPlanete != null)
+                {
+                    Manager.AjouterUnAstre(point, nouvellePlanete.LaPlanete);
+                }
+            }
 
             if (astreSelectionne != null)
             {
