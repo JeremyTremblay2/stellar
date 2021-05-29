@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using Utilitaire;
 
@@ -11,7 +14,7 @@ namespace Espace
     /// <summary>
     /// Un Astre est un objet abstrait, il s'agit d'un élément quelconque de l'Univers.
     /// </summary>
-    public abstract class Astre : IEquatable<Astre>, IComparable<Astre>, IComparable, INotifyPropertyChanged
+    public abstract class Astre : IEquatable<Astre>, IComparable<Astre>, IComparable, INotifyPropertyChanged, IDataErrorInfo
     {
         //Nom de l'astre.
         private string nom;
@@ -30,6 +33,8 @@ namespace Espace
         /// Propriété représentant le nom de l'astre sous forme d'une chaîne de caractères. Il ne peut pas être vide.
         /// Le nom ne peut être qu'écrit sous format titre (Xxxx Xx Xxxx).
         /// </summary>
+        [Required(ErrorMessage = "Le nom doit être renseigné")]
+        [MaxLength(18, ErrorMessage = "Le nom ne peut pas dépasser 18 caractères")]
         public string Nom
         {
             get => nom;
@@ -42,17 +47,21 @@ namespace Espace
         /// <summary>
         /// Propriété représentant l'âge de l'astre en valeur entière.
         /// </summary>
+        [Required(ErrorMessage = "L'âge doit être renseigné")]
+        [Range(0, long.MaxValue, ErrorMessage = "L'âge doit être positif.")]
         public long Age { get; set; }
 
         /// <summary>
         /// Propriété représentant une description quelconque de l'astre sous forme d'une chaîne de caractère.
         /// </summary>
+        [MaxLength(200, ErrorMessage = "La description ne peut pas dépasser 200 caractères")]
         public string Description { get; set; }
 
         /// <summary>
         /// Propriété représentant la masse de l'astre en valeur flottante (en masse terrestre s'il s'agit d'une planète, 
         /// ou en masse solaire s'il s'agit d'une étoile).
         /// </summary>
+        [Range(0, float.MaxValue, ErrorMessage = "La masse doit être positive.")]
         public float Masse { get; set; }
 
         /// <summary>
@@ -84,6 +93,27 @@ namespace Espace
         /// Propriété permettant d'associer une image à l'astre (il s'agit d'une chaîne de caractères).
         /// </summary>
         public string Image { get; set; }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                var validationResults = new List<ValidationResult>();
+
+                if (Validator.TryValidateProperty(
+                    GetType().GetProperty(columnName).GetValue(this)
+                    , new ValidationContext(this)
+                    {
+                        MemberName = columnName
+                    }
+                    , validationResults))
+                    return null;
+
+                return validationResults.First().ErrorMessage;
+            }
+        }
+
+        public string Error { get; }
 
         /// <summary>
         /// Constructeur vide, utilisé par les fabriques d'astres.

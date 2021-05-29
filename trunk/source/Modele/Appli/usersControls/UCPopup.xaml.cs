@@ -22,14 +22,23 @@ namespace Appli.usersControls
     /// </summary>
     public partial class UCPopup : UserControl
     {
-        public Manager LeManager => (Application.Current as App).LeManager;
+        private Astre astreAAjouter;
 
-        public Astre AstreAAjouter { get; set; }
+        public Manager LeManager => (Application.Current as App).LeManager;
 
         public UCPopup()
         {
             InitializeComponent();
             (Application.Current.MainWindow as MainWindow).Popup.Visibility = Visibility.Hidden;
+        }
+
+        public static readonly RoutedEvent AjouterAstreSurCarteEvent = EventManager.RegisterRoutedEvent("AjouterAstreSurCarte", 
+            RoutingStrategy.Direct, typeof(RoutedEventHandler), typeof(UCPopup));
+
+        public event RoutedEventHandler AjouterAstreSurCarte
+        {
+            add { AddHandler(AjouterAstreSurCarteEvent, value); }
+            remove { RemoveHandler(AjouterAstreSurCarteEvent, value); }
         }
 
         private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -45,15 +54,15 @@ namespace Appli.usersControls
         private void AjouterAstre(object sender, MouseButtonEventArgs e)
         {
             bool astreExistantSurCarte = false;
-            AstreAAjouter = LeManager.AstreSelectionne;
+            astreAAjouter = LeManager.AstreSelectionne;
 
-            if (AstreAAjouter == null) return;
+            if (astreAAjouter == null) return;
 
-            if (!AstreAAjouter.Personnalise)
+            if (!astreAAjouter.Personnalise)
             {
                 foreach (KeyValuePair<Geometrie.Point, Astre> kvp in LeManager.Carte.LesAstres)
                 {
-                    if (kvp.Value.Equals(AstreAAjouter))
+                    if (kvp.Value.Equals(astreAAjouter))
                     {
                         astreExistantSurCarte = true;
                     }
@@ -61,9 +70,9 @@ namespace Appli.usersControls
                 if (!astreExistantSurCarte)
                 {
                     (Application.Current.MainWindow as MainWindow).Popup.Visibility = Visibility.Hidden;
+                    RaiseEvent(new RoutedEventArgs(AjouterAstreSurCarteEvent));
                     return;
                 }
-                AstreAAjouter = null;
             }
             MessageBox.Show("Impossible d'ajouter l'astre sélectionné sur la carte, il est déjà présent.",
                             "L'astre ne peut être ajouté sur la carte",

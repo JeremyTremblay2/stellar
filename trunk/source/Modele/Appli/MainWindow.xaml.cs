@@ -1,21 +1,13 @@
 ﻿using Espace;
 using Modele;
-using Geometrie;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Appli.fenetres;
 using Appli.usersControls;
 
@@ -26,16 +18,18 @@ namespace Appli
     /// </summary>
     public partial class MainWindow : Window
     {
+        //Constantes qui correspondent au début des coordonnées du caneva, donc aux décalages horizontaux et verticaux.
         private const int decalageHorizontalCanvas = 350;
         private const int decalageVerticalCanvas = 50;
 
+        //Les attributs permettant d'effectuer les tris.
         private bool triOrdreAlphabetique = false;
         private byte filtrePersonnalisation = 3;
         private Type filtreType = typeof(Astre);
         private bool filtreFavoris = false;
         private string filtreNom;
 
-
+        //Permet de savoir quels sont les boutons enclenchés.
         private bool modeSpectateurActive = false;
         private Dictionary<string, bool> boutonsCarteActifs = new Dictionary<string, bool>()
         {
@@ -45,15 +39,15 @@ namespace Appli
             ["effacer"] = false,
             ["deplacer"] = false,
         };
+
+        //Le point cliqué par l'utilisateur.
         private Geometrie.Point pointClique;
+
+        //L'astre à ajouter sur la carte (clic effectué depuis le popup, dans la partie détail).
         private Astre astreAAjouter;
 
-        public string TexteMessageErreurCarte { get; private set; }
-
-
+        //Le manager.
         public Manager Manager => (Application.Current as App).LeManager;
-
-        public Geometrie.Point PointClique1 { get => pointClique; private set => pointClique = value; }
 
         public MainWindow()
         { 
@@ -98,7 +92,9 @@ namespace Appli
         private void EffacerDonneesCliquees()
         {
             boutonsCarteActifs = boutonsCarteActifs.ToDictionary(p => p.Key, p => false);
-            PointClique1 = null;
+            pointClique = null;
+            astreAAjouter = null;
+
             ajouterEtoile.Fill = "AliceBlue";
             ajouterPlanete.Fill = "AliceBlue";
             effacer.Fill = "AliceBlue";
@@ -118,7 +114,6 @@ namespace Appli
                 EffacerDonneesCliquees();
                 boutonsCarteActifs["ajouterEtoile"] = true;
                 ajouterEtoile.Fill = "Red";
-                astreAAjouter = null;
             }
         }
 
@@ -134,7 +129,6 @@ namespace Appli
                 EffacerDonneesCliquees();
                 boutonsCarteActifs["ajouterPlanete"] = true;
                 ajouterPlanete.Fill = "Red";
-                astreAAjouter = null;
             }
         }
 
@@ -150,7 +144,6 @@ namespace Appli
                 EffacerDonneesCliquees();
                 boutonsCarteActifs["relier"] = true;
                 relier.Fill = "Red";
-                astreAAjouter = null;
             }
         }
 
@@ -166,7 +159,6 @@ namespace Appli
                 EffacerDonneesCliquees();
                 boutonsCarteActifs["effacer"] = true;
                 effacer.Fill = "Red";
-                astreAAjouter = null;
             }
         }
 
@@ -183,7 +175,6 @@ namespace Appli
                 EffacerDonneesCliquees();
                 boutonsCarteActifs["deplacer"] = true;
                 deplacer.Fill = "Red";
-                astreAAjouter = null;
             }
         }
 
@@ -221,11 +212,11 @@ namespace Appli
 
                 else if (boutonsCarteActifs["relier"])
                 {
-                    if (PointClique1 == null)
+                    if (pointClique == null)
                     {
                         if (Manager.Carte.LesAstres[pointSurCarte] is Etoile)
                         {
-                            PointClique1 = pointSurCarte;
+                            pointClique = pointSurCarte;
                         }
                         else
                         {
@@ -235,12 +226,12 @@ namespace Appli
                         }
                     }
 
-                    else if (!PointClique1.Equals(pointSurCarte))
+                    else if (!pointClique.Equals(pointSurCarte))
                     {
                         if (Manager.Carte.LesAstres[pointSurCarte] is Etoile)
                         {
-                            Manager.RelierDeuxEtoiles(PointClique1, pointSurCarte);
-                            PointClique1 = null;
+                            Manager.RelierDeuxEtoiles(pointClique, pointSurCarte);
+                            pointClique = null;
                         }
                         else
                         {
@@ -252,14 +243,14 @@ namespace Appli
                 }
                 else if (boutonsCarteActifs["deplacer"])
                 {
-                    if (PointClique1 == null)
+                    if (pointClique == null)
                     {
-                        PointClique1 = pointSurCarte;
+                        pointClique = pointSurCarte;
                     }
                     else
                     {
-                        PointClique1 = null;
-                        PointClique1 = pointSurCarte;
+                        pointClique = null;
+                        pointClique = pointSurCarte;
                     }
                 }
                 else
@@ -272,50 +263,62 @@ namespace Appli
 
         private void CanevaClic(object sender, MouseButtonEventArgs e)
         {
-            if (boutonsCarteActifs["deplacer"] && PointClique1 != null)
+            if (boutonsCarteActifs["deplacer"] && pointClique != null)
             {
                 var point = new Geometrie.Point((int)e.GetPosition(this).X, (int)e.GetPosition(this).Y);
 				if (!RecherchePointAProximite(point) && !point.Equals(pointClique) && point.X > 16 + decalageHorizontalCanvas)
                 {
                     Debug.WriteLine(point);
                     point.Deplacer(point.X - 15 - decalageHorizontalCanvas, point.Y - decalageVerticalCanvas);
-                    Manager.DeplacerUnAstre(PointClique1, point);
-                    PointClique1 = null;
+                    Manager.DeplacerUnAstre(pointClique, point);
+                    pointClique = null;
                 }
             }
+
 			else if (boutonsCarteActifs["ajouterEtoile"])
             {
                 var point = new Geometrie.Point((int)e.GetPosition(this).X - decalageHorizontalCanvas, 
                     (int)e.GetPosition(this).Y - decalageVerticalCanvas);
 
-                var nouvelleEtoile = new AjouterEtoile();
-                nouvelleEtoile.Owner = this;
-                nouvelleEtoile.ShowDialog();
-
-                if (nouvelleEtoile.LEtoile != null)
+                if (!RecherchePointAProximite(point))
                 {
-                    Manager.AjouterUnAstre(point, nouvelleEtoile.LEtoile);
+                    var nouvelleEtoile = new AjouterEtoile();
+                    nouvelleEtoile.Owner = this;
+                    nouvelleEtoile.ShowDialog();
+
+                    if (nouvelleEtoile.LEtoile != null)
+                    {
+                        Manager.AjouterUnAstre(point, nouvelleEtoile.LEtoile);
+                    }
                 }
             }
+
             else if (boutonsCarteActifs["ajouterPlanete"])
             {
                 var point = new Geometrie.Point((int)e.GetPosition(this).X - decalageHorizontalCanvas,
                     (int)e.GetPosition(this).Y - decalageVerticalCanvas);
-                Debug.WriteLine(point);
-                var nouvellePlanete = new AjouterPlanete();
-                nouvellePlanete.ShowDialog();
-                if (nouvellePlanete.LaPlanete != null)
+                
+                if (!RecherchePointAProximite(point))
                 {
-                    Manager.AjouterUnAstre(point, nouvellePlanete.LaPlanete);
+                    var nouvellePlanete = new AjouterPlanete();
+                    nouvellePlanete.ShowDialog();
+                    if (nouvellePlanete.LaPlanete != null)
+                    {
+                        Manager.AjouterUnAstre(point, nouvellePlanete.LaPlanete);
+                    }
                 }
             }
 
-            if (astreAAjouter != null)
+            else if (astreAAjouter != null)
             {
                 var point = new Geometrie.Point((int)e.GetPosition(this).X, (int)e.GetPosition(this).Y);
-                Debug.WriteLine(point);
-                Manager.AjouterUnAstre(point, astreAAjouter);
-                astreAAjouter = null;
+
+                if (!RecherchePointAProximite(point))
+                {
+                    var point2 = new Geometrie.Point(point.X - decalageHorizontalCanvas, point.Y - decalageVerticalCanvas);
+                    Manager.AjouterUnAstre(point2, astreAAjouter);
+                    astreAAjouter = null;
+                }
             }    
         }
 
@@ -347,10 +350,15 @@ namespace Appli
 
         /**********************************************************************************************/
 
+        private void UCPopup_AjouterAstre(object sender, RoutedEventArgs e)
+        {
+            UserControl popup = sender as UserControl;
+            astreAAjouter = popup.DataContext as Astre;
+        }
+
         private void PopupClicMenu(object sender, MouseButtonEventArgs e)
         {
-            //besoin de récupérer l'astre ici.
-            
+            astreAAjouter = null;
             Popup.Visibility = Visibility.Visible; 
         }
 
