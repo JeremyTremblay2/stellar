@@ -32,7 +32,7 @@ namespace Appli.fenetres
         public AjouterEtoile()
         {
             InitializeComponent();
-            var etoile = new Etoile("Mon Etoile", "", 4500000000, 1, 1000, "", 1, TypeEtoile.NaineBlanche, true, "étoile.jpg");
+            var etoile = new Etoile("Mon Etoile", "", 4500000000, 1, 1000, "", 1, TypeEtoile.SupergeanteRouge, true, "étoile.jpg");
             LEtoile = new Etoile(etoile.Nom, etoile.Description, etoile.Age, etoile.Masse, etoile.Temperature, etoile.Constellation,
                 etoile.Luminosite, etoile.Type, etoile.Personnalise, etoile.Image);
             DataContext = this;
@@ -47,10 +47,11 @@ namespace Appli.fenetres
                                 MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (LEtoile.Nom.Length > longueurMaxNom)
+            if (LEtoile.Nom.Length > longueurMaxNom || string.IsNullOrWhiteSpace(LEtoile.Nom))
             {
-                MessageBox.Show($"Le nom de cette étoile est trop long, il doit faire au maximum {longueurMaxNom} caractères.",
-                    "Nom trop long",
+                MessageBox.Show($"Le nom de cette étoile doit faire au maximum {longueurMaxNom} caractères, mais ne peut pas " +
+                    $"non plus être vide.",
+                    "Nom incorrect",
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
@@ -73,19 +74,7 @@ namespace Appli.fenetres
 
             try
             {
-
-                /*LeManager.AjouterUnAstre(ClicCanvas, new FabriqueDEtoile().Initialiser(Nom)
-                                      .AvecDescription(Description)
-                                      .AvecAge(int.Parse(Age))
-                                      .AvecMasse(float.Parse(Masse))
-                                      .AvecTemperature(int.Parse(Temperature))
-                                      .AvecLuminosite(float.Parse(Luminosite))
-                                      .EstDansLaConstellation(Constellation)
-                                      .AvecType(TypeEtoile.NaineJaune)
-                                      //.AvecImage("sirius.jpeg")
-                                      .Construire());*/
                 Close();
-
             }
             catch (Exception exception)
             {

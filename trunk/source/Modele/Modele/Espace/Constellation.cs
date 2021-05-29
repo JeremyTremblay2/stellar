@@ -18,6 +18,8 @@ namespace Espace
     /// </summary>
     public class Constellation : IEquatable<Constellation>
     {
+        private static Random generateurCouleur = new Random();
+
         //Les hashsets de points et segments permettent de ne pas avoir de coordonnées en double.
         private HashSet<Point> lesPoints = new HashSet<Point>();
         private HashSet<Segment> lesSegments = new HashSet<Segment>();
@@ -35,11 +37,14 @@ namespace Espace
         public ObservableCollection<Segment> LesSegments { get; private set; } = new ObservableCollection<Segment>();
 
         /// <summary>
-        /// Propriété à changer en méthode de vérification des collections vides.
+        /// Propriété permettant de savoir si la constellation est vide, si elle ne contient pas de points et segments.
         /// </summary>
         public bool Vide { get; private set; }
 
-        public string Couleur { get; set; }
+        /// <summary>
+        /// La couleur de la constellation, qui sera appliquée à tous ses segments.
+        /// </summary>
+        public string Couleur { get; set; } = GenerationCouleurAleatoire();
 
         /// <summary>
         /// Constructeur de Constellations. Prend deux points en paramètre et trace un segment.
@@ -53,7 +58,7 @@ namespace Espace
                 throw new ArgumentException($"Un des point fournit lors de la création de la constellation est null." +
                     $"Le premier point : {point1}, le second : {point2}");
             }
-            CouleurConstel();
+
             Segment s = new Segment(point1, point2);
             s.Couleur = Couleur;
             lesPoints.Add(point1);
@@ -78,7 +83,7 @@ namespace Espace
                 throw new ArgumentException($"Un des point ou segment fournit lors de la création de la constellation est null." +
                     $"Les points : {points}, les segments : {segments}");
             }
-            CouleurConstel();
+
             lesPoints.UnionWith(points);
             lesSegments.UnionWith(segments);
             AppliqueCouleur();
@@ -424,14 +429,12 @@ namespace Espace
         /// <summary>
         /// Choisis une couleur aléatoire
         /// </summary>
-        private void CouleurConstel()
+        private static string GenerationCouleurAleatoire()
         {
-            var alea = new Random();
-            System.Drawing.Color c = System.Drawing.Color.FromArgb(255, alea.Next(256), alea.Next(256), alea.Next(256));
+            System.Drawing.Color c = System.Drawing.Color.FromArgb(255, generateurCouleur.Next(256),
+                generateurCouleur.Next(256), generateurCouleur.Next(256));
             c.ToArgb();
-            Couleur = "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2"); 
-
-            //System.Drawing.Color.FromArgb(255, alea.Next(256), alea.Next(256), alea.Next(256));
+            return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2"); 
         }
 
         /// <summary>

@@ -16,12 +16,6 @@ namespace Espace
         //Nom de l'astre.
         private string nom;
 
-        //Age de l'astre.
-        private long age;
-
-        //Masse de l'astre.
-        private float masse;
-
         //Permet de savoir si l'astre se trouve dans les favoris.
         private bool favori;
 
@@ -41,29 +35,14 @@ namespace Espace
             get => nom;
             set
             {
-                if (String.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException($"Le nom de l'astre ne peut pas être vide ou rempli de blanc, valeur donnée : {value}");
-                }
                 nom = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
             }
         }
 
         /// <summary>
-        /// Propriété représentant l'âge de l'astre en valeur entière. Il ne peut pas être négatif, sinon une exception est levée.
+        /// Propriété représentant l'âge de l'astre en valeur entière.
         /// </summary>
-        public long Age 
-        {
-            get => age; 
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentException($"L'âge de l'astre ne peut pas être inférieur à 0 ans. Valeur donnée : {value}");
-                }
-                age = value;
-            }
-        }
+        public long Age { get; set; }
 
         /// <summary>
         /// Propriété représentant une description quelconque de l'astre sous forme d'une chaîne de caractère.
@@ -72,20 +51,9 @@ namespace Espace
 
         /// <summary>
         /// Propriété représentant la masse de l'astre en valeur flottante (en masse terrestre s'il s'agit d'une planète, 
-        /// ou en masse solaire s'il s'agit d'une étoile). Elle ne peut pas être négative sinon une exception est levée.
+        /// ou en masse solaire s'il s'agit d'une étoile).
         /// </summary>
-        public float Masse
-        {
-            get => masse;
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentException($"La masse de l'astre ne peut pas être inférieure à 0. Valeur donnée : {value}");
-                }
-                masse = value;
-            }
-        }
+        public float Masse { get; set; }
 
         /// <summary>
         /// Propriété représentant la température de l'astre en valeur entière (en Kelvin).
