@@ -11,8 +11,6 @@ namespace Espace
     /// </summary>
     public class Etoile : Astre, IEquatable<Etoile>
     {
-        //La luminosité de l'étoile.
-        private float luminosite;
 
         /// <summary>
         /// Propriété représentant le type de l'étoile, contenu dans l'énumération TypeEtoile.
@@ -26,20 +24,8 @@ namespace Espace
 
         /// <summary>
         /// Propriété représentant la luminosité de l'étoile, sous forme d'une valeur flottante (en luminosité solaire Lo).
-        /// Elle ne peut pas être négative sinon une exception est levée.
         /// </summary>
-        public float Luminosite 
-        {
-            get => luminosite;
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentException($"La luminosité de l'astre ne peut pas être négative, valeur donnée : {value}");
-                }
-                luminosite = value;
-            }
-        }
+        public float Luminosite { get; set; }
 
         /// <summary>
         /// Constructeur vide, utilisé par les fabriques d'étoiles.

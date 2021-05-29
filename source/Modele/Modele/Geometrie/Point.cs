@@ -20,9 +20,9 @@ namespace Geometrie
         public int Y { get; private set; }
 
         /// <summary>
-        /// Propriété concernant la couleur d'un point, sous forme de chaîne de caractères, en anglais.
+        /// Propriété concernant la couleur d'un point, sous forme de chaîne de caractères, en anglais, ou en hexadécimal.
         /// </summary>
-        public string Couleur { get; private set; }
+        public string Couleur { get; set; }
 
         /// <summary>
         /// Constructeur de Point, permet d'initialiser un point aux coordonnées 0,0. La couleur par défaut est jaune.
@@ -49,14 +49,6 @@ namespace Geometrie
         {
             X = x;
             Y = y;
-        }
-
-        /// <summary>
-        /// Méthode permettant de mettre un point à la couleur verte.
-        /// </summary>
-        public void MettreCouleurVerte()
-        {
-            Couleur = "Green";
         }
 
         /// <summary>

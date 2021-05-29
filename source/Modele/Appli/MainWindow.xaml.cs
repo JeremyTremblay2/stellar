@@ -46,7 +46,7 @@ namespace Appli
             ["deplacer"] = false,
         };
         private Geometrie.Point pointClique;
-        private Astre astreSelectionne;
+        private Astre astreAAjouter;
 
         public string TexteMessageErreurCarte { get; private set; }
 
@@ -110,7 +110,6 @@ namespace Appli
         {
             if (boutonsCarteActifs["ajouterEtoile"])
             {
-                astreSelectionne = null;
                 boutonsCarteActifs["ajouterEtoile"] = false;
                 ajouterEtoile.Fill = "AliceBlue";
             }
@@ -119,6 +118,7 @@ namespace Appli
                 EffacerDonneesCliquees();
                 boutonsCarteActifs["ajouterEtoile"] = true;
                 ajouterEtoile.Fill = "Red";
+                astreAAjouter = null;
             }
         }
 
@@ -126,7 +126,6 @@ namespace Appli
         {
             if (boutonsCarteActifs["ajouterPlanete"])
             {
-                astreSelectionne = null;
                 boutonsCarteActifs["ajouterPlanete"] = false;
                 ajouterPlanete.Fill = "AliceBlue";
             }
@@ -135,6 +134,7 @@ namespace Appli
                 EffacerDonneesCliquees();
                 boutonsCarteActifs["ajouterPlanete"] = true;
                 ajouterPlanete.Fill = "Red";
+                astreAAjouter = null;
             }
         }
 
@@ -142,7 +142,6 @@ namespace Appli
         {
             if (boutonsCarteActifs["relier"])
             {
-                astreSelectionne = null;
                 boutonsCarteActifs["relier"] = false;
                 relier.Fill = "AliceBlue";
             }
@@ -151,12 +150,12 @@ namespace Appli
                 EffacerDonneesCliquees();
                 boutonsCarteActifs["relier"] = true;
                 relier.Fill = "Red";
+                astreAAjouter = null;
             }
         }
 
         private void EffacerClic(object sender, MouseButtonEventArgs e)
         {
-            astreSelectionne = null;
             if (boutonsCarteActifs["effacer"])
             {
                 boutonsCarteActifs["effacer"] = false;
@@ -167,6 +166,7 @@ namespace Appli
                 EffacerDonneesCliquees();
                 boutonsCarteActifs["effacer"] = true;
                 effacer.Fill = "Red";
+                astreAAjouter = null;
             }
         }
 
@@ -174,7 +174,7 @@ namespace Appli
         {
             if (boutonsCarteActifs["deplacer"])
             {
-                astreSelectionne = null;
+                astreAAjouter = null;
                 boutonsCarteActifs["deplacer"] = false;
                 deplacer.Fill = "AliceBlue";
             }
@@ -183,13 +183,14 @@ namespace Appli
                 EffacerDonneesCliquees();
                 boutonsCarteActifs["deplacer"] = true;
                 deplacer.Fill = "Red";
+                astreAAjouter = null;
             }
         }
 
         private void PoubelleClic(object sender, MouseButtonEventArgs e)
         {
 
-            MessageBoxResult resultat = MessageBox.Show("Voulez-vous vraiment tout supprimer ?",
+            MessageBoxResult resultat = MessageBox.Show("Voulez-vous vraiment effacer toute la carte ?",
                                         "Supprimer",
                                         MessageBoxButton.YesNo, MessageBoxImage.Warning);
             switch (resultat)
@@ -228,7 +229,9 @@ namespace Appli
                         }
                         else
                         {
-                            TexteMessageErreurCarte = "dsjfkdh";
+                            MessageBox.Show("Il est impossible de relier des planètes, seules des étoiles peuvent former une constellation.",
+                                "Impossible de relier des planètes",
+                                MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                     }
 
@@ -241,7 +244,9 @@ namespace Appli
                         }
                         else
                         {
-                            TexteMessageErreurCarte = "dsjfkdh";
+                            MessageBox.Show("Il est impossible de relier des planètes, seules des étoiles peuvent former une constellation.",
+                                "Impossible de relier des planètes",
+                                MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                     }
                 }
@@ -267,8 +272,6 @@ namespace Appli
 
         private void CanevaClic(object sender, MouseButtonEventArgs e)
         {
-            TexteMessageErreurCarte = "qef";
-
             if (boutonsCarteActifs["deplacer"] && PointClique1 != null)
             {
                 var point = new Geometrie.Point((int)e.GetPosition(this).X, (int)e.GetPosition(this).Y);
@@ -284,9 +287,11 @@ namespace Appli
             {
                 var point = new Geometrie.Point((int)e.GetPosition(this).X - decalageHorizontalCanvas, 
                     (int)e.GetPosition(this).Y - decalageVerticalCanvas);
-                Debug.WriteLine(point);
+
                 var nouvelleEtoile = new AjouterEtoile();
+                nouvelleEtoile.Owner = this;
                 nouvelleEtoile.ShowDialog();
+
                 if (nouvelleEtoile.LEtoile != null)
                 {
                     Manager.AjouterUnAstre(point, nouvelleEtoile.LEtoile);
@@ -305,12 +310,12 @@ namespace Appli
                 }
             }
 
-            if (astreSelectionne != null)
+            if (astreAAjouter != null)
             {
                 var point = new Geometrie.Point((int)e.GetPosition(this).X, (int)e.GetPosition(this).Y);
                 Debug.WriteLine(point);
-                Manager.AjouterUnAstre(point, astreSelectionne);
-                astreSelectionne = null;
+                Manager.AjouterUnAstre(point, astreAAjouter);
+                astreAAjouter = null;
             }    
         }
 
@@ -344,6 +349,8 @@ namespace Appli
 
         private void PopupClicMenu(object sender, MouseButtonEventArgs e)
         {
+            //besoin de récupérer l'astre ici.
+            
             Popup.Visibility = Visibility.Visible; 
         }
 

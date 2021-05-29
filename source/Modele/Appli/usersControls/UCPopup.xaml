@@ -9,10 +9,6 @@
              d:DesignHeight="450" d:DesignWidth="800"
              x:Name="root">
 
-    <UserControl.Resources>
-        
-    </UserControl.Resources>
-
     <Grid>
         <Rectangle Fill="Black" Opacity="0.5" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown"/>
         <Image Source="/images/UI/popup.png" Height="470" Width="350" HorizontalAlignment="Left" Margin="50 0 0 0"/>

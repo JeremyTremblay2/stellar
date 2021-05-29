@@ -80,7 +80,7 @@ namespace Modele
 
             if (astre is Planete)
             {
-                position.MettreCouleurVerte();
+                position.Couleur = "#008000";
             }
             lesAstres[position] = astre;
             LesAstresObservables[position] = astre;
@@ -129,7 +129,7 @@ namespace Modele
 
             if (astreADeplacer is Planete)
             {
-                nouvellePosition.MettreCouleurVerte();
+                nouvellePosition.Couleur = "#008000";
             }
 
             lesAstres.Remove(anciennePosition);

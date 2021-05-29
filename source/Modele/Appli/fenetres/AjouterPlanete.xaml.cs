@@ -98,7 +98,6 @@ namespace Appli.fenetres
         private void CheckVie_Checked(object sender, RoutedEventArgs e)
         {
             Vie.IsEnabled = true;
-            
         }
         private void CheckVie_Unchecked(object sender, RoutedEventArgs e)
         {

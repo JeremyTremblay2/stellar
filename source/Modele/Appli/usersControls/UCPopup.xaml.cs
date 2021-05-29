@@ -24,7 +24,7 @@ namespace Appli.usersControls
     {
         public Manager LeManager => (Application.Current as App).LeManager;
 
-        public Astre AstreSelectionne { get; set; }
+        public Astre AstreAAjouter { get; set; }
 
         public UCPopup()
         {
@@ -45,24 +45,25 @@ namespace Appli.usersControls
         private void AjouterAstre(object sender, MouseButtonEventArgs e)
         {
             bool astreExistantSurCarte = false;
-            AstreSelectionne = LeManager.AstreSelectionne;
+            AstreAAjouter = LeManager.AstreSelectionne;
 
-            if (AstreSelectionne == null) return;
+            if (AstreAAjouter == null) return;
 
-            if (!AstreSelectionne.Personnalise)
+            if (!AstreAAjouter.Personnalise)
             {
                 foreach (KeyValuePair<Geometrie.Point, Astre> kvp in LeManager.Carte.LesAstres)
                 {
-                    if (kvp.Value.Equals(AstreSelectionne))
+                    if (kvp.Value.Equals(AstreAAjouter))
                     {
                         astreExistantSurCarte = true;
                     }
                 }
                 if (!astreExistantSurCarte)
                 {
+                    (Application.Current.MainWindow as MainWindow).Popup.Visibility = Visibility.Hidden;
                     return;
                 }
-                AstreSelectionne = null;
+                AstreAAjouter = null;
             }
             MessageBox.Show("Impossible d'ajouter l'astre sélectionné sur la carte, il est déjà présent.",
                             "L'astre ne peut être ajouté sur la carte",
