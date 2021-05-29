@@ -32,7 +32,7 @@ namespace Appli.fenetres
         public AjouterEtoile()
         {
             InitializeComponent();
-            var etoile = new Etoile("Mon Etoile", "", 4500000000, 1, 1000, "", 1, TypeEtoile.SupergeanteRouge, true, "étoile.jpg");
+            var etoile = new Etoile("Mon Etoile", "", 4500000000, 1, 1000, "", 1, TypeEtoile.TrouNoir, true, "étoile.jpg");
             LEtoile = new Etoile(etoile.Nom, etoile.Description, etoile.Age, etoile.Masse, etoile.Temperature, etoile.Constellation,
                 etoile.Luminosite, etoile.Type, etoile.Personnalise, etoile.Image);
             DataContext = this;

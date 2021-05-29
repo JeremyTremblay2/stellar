@@ -315,7 +315,8 @@
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type espace:Etoile}">
 
-                    <usersControls:UCPopup ImageAstre="{Binding Image}"
+                    <usersControls:UCPopup AjouterAstreSurCarte="UCPopup_AjouterAstre"
+                                           ImageAstre="{Binding Image}"
                                            NomAstre="{Binding Nom}"
                                            DescriptionAstre="{Binding Description}"
                                            AgeAstre="{Binding Age}"
@@ -326,7 +327,8 @@
                                            LuminositeEtoile="{Binding Luminosite}"/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type espace:Planete}">
-                    <usersControls:UCPopup ImageAstre="{Binding Image}"
+                    <usersControls:UCPopup AjouterAstreSurCarte="UCPopup_AjouterAstre"
+                                           ImageAstre="{Binding Image}"
                                            NomAstre="{Binding Nom}"
                                            DescriptionAstre="{Binding Description}"
                                            AgeAstre="{Binding Age}"

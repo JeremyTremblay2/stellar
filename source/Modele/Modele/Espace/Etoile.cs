@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Utilitaire;
 
 namespace Espace
@@ -9,7 +13,7 @@ namespace Espace
     /// Une étoile est une spécification d'un astre, il s'agit d'un objet plus précis qui se situe éventuellemnt dans une constellation, 
     /// possède un type et une luminosité.
     /// </summary>
-    public class Etoile : Astre, IEquatable<Etoile>
+    public class Etoile : Astre, IEquatable<Etoile>, IDataErrorInfo
     {
 
         /// <summary>
@@ -20,12 +24,36 @@ namespace Espace
         /// <summary>
         /// Propriété représentant la constellation sous forme de châine de caractères, dans laquelle se trouve l'étoile.
         /// </summary>
+        [Required(ErrorMessage = "La constellation doit être renseignée.")]
+        [MaxLength(20, ErrorMessage = "La constellation ne peut pas dépasser 20 caractères.")]
         public string Constellation { get; set; }
 
         /// <summary>
         /// Propriété représentant la luminosité de l'étoile, sous forme d'une valeur flottante (en luminosité solaire Lo).
         /// </summary>
+        [Range(0, float.MaxValue, ErrorMessage = "La luminositée doit être positive.")]
         public float Luminosite { get; set; }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                var validationResults = new List<ValidationResult>();
+
+                if (Validator.TryValidateProperty(
+                    GetType().GetProperty(columnName).GetValue(this)
+                    , new ValidationContext(this)
+                    {
+                        MemberName = columnName
+                    }
+                    , validationResults))
+                    return null;
+
+                return validationResults.First().ErrorMessage;
+            }
+        }
+
+        public string Error { get; }
 
         /// <summary>
         /// Constructeur vide, utilisé par les fabriques d'étoiles.

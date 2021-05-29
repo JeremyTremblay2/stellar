@@ -44,12 +44,26 @@
             </Grid.RowDefinitions>
 
 
+            <TextBlock Style="{StaticResource texteInfosPopup}" Text="Nom : " HorizontalAlignment="Right" 
+                       VerticalAlignment="Center" Margin="0 0 0 0"/>
+            <TextBox Text="{Binding LEtoile.Nom, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                     Grid.Column="1" Template="{StaticResource TextBoxRecherche}" >
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <Border BorderBrush="Red" BorderThickness="2" CornerRadius="10">
+                                <AdornedElementPlaceholder/>
+                            </Border>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
 
-
-            <!--0-->
-            <TextBlock Style="{StaticResource texteInfosPopup}" Text="Type : "  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0" />
-            <ComboBox ItemsSource="{Binding Source={StaticResource enumerationTypes}}" Grid.Column="1" Height="25"
-                      SelectedItem="{Binding LEtoile.Type}">
+            <TextBlock Style="{StaticResource texteInfosPopup}" Text="Type : "  HorizontalAlignment="Right" 
+                       VerticalAlignment="Center" Grid.Row="1" Margin="0 0 0 0"/>
+            <ComboBox ItemsSource="{Binding Source={StaticResource enumerationTypes}}" SelectedItem="{Binding LEtoile.Type}" 
+                      Height="25" Grid.Column="1" Grid.Row="1">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Converter={StaticResource convertisseurDEnumerationsEnTexte}}"/>
@@ -57,42 +71,103 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <!--<local:UCImageAstre ImageAstre="{Binding LEtoile.Image}" Largeur="50" Hauteur="50"/>-->
+            <TextBlock Style="{StaticResource texteInfosPopup}" Text="Description : " HorizontalAlignment="Right" 
+                       VerticalAlignment="Center" Grid.Row="2" Margin="0 0 0 0"/>
+            <TextBox Text="{Binding LEtoile.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                     Template="{StaticResource TextBoxRecherche}" Grid.Row="2" Grid.Column="1">
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <Border BorderBrush="Red" BorderThickness="2" CornerRadius="10">
+                                <AdornedElementPlaceholder/>
+                            </Border>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red" FontSize="10"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
 
-            <!--1-->
-            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Nom : " Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="1" Grid.Column="1"
-                     Text="{Binding LEtoile.Nom}" Cursor="Arrow"/>
+            <TextBlock Style="{StaticResource texteInfosPopup}" Text="Age : " HorizontalAlignment="Right" 
+                       VerticalAlignment="Center" Grid.Row="3" Margin="0 0 0 0"/>
+            <TextBox Text="{Binding LEtoile.Age, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                     Template="{StaticResource TextBoxRecherche}" Grid.Row="3" Grid.Column="1">
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <Border BorderBrush="Red" BorderThickness="2" CornerRadius="10">
+                                <AdornedElementPlaceholder/>
+                            </Border>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
 
+            <TextBlock Style="{StaticResource texteInfosPopup}" Text="Masse : " HorizontalAlignment="Right" 
+                       VerticalAlignment="Center" Grid.Row="4" Margin="0 0 0 0"/>
+            <TextBox Text="{Binding LEtoile.Masse, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                     Template="{StaticResource TextBoxRecherche}" Grid.Row="4" Grid.Column="1">
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <Border BorderBrush="Red" BorderThickness="2" CornerRadius="10">
+                                <AdornedElementPlaceholder/>
+                            </Border>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
 
-            <!--2-->
-            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Description : " Grid.Row="2" Margin="0,0,0,0"/>
-            <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="2" Grid.Column="2"
-                         Text="{Binding LEtoile.Description}"/>
+            <TextBlock Style="{StaticResource texteInfosPopup}" Text="Temperature : " HorizontalAlignment="Right" 
+                       VerticalAlignment="Center" Grid.Row="5" Margin="0 0 0 0"/>
+            <TextBox Text="{Binding LEtoile.Temperature, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                     Template="{StaticResource TextBoxRecherche}" Grid.Row="5" Grid.Column="1">
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <Border BorderBrush="Red" BorderThickness="2" CornerRadius="10">
+                                <AdornedElementPlaceholder/>
+                            </Border>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
 
-            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Constellation : " Grid.Row="3" Margin="0,0,0,0"/>
-            <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="3" Grid.Column="3"
-                         Text="{Binding LEtoile.Constellation}"/>
+            <TextBlock Style="{StaticResource texteInfosPopup}" Text="Constellation : " HorizontalAlignment="Right" 
+                       VerticalAlignment="Center" Grid.Row="6" Margin="0 0 0 0"/>
+            <TextBox Text="{Binding LEtoile.Constellation, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                     Template="{StaticResource TextBoxRecherche}" Grid.Row="6" Grid.Column="1">
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <Border BorderBrush="Red" BorderThickness="2" CornerRadius="10">
+                                <AdornedElementPlaceholder/>
+                            </Border>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
 
-            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Age : " Grid.Row="4" Margin="0,0,0,0"/>
-            <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="4" Grid.Column="4"
-                     Text="{Binding LEtoile.Age}"/>
-
-            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Masse : " Grid.Row="5" Margin="0,0,0,0"/>
-            <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="5" Grid.Column="5"
-                     Text="{Binding LEtoile.Masse}"/>
-
-            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Luminosité : " Grid.Row="6" Margin="0,0,0,0"/>
-            <TextBox Template="{StaticResource TextBoxRecherche}"  Grid.Row="6" Grid.Column="6"
-                         Text="{Binding LEtoile.Luminosite}"/>
-
-            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Température : " Grid.Row="7" Margin="0,0,0,0"/>
-            <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="7" Grid.Column="7"
-                         Text="{Binding LEtoile.Temperature}"/>
-
-
-
+            <TextBlock Style="{StaticResource texteInfosPopup}" Text="Luminosite : " HorizontalAlignment="Right" 
+                       VerticalAlignment="Center" Grid.Row="7" Margin="0 0 0 0"/>
+            <TextBox Text="{Binding LEtoile.Luminosite, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                     Template="{StaticResource TextBoxRecherche}" Grid.Row="7" Grid.Column="1">
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <Border BorderBrush="Red" BorderThickness="2" CornerRadius="10">
+                                <AdornedElementPlaceholder/>
+                            </Border>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
         </Grid>
+        
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
