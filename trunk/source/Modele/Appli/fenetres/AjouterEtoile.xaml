@@ -27,7 +27,13 @@
         <TextBlock Style="{StaticResource texteNomAstre}" Text="Ajouter une étoile" HorizontalAlignment="Center"
                        Foreground="Orange" Margin="0 10 0 0" FontSize="18"/>
 
-        <Grid Margin="10 50">
+        
+        <Button Cursor="Hand" Width="60" Background="Transparent" VerticalAlignment="Top" Margin="50" Click="OuvrirImage">
+            <Image Source="/images/icones/ajoutImage.png" x:Name="Image" StretchDirection="DownOnly" />
+            
+        </Button>
+        <!--<Setter TargetName="Image" Property="Source" Value="/images/icones/ajoutImage.png"/>-->
+        <Grid Margin="10 120 10 50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
@@ -74,7 +80,7 @@
             <TextBlock Style="{StaticResource texteInfosPopup}" Text="Description : " HorizontalAlignment="Right" 
                        VerticalAlignment="Center" Grid.Row="2" Margin="0 0 0 0"/>
             <TextBox Text="{Binding LEtoile.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
-                     Template="{StaticResource TextBoxRecherche}" Grid.Row="2" Grid.Column="1" AcceptsReturn="True">
+					Template="{StaticResource TextBoxRecherche}" Grid.Row="2" Grid.Column="1" AcceptsReturn="True" Height="35" MaxLength="230" TextWrapping="Wrap">
                 <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <StackPanel>
@@ -87,10 +93,10 @@
                 </Validation.ErrorTemplate>
             </TextBox>
 
-            <TextBlock Style="{StaticResource texteInfosPopup}" Text="Age : " HorizontalAlignment="Right" 
+            <TextBlock Style="{StaticResource texteInfosPopup}" Text="Age : " HorizontalAlignment="Right"
                        VerticalAlignment="Center" Grid.Row="3" Margin="0 0 0 0"/>
             <TextBox Text="{Binding LEtoile.Age, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
-                     Template="{StaticResource TextBoxRecherche}" Grid.Row="3" Grid.Column="1">
+                     Template="{StaticResource TextBoxRecherche}" Grid.Row="3" Grid.Column="1" PreviewTextInput="SeulementNombre">
                 <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <StackPanel>
@@ -105,9 +111,8 @@
 
             <TextBlock Style="{StaticResource texteInfosPopup}" Text="Masse : " HorizontalAlignment="Right" 
                        VerticalAlignment="Center" Grid.Row="4" Margin="0 0 0 0"/>
-            <TextBox Text="{Binding LEtoile.Masse, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, 
-                StringFormat=N2}" Template="{StaticResource TextBoxRecherche}" Grid.Row="4" Grid.Column="1">
-                <Validation.ErrorTemplate>
+			<TextBox Text="{Binding LEtoile.Masse, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, 
+                StringFormat=N2}" Template="{StaticResource TextBoxRecherche}" Grid.Row="4" Grid.Column="1" PreviewTextInput="SeulementNombre">                <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <StackPanel>
                             <Border BorderBrush="Red" BorderThickness="2" CornerRadius="10">
@@ -122,7 +127,7 @@
             <TextBlock Style="{StaticResource texteInfosPopup}" Text="Temperature : " HorizontalAlignment="Right" 
                        VerticalAlignment="Center" Grid.Row="5" Margin="0 0 0 0"/>
             <TextBox Text="{Binding LEtoile.Temperature, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
-                     Template="{StaticResource TextBoxRecherche}" Grid.Row="5" Grid.Column="1">
+                     Template="{StaticResource TextBoxRecherche}" Grid.Row="5" Grid.Column="1" PreviewTextInput="SeulementNombre">
                 <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <StackPanel>
@@ -153,9 +158,8 @@
 
             <TextBlock Style="{StaticResource texteInfosPopup}" Text="Luminosite : " HorizontalAlignment="Right" 
                        VerticalAlignment="Center" Grid.Row="7" Margin="0 0 0 0"/>
-            <TextBox Text="{Binding LEtoile.Luminosite, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, 
-                StringFormat=N2}" Template="{StaticResource TextBoxRecherche}" Grid.Row="7" Grid.Column="1">
-                <Validation.ErrorTemplate>
+			<TextBox Text="{Binding LEtoile.Luminosite, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, 
+                StringFormat=N2}" Template="{StaticResource TextBoxRecherche}" Grid.Row="7" Grid.Column="1" PreviewTextInput="SeulementNombre">                <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <StackPanel>
                             <Border BorderBrush="Red" BorderThickness="2" CornerRadius="10">

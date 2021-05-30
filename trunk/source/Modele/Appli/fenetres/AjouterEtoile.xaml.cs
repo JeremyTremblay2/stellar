@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
+using System.Diagnostics;
 
 namespace Appli.fenetres
 {
@@ -28,6 +31,7 @@ namespace Appli.fenetres
         public Manager LeManager => (App.Current as App).LeManager;
 
         public Etoile LEtoile { get; set; }
+        private string etoileImg;
 
         public AjouterEtoile()
         {
@@ -84,6 +88,12 @@ namespace Appli.fenetres
             }
         }
 
+        private void SeulementNombre(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
         private void Fermer(object sender, MouseButtonEventArgs e)
         {
             LEtoile = null;
@@ -99,6 +109,56 @@ namespace Appli.fenetres
         {
             base.OnMouseLeftButtonDown(e);
             this.DragMove();
+        }
+
+        static Dictionary<string, BitmapEncoder> encoders = new Dictionary<string, BitmapEncoder>()
+                                                    {
+                                                        {".jpg", new JpegBitmapEncoder()},
+                                                        {".bmp", new BmpBitmapEncoder()},
+                                                        {".png", new PngBitmapEncoder()}
+                                                    };
+        private void OuvrirImage(object sender, RoutedEventArgs e)
+        {
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            //dlg.InitialDirectory = "C:\\Users\\Public\\Pictures\\Sample Pictures";
+            //dlg.FileName = "Images"; // Default file name
+            dlg.DefaultExt = ".jpg | .png | .gif"; // Default file extension
+            dlg.Filter = "All images files (.jpg, .png, .gif)|*.jpg;*.png;*.gif|JPG files (.jpg)|*.jpg|PNG files (.png)|*.png|GIF files (.gif)|*.gif"; // Filter files by extension 
+
+            // Show open file dialog box
+            bool? result = dlg.ShowDialog();
+
+            // Process open file dialog box results 
+            if (result == true)
+            {
+                // Open document 
+                string filename = dlg.FileName;
+                
+                etoileImg = dlg.SafeFileName.ToString();
+
+                Image.Source = new BitmapImage(new Uri(filename, UriKind.Absolute));
+                FileInfo fi = new FileInfo(filename);
+                if (!encoders.ContainsKey(fi.Extension))
+                {
+                    return;
+                }
+                SaveImage(new BitmapImage(new Uri(filename, UriKind.Absolute)), dlg.SafeFileName.ToString(), encoders[fi.Extension]);
+                LEtoile.Image = etoileImg;
+            }
+        }
+
+        void SaveImage(BitmapImage img, string fileName, BitmapEncoder encoder)
+        {
+            fileName = @"..\..\StellarBin\images\" + fileName; //..\\StellarBin\\images\\
+            
+            BitmapFrame frame = BitmapFrame.Create(img);
+            encoder.Frames.Add(frame);
+
+            using (var stream = File.Create(fileName))
+            {
+                encoder.Save(stream);
+            }
         }
     }
 }

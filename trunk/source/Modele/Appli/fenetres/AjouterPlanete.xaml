@@ -25,7 +25,7 @@
         <Image Source="/images/UI/popup.png" Height="470" Width="350" HorizontalAlignment="Left" MouseLeftButtonDown="Deplacer"/>
         <TextBlock Style="{StaticResource texteNomAstre}" Text="Ajouter une planète" HorizontalAlignment="Center"
                        Foreground="Orange" Margin="0 10 0 0" FontSize="18"/>
-
+         
         <Grid Margin="10 50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -40,13 +40,11 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
 
 
-
-            <!--0-->
+            
             <TextBlock Style="{StaticResource texteInfosPopup}" Text="Type : "  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0" />
             <ComboBox ItemsSource="{Binding Source={StaticResource enumerationTypes}}" Grid.Column="1" Height="25">
                 <ComboBox.ItemTemplate>
@@ -55,48 +53,90 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+            
+            <TextBlock Style="{StaticResource texteInfosPopup}" Text="Nom : " HorizontalAlignment="Right" 
+                       VerticalAlignment="Center" Grid.Row="1" Margin="0 0 0 0"/>
+            <TextBox Text="{Binding LaPlanete.Nom, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                     Grid.Column="1" Grid.Row="1" Template="{StaticResource TextBoxRecherche}" >
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <Border BorderBrush="Red" BorderThickness="2" CornerRadius="10">
+                                <AdornedElementPlaceholder/>
+                            </Border>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
 
-            <!--<local:UCImageAstre ImageAstre="{Binding LaPlanete.Image}" Largeur="50" Hauteur="50"/>-->
+            <TextBlock Style="{StaticResource texteInfosPopup}" Text="Description : " HorizontalAlignment="Right" 
+                       VerticalAlignment="Center" Grid.Row="2" Margin="0 0 0 0"/>
+            <TextBox Text="{Binding LaPlanete.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                     Template="{StaticResource TextBoxRecherche}" Grid.Row="2" Grid.Column="1" Height="45" MaxLength="230" Cursor="Arrow" AcceptsReturn="True" TextWrapping="Wrap">
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <Border BorderBrush="Red" BorderThickness="2" CornerRadius="10">
+                                <AdornedElementPlaceholder/>
+                            </Border>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red" FontSize="10"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
 
-            <!--1-->
-            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Nom : " Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="1" Grid.Column="1"
-                     Text="{Binding LaPlanete.Nom}" Cursor="Arrow"/>
+            <TextBlock Style="{StaticResource texteInfosPopup}" Text="Age : " HorizontalAlignment="Right"
+                       VerticalAlignment="Center" Grid.Row="3" Margin="0 0 0 0"/>
+            <TextBox Text="{Binding LaPlanete.Age, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                     Template="{StaticResource TextBoxRecherche}" Grid.Row="3" Grid.Column="1" PreviewTextInput="SeulementNombre">
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <Border BorderBrush="Red" BorderThickness="2" CornerRadius="10">
+                                <AdornedElementPlaceholder/>
+                            </Border>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
 
-
-            <!--2-->
-            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Description : " Grid.Row="2" Margin="0,0,0,0"/>
-            <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="2" Grid.Column="2"
-                         Text="{Binding LaPlanete.Description}"/>
-
-            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Système : " Grid.Row="3" Margin="0,0,0,0" Cursor="Arrow"/>
-            <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="3" Grid.Column="3"
+            <TextBlock Style="{StaticResource texteInfosPopup}" Text="Masse : " HorizontalAlignment="Right" 
+                       VerticalAlignment="Center" Grid.Row="4" Margin="0 0 0 0"/>
+            <TextBox Text="{Binding LaPlanete.Masse, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                     Template="{StaticResource TextBoxRecherche}" Grid.Row="4" Grid.Column="1" PreviewTextInput="SeulementNombre">
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <Border BorderBrush="Red" BorderThickness="2" CornerRadius="10">
+                                <AdornedElementPlaceholder/>
+                            </Border>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
+            
+            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Système : " Grid.Row="5" Margin="0,0,0,0" Cursor="Arrow"/>
+            <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="5" Grid.Column="1"
                          Text="{Binding LaPlanete.Systeme}"/>
 
-            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Age : " Grid.Row="4" Margin="0,0,0,0"/>
-            <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="4" Grid.Column="4"
-                     Text="{Binding LaPlanete.Age}"/>
-
-            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Masse : " Grid.Row="5" Margin="0,0,0,0"/>
-            <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="5" Grid.Column="5"
-                     Text="{Binding Masse}"/>
 
             <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Eau : " Grid.Row="6" Margin="0,0,0,0"/>
             <CheckBox  Grid.Row="6" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5,0,0,0"
-                       Checked="{Binding LaPlanete.EauPresente}" />
+                       IsChecked="{Binding LaPlanete.EauPresente}"/>
 
-            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Température : " Grid.Row="7" Margin="0,0,0,0"/>
-            <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="7" Grid.Column="7"
-                         Text="{Binding LaPlanete.Temperature}"/>
+
+
             
-
-            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Vie : " Grid.Row="8" Margin="0,0,0,0"/>
+            <TextBlock Style="{StaticResource texteInfosPopupCreation}" Text="Vie : " Grid.Row="7" Margin="0,0,0,0"/>
             <CheckBox  Grid.Row="8" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5,0,0,0" x:Name="CheckVie" Checked="CheckVie_Checked" Unchecked="CheckVie_Unchecked"
                          />
-            <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="8" Grid.Column="8" Margin="25,0,0,0" x:Name="Vie" Background="DarkGray"
+            <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="7" Grid.Column="1" Margin="25,0,0,0" x:Name="Vie"
                          Text="{Binding LaPlanete.Vie}" Cursor="Arrow"/>
 
-
+            
         </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
