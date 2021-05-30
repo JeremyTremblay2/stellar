@@ -13,6 +13,7 @@ namespace Tests_Fonctionnels
         {
             Manager manager = new Manager(new Stub.Stub());
             manager.ChargeDonnees();
+            Console.WriteLine(manager);
             manager.Persistance = new DataContractPersistance.DataContractPers();
             manager.SauvegardeDonnees();
         }
