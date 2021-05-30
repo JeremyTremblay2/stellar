@@ -115,24 +115,27 @@ namespace Appli.fenetres
 
         void SaveImage(BitmapImage img, string fileName, BitmapEncoder encoder)
         {
-            FileInfo fi = new FileInfo(fileName);
-            
-            int i = 0;
-
-            while (File.Exists(System.IO.Path.Combine(ConvertisseurDeTexteEnImage.cheminImages, fileName)))
+            if(!File.Exists(System.IO.Path.Combine(ConvertisseurDeTexteEnImage.cheminImages, fileName)))
             {
-                fileName = $"{fi.Name.Remove(fi.Name.LastIndexOf('.'))}_{i}{fi.Extension}";
-                i++;
-            }
+                FileInfo fi = new FileInfo(fileName);
 
-            fileName = @"..\..\StellarBin\images\" + fileName;
+                /*int i = 0;
 
-            BitmapFrame frame = BitmapFrame.Create(img);
-            encoder.Frames.Add(frame);
+                while (File.Exists(System.IO.Path.Combine(ConvertisseurDeTexteEnImage.cheminImages, fileName)))
+                {
+                    fileName = $"{fi.Name.Remove(fi.Name.LastIndexOf('.'))}_{i}{fi.Extension}";
+                    i++;
+                }*/
 
-            using (var stream = File.Create(fileName))
-            {
-                encoder.Save(stream);
+                fileName = @"..\..\StellarBin\images\" + fileName;
+
+                BitmapFrame frame = BitmapFrame.Create(img);
+                encoder.Frames.Add(frame);
+
+                using (var stream = File.Create(fileName))
+                {
+                    encoder.Save(stream);
+                }
             }
         }
     }

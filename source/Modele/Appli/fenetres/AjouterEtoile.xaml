@@ -31,7 +31,7 @@
         
         <Button Cursor="Hand" Height="50" Background="Transparent" VerticalAlignment="Top" Margin="36" Click="OuvrirImage">
             <Button.Content>
-                <Image Source="{Binding LEtoile.Image, Converter={StaticResource convertisseurDeTexteEnImage}}" x:Name="Image" StretchDirection="DownOnly" />
+                <Image Source="/images/icones/ajoutImage.png" x:Name="Image" StretchDirection="DownOnly" />
             </Button.Content>
         </Button>
         
