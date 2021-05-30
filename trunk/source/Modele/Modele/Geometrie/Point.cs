@@ -7,8 +7,9 @@ namespace Geometrie
     /// <summary>
     /// Un point représente les coordonnées (x et y) d'un point sur la carte (l'emplacement des astres).
     /// </summary>
-    public class Point : IEquatable<Point>
+    public class Point : IEquatable<Point>, INotifyPropertyChanged
     {
+        private string couleur;
         /// <summary>
         /// Propriété contenant la position en abscisses de x, sous forme d'une valeur entière.
         /// </summary>
@@ -22,7 +23,16 @@ namespace Geometrie
         /// <summary>
         /// Propriété concernant la couleur d'un point, sous forme de chaîne de caractères, en anglais, ou en hexadécimal.
         /// </summary>
-        public string Couleur { get; set; }
+        public string Couleur
+        {
+            get => couleur;
+            set
+            {
+                if (couleur == value) return;
+                couleur = value;
+                OnPropertyChanged(nameof(Couleur));
+            }
+        }
 
         /// <summary>
         /// Constructeur de Point, permet d'initialiser un point aux coordonnées 0,0. La couleur par défaut est jaune.
@@ -39,6 +49,11 @@ namespace Geometrie
             Deplacer(x, y);
             Couleur = "Yellow";
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        void OnPropertyChanged(string nomPropriete)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropriete));
 
         /// <summary>
         /// Permet de déplacer un point à de nouvelles coordonnées.

@@ -29,7 +29,7 @@ namespace Espace
         /// </summary>
         [DataMember]
         [Required(ErrorMessage = "La constellation doit être renseignée.")]
-        [MaxLength(20, ErrorMessage = "La constellation ne peut pas dépasser 20 caractères.")]
+        [MaxLength(20, ErrorMessage = "Constellation trop longue.")]
         public string Constellation { get; set; }
 
         /// <summary>
