@@ -21,7 +21,7 @@ namespace Geometrie
         /// <summary>
         /// La couleur d'un segment, permet de l'identifier et est jaune par défaut.
         /// </summary>
-        public string Couleur { get; internal set; }
+        public string Couleur { get; internal set; } = "#ffffff";
 
         /// <summary>
         /// Constructeur de Segment.

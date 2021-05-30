@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -89,6 +90,12 @@ namespace Appli.fenetres
                                 MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private void SeulementNombre(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
         private void Deplacer(object sender, MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);
@@ -98,10 +105,12 @@ namespace Appli.fenetres
         private void CheckVie_Checked(object sender, RoutedEventArgs e)
         {
             Vie.IsEnabled = true;
+            Vie.Background = Brushes.White;
         }
         private void CheckVie_Unchecked(object sender, RoutedEventArgs e)
         {
             Vie.IsEnabled = false;
+            Vie.Background = Brushes.DarkGray;
         }
     }
   

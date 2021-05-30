@@ -45,7 +45,6 @@ namespace Espace
         /// La couleur de la constellation, qui sera appliquée à tous ses segments.
         /// </summary>
         public string Couleur { get; set; } = GenerationCouleurAleatoire();
-
         /// <summary>
         /// Constructeur de Constellations. Prend deux points en paramètre et trace un segment.
         /// </summary>
@@ -64,7 +63,6 @@ namespace Espace
             lesPoints.Add(point1);
             lesPoints.Add(point2);
             lesSegments.Add(s);
-
             MiseAJourCollections();
 
             Vide = false;
@@ -434,8 +432,7 @@ namespace Espace
             System.Drawing.Color c = System.Drawing.Color.FromArgb(255, generateurCouleur.Next(256),
                 generateurCouleur.Next(256), generateurCouleur.Next(256));
             c.ToArgb();
-            return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2"); 
-        }
+			return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");        }
 
         /// <summary>
         /// Applique la couleur sur tout les segments de la constellation
