@@ -11,7 +11,7 @@ namespace Appli.convertisseurs
 {
     public class ConvertisseurDeTexteEnImage : IValueConverter
     {
-        private static string cheminImages;
+        public static string cheminImages;
         static ConvertisseurDeTexteEnImage()
         {
             cheminImages = Path.Combine(Directory.GetCurrentDirectory(), @"..\images\");

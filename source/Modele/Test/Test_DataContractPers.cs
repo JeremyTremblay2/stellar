@@ -11,11 +11,19 @@ namespace Tests_Fonctionnels
     {
         public static void TestChargement()
         {
+            //Création du manager et chargement du stub.
             Manager manager = new Manager(new Stub.Stub());
             manager.ChargeDonnees();
             Console.WriteLine(manager);
+
+            //Sauvegarde en datacontract des données.
             manager.Persistance = new DataContractPersistance.DataContractPers();
             manager.SauvegardeDonnees();
+
+            //Chargement des données précédemment sauvegardées après instanciation d'un nouveau manager.
+            Manager manager2 = new Manager(new DataContractPersistance.DataContractPers());
+            manager2.ChargeDonnees();
+            Console.WriteLine(manager);
         }
     }
 }

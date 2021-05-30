@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
 using System.Diagnostics;
+using Appli.convertisseurs;
 
 namespace Appli.fenetres
 {
@@ -24,19 +25,18 @@ namespace Appli.fenetres
     /// </summary>
     public partial class AjouterEtoile : Window
     {
-        private const int longueurMaxNom = 18;
-        private const int longueurMaxConstellation = 20;
-        private const int longueurMaxDescription = 200;
+        private string etoileImg;
 
         public Manager LeManager => (App.Current as App).LeManager;
 
-        public Etoile LEtoile { get; set; }
-        private string etoileImg;
+        public Etoile LEtoile { get; internal set; }
+
+        public bool Modification { get; internal set; }
 
         public AjouterEtoile()
         {
             InitializeComponent();
-            var etoile = new Etoile("Mon Etoile", "", 4500000000, 1, 1000, "", 1, TypeEtoile.TrouNoir, true, "étoile.jpg");
+            var etoile = new Etoile("", "", 0, 0, 0, "", 0, TypeEtoile.NaineBlanche, true, "étoile.jpg");
             LEtoile = new Etoile(etoile.Nom, etoile.Description, etoile.Age, etoile.Masse, etoile.Temperature, etoile.Constellation,
                 etoile.Luminosite, etoile.Type, etoile.Personnalise, etoile.Image);
             DataContext = this;
@@ -44,48 +44,16 @@ namespace Appli.fenetres
 
         private void Valider(object sender, RoutedEventArgs e)
         {
-            if (LeManager.RecupererAstre(LEtoile.Nom) != null)
+            if (LeManager.RecupererAstre(LEtoile.Nom) != null && !Modification)
             {
                 MessageBox.Show("Un astre avec ce nom existe déjà dans l'application, veuillez choisir un nom différent.",
                                 "Attention, ce nom est déjà utilisé !",
                                 MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (LEtoile.Nom.Length > longueurMaxNom || string.IsNullOrWhiteSpace(LEtoile.Nom))
-            {
-                MessageBox.Show($"Le nom de cette étoile doit faire au maximum {longueurMaxNom} caractères, mais ne peut pas " +
-                    $"non plus être vide.",
-                    "Nom incorrect",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (LEtoile.Description.Length > longueurMaxDescription)
-            {
-                MessageBox.Show($"La description de cette étoile est trop longue, elle doit faire au maximum " +
-                    $"{longueurMaxDescription} caractères.",
-                    "Description trop longue",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (LEtoile.Constellation.Length > longueurMaxConstellation)
-            {
-                MessageBox.Show($"La constellation de cette étoile possède un nom trop long, elle doit faire au maximum " +
-                    $"{longueurMaxConstellation} caractères.",
-                    "Constellation trop longue",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
 
-            try
-            {
-                Close();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.StackTrace + "\nVérifiez les données puis réessayez.",
-                                "Une erreur est survenue dans l'ajout",
-                                MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            LEtoile.Description = LEtoile.Description.Replace("\r\n", "");
+            Close();
         }
 
         private void SeulementNombre(object sender, TextCompositionEventArgs e)
@@ -100,10 +68,7 @@ namespace Appli.fenetres
             Close();
         }
 
-        private void Fermer(object sender, RoutedEventArgs e)
-        {
-            Fermer(null, null);
-        }
+        private void Fermer(object sender, RoutedEventArgs e) => Fermer(null, null);
 
         private void Deplacer(object sender, MouseButtonEventArgs e)
         {
@@ -111,28 +76,25 @@ namespace Appli.fenetres
             this.DragMove();
         }
 
-        static Dictionary<string, BitmapEncoder> encoders = new Dictionary<string, BitmapEncoder>()
+        private void OuvrirImage(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+            Dictionary<string, BitmapEncoder> encoders = new Dictionary<string, BitmapEncoder>()
                                                     {
                                                         {".jpg", new JpegBitmapEncoder()},
                                                         {".bmp", new BmpBitmapEncoder()},
                                                         {".png", new PngBitmapEncoder()}
                                                     };
-        private void OuvrirImage(object sender, RoutedEventArgs e)
-        {
-            // Configure open file dialog box
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            //dlg.InitialDirectory = "C:\\Users\\Public\\Pictures\\Sample Pictures";
-            //dlg.FileName = "Images"; // Default file name
-            dlg.DefaultExt = ".jpg | .png | .gif"; // Default file extension
-            dlg.Filter = "All images files (.jpg, .png, .gif)|*.jpg;*.png;*.gif|JPG files (.jpg)|*.jpg|PNG files (.png)|*.png|GIF files (.gif)|*.gif"; // Filter files by extension 
 
-            // Show open file dialog box
+            dlg.FileName = "Images";
+            dlg.DefaultExt = ".jpg | .png | .gif"; 
+            dlg.Filter = "All images files (.jpg, .png, .gif)|*.jpg;*.png;*.gif|JPG files (.jpg)|*.jpg|PNG files (.png)|*.png|GIF files (.gif)|*.gif";
+
             bool? result = dlg.ShowDialog();
 
-            // Process open file dialog box results 
             if (result == true)
             {
-                // Open document 
                 string filename = dlg.FileName;
                 
                 etoileImg = dlg.SafeFileName.ToString();
@@ -143,6 +105,9 @@ namespace Appli.fenetres
                 {
                     return;
                 }
+
+                
+
                 SaveImage(new BitmapImage(new Uri(filename, UriKind.Absolute)), dlg.SafeFileName.ToString(), encoders[fi.Extension]);
                 LEtoile.Image = etoileImg;
             }
@@ -150,8 +115,18 @@ namespace Appli.fenetres
 
         void SaveImage(BitmapImage img, string fileName, BitmapEncoder encoder)
         {
-            fileName = @"..\..\StellarBin\images\" + fileName; //..\\StellarBin\\images\\
+            FileInfo fi = new FileInfo(fileName);
             
+            int i = 0;
+
+            while (File.Exists(System.IO.Path.Combine(ConvertisseurDeTexteEnImage.cheminImages, fileName)))
+            {
+                fileName = $"{fi.Name.Remove(fi.Name.LastIndexOf('.'))}_{i}{fi.Extension}";
+                i++;
+            }
+
+            fileName = @"..\..\StellarBin\images\" + fileName;
+
             BitmapFrame frame = BitmapFrame.Create(img);
             encoder.Frames.Add(frame);
 

@@ -28,6 +28,9 @@ namespace Appli.fenetres
         public Manager LeManager => (App.Current as App).LeManager;
 
         public Planete LaPlanete { get; set; }
+
+        public bool Modification { get; internal set; }
+
         public AjouterPlanete()
         {
             InitializeComponent();

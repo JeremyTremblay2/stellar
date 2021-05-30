@@ -37,7 +37,7 @@ namespace Espace
         /// </summary>
         [DataMember (EmitDefaultValue = false, Order = 0)]
         [Required(ErrorMessage = "Le nom doit être renseigné")]
-        [MaxLength(18, ErrorMessage = "Le nom ne peut pas dépasser 18 caractères")]
+        [MaxLength(18, ErrorMessage = "Nom trop long.")]
         public string Nom
         {
             get => nom;
@@ -59,7 +59,7 @@ namespace Espace
         /// Propriété représentant une description quelconque de l'astre sous forme d'une chaîne de caractère.
         /// </summary>
         [DataMember (EmitDefaultValue = false, Order = 2)]
-        [MaxLength(200, ErrorMessage = "La description ne peut pas dépasser 200 caractères")]
+        [MaxLength(200, ErrorMessage = "Description trop longue.")]
         public string Description { get; set; }
 
         /// <summary>

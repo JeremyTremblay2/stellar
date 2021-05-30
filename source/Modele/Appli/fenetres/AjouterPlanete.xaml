@@ -11,7 +11,8 @@
         ResizeMode="NoResize"
         Background="Transparent"
         WindowStyle="None" AllowsTransparency="True" Topmost="True" 
-        Title="AjouterEtoile" Height="470" Width="350">
+        Title="AjouterEtoile" Height="470" Width="350"
+        WindowStartupLocation="CenterOwner">
 
     <Window.Resources>
         <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type System:Enum}" x:Key="enumerationTypes">
