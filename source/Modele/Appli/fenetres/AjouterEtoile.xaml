@@ -74,7 +74,7 @@
             <TextBlock Style="{StaticResource texteInfosPopup}" Text="Description : " HorizontalAlignment="Right" 
                        VerticalAlignment="Center" Grid.Row="2" Margin="0 0 0 0"/>
             <TextBox Text="{Binding LEtoile.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
-                     Template="{StaticResource TextBoxRecherche}" Grid.Row="2" Grid.Column="1">
+                     Template="{StaticResource TextBoxRecherche}" Grid.Row="2" Grid.Column="1" AcceptsReturn="True">
                 <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <StackPanel>
@@ -105,8 +105,8 @@
 
             <TextBlock Style="{StaticResource texteInfosPopup}" Text="Masse : " HorizontalAlignment="Right" 
                        VerticalAlignment="Center" Grid.Row="4" Margin="0 0 0 0"/>
-            <TextBox Text="{Binding LEtoile.Masse, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
-                     Template="{StaticResource TextBoxRecherche}" Grid.Row="4" Grid.Column="1">
+            <TextBox Text="{Binding LEtoile.Masse, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, 
+                StringFormat=N2}" Template="{StaticResource TextBoxRecherche}" Grid.Row="4" Grid.Column="1">
                 <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <StackPanel>
@@ -153,8 +153,8 @@
 
             <TextBlock Style="{StaticResource texteInfosPopup}" Text="Luminosite : " HorizontalAlignment="Right" 
                        VerticalAlignment="Center" Grid.Row="7" Margin="0 0 0 0"/>
-            <TextBox Text="{Binding LEtoile.Luminosite, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
-                     Template="{StaticResource TextBoxRecherche}" Grid.Row="7" Grid.Column="1">
+            <TextBox Text="{Binding LEtoile.Luminosite, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, 
+                StringFormat=N2}" Template="{StaticResource TextBoxRecherche}" Grid.Row="7" Grid.Column="1">
                 <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <StackPanel>

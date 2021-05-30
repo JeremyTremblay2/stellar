@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using Utilitaire;
 
@@ -14,6 +15,7 @@ namespace Espace
     /// <summary>
     /// Un Astre est un objet abstrait, il s'agit d'un élément quelconque de l'Univers.
     /// </summary>
+    [DataContract, KnownType(typeof(Etoile)), KnownType(typeof(Planete))]
     public abstract class Astre : IEquatable<Astre>, IComparable<Astre>, IComparable, INotifyPropertyChanged, IDataErrorInfo
     {
         //Nom de l'astre.
@@ -33,6 +35,7 @@ namespace Espace
         /// Propriété représentant le nom de l'astre sous forme d'une chaîne de caractères. Il ne peut pas être vide.
         /// Le nom ne peut être qu'écrit sous format titre (Xxxx Xx Xxxx).
         /// </summary>
+        [DataMember (EmitDefaultValue = false, Order = 0)]
         [Required(ErrorMessage = "Le nom doit être renseigné")]
         [MaxLength(18, ErrorMessage = "Le nom ne peut pas dépasser 18 caractères")]
         public string Nom
@@ -47,6 +50,7 @@ namespace Espace
         /// <summary>
         /// Propriété représentant l'âge de l'astre en valeur entière.
         /// </summary>
+        [DataMember (EmitDefaultValue = false, Order = 1)]
         [Required(ErrorMessage = "L'âge doit être renseigné")]
         [Range(0, long.MaxValue, ErrorMessage = "L'âge doit être positif.")]
         public long Age { get; set; }
@@ -54,6 +58,7 @@ namespace Espace
         /// <summary>
         /// Propriété représentant une description quelconque de l'astre sous forme d'une chaîne de caractère.
         /// </summary>
+        [DataMember (EmitDefaultValue = false, Order = 2)]
         [MaxLength(200, ErrorMessage = "La description ne peut pas dépasser 200 caractères")]
         public string Description { get; set; }
 
@@ -61,18 +66,21 @@ namespace Espace
         /// Propriété représentant la masse de l'astre en valeur flottante (en masse terrestre s'il s'agit d'une planète, 
         /// ou en masse solaire s'il s'agit d'une étoile).
         /// </summary>
+        [DataMember (EmitDefaultValue = false, Order = 3)]
         [Range(0, float.MaxValue, ErrorMessage = "La masse doit être positive.")]
         public float Masse { get; set; }
 
         /// <summary>
         /// Propriété représentant la température de l'astre en valeur entière (en Kelvin).
         /// </summary>
+        [DataMember(EmitDefaultValue = false, Order = 4)]
         public int Temperature { get; set; }
 
         /// <summary>
         /// Propriété pour savoir si l'astre est un favori de l'utilisateur ou non, représenté par un booléen.
         /// Une notification de changement est envoyé à la vue quand l'état du favori est modifié.
         /// </summary>
+        [DataMember(EmitDefaultValue = false, Order = 6)]
         public bool Favori
         {
             get => favori;
@@ -87,11 +95,13 @@ namespace Espace
         /// <summary>
         /// Propriété permettant de savoir si l'astre est un astre personnalisé (= crée par l'utilisateur) ou non, représente par un booléen.
         /// </summary>
+        [DataMember(EmitDefaultValue = false, Order = 7)]
         public bool Personnalise { get; internal set; }
 
         /// <summary>
         /// Propriété permettant d'associer une image à l'astre (il s'agit d'une chaîne de caractères).
         /// </summary>
+        [DataMember(EmitDefaultValue = false, Order = 5)]
         public string Image { get; set; }
 
         public string this[string columnName]

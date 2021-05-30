@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DataContractPersistance\DataContractPersistance.csproj" />
     <ProjectReference Include="..\Modele\Modele.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
 
 namespace Espace
 {
@@ -8,26 +9,31 @@ namespace Espace
     /// Une planète est une spécification d'un astre, il s'agit d'un objet plus précis qui se situe dans un système stellaire, 
     /// possède un type, contient éventuellement de l'eau, et de la vie.
     /// </summary>
+    [DataContract]
     public class Planete : Astre, IEquatable<Planete>
     {
         /// <summary>
         /// Propriété représentant le type de la planète, contenu dans l'énumération TypePlanete.
         /// </summary>
+        [DataMember]
         public TypePlanete Type { get; set; }
 
         /// <summary>
         /// Propriété permettant de représenter la présence de vie ou non de la planète, sous forme de chaîne de caractères.
         /// </summary>
+        [DataMember]
         public string Vie { get; set; }
 
         /// <summary>
         /// Propriété représentant la présence d'eau sur la planète ou non, sous forme de booléen. 
         /// </summary>
+        [DataMember]
         public bool EauPresente { get; set; }
 
         /// <summary>
         /// Propriété permettant de représenter le système stellaire de la planète, sous forme de chaîne de caractères.
         /// </summary>
+        [DataMember]
         public string Systeme { get; set; }
 
         /// <summary>

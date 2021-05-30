@@ -1,3 +1,4 @@
+using DataContractPersistance;
 using Modele;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Appli
     /// </summary>
     public partial class App : Application
     {
-        public Manager LeManager { get; private set; } = new Manager();
+        public Manager LeManager { get; private set; } = new Manager(new DataContractPers());
 
         public App()
         {

@@ -1,10 +1,8 @@
 ﻿using Espace;
 using Modele;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DataContractPersistance;
+
 
 namespace Tests_Fonctionnels
 {
@@ -14,7 +12,7 @@ namespace Tests_Fonctionnels
     public static class Test_Manager
     {
         //Instanciation d'un manager.
-        static Manager manager = new Manager();
+        static Manager manager = new Manager(new DataContractPers());
 
         /// <summary>
         /// Méthode de test dans laquelle on vérifie si le manager est bien vide après sa création.
