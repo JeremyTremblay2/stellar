@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.Serialization;
 using Utilitaire;
 
 namespace Espace
@@ -13,17 +14,20 @@ namespace Espace
     /// Une étoile est une spécification d'un astre, il s'agit d'un objet plus précis qui se situe éventuellemnt dans une constellation, 
     /// possède un type et une luminosité.
     /// </summary>
+    [DataContract]
     public class Etoile : Astre, IEquatable<Etoile>, IDataErrorInfo
     {
 
         /// <summary>
         /// Propriété représentant le type de l'étoile, contenu dans l'énumération TypeEtoile.
         /// </summary>
+        [DataMember]
         public TypeEtoile Type { get; set; }
 
         /// <summary>
         /// Propriété représentant la constellation sous forme de châine de caractères, dans laquelle se trouve l'étoile.
         /// </summary>
+        [DataMember]
         [Required(ErrorMessage = "La constellation doit être renseignée.")]
         [MaxLength(20, ErrorMessage = "La constellation ne peut pas dépasser 20 caractères.")]
         public string Constellation { get; set; }
@@ -31,10 +35,11 @@ namespace Espace
         /// <summary>
         /// Propriété représentant la luminosité de l'étoile, sous forme d'une valeur flottante (en luminosité solaire Lo).
         /// </summary>
+        [DataMember]
         [Range(0, float.MaxValue, ErrorMessage = "La luminositée doit être positive.")]
         public float Luminosite { get; set; }
 
-        public string this[string columnName]
+        public new string this[string columnName]
         {
             get
             {
@@ -53,7 +58,7 @@ namespace Espace
             }
         }
 
-        public string Error { get; }
+        public new string Error { get; }
 
         /// <summary>
         /// Constructeur vide, utilisé par les fabriques d'étoiles.
