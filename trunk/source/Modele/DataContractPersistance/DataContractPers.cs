@@ -11,7 +11,7 @@ namespace DataContractPersistance
     public class DataContractPers : IPersistanceManager
     {
 
-        public string CheminFichier { get; set; } = Path.Combine(Directory.GetCurrentDirectory(), "...//XML");
+        public string CheminFichier { get; set; } = Path.Combine(Directory.GetCurrentDirectory(), "..//XML");
 
         public string NomFichier { get; set; } = "astres.xml";
 
@@ -28,7 +28,7 @@ namespace DataContractPersistance
 
             IEnumerable<Astre> astres;
 
-            using(Stream s = File.OpenRead(CheminFichier))
+            using(Stream s = File.OpenRead(PersChemin))
             {
                 astres = serializer.ReadObject(s) as IEnumerable<Astre>;
             }
