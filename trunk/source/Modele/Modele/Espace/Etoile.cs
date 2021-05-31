@@ -39,6 +39,12 @@ namespace Espace
         [Range(0, float.MaxValue, ErrorMessage = "La luminositée doit être positive.")]
         public float Luminosite { get; set; }
 
+        /// <summary>
+        /// Permet de vérifier la cohérence des données lors d'entrées utilisateur avec les décorateurs placées sur les propriétées 
+        /// précédentes. Peut éventuellement retourner des messages d'erreurs.
+        /// </summary>
+        /// <param name="columnName">Une colonne associée en réalité à la propriété dont on veut tester la cohérence des données.</param>
+        /// <returns>Un message d'erreur sous forme d'une chaîne de caractères ou null si tout est correct.</returns>
         public new string this[string columnName]
         {
             get
@@ -58,6 +64,9 @@ namespace Espace
             }
         }
 
+        /// <summary>
+        /// Propriété permettant de retourner l'erreur associée à l'invalidité des champs.
+        /// </summary>
         public new string Error { get; }
 
         /// <summary>
@@ -149,6 +158,5 @@ namespace Espace
         {
             return base.GetHashCode() + Type.GetHashCode() + Constellation.GetHashCode() + Luminosite.GetHashCode();
         }
-
     }
 }

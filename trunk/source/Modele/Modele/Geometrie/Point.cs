@@ -11,7 +11,12 @@ namespace Geometrie
     [DataContract]
     public class Point : IEquatable<Point>, INotifyPropertyChanged
     {
+        //La couleur du point.
         private string couleur;
+
+        //Evenement de notification en cas de modification d'une propriété.
+        public event PropertyChangedEventHandler PropertyChanged;
+
         /// <summary>
         /// Propriété contenant la position en abscisses de x, sous forme d'une valeur entière.
         /// </summary>
@@ -26,6 +31,7 @@ namespace Geometrie
 
         /// <summary>
         /// Propriété concernant la couleur d'un point, sous forme de chaîne de caractères, en anglais, ou en hexadécimal.
+        /// Notifie la vue de sa modification.
         /// </summary>
         [DataMember]
         public string Couleur
@@ -55,8 +61,11 @@ namespace Geometrie
             Couleur = "Yellow";
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        /// <summary>
+        /// Méthode permettant de notifier l'application d'un changement de propriété dans les données, afin qu'elle puisse se
+        /// mettre à jour.
+        /// </summary>
+        /// <param name="nomPropriete">Le nom de la propriété changée sous forme de chaîne de caractères.</param>
         void OnPropertyChanged(string nomPropriete)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropriete));
 
