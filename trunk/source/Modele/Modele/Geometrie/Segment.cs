@@ -1,26 +1,31 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
 
 namespace Geometrie
 {
     /// <summary>
     /// Un segment représente les coordonnées de deux points reliés entre eux (liaisons entre les étoiles sur la carte).
     /// </summary>
+    [DataContract]
     public class Segment : IEquatable<Segment>
     {
         /// <summary>
         /// Propriété représentant le premier point du segment, sous forme de type Point.
         /// </summary>
+        [DataMember]
         public Point Point1 { get; private set; }
 
         /// <summary>
         /// Propriété représentant le second point du segment, sous forme de type Point.
         /// </summary>
+        [DataMember]
         public Point Point2 { get; private set; }
 
         /// <summary>
         /// La couleur d'un segment, permet de l'identifier et est jaune par défaut.
         /// </summary>
+        [DataMember]
         public string Couleur { get; internal set; } = "#ffffff";
 
         /// <summary>

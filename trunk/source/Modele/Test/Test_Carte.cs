@@ -14,7 +14,7 @@ namespace Test
     public static class Test_Carte
     {
         //La carte utilisée par les tests.
-        static Carte uneCarte = new Carte(false);
+        static Carte uneCarte = new Carte(new Stub.Stub(), false);
 
         /// <summary>
         /// Initialisation : ajout d'étoiles dans la carte.

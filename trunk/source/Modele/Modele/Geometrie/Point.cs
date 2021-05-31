@@ -1,28 +1,33 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
 
 namespace Geometrie
-{   
+{
     /// <summary>
     /// Un point représente les coordonnées (x et y) d'un point sur la carte (l'emplacement des astres).
     /// </summary>
+    [DataContract]
     public class Point : IEquatable<Point>, INotifyPropertyChanged
     {
         private string couleur;
         /// <summary>
         /// Propriété contenant la position en abscisses de x, sous forme d'une valeur entière.
         /// </summary>
+        [DataMember]
         public int X { get; private set; }
 
         /// <summary>
         /// Propriété contenant la position en ordonnées de y, sous forme d'une valeur entière.
         /// </summary>
+        [DataMember]
         public int Y { get; private set; }
 
         /// <summary>
         /// Propriété concernant la couleur d'un point, sous forme de chaîne de caractères, en anglais, ou en hexadécimal.
         /// </summary>
+        [DataMember]
         public string Couleur
         {
             get => couleur;

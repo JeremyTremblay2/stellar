@@ -75,12 +75,12 @@ namespace Modele
         /// Constructeur de Manager. Il ne prend pas de paramètre.
         /// On instancie notre liste d'astre et notre Carte.
         /// </summary>
-        public Manager(IPersistanceManager persistance)
+        public Manager(IPersistanceManager persistance, IPersistanceCarte persistanceCarte)
         {
             Persistance = persistance;
             lesAstres = new ObservableCollection<Astre>();
             InitCollections();
-            Carte = new Carte();
+            Carte = new Carte(persistanceCarte);
         }
 
         [OnDeserialized]
@@ -98,15 +98,35 @@ namespace Modele
             {
                 lesAstres.Add(astre);
             }
-            LesAstres = new ReadOnlyObservableCollection<Astre>(lesAstres);
-            lesAstresTries = new ObservableCollection<Astre>(lesAstres);
-            LesAstresTries = new ReadOnlyObservableCollection<Astre>(lesAstresTries);
+            for (int i = 0; i < lesAstres.Count; i++)
+            {
+                if (i % 2 == 0)
+                    lesAstres[i].ModifierFavori();
+            }
+            InitCollections();
         }
 
         public void SauvegardeDonnees()
         {
-            Persistance.SauvegardeDonnees(lesAstres);
+            Persistance.SauvegardeDonnees(lesAstres.Where(astre => !astre.Personnalise));
         }
+
+        public void ChargeDonneesCarte(string nomFichier)
+        {
+            SupprimerTout();
+            Carte.ChargeDonnees(nomFichier);
+            foreach(KeyValuePair<Point, Astre> kvp in Carte.LesAstres)
+            {
+                if (!lesAstres.Contains(kvp.Value))
+                {
+                    lesAstres.Add(kvp.Value);
+                }
+            }
+            OnPropertyChanged(nameof(Carte));
+        }
+
+        public void SauvegardeDonneesCarte(string nomFichier)
+            => Carte.SauvegardeDonnees(nomFichier);
 
         /// <summary>
         /// Méthode permettant l'ajout d'un astre à la carte et à la liste d'astres.

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using Swordfish.NET.Collections;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace Espace
 {
@@ -16,34 +17,41 @@ namespace Espace
     /// Une constellation est un ensemble de points reliés par des segments, le tout forme un graphe connexe (les étoiles et les 
     /// liens entre elles).
     /// </summary>
+    [DataContract]
     public class Constellation : IEquatable<Constellation>
     {
         private static Random generateurCouleur = new Random();
 
         //Les hashsets de points et segments permettent de ne pas avoir de coordonnées en double.
+        [DataMember]
         private HashSet<Point> lesPoints = new HashSet<Point>();
+        [DataMember]
         private HashSet<Segment> lesSegments = new HashSet<Segment>();
 
         /// <summary>
         /// Propriété observable en lecture seule concernant l'hashset de points, qui sont l'ensemble des points 
         /// contenus dans une constellation.
         /// </summary>
+        [DataMember]
         public ObservableCollection<Point> LesPoints { get; private set; } = new ObservableCollection<Point>();
 
         /// <summary>
         /// Propriété observable en lecture seule concernant l'hashset de segments, qui sont l'ensembles des liens 
         /// qui relient les étoiles entres elles.
         /// </summary>
+        [DataMember]
         public ObservableCollection<Segment> LesSegments { get; private set; } = new ObservableCollection<Segment>();
 
         /// <summary>
         /// Propriété permettant de savoir si la constellation est vide, si elle ne contient pas de points et segments.
         /// </summary>
+        [DataMember]
         public bool Vide { get; private set; }
 
         /// <summary>
         /// La couleur de la constellation, qui sera appliquée à tous ses segments.
         /// </summary>
+        [DataMember]
         public string Couleur { get; set; } = GenerationCouleurAleatoire();
         /// <summary>
         /// Constructeur de Constellations. Prend deux points en paramètre et trace un segment.

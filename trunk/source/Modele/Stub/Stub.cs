@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using Espace;
+using Geometrie;
 using Modele;
 
 namespace Stub
 {
-    public class Stub : IPersistanceManager
+    public class Stub : IPersistanceManager, IPersistanceCarte
     {
         public IEnumerable<Astre> ChargeDonnees()
         {
@@ -204,6 +205,16 @@ namespace Stub
         public void SauvegardeDonnees(IEnumerable<Astre> astres)
         {
             Debug.WriteLine("Sauvegarde demandée.");
+        }
+
+        public (Dictionary<Point, Astre> astres, IEnumerable<Constellation> constellations) ChargeDonneesCarte(string cheminFichier)
+        {
+            return (new Dictionary<Point, Astre>(), new List<Constellation>());
+        }
+
+        public void SauvegardeDonneesCarte(Dictionary<Point, Astre> astres, IEnumerable<Constellation> constellations, string cheminFichier)
+        {
+            Debug.WriteLine("Sauvegarde de la carte demandée.");
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Appli
     /// </summary>
     public partial class App : Application
     {
-        public Manager LeManager { get; private set; } = new Manager(new DataContractPers());
+        public Manager LeManager { get; private set; } = new Manager(new DataContractPers(), new DataContractPers());
 
         public App()
         {
