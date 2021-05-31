@@ -16,21 +16,17 @@ namespace Modele
     /// La carte est une entitée contenant tous les éléments disposés dessus. Cela peut être des astres, des constellations...
     /// Elle utilise un système de coordonnées.
     /// </summary>
-    public class Carte : IEquatable<Carte>, INotifyPropertyChanged
+    public class Carte : IEquatable<Carte>
     {
-        //Générateur de constellations aléatoire à la création de la carte.
-        private static Random generateurAleatoire = new Random();
+        //Générateur de constellations aléatoire à la création de la carte (pas implémenté).
+        //private static Random generateurAleatoire = new Random();
 
         //Dictionnaire de données permettant de retrouver facilement un Astre grâce à sa position.
         private Dictionary<Point, Astre> lesAstres;
         //Les constellations présentes sur la carte (liste de données).
         private ObservableCollection<Constellation> lesConstellations;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        void OnPropertyChanged(string nomPropriete)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropriete));
-
+        //Le type de persistance qui sera utilisé lors de la sérialisation / désérialisation de la carte.
         public IPersistanceCarte Persistance { get; set; }
 
         /// <summary>
@@ -45,6 +41,10 @@ namespace Modele
         /// </summary>
         public ReadOnlyObservableCollection<Constellation> LesConstellations { get; private set; }
 
+        /// <summary>
+        /// Propriété en lecture seule contenant cette fois-ci le dictionnaire en version observable, qui notifie la vue des mises à jour de
+        /// ses données.
+        /// </summary>
         public ConcurrentObservableDictionary<Point, Astre> LesAstresObservables { get; private set; }
 
         /// <summary>
@@ -52,6 +52,7 @@ namespace Modele
         /// via leur Point de coordonnées. Une carte se compose aussi d'une liste de constellations (des points reliés entre eux par des segments).
         /// On instancie ici également les collections en lectures seules afin que les champs soient bien encapsulés.
         /// </summary>
+        /// <param name="persistance">Le type de persistance qui sera utilisé lors des chargements / sauvegardes de la Carte.</param>
         /// <param name="avecCreations">Paramètre permettant de créer une carte avec déjà quelques éléments aléatoires dessus (des constellations,
         /// étoiles et planètes). S'il vaut true, alors une telle carte sera générée, si false, la carte sera construite vide.
         /// </param>
@@ -67,22 +68,34 @@ namespace Modele
 
             if (avecCreations)
             {
-                //Ajouter des astres et constellations.
+                //Ajouter des astres et constellations de manière aléatoire (pas implémenté).
             }
         }
 
+        /// <summary>
+        /// Permet l'instanciation des collections.
+        /// </summary>
         [OnDeserialized]
-        public void InitCollections()
+        public void InitCollections(StreamingContext sc = new StreamingContext())
         {
             LesAstres = new ReadOnlyDictionary<Point, Astre>(lesAstres);
             LesConstellations = new ReadOnlyObservableCollection<Constellation>(lesConstellations);
         }
 
+        /// <summary>
+        /// Permet le chargement des données de la carte, depuis un fichier.
+        /// Cette méthode appelle la méthode de chargement des données associée au type de persistance de la carte.
+        /// Elle efface les données de ses collections, puis ajoute les données lues dans ses collections.
+        /// </summary>
+        /// <param name="nomFichier">Le nom du fichier dans lequel les données seront enregistrées, sous forme d'une chaîne de
+        /// caractères.</param>
         public void ChargeDonnees(string nomFichier)
         {
             var donnees = Persistance.ChargeDonneesCarte(nomFichier);
-            
-            foreach(KeyValuePair<Point, Astre> kvp in donnees.astres)
+
+            SupprimerTout();
+
+            foreach (KeyValuePair<Point, Astre> kvp in donnees.astres)
             {
                 lesAstres.Add(kvp.Key, kvp.Value);
                 LesAstresObservables.Add(kvp.Key, kvp.Value);
@@ -91,16 +104,16 @@ namespace Modele
             {
                 lesConstellations.Add(constel);
             }
-            InitCollections();
-            OnPropertyChanged(nameof(LesAstresObservables));
-            OnPropertyChanged(nameof(LesConstellations));
         }
 
+        /// <summary>
+        /// Méthode permettant de sauvegarder les données de la Carte actuelle dans un fcihier, dont le nom est passé en paramètre.
+        /// Cette méthode ne fait que déléguer la sauvegarde au type de persistance instancié.
+        /// </summary>
+        /// <param name="nomFichier">Le nom du fichier dans lequel les données seront sauvegardées.</param>
         public void SauvegardeDonnees(string nomFichier)
-        {
-            Persistance.SauvegardeDonneesCarte(lesAstres, lesConstellations, nomFichier);
-        }
-
+            =>Persistance.SauvegardeDonneesCarte(lesAstres, lesConstellations, nomFichier);
+  
         /// <summary>
         /// Méthode permettant d'ajouter un astre à la carte (il peut s'agir d'une étoile ou d'une planète).
         /// Pour cela, si le point ou l'astre n'est pas null (on lève un exception le cas échéant), on vient l'ajouter au dictionnaire 
@@ -221,8 +234,6 @@ namespace Modele
                     lesConstellations.Remove(tempoConstel);
                 }
             }
-
-                
 
             //Si ce n'est pas une constellation, c'est une suppression pure et simple.
             else                

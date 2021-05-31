@@ -10,6 +10,9 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Appli.fenetres;
 using Appli.usersControls;
+using Microsoft.Win32;
+using System.IO;
+using System.Runtime.Serialization;
 
 namespace Appli
 {
@@ -218,12 +221,45 @@ namespace Appli
 
         private void ChargementClic(object sender, MouseButtonEventArgs e)
         {
-            Manager.ChargeDonneesCarte("D:\\Cours\\test.stel");
+            OpenFileDialog chargementFichier = new OpenFileDialog();
+            chargementFichier.Filter = "XML files (*.xml)|*.xml";
+
+            if (chargementFichier.ShowDialog() == true)
+            {
+                Debug.WriteLine(chargementFichier.FileName);
+
+                MessageBoxResult resultat = MessageBox.Show("Ouvrir un nouveau projet effacera la carte actuelle, êtes-vous sûr de vouloir ouvrir" +
+                                                            " un nouveau document ?",
+                                                            "Ouverture d'une carte",
+                                                            MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (resultat == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        Debug.WriteLine(chargementFichier.FileName);
+                        Manager.ChargeDonneesCarte(chargementFichier.FileName);
+                    }
+                    catch (Exception erreur)
+                    {
+                        MessageBox.Show(erreur.Message,
+                                        "Un problème est survenu",
+                                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
         }
 
         private void SauvegardeClic(object sender, MouseButtonEventArgs e)
         {
-            Manager.SauvegardeDonneesCarte("D:\\Cours\\test.stel");
+            SaveFileDialog sauvegardeFichier = new SaveFileDialog();
+            sauvegardeFichier.Filter = "XML file (*.xml)|*.xml";
+
+            if (sauvegardeFichier.ShowDialog() == true)
+            {
+                Debug.WriteLine(sauvegardeFichier.FileName);
+                Manager.SauvegardeDonneesCarte(sauvegardeFichier.FileName);
+            }
         }
 
         private void PoubelleClic(object sender, MouseButtonEventArgs e)

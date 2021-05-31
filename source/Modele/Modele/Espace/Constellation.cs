@@ -53,6 +53,7 @@ namespace Espace
         /// </summary>
         [DataMember]
         public string Couleur { get; set; } = GenerationCouleurAleatoire();
+
         /// <summary>
         /// Constructeur de Constellations. Prend deux points en paramètre et trace un segment.
         /// </summary>
@@ -433,7 +434,7 @@ namespace Espace
         }
 
         /// <summary>
-        /// Choisis une couleur aléatoire
+        /// Choisi une couleur aléatoire à l'instanciation de la constellation.
         /// </summary>
         private static string GenerationCouleurAleatoire()
         {
@@ -443,7 +444,7 @@ namespace Espace
 			return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");        }
 
         /// <summary>
-        /// Applique la couleur sur tout les segments de la constellation
+        /// Applique la couleur sur tous les segments de la constellation.
         /// </summary>
         private void AppliqueCouleur()
         {

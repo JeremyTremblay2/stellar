@@ -48,8 +48,14 @@ namespace Modele
         /// </summary>
         public Carte Carte { get; private set; }
 
+        /// <summary>
+        /// Evènement permettant la notification du changement d'une propriété.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Propriété concernant l'astre sélectionné dans l'application, et notifie la vue de son changement en cas de modifications.
+        /// </summary>
         public Astre AstreSelectionne
         {
             get => astreSelectionne;
@@ -73,7 +79,9 @@ namespace Modele
 
         /// <summary>
         /// Constructeur de Manager. Il ne prend pas de paramètre.
-        /// On instancie notre liste d'astre et notre Carte.
+        /// On instancie notre liste d'astre et notre Carte. On vient instancie nos méthodes de persistance pour la Carte et le Manager.
+        /// <param name="persistance">Le type de persistance utilisé par le Manager.</param>
+        /// <param name="persistanceCarte">LE type de persistance utilisé par la Carte.</param>
         /// </summary>
         public Manager(IPersistanceManager persistance, IPersistanceCarte persistanceCarte)
         {
@@ -83,6 +91,10 @@ namespace Modele
             Carte = new Carte(persistanceCarte);
         }
 
+        /// <summary>
+        /// Permet l'instanciation des collections.
+        /// </summary>
+        /// <param name="sc"></param>
         [OnDeserialized]
         void InitCollections(StreamingContext sc = new StreamingContext())
         {
@@ -91,6 +103,10 @@ namespace Modele
             LesAstresTries = new ReadOnlyObservableCollection<Astre>(lesAstresTries);
         }
 
+        /// <summary>
+        /// Méthode appellant le chargement des données de la persistance instanciée.
+        /// Elle vient ajouter les données chargées dans ses listes.
+        /// </summary>
         public void ChargeDonnees()
         {
             var donnees = Persistance.ChargeDonnees();
@@ -98,33 +114,50 @@ namespace Modele
             {
                 lesAstres.Add(astre);
             }
-            for (int i = 0; i < lesAstres.Count; i++)
-            {
-                if (i % 2 == 0)
-                    lesAstres[i].ModifierFavori();
-            }
             InitCollections();
         }
 
+        /// <summary>
+        /// Méthode appellant la sauvegarde des données de la persistance instanciée.
+        /// On enregistre que les astres non personnalisés.
+        /// </summary>
         public void SauvegardeDonnees()
-        {
-            Persistance.SauvegardeDonnees(lesAstres.Where(astre => !astre.Personnalise));
-        }
+            => Persistance.SauvegardeDonnees(lesAstres.Where(astre => !astre.Personnalise));
 
+        /// <summary>
+        /// Méthode permettant le chargement des données contenues dans la carte.
+        /// On appelle la méthode correspondante dans la carte, puis on vient ajouter les astres personnalisés dans nos listes qui ont pu 
+        /// être incorporés suite au chargement de la carte.
+        /// </summary>
+        /// <param name="nomFichier">Le nom du fichier sous forme de chaîne de caractères, dans lequel on va lire les données de la carte.</param>
         public void ChargeDonneesCarte(string nomFichier)
         {
-            SupprimerTout();
             Carte.ChargeDonnees(nomFichier);
-            foreach(KeyValuePair<Point, Astre> kvp in Carte.LesAstres)
+
+            for (int i = 0; i < lesAstres.Count; i++)
+            {
+                if (lesAstres[i].Personnalise)
+                {
+                    lesAstres.Remove(lesAstres[i]);
+                    i--;
+                }
+            }
+
+            foreach (KeyValuePair<Point, Astre> kvp in Carte.LesAstres)
             {
                 if (!lesAstres.Contains(kvp.Value))
                 {
                     lesAstres.Add(kvp.Value);
+                    lesAstresTries.Add(kvp.Value);
                 }
             }
-            OnPropertyChanged(nameof(Carte));
+            InitCollections();
         }
 
+        /// <summary>
+        /// Méthode déléguant la sauvegarde de la Carte, à la Carte.
+        /// </summary>
+        /// <param name="nomFichier">Le nom du fichier qui sera utilisé pour sauvegarder des données de la carte.</param>
         public void SauvegardeDonneesCarte(string nomFichier)
             => Carte.SauvegardeDonnees(nomFichier);
 
@@ -260,10 +293,13 @@ namespace Modele
             OnPropertyChanged(nameof(LesAstresTries));
         }
 
+        /// <summary>
+        /// Méthode permettant de retourner l'astre correpondant au nom fournit au paramètre, ou null s'il n'existe pas.
+        /// </summary>
+        /// <param name="nom">Le nom de l'astre que l'on veut chercher.</param>
+        /// <returns>L'astre correspondant ou null si aucun ne satisfait le nom passé en paramètre.</returns>
         public Astre RecupererAstre(string nom)
-        {
-            return lesAstres.SingleOrDefault(astre => astre.Nom.Equals(nom));
-        }
+            => lesAstres.SingleOrDefault(astre => astre.Nom.Equals(nom));
 
         /// <summary>
         /// Méthode permettant l'affichage du Manager.

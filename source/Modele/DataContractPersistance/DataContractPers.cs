@@ -85,7 +85,7 @@ namespace DataContractPersistance
             }
         }
 
-        public (Dictionary<Point, Astre> astres, IEnumerable<Constellation> constellations) ChargeDonneesCarte(string cheminFichier)
+        public (Dictionary<Point, Astre> astres, IEnumerable<Constellation> constellations) ChargeDonneesCarte(string cheminFichier) 
         {
             if (!File.Exists(cheminFichier))
             {
@@ -98,7 +98,15 @@ namespace DataContractPersistance
 
             using (Stream s = File.OpenRead(cheminFichier))
             {
-                data = serializer.ReadObject(s) as DataCartePersist;
+                try
+                {
+                    data = serializer.ReadObject(s) as DataCartePersist;
+                }
+                catch (Exception e)
+                {
+                    throw new SerializationException("Le fichier sélectionné semble innacessible ou corrompu.\n" +
+                        "Veuillez rééssayer.");
+                }
             }
 
             return (data.Dico, data.Constellations);

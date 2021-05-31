@@ -27,17 +27,13 @@ namespace Espace
         //Sert à envoyer des notifications quand des données sont modifiées.
         public event PropertyChangedEventHandler PropertyChanged;
 
-        //Méthode permettant de notifier la vue que des données ont été mises à jour.
-        void OnPropertyChanged(string nomPropriete)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropriete));
-
         /// <summary>
         /// Propriété représentant le nom de l'astre sous forme d'une chaîne de caractères. Il ne peut pas être vide.
         /// Le nom ne peut être qu'écrit sous format titre (Xxxx Xx Xxxx).
         /// </summary>
         [DataMember (EmitDefaultValue = false, Order = 0)]
         [Required(ErrorMessage = "Le nom doit être renseigné")]
-        [MaxLength(18, ErrorMessage = "Nom trop long.")]
+        [MaxLength(15, ErrorMessage = "Nom trop long.")]
         public string Nom
         {
             get => nom;
@@ -104,6 +100,12 @@ namespace Espace
         [DataMember(EmitDefaultValue = false, Order = 5)]
         public string Image { get; set; }
 
+        /// <summary>
+        /// Permet de vérifier la cohérence des données lors d'entrées utilisateur avec les décorateurs placées sur les propriétées 
+        /// précédentes. Peut éventuellement retourner des messages d'erreurs.
+        /// </summary>
+        /// <param name="columnName">Une colonne associée en réalité à la propriété dont on veut tester la cohérence des données.</param>
+        /// <returns>Un message d'erreur sous forme d'une chaîne de caractères ou null si tout est correct.</returns>
         public string this[string columnName]
         {
             get
@@ -123,6 +125,9 @@ namespace Espace
             }
         }
 
+        /// <summary>
+        /// Propriété permettant de retourner l'erreur associée à l'invalidité des champs.
+        /// </summary>
         public string Error { get; }
 
         /// <summary>
@@ -149,8 +154,12 @@ namespace Espace
             Temperature = temperature;
             Personnalise = personnalise;
             Image = image;
-        } 
-        
+        }
+
+        //Méthode permettant de notifier la vue que des données ont été mises à jour.
+        void OnPropertyChanged(string nomPropriete)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropriete));
+
         /// <summary>
         /// Méthode permettant la modification de l'état de l'attribut favori. On change son état actuel.
         /// </summary>
