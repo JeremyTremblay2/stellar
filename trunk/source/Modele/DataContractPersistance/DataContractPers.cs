@@ -102,7 +102,7 @@ namespace DataContractPersistance
                 {
                     data = serializer.ReadObject(s) as DataCartePersist;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     throw new SerializationException("Le fichier sélectionné semble innacessible ou corrompu.\n" +
                         "Veuillez rééssayer.");

@@ -33,7 +33,9 @@ namespace Test
             //Test_Recherche.TestRechercheParPersonnalisation();
             //Test_Recherche.TestRechercheParNom();
 
-            Test_DataContractPers.TestChargement();
+            //Test_DataContractPers.TestChargement();
+
+            Test_JSONPers.TestChargement();
         }
     }
 }
