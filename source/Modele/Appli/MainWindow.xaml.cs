@@ -216,6 +216,16 @@ namespace Appli
             }
         }
 
+        private void ChargementClic(object sender, MouseButtonEventArgs e)
+        {
+            Manager.ChargeDonneesCarte("D:\\Cours\\test.stel");
+        }
+
+        private void SauvegardeClic(object sender, MouseButtonEventArgs e)
+        {
+            Manager.SauvegardeDonneesCarte("D:\\Cours\\test.stel");
+        }
+
         private void PoubelleClic(object sender, MouseButtonEventArgs e)
         {
 

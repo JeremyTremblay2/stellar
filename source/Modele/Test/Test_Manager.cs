@@ -12,7 +12,7 @@ namespace Tests_Fonctionnels
     public static class Test_Manager
     {
         //Instanciation d'un manager.
-        static Manager manager = new Manager(new DataContractPers());
+        static Manager manager = new Manager(new DataContractPers(), new Stub.Stub());
 
         /// <summary>
         /// Méthode de test dans laquelle on vérifie si le manager est bien vide après sa création.

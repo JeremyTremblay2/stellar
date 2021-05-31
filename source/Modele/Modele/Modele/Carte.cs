@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using Swordfish.NET.Collections;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace Modele
 {
@@ -15,7 +16,7 @@ namespace Modele
     /// La carte est une entitée contenant tous les éléments disposés dessus. Cela peut être des astres, des constellations...
     /// Elle utilise un système de coordonnées.
     /// </summary>
-    public class Carte : IEquatable<Carte>
+    public class Carte : IEquatable<Carte>, INotifyPropertyChanged
     {
         //Générateur de constellations aléatoire à la création de la carte.
         private static Random generateurAleatoire = new Random();
@@ -24,6 +25,13 @@ namespace Modele
         private Dictionary<Point, Astre> lesAstres;
         //Les constellations présentes sur la carte (liste de données).
         private ObservableCollection<Constellation> lesConstellations;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        void OnPropertyChanged(string nomPropriete)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nomPropriete));
+
+        public IPersistanceCarte Persistance { get; set; }
 
         /// <summary>
         /// Propriété en lecture seule concernant le dictionnaire permettant de retrouver un Astre facilement présent sur la Carte, 
@@ -47,20 +55,50 @@ namespace Modele
         /// <param name="avecCreations">Paramètre permettant de créer une carte avec déjà quelques éléments aléatoires dessus (des constellations,
         /// étoiles et planètes). S'il vaut true, alors une telle carte sera générée, si false, la carte sera construite vide.
         /// </param>
-        public Carte(bool avecCreations = true)
+        public Carte(IPersistanceCarte persistance, bool avecCreations = true)
         {
+            Persistance = persistance;
+
             lesAstres = new Dictionary<Point, Astre>();
             lesConstellations = new ObservableCollection<Constellation>();
-
-            LesAstres = new ReadOnlyDictionary<Point, Astre>(lesAstres);
-            LesConstellations = new ReadOnlyObservableCollection<Constellation>(lesConstellations);
-
             LesAstresObservables = new ConcurrentObservableDictionary<Point, Astre>();
+
+            InitCollections();
 
             if (avecCreations)
             {
                 //Ajouter des astres et constellations.
             }
+        }
+
+        [OnDeserialized]
+        public void InitCollections()
+        {
+            LesAstres = new ReadOnlyDictionary<Point, Astre>(lesAstres);
+            LesConstellations = new ReadOnlyObservableCollection<Constellation>(lesConstellations);
+        }
+
+        public void ChargeDonnees(string nomFichier)
+        {
+            var donnees = Persistance.ChargeDonneesCarte(nomFichier);
+            
+            foreach(KeyValuePair<Point, Astre> kvp in donnees.astres)
+            {
+                lesAstres.Add(kvp.Key, kvp.Value);
+                LesAstresObservables.Add(kvp.Key, kvp.Value);
+            }
+            foreach (var constel in donnees.constellations)
+            {
+                lesConstellations.Add(constel);
+            }
+            InitCollections();
+            OnPropertyChanged(nameof(LesAstresObservables));
+            OnPropertyChanged(nameof(LesConstellations));
+        }
+
+        public void SauvegardeDonnees(string nomFichier)
+        {
+            Persistance.SauvegardeDonneesCarte(lesAstres, lesConstellations, nomFichier);
         }
 
         /// <summary>
