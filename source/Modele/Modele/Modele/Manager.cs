@@ -122,7 +122,11 @@ namespace Modele
         /// On enregistre que les astres non personnalisés.
         /// </summary>
         public void SauvegardeDonnees()
-            => Persistance.SauvegardeDonnees(lesAstres.Where(astre => !astre.Personnalise));
+        {
+            var astres = new List<Astre>();
+            astres = lesAstres.Where(astre => !astre.Personnalise).ToList();
+            Persistance.SauvegardeDonnees(astres);
+        }
 
         /// <summary>
         /// Méthode permettant le chargement des données contenues dans la carte.

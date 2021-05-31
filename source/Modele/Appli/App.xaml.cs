@@ -1,5 +1,6 @@
 using DataContractPersistance;
 using Modele;
+using JSONPersistance;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,7 +16,7 @@ namespace Appli
     /// </summary>
     public partial class App : Application
     {
-        public Manager LeManager { get; private set; } = new Manager(new DataContractPers(), new DataContractPers());
+        public Manager LeManager { get; private set; } = new Manager(new JSONPers(), new DataContractPers());
 
         public App()
         {
