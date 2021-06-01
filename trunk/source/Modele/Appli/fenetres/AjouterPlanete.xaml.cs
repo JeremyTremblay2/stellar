@@ -1,7 +1,9 @@
-﻿using Espace;
+﻿using Appli.convertisseurs;
+using Espace;
 using Modele;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -31,13 +33,14 @@ namespace Appli.fenetres
 
         public bool Modification { get; internal set; }
 
+        private string planeteImg;
         public AjouterPlanete()
         {
             InitializeComponent();
             Vie.IsEnabled = false;
             var planete = new Planete("Ma Planète", "", 4500000000, 1, 1000, "", false, "Solaire", TypePlanete.Tellurique, true, "planète.jpg");
             LaPlanete = new Planete(planete.Nom, planete.Description, planete.Age, planete.Masse, planete.Temperature, planete.Vie,
-                planete.EauPresente, planete.Systeme, planete.Type, planete.Personnalise , planete.Image);
+                planete.EauPresente, planete.Systeme, planete.Type, planete.Personnalise , planeteImg);
             DataContext = this;
         }
 
@@ -115,6 +118,69 @@ namespace Appli.fenetres
             Vie.IsEnabled = false;
             Vie.Background = Brushes.DarkGray;
         }
+        private void OuvrirImage(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+            Dictionary<string, BitmapEncoder> encoders = new Dictionary<string, BitmapEncoder>()
+                                                    {
+                                                        {".jpg", new JpegBitmapEncoder()},
+                                                        {".bmp", new BmpBitmapEncoder()},
+                                                        {".png", new PngBitmapEncoder()}
+                                                    };
+
+            dlg.FileName = "Images";
+            dlg.DefaultExt = ".jpg | .png | .gif";
+            dlg.Filter = "All images files (.jpg, .png, .gif)|*.jpg;*.png;*.gif|JPG files (.jpg)|*.jpg|PNG files (.png)|*.png|GIF files (.gif)|*.gif";
+
+            bool? result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                string filename = dlg.FileName;
+
+                planeteImg = dlg.SafeFileName.ToString();
+
+                Image.Source = new BitmapImage(new Uri(filename, UriKind.Absolute));
+                FileInfo fi = new FileInfo(filename);
+                if (!encoders.ContainsKey(fi.Extension))
+                {
+                    return;
+                }
+
+
+
+                SaveImage(new BitmapImage(new Uri(filename, UriKind.Absolute)), planeteImg, encoders[fi.Extension]);
+
+                LaPlanete.Image = planeteImg;
+
+            }
+        }
+
+        void SaveImage(BitmapImage img, string fileName, BitmapEncoder encoder)
+        {
+            if (!File.Exists(System.IO.Path.Combine(ConvertisseurDeTexteEnImage.cheminImages, fileName)))
+            {
+                FileInfo fi = new FileInfo(fileName);
+
+                /*int i = 0;
+
+                while (File.Exists(System.IO.Path.Combine(ConvertisseurDeTexteEnImage.cheminImages, fileName)))
+                {
+                    fileName = $"{fi.Name.Remove(fi.Name.LastIndexOf('.'))}_{i}{fi.Extension}";
+                    i++;
+                }*/
+
+                fileName = @"..\..\StellarBin\images\" + fileName;
+
+                BitmapFrame frame = BitmapFrame.Create(img);
+                encoder.Frames.Add(frame);
+
+                using (var stream = File.Create(fileName))
+                {
+                    encoder.Save(stream);
+                }
+            }
+        }
     }
-  
 }
