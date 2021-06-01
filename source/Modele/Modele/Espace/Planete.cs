@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
@@ -10,7 +12,7 @@ namespace Espace
     /// possède un type, contient éventuellement de l'eau, et de la vie.
     /// </summary>
     [DataContract]
-    public class Planete : Astre, IEquatable<Planete>
+    public class Planete : Astre, IEquatable<Planete>, IDataErrorInfo
     {
         /// <summary>
         /// Propriété représentant le type de la planète, contenu dans l'énumération TypePlanete.
@@ -34,6 +36,8 @@ namespace Espace
         /// Propriété permettant de représenter le système stellaire de la planète, sous forme de chaîne de caractères.
         /// </summary>
         [DataMember]
+        [Required(ErrorMessage = "Le système doit être renseignée.")]
+        [MaxLength(20, ErrorMessage = "Trop long.")]
         public string Systeme { get; set; }
 
         /// <summary>
