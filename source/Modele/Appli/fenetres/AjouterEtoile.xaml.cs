@@ -106,16 +106,18 @@ namespace Appli.fenetres
                     return;
                 }
 
-                
 
-                SaveImage(new BitmapImage(new Uri(filename, UriKind.Absolute)), dlg.SafeFileName.ToString(), encoders[fi.Extension]);
+                
+                SaveImage(new BitmapImage(new Uri(filename, UriKind.Absolute)), etoileImg, encoders[fi.Extension]);
+                
                 LEtoile.Image = etoileImg;
+                
             }
         }
 
         void SaveImage(BitmapImage img, string fileName, BitmapEncoder encoder)
         {
-            if(!File.Exists(System.IO.Path.Combine(ConvertisseurDeTexteEnImage.cheminImages, fileName)))
+            if (!File.Exists(System.IO.Path.Combine(ConvertisseurDeTexteEnImage.cheminImages, fileName)))
             {
                 FileInfo fi = new FileInfo(fileName);
 
