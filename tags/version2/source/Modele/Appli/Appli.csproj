@@ -1,0 +1,88 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\StellarBin\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="images\fonds\fondCarte1.jpg" />
+    <None Remove="images\fonds\fondCarte2.jpg" />
+    <None Remove="images\fonds\fondCarte3.jpg" />
+    <None Remove="images\fonds\fond_ciel.jpg" />
+    <None Remove="images\fonds\fontCarte1.jpg" />
+    <None Remove="images\fonds\fontCarte2.jpg" />
+    <None Remove="images\icones\ajoutImage.png" />
+    <None Remove="images\icones\coeurPlein.png" />
+    <None Remove="images\icones\coeurVide.png" />
+    <None Remove="images\icones\etoile.png" />
+    <None Remove="images\icones\icone.png" />
+    <None Remove="images\icones\ordreAlphabetiqueCroissant.png" />
+    <None Remove="images\icones\ordreAlphabetiqueDecroissant.png" />
+    <None Remove="images\icones\planete.png" />
+    <None Remove="images\icones\recherche.png" />
+    <None Remove="images\icones\tousLesAstres.png" />
+    <None Remove="images\UI\popup.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataContractPersistance\DataContractPersistance.csproj" />
+    <ProjectReference Include="..\JSONPersistance\JSONPersistance.csproj" />
+    <ProjectReference Include="..\Modele\Modele.csproj" />
+    <ProjectReference Include="..\Stub\Stub.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="images\fonds\fondCarte1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\fonds\fondCarte2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\fonds\fondCarte3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\icones\ajoutImage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="images\icones\coeurPlein.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\icones\coeurVide.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\icones\etoile.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\icones\icone.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\icones\ordreAlphabetiqueCroissant.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\icones\ordreAlphabetiqueDecroissant.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\icones\planete.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\icones\recherche.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\icones\tousLesAstres.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="images\UI\popup.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>
