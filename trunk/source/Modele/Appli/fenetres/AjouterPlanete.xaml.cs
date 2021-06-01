@@ -46,12 +46,11 @@ namespace Appli.fenetres
 
         private void Fermer(object sender, MouseButtonEventArgs e)
         {
+            LaPlanete = null;
             Close();
         }
-        private void Fermer(object sender, RoutedEventArgs e)
-        {
-            Fermer(null, null);
-        }
+        private void Fermer(object sender, RoutedEventArgs e) => Fermer(null, null);
+
         private void Valider(object sender, RoutedEventArgs e)
         {
             if (LeManager.RecupererAstre(LaPlanete.Nom) != null)

@@ -150,7 +150,7 @@
             <TextBlock Style="{StaticResource texteInfosPopup}" Text="Constellation : " HorizontalAlignment="Right" 
                        VerticalAlignment="Center" Grid.Row="6" Margin="0 0 0 0"/>
             <TextBox Text="{Binding LEtoile.Constellation, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
-                     Template="{StaticResource TextBoxRecherche}" Grid.Row="6" Grid.Column="1" x:Name="Constellation">
+                     Template="{StaticResource TextBoxRecherche}" Grid.Row="6" Grid.Column="1" x:Name="Constellation" Cursor="Arrow">
                 <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <StackPanel>
