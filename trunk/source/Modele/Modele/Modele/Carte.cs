@@ -147,6 +147,7 @@ namespace Modele
 
             var position = lesAstres.FirstOrDefault(kvp => kvp.Value.Equals(astreOriginel)).Key;
             lesAstres[position] = astreModifie;
+            LesAstresObservables[position] = astreModifie;
         }
         
         /// <summary>

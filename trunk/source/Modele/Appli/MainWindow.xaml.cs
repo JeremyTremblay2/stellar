@@ -642,7 +642,15 @@ namespace Appli
             {
                 RelierClic(null, null);
             }
-            else if (e.Key == Key.Delete)
+            else if (CtrlOk && e.Key == Key.M)
+            {
+                ModifierClic(null, null);
+            }
+            else if (e.Key == Key.F12)
+            {
+                SpectateurClic(null, null);
+            }
+            else if (e.Key == Key.U)
             {
                 PoubelleClic(null, null);
             }
