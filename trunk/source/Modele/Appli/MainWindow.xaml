@@ -9,7 +9,7 @@
         x:Class="Appli.MainWindow"
         mc:Ignorable="d" Icon="/images/icones/icone.png"
         Title="Stellar" Height="600" Width="1100"
-        KeyDown="RaccourcisClavier">
+        KeyDown="RaccourcisClavier" KeyUp="CtrlUp">
 
     <Window.Resources>
         <DataTemplate x:Key="astreTemplate">
