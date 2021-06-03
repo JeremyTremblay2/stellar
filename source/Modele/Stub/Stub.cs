@@ -54,7 +54,7 @@ namespace Stub
                                 .AvecImage("bételgeuse.jpg")
                                 .Construire(),
 
-                fabriqueDetoile.Initialiser("Castor", true)
+                fabriqueDetoile.Initialiser("Castor")
                                 .AvecDescription("Castor (ou Alpha Geminorum) est la seconde étoile la plus brillante de la " +
                                 "constellation des Gémeaux et une des plus brillantes étoiles du ciel nocturne.")
                                 .AvecAge(370000000)
@@ -65,7 +65,7 @@ namespace Stub
                                 .AvecImage("castor.jpg")
                                 .Construire(),
 
-                fabriqueDetoile.Initialiser("Pollux", true)
+                fabriqueDetoile.Initialiser("Pollux")
                                 .AvecDescription("Pollux (β Gem / Beta Geminorum) est l'étoile la plus brillante de la " +
                                 "constellation des Gémeaux et l'une des plus brillantes du ciel nocturne.")
                                 .AvecAge(7400000000)
@@ -73,10 +73,46 @@ namespace Stub
                                 .AvecTemperature(4865)
                                 .AvecLuminosite(32)
                                 .EstDansLaConstellation("Gémeaux")
+                                .AvecType(TypeEtoile.GeanteRouge)
                                 .AvecImage("pollux.jpg")
                                 .Construire(),
 
-                fabriqueDePlanete.Initialiser("Mars", true)
+                fabriqueDetoile.Initialiser("Polaris")
+                                .AvecDescription("Polaris ou Alpha Ursae Minoris est une étoile multiple. Elle est l’étoile la plus brillante de la constellation de la Petite Ourse. " +
+                                "Elle est aussi connue sous le nom de l’Étoile polaire car elle correspond à la direction du pôle nord céleste")
+                                .AvecAge(70000000)
+                                .AvecMasse(4.5f)
+                                .AvecTemperature(7000)
+                                .AvecLuminosite(2)
+                                .EstDansLaConstellation("Petite Ourse")
+                                .AvecType(TypeEtoile.SupergeanteRouge)
+                                .AvecImage("pollux.jpg")
+                                .Construire(),
+
+                fabriqueDetoile.Initialiser("Spica")
+                                .AvecDescription("Spica ou α Virginis. C'est l'étoile la plus lumineuse de la constellation de la Vierge. " +
+                                "On peut remarquer un scintillement lorsqu'on l'observe car Spica est une étoile binaire spectroscopique et une étoile variable ellipsoïdale. ")
+                                .AvecAge(12500000)
+                                .AvecMasse(11.43f)
+                                .AvecTemperature(25300)
+                                .AvecLuminosite(20512)
+                                .EstDansLaConstellation("Vierge")
+                                .AvecType(TypeEtoile.GeanteBleu)
+                                .AvecImage("pollux.jpg")
+                                .Construire(),
+
+                fabriqueDetoile.Initialiser("Antarès")
+                                .AvecDescription("Antarès ou α Scorpii est une étoile binaire en fin de vie.")
+                                .AvecAge(11000000)
+                                .AvecMasse(18f)
+                                .AvecTemperature(3570)
+                                .AvecLuminosite(97700)
+                                .EstDansLaConstellation("Scorpion")
+                                .AvecType(TypeEtoile.SupergeanteRouge)
+                                .AvecImage("Antarès.jpg")
+                                .Construire(),
+
+                fabriqueDePlanete.Initialiser("Mars")
                                 .AvecDescription("Mars est la quatrième planète par ordre croissant de la distance au Soleil " +
                                 "et la deuxième par ordre croissant de la taille et de la masse.")
                                 .AvecAge(4500000000)
