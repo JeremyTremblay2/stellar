@@ -24,6 +24,7 @@ namespace Espace
         /// Propriété permettant de représenter la présence de vie ou non de la planète, sous forme de chaîne de caractères.
         /// </summary>
         [DataMember]
+        [MaxLength(30, ErrorMessage = "Trop long.")]
         public string Vie { get; set; }
 
         /// <summary>

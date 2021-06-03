@@ -8,7 +8,8 @@
         xmlns:espace="clr-namespace:Espace;assembly=Modele" 
         x:Class="Appli.MainWindow"
         mc:Ignorable="d" Icon="/images/icones/icone.png"
-        Title="Stellar" Height="600" Width="1100">
+        Title="Stellar" Height="600" Width="1100"
+        KeyDown="RaccourcisClavier">
 
     <Window.Resources>
         <DataTemplate x:Key="astreTemplate">
@@ -179,7 +180,7 @@
 
             <Grid VerticalAlignment="Top">
                 <WrapPanel HorizontalAlignment="Left">
-                    <usersControls:UCPathButton Width="25" Height="30" Margin="10 10 10 0" 
+                    <usersControls:UCPathButton Width="25" Height="30" Margin="10 10 10 0"
                                     MouseLeftButtonDown="SauvegardeClic"
                                     Path="M466.208,88.458L380.875,3.125c-2-2-4.708-3.125-7.542-3.125H42.667C19.146,0,0,19.135,0,42.667v384
                 c0,23.531,19.146,42.667,42.667,42.667h384c23.521,0,42.667-19.135,42.667-42.667V96
