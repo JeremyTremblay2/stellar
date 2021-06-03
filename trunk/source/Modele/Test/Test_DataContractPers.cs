@@ -31,11 +31,11 @@ namespace Tests_Fonctionnels
             manager2.RelierDeuxEtoiles(new Point(200, 320), new Point(425, 13)); 
 
             //Sauvegarde des données de la carte.
-            manager2.SauvegardeDonneesCarte("D:\\Cours\\test.xml");
+            manager2.SauvegardeDonneesCarte(@"test.xml");
             Console.WriteLine(manager2);
 
             //Chargement des données de la carte précédemment sauvegardée.
-            manager2.ChargeDonneesCarte("D:\\Cours\\test.xml");
+            manager2.ChargeDonneesCarte(@"test.xml");
             Console.WriteLine(manager2);
         }
     }
