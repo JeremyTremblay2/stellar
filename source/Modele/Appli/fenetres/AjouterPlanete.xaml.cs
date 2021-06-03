@@ -37,8 +37,7 @@ namespace Appli.fenetres
         public AjouterPlanete()
         {
             InitializeComponent();
-            Vie.IsEnabled = false;
-            var planete = new Planete("", "", 0, 0, 0, "dfgd", false, "", TypePlanete.Tellurique, true, "planète.jpg");
+            var planete = new Planete("", "", 0, 0, 0, "", false, "", TypePlanete.Tellurique, true, "planète.jpg");
             LaPlanete = new Planete(planete.Nom, planete.Description, planete.Age, planete.Masse, planete.Temperature, planete.Vie,
                 planete.EauPresente, planete.Systeme, planete.Type, planete.Personnalise, planete.Image);
             LaPlaneteEditable = new Planete(LaPlanete.Nom, LaPlanete.Description, LaPlanete.Age, LaPlanete.Masse, LaPlanete.Temperature, LaPlanete.Vie,
