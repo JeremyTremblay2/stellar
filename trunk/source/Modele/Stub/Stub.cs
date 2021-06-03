@@ -222,7 +222,7 @@ namespace Stub
                                 .AvecImage("neptune.jpg")
                                 .Construire(),
 
-                fabriqueDePlanete.Initialiser("Pluton", true)
+                fabriqueDePlanete.Initialiser("Pluton")
                                 .AvecDescription("Pluton, officiellement désigné par (134340) Pluton, est une planète naine, la plus volumineuse " +
                                 "connue dans le Système solaire, et la deuxième en ce qui concerne sa masse. Elle ne fait plus partie du système solaire.")                               .AvecAge(4500000000)
                                 .AvecMasse(0.002f)

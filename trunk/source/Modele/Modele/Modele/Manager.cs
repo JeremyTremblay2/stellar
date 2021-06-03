@@ -203,6 +203,15 @@ namespace Modele
             }
         }
 
+        public void ModifierUnAstre(Astre astreOriginel, Astre astreModifie)
+        {
+            Carte.ModifierUnAstre(astreOriginel, astreModifie);
+
+            lesAstres[lesAstres.IndexOf(astreOriginel)] = astreModifie;
+            lesAstresTries.Remove(astreOriginel);
+            lesAstresTries.Add(astreModifie);
+        }
+
         /// <summary>
         /// Permet la suppression d'un astre sur la Carte. Nécéssite donc un point de coordonnées.
         /// La suppression du-dit astre se déroulera dans la classe Carte, cependant, l'astre éventuellement supprimé est retourné.

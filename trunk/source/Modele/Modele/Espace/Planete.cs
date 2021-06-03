@@ -24,7 +24,7 @@ namespace Espace
         /// Propriété permettant de représenter la présence de vie ou non de la planète, sous forme de chaîne de caractères.
         /// </summary>
         [DataMember]
-        [MaxLength(30, ErrorMessage = "Trop long.")]
+		[MaxLength(20, ErrorMessage = "Informations trop longues.")]
         public string Vie { get; set; }
 
         /// <summary>
@@ -37,8 +37,8 @@ namespace Espace
         /// Propriété permettant de représenter le système stellaire de la planète, sous forme de chaîne de caractères.
         /// </summary>
         [DataMember]
-        [Required(ErrorMessage = "Le système doit être renseignée.")]
-        [MaxLength(20, ErrorMessage = "Trop long.")]
+        [Required(ErrorMessage = "Le système doit être renseigné.")]
+        [MaxLength(15, ErrorMessage = "Système trop long.")]
         public string Systeme { get; set; }
 
         /// <summary>

@@ -31,7 +31,9 @@ namespace Appli.fenetres
 
         public Etoile LEtoile { get; internal set; }
 
-        public bool Modification { get; internal set; }
+        public Etoile LEtoileEditable { get; internal set; }
+
+        public bool EstEnCoursDeCreation { get; internal set; } = true;
 
         public AjouterEtoile()
         {
@@ -39,12 +41,14 @@ namespace Appli.fenetres
             var etoile = new Etoile("", "", 0, 0, 0, "", 0, TypeEtoile.NaineBlanche, true, "étoile.jpg");
             LEtoile = new Etoile(etoile.Nom, etoile.Description, etoile.Age, etoile.Masse, etoile.Temperature, etoile.Constellation,
                 etoile.Luminosite, etoile.Type, etoile.Personnalise, etoile.Image);
+            LEtoileEditable = new Etoile(etoile.Nom, etoile.Description, etoile.Age, etoile.Masse, etoile.Temperature, etoile.Constellation,
+                 etoile.Luminosite, etoile.Type, etoile.Personnalise, etoile.Image);
             DataContext = this;
         }
 
         private void Valider(object sender, RoutedEventArgs e)
         {
-            if (LeManager.RecupererAstre(LEtoile.Nom) != null && !Modification)
+            if (LeManager.RecupererAstre(LEtoileEditable.Nom) != null && EstEnCoursDeCreation)
             {
                 MessageBox.Show("Un astre avec ce nom existe déjà dans l'application, veuillez choisir un nom différent.",
                                 "Attention, ce nom est déjà utilisé !",
@@ -52,7 +56,7 @@ namespace Appli.fenetres
                 return;
             }
 
-            LEtoile.Description = LEtoile.Description.Replace("\r\n", "");
+            LEtoileEditable.Description = LEtoileEditable.Description.Replace("\r\n", " ");
             Close();
         }
 
@@ -64,7 +68,7 @@ namespace Appli.fenetres
 
         private void Fermer(object sender, MouseButtonEventArgs e)
         {
-            LEtoile = null;
+            LEtoileEditable = null;
             Close();
         }
 
@@ -106,28 +110,17 @@ namespace Appli.fenetres
                     return;
                 }
 
+                SauvegardeImage(new BitmapImage(new Uri(filename, UriKind.Absolute)), etoileImg, encoders[fi.Extension]);
 
-                
-                SaveImage(new BitmapImage(new Uri(filename, UriKind.Absolute)), etoileImg, encoders[fi.Extension]);
-                
-                LEtoile.Image = etoileImg;
-                
+                LEtoileEditable.Image = etoileImg;
             }
         }
 
-        void SaveImage(BitmapImage img, string fileName, BitmapEncoder encoder)
+        void SauvegardeImage(BitmapImage img, string fileName, BitmapEncoder encoder)
         {
             if (!File.Exists(System.IO.Path.Combine(ConvertisseurDeTexteEnImage.cheminImages, fileName)))
             {
                 FileInfo fi = new FileInfo(fileName);
-
-                /*int i = 0;
-
-                while (File.Exists(System.IO.Path.Combine(ConvertisseurDeTexteEnImage.cheminImages, fileName)))
-                {
-                    fileName = $"{fi.Name.Remove(fi.Name.LastIndexOf('.'))}_{i}{fi.Extension}";
-                    i++;
-                }*/
 
                 fileName = @"..\..\StellarBin\images\" + fileName;
 

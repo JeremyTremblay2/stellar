@@ -1,15 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup />
+  <PropertyGroup>
+    <_LastSelectedProfileId>D:\Cours\2020-2021\S2\Conception Orientée Objet\Projet Tuteuré\trunk\source\Modele\Appli\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
   <ItemGroup>
     <ApplicationDefinition Update="App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="fenetres\AjouterEtoile.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="usersControls\UCImageAstre.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -21,9 +20,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="fenetres\AjouterEtoile.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

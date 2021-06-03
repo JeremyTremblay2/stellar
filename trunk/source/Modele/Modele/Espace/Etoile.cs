@@ -15,7 +15,7 @@ namespace Espace
     /// possède un type et une luminosité.
     /// </summary>
     [DataContract]
-    public class Etoile : Astre, IEquatable<Etoile>, IDataErrorInfo
+    public class Etoile : Astre, IEquatable<Etoile>
     {
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Espace
         /// </summary>
         [DataMember]
         [Required(ErrorMessage = "La constellation doit être renseignée.")]
-        [MaxLength(20, ErrorMessage = "Constellation trop longue.")]
+        [MaxLength(15, ErrorMessage = "Constellation trop longue.")]
         public string Constellation { get; set; }
 
         /// <summary>
@@ -38,36 +38,6 @@ namespace Espace
         [DataMember]
         [Range(0, float.MaxValue, ErrorMessage = "La luminositée doit être positive.")]
         public float Luminosite { get; set; }
-
-        /// <summary>
-        /// Permet de vérifier la cohérence des données lors d'entrées utilisateur avec les décorateurs placées sur les propriétées 
-        /// précédentes. Peut éventuellement retourner des messages d'erreurs.
-        /// </summary>
-        /// <param name="columnName">Une colonne associée en réalité à la propriété dont on veut tester la cohérence des données.</param>
-        /// <returns>Un message d'erreur sous forme d'une chaîne de caractères ou null si tout est correct.</returns>
-        public new string this[string columnName]
-        {
-            get
-            {
-                var validationResults = new List<ValidationResult>();
-
-                if (Validator.TryValidateProperty(
-                    GetType().GetProperty(columnName).GetValue(this)
-                    , new ValidationContext(this)
-                    {
-                        MemberName = columnName
-                    }
-                    , validationResults))
-                    return null;
-
-                return validationResults.First().ErrorMessage;
-            }
-        }
-
-        /// <summary>
-        /// Propriété permettant de retourner l'erreur associée à l'invalidité des champs.
-        /// </summary>
-        public new string Error { get; }
 
         /// <summary>
         /// Constructeur vide, utilisé par les fabriques d'étoiles.
