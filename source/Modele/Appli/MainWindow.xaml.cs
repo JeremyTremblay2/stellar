@@ -612,47 +612,46 @@ namespace Appli
             if (e.Key == Key.LeftCtrl)
                 CtrlOk = true;
 
+            Debug.WriteLine(e.Key.ToString());
             
             if (CtrlOk && e.Key == Key.D)
             {
                 DeplacerClic(null, null);
-                CtrlOk = false;
             } 
-            else if (CtrlOk && e.Key == Key.R)
+            else if (CtrlOk && e.Key == Key.G)
             {
                 EffacerClic(null, null);
-                CtrlOk = false;
             } 
-            else if (CtrlOk && e.Key == Key.L)
+            else if (CtrlOk && e.Key == Key.O)
             {
                 ChargementClic(null, null);
-                CtrlOk = false;
             }
             else if(CtrlOk && e.Key == Key.S)
             {
                 SauvegardeClic(null, null);
-                CtrlOk = false;
             }
             else if (CtrlOk && e.Key == Key.E)
             {
                 EtoileClic(null, null);
-                CtrlOk = false;
             }
             else if (CtrlOk && e.Key == Key.P)
             {
                 PlaneteClic(null, null);
-                CtrlOk = false;
             }
             else if (CtrlOk && e.Key == Key.J)
             {
                 RelierClic(null, null);
-                CtrlOk = false;
             }
             else if (e.Key == Key.Delete)
             {
                 PoubelleClic(null, null);
-                CtrlOk = false;
             }
+        }
+
+        private void CtrlUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.LeftCtrl)
+                CtrlOk = false;
         }
     }
 }
