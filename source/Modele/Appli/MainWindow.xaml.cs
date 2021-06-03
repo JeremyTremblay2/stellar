@@ -31,6 +31,7 @@ namespace Appli
         private Type filtreType = typeof(Astre);
         private bool filtreFavoris = false;
         private string filtreNom;
+        private bool CtrlOk = false;
 
         //Permet de savoir quels sont les boutons enclenchés.
         private bool modeSpectateurActive = false;
@@ -582,6 +583,60 @@ namespace Appli
         private void FinSurvolBouton(object sender, MouseEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        /// <summary>
+        /// Raccourcis clavier
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RaccourcisClavier(object sender, KeyEventArgs e)
+        {
+
+            if (e.Key == Key.LeftCtrl)
+                CtrlOk = true;
+
+            
+            if (CtrlOk && e.Key == Key.D)
+            {
+                DeplacerClic(null, null);
+                CtrlOk = false;
+            } 
+            else if (CtrlOk && e.Key == Key.R)
+            {
+                EffacerClic(null, null);
+                CtrlOk = false;
+            } 
+            else if (CtrlOk && e.Key == Key.L)
+            {
+                ChargementClic(null, null);
+                CtrlOk = false;
+            }
+            else if(CtrlOk && e.Key == Key.S)
+            {
+                SauvegardeClic(null, null);
+                CtrlOk = false;
+            }
+            else if (CtrlOk && e.Key == Key.E)
+            {
+                EtoileClic(null, null);
+                CtrlOk = false;
+            }
+            else if (CtrlOk && e.Key == Key.P)
+            {
+                PlaneteClic(null, null);
+                CtrlOk = false;
+            }
+            else if (CtrlOk && e.Key == Key.J)
+            {
+                RelierClic(null, null);
+                CtrlOk = false;
+            }
+            else if (e.Key == Key.Delete)
+            {
+                PoubelleClic(null, null);
+                CtrlOk = false;
+            }
         }
     }
 }

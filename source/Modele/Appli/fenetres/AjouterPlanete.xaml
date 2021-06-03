@@ -170,9 +170,20 @@
             <CheckBox  Grid.Row="8" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="5,0,0,0" x:Name="CheckVie" Checked="CheckVie_Checked" Unchecked="CheckVie_Unchecked"
                          />
             <TextBox Template="{StaticResource TextBoxRecherche}" Grid.Row="8" Grid.Column="1" Margin="25,0,0,0" x:Name="Vie"
-                         Text="{Binding LaPlanete.Vie}" Cursor="Arrow"/>
+                         Text="{Binding LaPlanete.Vie}" Cursor="Arrow">
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <Border BorderBrush="Red" BorderThickness="2" CornerRadius="10">
+                                <AdornedElementPlaceholder/>
+                            </Border>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
 
-            
+
         </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
