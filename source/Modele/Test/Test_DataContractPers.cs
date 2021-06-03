@@ -26,17 +26,18 @@ namespace Tests_Fonctionnels
             manager2.ChargeDonnees();
             Console.WriteLine(manager2);
 
-            manager2.AjouterUnAstre(new Point(425, 13), manager2.LesAstres[0]);
-            manager2.AjouterUnAstre(new Point(200, 320), manager2.LesAstres[1]);
-            manager2.RelierDeuxEtoiles(new Point(200, 320), new Point(425, 13)); 
+            //Création du manager et chargement du stub.
+            Manager manager3 = new Manager(new Stub.Stub(), new Stub.Stub());
+            manager3.ChargeDonnees();
 
-            //Sauvegarde des données de la carte.
-            manager2.SauvegardeDonneesCarte(@"test.xml");
-            Console.WriteLine(manager2);
+            //Sauvegarde en datacontract des données.
+            manager3.Persistance = new JSONPersistance.JSONPers();
+            manager3.SauvegardeDonnees();
 
-            //Chargement des données de la carte précédemment sauvegardée.
-            manager2.ChargeDonneesCarte(@"test.xml");
-            Console.WriteLine(manager2);
+            //Chargement des données précédemment sauvegardées après instanciation d'un nouveau manager.
+            Manager manager4 = new Manager(new JSONPersistance.JSONPers(), new DataContractPersistance.DataContractPers());
+            manager4.ChargeDonnees();
+            Console.WriteLine(manager4);
         }
     }
 }

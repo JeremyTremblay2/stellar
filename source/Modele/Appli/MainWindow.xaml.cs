@@ -138,7 +138,7 @@ namespace Appli
                 {
                     if (kvp.Value.Personnalise)
                     {
-                        kvp.Key.Couleur = "Blue";
+                        kvp.Key.Couleur = "Cyan";
                     }
                 }
             }
@@ -352,33 +352,48 @@ namespace Appli
 
                     if (astre is Etoile)
                     {
+                        Manager.AstreSelectionne = null;
+
                         var nouvelleEtoile = new AjouterEtoile();
                         nouvelleEtoile.Owner = this;
                         nouvelleEtoile.LEtoile = (Etoile)astre;
-                        nouvelleEtoile.Modification = true;
-                        //Manager.SupprimerUnAstre(pointSurCarte);
+
+                        nouvelleEtoile.LEtoileEditable = new Etoile(nouvelleEtoile.LEtoile.Nom, nouvelleEtoile.LEtoile.Description,
+                            nouvelleEtoile.LEtoile.Age, nouvelleEtoile.LEtoile.Masse, nouvelleEtoile.LEtoile.Temperature,
+                            nouvelleEtoile.LEtoile.Constellation, nouvelleEtoile.LEtoile.Luminosite, nouvelleEtoile.LEtoile.Type,
+                            nouvelleEtoile.LEtoile.Personnalise, nouvelleEtoile.LEtoile.Image);
+
+                        nouvelleEtoile.EstEnCoursDeCreation = false;
                         nouvelleEtoile.ShowDialog();
 
-                        if (nouvelleEtoile.LEtoile != null)
+                        if (nouvelleEtoile.LEtoileEditable != null)
                         {
+                            Manager.ModifierUnAstre(nouvelleEtoile.LEtoile, nouvelleEtoile.LEtoileEditable);
                             EffacerDonneesCliquees();
-                            Manager.SupprimerUnAstre(pointSurCarte);
-                            Manager.AjouterUnAstre(pointSurCarte, nouvelleEtoile.LEtoile);
-                        } 
+                            FaireLaRecherche();
+                        }
                     }
                     else
                     {
+                        Manager.AstreSelectionne = null;
+
                         var nouvellePlanete = new AjouterPlanete();
                         nouvellePlanete.Owner = this;
                         nouvellePlanete.LaPlanete = (Planete)astre;
-                        nouvellePlanete.Modification = true;
+
+                        nouvellePlanete.LaPlaneteEditable = new Planete(nouvellePlanete.LaPlanete.Nom, nouvellePlanete.LaPlanete.Description,
+                            nouvellePlanete.LaPlanete.Age, nouvellePlanete.LaPlanete.Masse, nouvellePlanete.LaPlanete.Temperature,
+                            nouvellePlanete.LaPlanete.Vie, nouvellePlanete.LaPlanete.EauPresente, nouvellePlanete.LaPlanete.Systeme,
+                            nouvellePlanete.LaPlanete.Type, nouvellePlanete.LaPlanete.Personnalise, nouvellePlanete.LaPlanete.Image);
+
+                        nouvellePlanete.EstEnCoursDeCreation = false;
                         nouvellePlanete.ShowDialog();
 
-                        if (nouvellePlanete.LaPlanete != null)
+                        if (nouvellePlanete.LaPlaneteEditable != null)
                         {
+                            Manager.ModifierUnAstre(nouvellePlanete.LaPlanete, nouvellePlanete.LaPlaneteEditable);
                             EffacerDonneesCliquees();
-                            Manager.SupprimerUnAstre(pointSurCarte);
-                            Manager.AjouterUnAstre(pointSurCarte, nouvellePlanete.LaPlanete);
+                            FaireLaRecherche();
                         }
                     }
                 }
@@ -413,11 +428,11 @@ namespace Appli
                     nouvelleEtoile.Owner = this;
                     nouvelleEtoile.ShowDialog();
 
-                    if (nouvelleEtoile.LEtoile != null)
+                    if (nouvelleEtoile.LEtoileEditable != null)
                     {
                         EffacerDonneesCliquees();
                         point.Deplacer(point.X - 15 - decalageHorizontalCanvas, point.Y - decalageVerticalCanvas);
-                        Manager.AjouterUnAstre(point, nouvelleEtoile.LEtoile);
+                        Manager.AjouterUnAstre(point, nouvelleEtoile.LEtoileEditable);
                     }
                 }
 
@@ -427,11 +442,11 @@ namespace Appli
                     nouvellePlanete.Owner = this;
                     nouvellePlanete.ShowDialog();
 
-                    if (nouvellePlanete.LaPlanete != null)
+                    if (nouvellePlanete.LaPlaneteEditable != null)
                     {
                         EffacerDonneesCliquees();
                         point.Deplacer(point.X - 15 - decalageHorizontalCanvas, point.Y - decalageVerticalCanvas);
-                        Manager.AjouterUnAstre(point, nouvellePlanete.LaPlanete);
+                        Manager.AjouterUnAstre(point, nouvellePlanete.LaPlaneteEditable);
                     }
                 }
 
@@ -490,6 +505,7 @@ namespace Appli
             Button bouton = sender as Button;
             Astre astre = bouton.DataContext as Astre;
             astre.ModifierFavori();
+            Manager.SauvegardeDonnees();
         }
 
         private void FaireLaRecherche()

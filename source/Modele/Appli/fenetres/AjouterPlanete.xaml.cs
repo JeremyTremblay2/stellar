@@ -24,77 +24,50 @@ namespace Appli.fenetres
     /// </summary>
     public partial class AjouterPlanete : Window
     {
-        private const int longueurMaxNom = 18;
-        private const int longueurMaxSysteme = 20;
-        private const int longueurMaxDescription = 200;
+        private string planeteImg;
+
         public Manager LeManager => (App.Current as App).LeManager;
 
-        public Planete LaPlanete { get; set; }
+        public Planete LaPlanete { get; internal set; }
 
-        public bool Modification { get; internal set; }
+        public Planete LaPlaneteEditable { get; internal set; }
 
-        private string planeteImg;
+        public bool EstEnCoursDeCreation { get; internal set; } = true;
+
         public AjouterPlanete()
         {
             InitializeComponent();
             Vie.IsEnabled = false;
-            var planete = new Planete("Ma Planète", "", 4500000000, 1, 1000, "", false, "Solaire", TypePlanete.Tellurique, true, "planète.jpg");
+            var planete = new Planete("", "", 0, 0, 0, "dfgd", false, "", TypePlanete.Tellurique, true, "planète.jpg");
             LaPlanete = new Planete(planete.Nom, planete.Description, planete.Age, planete.Masse, planete.Temperature, planete.Vie,
-                planete.EauPresente, planete.Systeme, planete.Type, planete.Personnalise , planeteImg);
+                planete.EauPresente, planete.Systeme, planete.Type, planete.Personnalise, planete.Image);
+            LaPlaneteEditable = new Planete(LaPlanete.Nom, LaPlanete.Description, LaPlanete.Age, LaPlanete.Masse, LaPlanete.Temperature, LaPlanete.Vie,
+                LaPlanete.EauPresente, LaPlanete.Systeme, LaPlanete.Type, LaPlanete.Personnalise, LaPlanete.Image);
             DataContext = this;
         }
 
-        private void Fermer(object sender, MouseButtonEventArgs e)
-        {
-            LaPlanete = null;
-            Close();
-        }
-        private void Fermer(object sender, RoutedEventArgs e) => Fermer(null, null);
-
         private void Valider(object sender, RoutedEventArgs e)
         {
-            if (LeManager.RecupererAstre(LaPlanete.Nom) != null)
+            if (LaPlaneteEditable.Nom != null && LeManager.RecupererAstre(LaPlaneteEditable.Nom) != null && EstEnCoursDeCreation)
             {
                 MessageBox.Show("Un astre avec ce nom existe déjà dans l'application, veuillez choisir un nom différent.",
                                 "Attention, ce nom est déjà utilisé !",
                                 MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (LaPlanete.Nom.Length > longueurMaxNom)
-            {
-                MessageBox.Show($"Le nom de cette étoile est trop long, il doit faire au maximum {longueurMaxNom} caractères.",
-                    "Nom trop long",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (LaPlanete.Description.Length > longueurMaxDescription)
-            {
-                MessageBox.Show($"La description de cette étoile est trop longue, elle doit faire au maximum " +
-                    $"{longueurMaxDescription} caractères.",
-                    "Description trop longue",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (LaPlanete.Systeme.Length > longueurMaxSysteme)
-            {
-                MessageBox.Show($"La constellation de cette étoile possède un nom trop long, elle doit faire au maximum " +
-                    $"{longueurMaxSysteme} caractères.",
-                    "Constellation trop longue",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
 
-            try
-            {
-                Close();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.StackTrace + "\nVérifiez les données puis réessayez.",
-                                "Une erreur est survenue dans l'ajout",
-                                MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            LaPlaneteEditable.Description = LaPlaneteEditable.Description.Replace("\r\n", " ");
+            Close();
         }
+
+        private void Fermer(object sender, MouseButtonEventArgs e)
+        {
+            LaPlaneteEditable = null;
+            Close();
+        }
+
+        private void Fermer(object sender, RoutedEventArgs e) => Fermer(null, null);
+
         private void SeulementNombre(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
@@ -107,16 +80,6 @@ namespace Appli.fenetres
             this.DragMove();
         }
 
-        private void CheckVie_Checked(object sender, RoutedEventArgs e)
-        {
-            Vie.IsEnabled = true;
-            Vie.Background = Brushes.White;
-        }
-        private void CheckVie_Unchecked(object sender, RoutedEventArgs e)
-        {
-            Vie.IsEnabled = false;
-            Vie.Background = Brushes.DarkGray;
-        }
         private void OuvrirImage(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
@@ -147,12 +110,9 @@ namespace Appli.fenetres
                     return;
                 }
 
-
-
                 SaveImage(new BitmapImage(new Uri(filename, UriKind.Absolute)), planeteImg, encoders[fi.Extension]);
 
-                LaPlanete.Image = planeteImg;
-
+                LaPlaneteEditable.Image = planeteImg;
             }
         }
 
@@ -161,14 +121,6 @@ namespace Appli.fenetres
             if (!File.Exists(System.IO.Path.Combine(ConvertisseurDeTexteEnImage.cheminImages, fileName)))
             {
                 FileInfo fi = new FileInfo(fileName);
-
-                /*int i = 0;
-
-                while (File.Exists(System.IO.Path.Combine(ConvertisseurDeTexteEnImage.cheminImages, fileName)))
-                {
-                    fileName = $"{fi.Name.Remove(fi.Name.LastIndexOf('.'))}_{i}{fi.Extension}";
-                    i++;
-                }*/
 
                 fileName = @"..\..\StellarBin\images\" + fileName;
 

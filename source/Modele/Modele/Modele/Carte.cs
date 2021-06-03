@@ -136,6 +136,18 @@ namespace Modele
             lesAstres[position] = astre;
             LesAstresObservables[position] = astre;
         }
+
+        public void ModifierUnAstre(Astre astreOriginel, Astre astreModifie)
+        {
+            if (!lesAstres.ContainsValue(astreOriginel))
+            {
+                throw new ArgumentException($"L'astre donné en paramètre n'existe pas dans le dictionnaire. " +
+                    $"Valeur donnée : {astreOriginel}");
+            }
+
+            var position = lesAstres.FirstOrDefault(kvp => kvp.Value.Equals(astreOriginel)).Key;
+            lesAstres[position] = astreModifie;
+        }
         
         /// <summary>
         /// Permet de déplacer un astre d'un ancien point de position à un nouveau.

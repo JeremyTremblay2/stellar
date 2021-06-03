@@ -53,7 +53,7 @@
                             </TextBlock>
                             <TextBlock Style="{StaticResource texteInfosPopup}">
                                 <Run Text="Etoile de type" />
-                                <Run Text="{Binding TypeEtoile, ElementName=root, Converter={StaticResource convertisseurDEnumerationsEnTexte}}" />
+                                <Run Text="{Binding TypeEtoile, ElementName=root}" />
                             </TextBlock>
                             <TextBlock Style="{StaticResource texteInfosPopup}">
                                 <Run Text="Luminosité de " />

@@ -3,7 +3,6 @@ using FluentAssertions;
 using Geometrie;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Modele;
-using DataContractPersistance;
 
 namespace Tests_Unitaires
 {
@@ -14,7 +13,7 @@ namespace Tests_Unitaires
     public class Test_Manager_Unit
     {
         //Instanciation d'un manager.
-        Manager manager = new Manager(new DataContractPers());
+        Manager manager = new Manager(new Stub.Stub(), new Stub.Stub());
 
         /// <summary>
         /// Méthode permettant de tester si la création du manager fonctionne, en vérifiant que la liste d'astres est bien vide à 
