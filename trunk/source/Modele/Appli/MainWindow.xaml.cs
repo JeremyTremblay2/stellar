@@ -96,6 +96,9 @@ namespace Appli
             }
         }
 
+        /// <summary>
+        /// Permet de réinitialiser l'affichage de la carte.
+        /// </summary>
         private void EffacerDonneesCliquees()
         {
             boutonsCarteActifs = boutonsCarteActifs.ToDictionary(p => p.Key, p => false);
@@ -121,7 +124,11 @@ namespace Appli
                 }
             }
         }
-
+        /// <summary>
+        /// Événement lié au clic du bouton Modifier. Il permet de modifier un astre personnalisé.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ModifierClic(object sender, MouseButtonEventArgs e)
         {
             if (boutonsCarteActifs["modifier"])
@@ -143,7 +150,11 @@ namespace Appli
                 }
             }
         }
-
+        /// <summary>
+        /// Événement lié au clic du bouton d'ajout d'une étoile. Il permet d'ajouter une étoile.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EtoileClic(object sender, MouseButtonEventArgs e)
         {
             if (boutonsCarteActifs["ajouterEtoile"])
@@ -159,6 +170,11 @@ namespace Appli
             }
         }
 
+        /// <summary>
+        /// Événement lié au clic du bouton d'ajout de planète. Il permet d'ajouter une planète.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PlaneteClic(object sender, MouseButtonEventArgs e)
         {
             if (boutonsCarteActifs["ajouterPlanete"])
@@ -173,7 +189,11 @@ namespace Appli
                 ajouterPlanete.Fill = "Red";
             }
         }
-
+        /// <summary>
+        /// Événement lié au clic du bouton relier. Il permet de relier deux astres.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RelierClic(object sender, MouseButtonEventArgs e)
         {
             if (boutonsCarteActifs["relier"])
@@ -189,6 +209,11 @@ namespace Appli
             }
         }
 
+        /// <summary>
+        /// Événement lié au clic du bouton gomme. Il permet de d'effacer un astre.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EffacerClic(object sender, MouseButtonEventArgs e)
         {
             if (boutonsCarteActifs["effacer"])
@@ -204,6 +229,11 @@ namespace Appli
             }
         }
 
+        /// <summary>
+        /// Événement lié au clic du bouton déplacer. Il permet de d'éplacer un astre.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeplacerClic(object sender, MouseButtonEventArgs e)
         {
             if (boutonsCarteActifs["deplacer"])
@@ -220,6 +250,11 @@ namespace Appli
             }
         }
 
+        /// <summary>
+        /// Événement lié au clic du bouton ouvrir. Ouvre une message permettant de sélectionner le fichier à charger.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChargementClic(object sender, MouseButtonEventArgs e)
         {
             bool carteVide = false;
@@ -260,7 +295,11 @@ namespace Appli
                 }
             }
         }
-
+        /// <summary>
+        /// Événement lié au clic du bouton sauvegarder. Ouvre une message permettant de sélectionner le fichier à enregister.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SauvegardeClic(object sender, MouseButtonEventArgs e)
         {
             SaveFileDialog sauvegardeFichier = new SaveFileDialog();
@@ -272,7 +311,11 @@ namespace Appli
                 Manager.SauvegardeDonneesCarte(sauvegardeFichier.FileName);
             }
         }
-
+        /// <summary>
+        /// Événement lié au clic du bouton poubelle. Il permet de tout supprimer.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PoubelleClic(object sender, MouseButtonEventArgs e)
         {
 
@@ -288,7 +331,12 @@ namespace Appli
                     break;
             }
         }
-
+        /// <summary>
+        /// Événement lié aux clics sur les astres. Transforme un clic en Point 
+        /// et appelle les méthodes necessaires celon les boutons d'outils cliqués
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PointClique(object sender, MouseButtonEventArgs e)
         {
             var point = new Geometrie.Point((int)e.GetPosition(this).X, (int)e.GetPosition(this).Y);
@@ -414,7 +462,12 @@ namespace Appli
                 }
             }
         }
-
+        /// <summary>
+        /// Événement lié aux clics sur le Caneva. Transforme un clic en Point 
+        /// et appelle les méthodes necessaires celon les boutons d'outils cliqués
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CanevaClic(object sender, MouseButtonEventArgs e)
         {
             var point = new Geometrie.Point((int)e.GetPosition(this).X, (int)e.GetPosition(this).Y);
@@ -470,7 +523,11 @@ namespace Appli
                 }
             }
         }
-
+        /// <summary>
+        /// Permet de rechercher si un point est à proximité d'un clic sur le caneva.
+        /// </summary>
+        /// <param name="ptSelect">Point sélectionné lors d'un clic sur le caneva</param>
+        /// <returns>Retourne vrai si un point (Astre) est à proximité et faux si rien n'est trouvé</returns>
         private bool RecherchePointAProximite(Geometrie.Point ptSelect)
         {
             foreach (Geometrie.Point pt in Manager.Carte.LesAstres.Keys)
@@ -484,6 +541,11 @@ namespace Appli
             return false;
         }
 
+        /// <summary>
+        /// Permet de récupérer le point (l'astre) qui a été cliqué à partir d'un point passé en paramètre.
+        /// </summary>
+        /// <param name="ptSelect">Point cliqué sur le caneva</param>
+        /// <returns>Retourne le point (Astre) cliqué</returns>
         private Geometrie.Point RecupererPointClique(Geometrie.Point ptSelect)
         {
             foreach (Geometrie.Point pt in Manager.Carte.LesAstres.Keys)
@@ -506,12 +568,22 @@ namespace Appli
             astreAAjouter = popup.DataContext as Astre;
         }
 
+        /// <summary>
+        /// Ouvre le popup de détail lorsque un élément de la liste du menu est cliqué.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PopupClicMenu(object sender, MouseButtonEventArgs e)
         {
             astreAAjouter = null;
             Popup.Visibility = Visibility.Visible; 
         }
 
+        /// <summary>
+        /// Modifie les favoris lorsque le bouton favoris est cliqué.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ModifierFavori(object sender, RoutedEventArgs e)
         {
             Button bouton = sender as Button;
@@ -519,13 +591,20 @@ namespace Appli
             astre.ModifierFavori();
             Manager.SauvegardeDonnees();
         }
-
+        /// <summary>
+        /// Permet d'éffectuer la recherche demandé.
+        /// </summary>
         private void FaireLaRecherche()
         {
             Manager.Filtrage(filtreFavoris, filtrePersonnalisation, filtreType, triOrdreAlphabetique, filtreNom);
             Popup.Visibility = Visibility.Hidden;
         }
 
+        /// <summary>
+        /// Événement lié au bouton de tri alphabetique. Mets à jour la recherche lorsque le bouton est cliqué
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BoutonTriAlphabetique(object sender, MouseButtonEventArgs e)
         {
             if (triOrdreAlphabetique)
@@ -540,7 +619,11 @@ namespace Appli
             }
             FaireLaRecherche();
         }
-
+        /// <summary>
+        /// Événement lié au bouton des favoris. Mets à jour la recherche lorsque le bouton est cliqué
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BoutonFiltreFavori(object sender, MouseButtonEventArgs e)
         {
             if (filtreFavoris)
@@ -556,7 +639,11 @@ namespace Appli
             }
             FaireLaRecherche();
         }
-
+        /// <summary>
+        /// Événement lié au bouton de tri par astre personnalisé. Mets à jour la recherche lorsque le bouton est cliqué
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BoutonFiltrePersonnalisation(object sender, RoutedEventArgs e)
         {
             if (filtrePersonnalisation == 1)
@@ -576,7 +663,11 @@ namespace Appli
             }
             FaireLaRecherche();
         }
-
+        /// <summary>
+        /// Événement lié au bouton de tri par type d'astre. Mets à jour la recherche lorsque le bouton est cliqué
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BoutonFiltreType(object sender, RoutedEventArgs e)
         {
             if (filtreType == typeof(Etoile))
@@ -596,7 +687,11 @@ namespace Appli
             }
             FaireLaRecherche();
         }
-
+        /// <summary>
+        /// Événement lié à la barre de recherche. Mets à jour la recherche selon les caractères entrés dans la textbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void barreRecherche(object sender, TextChangedEventArgs e)
         {
             filtreNom = BarreRecherche.Text;
@@ -668,6 +763,11 @@ namespace Appli
             }
         }
 
+        /// <summary>
+        /// Mets à false CtrlUp lorsque le bouton LeftCtrl est relaché.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CtrlUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.LeftCtrl)
