@@ -17,13 +17,13 @@
             <local:UCImageAstre ImageAstre="{Binding ImageAstre, ElementName=root}" Margin="0 20 0 5" 
                 Largeur="110" Hauteur="110"/>
 
-            <TextBlock FontFamily="Comic Sans MS" HorizontalAlignment="Center" FontSize="20" Foreground="#97befa" 
+            <TextBlock FontFamily="{StaticResource policeParDefaut}" HorizontalAlignment="Center" FontSize="20" Foreground="#97befa" 
                            TextAlignment="Center" Text="{Binding NomAstre, ElementName=root}" />
 
-            <TextBlock FontFamily="Comic Sans MS" HorizontalAlignment="Center" Foreground="#97befa" TextAlignment="Justify" 
+            <TextBlock FontFamily="{StaticResource policeParDefaut}" HorizontalAlignment="Center" Foreground="#97befa" TextAlignment="Justify" 
                        TextWrapping="Wrap" Margin="20 5 20 0" Text="{Binding DescriptionAstre, ElementName=root}" />
 
-            <TextBlock FontFamily="Comic Sans MS" Foreground="#d5e5fc" HorizontalAlignment="Left" TextAlignment="Center" TextWrapping="Wrap" 
+            <TextBlock FontFamily="{StaticResource policeParDefaut}" Foreground="#d5e5fc" HorizontalAlignment="Left" TextAlignment="Center" TextWrapping="Wrap" 
                            Margin="20 20 0 0" FontSize="15" Text="Infos :" />
 
             <TextBlock Style="{StaticResource texteInfosPopup}">
@@ -100,11 +100,11 @@
             </StackPanel>
 
         </StackPanel>
-        <local:UCPathButton MouseDown="buttonPopupClicCroix"  Margin="375 0 0 414" HorizontalAlignment="Left"
+        <local:UCPathButton MouseDown="buttonPopupClicCroix"  Margin="375 0 0 414" HorizontalAlignment="Left" ToolTip="Fermer"
             x:Name="QuitterPopup" Width="10" Height="18"
             Path="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"/>
         <local:UCPathButton HorizontalAlignment="Left" Width="25" Height="35" Margin="65 5 0 414" 
-            MouseLeftButtonDown="AjouterAstre" x:Name="ajouterAstre"
+            MouseLeftButtonDown="AjouterAstre" x:Name="ajouterAstre" ToolTip="Ajouter à la carte"
             Path="M490.772,348.495V106.681c0-2.88-1.173-5.547-3.093-7.573l-96-96c-3.627-3.627-9.387-4.16-13.653-1.173l-132.587,91.84
                 L112.852,1.935c-4.267-2.88-9.92-2.453-13.653,1.173l-96,96c-2.027,2.027-3.093,4.693-3.093,7.573v373.333
                 c0,5.867,4.8,10.667,10.667,10.667c2.88,0,5.547-1.173,7.573-3.093l89.707-89.707l131.307,90.987c3.2,2.24,7.36,2.56,10.88,0.747

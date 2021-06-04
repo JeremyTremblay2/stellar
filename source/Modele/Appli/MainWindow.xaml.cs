@@ -222,6 +222,8 @@ namespace Appli
 
         private void ChargementClic(object sender, MouseButtonEventArgs e)
         {
+            bool carteVide = false;
+            MessageBoxResult resultat = MessageBoxResult.No;
             OpenFileDialog chargementFichier = new OpenFileDialog();
             chargementFichier.Filter = "XML files (*.xml)|*.xml";
 
@@ -229,17 +231,25 @@ namespace Appli
             {
                 Debug.WriteLine(chargementFichier.FileName);
 
-                MessageBoxResult resultat = MessageBox.Show("Ouvrir un nouveau projet effacera la carte actuelle, êtes-vous sûr de vouloir ouvrir" +
-                                                            " un nouveau document ?",
-                                                            "Ouverture d'une carte",
-                                                            MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (!Manager.Carte.LesAstres.Any())
+                {
+                    carteVide = true;
+                }
+                else
+                {
+                    resultat = MessageBox.Show("Ouvrir un nouveau projet effacera la carte actuelle, êtes-vous sûr de vouloir ouvrir" +
+                                                " un nouveau document ?",
+                                                "Ouverture d'une carte",
+                                                MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                }
 
-                if (resultat == MessageBoxResult.Yes)
+                if (resultat == MessageBoxResult.Yes || carteVide)
                 {
                     try
                     {
                         Debug.WriteLine(chargementFichier.FileName);
                         Manager.ChargeDonneesCarte(chargementFichier.FileName);
+                        FaireLaRecherche();
                     }
                     catch (Exception erreur)
                     {
@@ -433,6 +443,7 @@ namespace Appli
                         EffacerDonneesCliquees();
                         point.Deplacer(point.X - 15 - decalageHorizontalCanvas, point.Y - decalageVerticalCanvas);
                         Manager.AjouterUnAstre(point, nouvelleEtoile.LEtoileEditable);
+                        FaireLaRecherche();
                     }
                 }
 
@@ -447,6 +458,7 @@ namespace Appli
                         EffacerDonneesCliquees();
                         point.Deplacer(point.X - 15 - decalageHorizontalCanvas, point.Y - decalageVerticalCanvas);
                         Manager.AjouterUnAstre(point, nouvellePlanete.LaPlaneteEditable);
+                        FaireLaRecherche();
                     }
                 }
 

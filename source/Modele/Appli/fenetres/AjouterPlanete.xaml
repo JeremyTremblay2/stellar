@@ -28,7 +28,8 @@
         <TextBlock Style="{StaticResource texteNomAstre}" Text="Edition d'une planète" HorizontalAlignment="Center"
                        Foreground="Orange" Margin="0 10 0 0" FontSize="18"/>
 
-        <Button Cursor="Hand" Height="50" Background="Transparent" VerticalAlignment="Top" Margin="36" Click="OuvrirImage">
+        <Button Cursor="Hand" Height="50" Background="Transparent" VerticalAlignment="Top" Margin="36" Click="OuvrirImage" 
+                ToolTip="Ouvrir une image" MouseEnter="SurvolBouton" MouseLeave="FinSurvolBouton">
             <Button.Content>
                 <Image Source="{Binding LaPlaneteEditable.Image, Converter={StaticResource convertisseurDeTexteEnImage}}" 
                        x:Name="Image" StretchDirection="DownOnly" />
@@ -193,7 +194,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Border HorizontalAlignment="Center">
+            <Border HorizontalAlignment="Center" ToolTip="Valider" MouseEnter="SurvolBouton" MouseLeave="FinSurvolBouton">
                 <Button Width="100" Height="30" Click="Valider"  Margin="0 400 0 0" Opacity="1">
                     <Button.Template>
                         <ControlTemplate>
@@ -225,7 +226,7 @@
                 </Button>
             </Border>
 
-            <Border Grid.Column="1" HorizontalAlignment="Center">
+            <Border Grid.Column="1" HorizontalAlignment="Center" ToolTip="Annuler" MouseEnter="SurvolBouton" MouseLeave="FinSurvolBouton">
                 <Button Width="100" Height="30" Click="Fermer" Margin="0 400 0 0" Opacity="1">
                     <Button.Template>
                         <ControlTemplate>
@@ -239,7 +240,8 @@
             </Border>
 
         </Grid>
-        <usersControls:UCPathButton Width="10" Height="18" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,17,14,0" MouseLeftButtonDown="Fermer"
+        <usersControls:UCPathButton Width="10" Height="18" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,17,14,0" 
+                                    MouseLeftButtonDown="Fermer" ToolTip="Fermer"
                                     Path="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"/>
     </Grid>
 </Window>
