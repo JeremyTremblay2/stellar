@@ -16,13 +16,13 @@ namespace Modele
         /// <summary>
         /// Méthode sans corps ayant pour but de retourner une collection d'astres, après chargement des données.
         /// </summary>
-        /// <returns>La collection d'stres qui vient d'être chargée.</returns>
+        /// <returns>La collection d'astres qui vient d'être chargée.</returns>
         IEnumerable<Astre> ChargeDonnees();
 
         /// <summary>
         /// Méthode sans corps utilisée pour la sauvegarde d'une collection d'astres.
         /// </summary>
-        /// <param name="astres">La colelction à sérialiser.</param>
+        /// <param name="astres">La collection à sérialiser.</param>
         void SauvegardeDonnees(IEnumerable<Astre> astres);
     }
 }

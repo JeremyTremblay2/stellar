@@ -11,16 +11,16 @@ namespace Modele
     public class FabriqueDAstre<T,P> where T : FabriqueDAstre<T,P> where P : Astre, new()
     {
         /// <summary>
-        /// Propriété concernant l'astre le type d'astre qui va être crée par la fabrique (ici P). 
+        /// Propriété concernant l'astre le type d'astre qui va être créé par la fabrique (ici P). 
         /// </summary>
         protected P Astre { get; private set; }
 
         /// <summary>
         /// Méthode permettant d'initialiser et de lancer la construction de l'astre.
         /// Pour cela, il faut fournir le nom de l'astre en paramètre, et éventuellement s'il est personnalisé ou non (par défaut c'est
-        /// faux). On instancie ensuite un P (qui correspond au type de l'astre crée).
+        /// faux). On instancie ensuite un P (qui correspond au type de l'astre créé).
         /// </summary>
-        /// <param name="nom">Le nom de l'astre qui va être crée.</param>
+        /// <param name="nom">Le nom de l'astre qui va être créé.</param>
         /// <param name="personnalise">Un booléen permettant de dire si on veut que l'astre soit personnalisé ou non.</param>
         /// <returns>Une fabrique d'astres de type T.</returns>
         public T Initialiser(string nom, bool personnalise = false)
@@ -43,7 +43,7 @@ namespace Modele
         }
 
         /// <summary>
-        /// Méthode permettant d'ajouter un age à un astre. Appelle le mutateur de l'âge de l'astre pour modifier sa valeur.
+        /// Méthode permettant d'ajouter un âge à un astre. Appelle le mutateur de l'âge de l'astre pour modifier sa valeur.
         /// </summary>
         /// <param name="age">Un entier long représentant l'âge de l'astre.</param>
         /// <returns>Une fabrique d'astre de type T.</returns>

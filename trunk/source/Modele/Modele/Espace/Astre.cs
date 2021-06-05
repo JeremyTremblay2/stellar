@@ -101,7 +101,7 @@ namespace Espace
         public string Image { get; set; }
 
         /// <summary>
-        /// Permet de vérifier la cohérence des données lors d'entrées utilisateur avec les décorateurs placés sur les propriétées 
+        /// Permet de vérifier la cohérence des données lors d'entrées utilisateur avec les décorateurs placés sur les propriétés 
         /// précédentes. Peut éventuellement retourner des messages d'erreurs.
         /// </summary>
         /// <param name="columnName">Une colonne associée en réalité à la propriété dont on veut tester la cohérence des données.</param>
@@ -140,7 +140,7 @@ namespace Espace
         /// </summary>
         /// <param name="nom">Le nom de l'astre.</param>
         /// <param name="description">Une description courte de l'astre en question.</param>
-        /// <param name="age">L'age de l'astre.</param>
+        /// <param name="age">L'âge de l'astre.</param>
         /// <param name="masse">La masse de l'astre (en masse terrestre ou solaire).</param>
         /// <param name="temperature">La température de l'astre (en kelvin).</param>
         /// <param name="personnalise">Un booléen indiquant si l'astre est personnalisé (créé par l'utilisateur) ou non.</param>
@@ -217,7 +217,7 @@ namespace Espace
 
         /// <summary>
         /// Protocole d'égalité permettant de savoir si un astre passé en paramètre est égal à this, donc s'il possède le même nom, 
-        /// même age, même masse, même température.
+        /// même âge, même masse, même température.
         /// </summary>
         /// <param name="autre">Un astre que l'on souhaite comparer à this.</param>
         /// <returns>Un booléen qui indique si l'astre passé en paramètre est le même que this ou non.</returns>
@@ -232,7 +232,7 @@ namespace Espace
         /// <summary>
         /// Protocole d'égalité permettant de savoir si un objet passé en paramètre est un Astre.
         /// Si cette vérification est faite avec succès, alors on vérifie ensuite si cet astre est égal à this, donc s'il possède le même 
-        /// nom, même age, même masse, même température, en appellant la méthode Equals de cet astre et en le castant.
+        /// nom, même âge, même masse, même température, en appellant la méthode Equals de cet astre et en le castant.
         /// </summary>
         /// <param name="obj">Un objet quelconque, dont on veut déterminer s'il s'agit d'un astre (et s'il s'agit du même astre que this)</param>
         /// <returns>Un booléen qui indique si l'objet passé en paramètre est le même que this ou non.</returns>
@@ -247,7 +247,7 @@ namespace Espace
 
         /// <summary>
         /// Permet la génération d'un HashCode, utilisé dans le cas des dictionnaires.
-        /// Ce hascode est définit par le nom, l'âge, la température et la masse de l'astre.
+        /// Ce hascode est défini par le nom, l'âge, la température et la masse de l'astre.
         /// </summary>
         /// <returns>Un entier représentant le hashcode de cet astre.</returns>
         public override int GetHashCode()

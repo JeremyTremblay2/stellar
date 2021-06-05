@@ -56,7 +56,7 @@ namespace DataContractPersistance
 
         /// <summary>
         /// Méthode de sauvegarder des données du Manager. 
-        /// Crée éventuellement le dossier destinaton, puis sérailise la collection d'astres passée en paramètre.
+        /// Crée éventuellement le dossier destinaton, puis sérialise la collection d'astres passée en paramètre.
         /// </summary>
         /// <param name="astres">La collection d'astres à sérialiser.</param>
         public void SauvegardeDonnees(IEnumerable<Astre> astres)
@@ -121,7 +121,7 @@ namespace DataContractPersistance
         /// Méthode de chargement des données de la Carte. Lève une exception si le fichier passé en paramètre n'existe pas ou est corrompu.
         /// Permet de charger les données d'un fichier passé en paramètre puis les retourne.
         /// </summary>
-        /// <param name="cheminFichier">Le nom du fichier dans lesquelles les données seront chargées.</param>
+        /// <param name="cheminFichier">Le nom du fichier dans lequel les données seront chargées.</param>
         /// <returns>Un dictionnaire de points et d'astres, ainsi qu'une collection de constellations qui viennent d'être chargées.</returns>
         public (Dictionary<Point, Astre> astres, IEnumerable<Constellation> constellations) ChargeDonneesCarte(string cheminFichier) 
         {

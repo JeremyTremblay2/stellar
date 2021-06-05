@@ -49,7 +49,7 @@ namespace Appli.usersControls
         }
 
         /// <summary>
-        /// Propriété sur k'image de l'astre et dependency Property.
+        /// Propriété sur l'image de l'astre et dependency Property.
         /// </summary>
         public string ImageAstre
         {

@@ -54,7 +54,7 @@ namespace Appli.usersControls
         }
 
         /// <summary>
-        /// Mutateur sur la couleur de l'image. PErmet de mieux faire ressortir les boutons.
+        /// Mutateur sur la couleur de l'image. Permet de mieux faire ressortir les boutons.
         /// </summary>
         public string Fill
         {

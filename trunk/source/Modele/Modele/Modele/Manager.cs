@@ -32,7 +32,7 @@ namespace Modele
         public IPersistanceManager Persistance { get; set; }
 
         /// <summary>
-        /// Propriété en lecture seule concernant la liste d'astres, qui est l'ensembles de toutes les données (les astres) 
+        /// Propriété en lecture seule concernant la liste d'astres, qui est l'ensemble de toutes les données (les astres) 
         /// de l'application.
         /// </summary>
         public ReadOnlyObservableCollection<Astre> LesAstres { get; private set; }
@@ -80,7 +80,7 @@ namespace Modele
 
         /// <summary>
         /// Constructeur de Manager. Il ne prend pas de paramètre.
-        /// On instancie notre liste d'astre et notre Carte. On vient instancie nos méthodes de persistance pour la Carte et le Manager.
+        /// On instancie notre liste d'astre et notre Carte. On vient instancier nos méthodes de persistance pour la Carte et le Manager.
         /// <param name="persistance">Le type de persistance utilisé par le Manager.</param>
         /// <param name="persistanceCarte">Le type de persistance utilisé par la Carte.</param>
         /// </summary>
@@ -168,7 +168,7 @@ namespace Modele
 
         /// <summary>
         /// Méthode permettant l'ajout d'un astre à la carte et à la liste d'astres.
-        /// Pour cela, on vérifie que le point et l'astre fournit en paramètre ne sont pas null.
+        /// Pour cela, on vérifie que le point et l'astre fourni en paramètre ne sont pas null.
         /// Si c'est le cas, on ajoute l'astre à la liste et on appelle une méthode dans notre Carte qui va venir l'ajouter à la position fournie.
         /// </summary>
         /// <param name="position">Le Point de la position de l'astre sur la carte.</param>
@@ -185,7 +185,7 @@ namespace Modele
 
         /// <summary>
         /// Méthode permettant l'ajout d'un astre uniquement dans la liste d'astres (pas sur la carte).
-        /// Pour cela, on vérifie que l'astre fournit en paramètre n'est pas null (sinon on lève une exception), et on l'ajoute à la liste,
+        /// Pour cela, on vérifie que l'astre fourni en paramètre n'est pas null (sinon on lève une exception), et on l'ajoute à la liste,
         /// s'il n'est pas déjà existant.
         /// </summary>
         /// <param name="astre">L'astre à ajouter à la liste.</param>
@@ -221,7 +221,7 @@ namespace Modele
 
         /// <summary>
         /// Permet la suppression d'un astre sur la Carte. Nécéssite donc un point de coordonnées.
-        /// La suppression du-dit astre se déroulera dans la classe Carte, cependant, l'astre éventuellement supprimé est retourné.
+        /// La suppression dudit astre se déroulera dans la classe Carte, cependant, l'astre éventuellement supprimé est retourné.
         /// On vérifie donc qu'il n'est pas null (si la suppression n'a pas eu lieu, si c'était par exemple un point dans une constellation),
         /// et qu'il s'agit d'un astre personnalisé (les astres pré-existants dans le logiciel ne peuvent jamais être effacés), et on peut
         /// alors le supprimer.
@@ -314,7 +314,7 @@ namespace Modele
         }
 
         /// <summary>
-        /// Méthode permettant de retourner l'astre correpondant au nom fournit au paramètre, ou null s'il n'existe pas.
+        /// Méthode permettant de retourner l'astre correpondant au nom fourni au paramètre, ou null s'il n'existe pas.
         /// </summary>
         /// <param name="nom">Le nom de l'astre que l'on veut chercher.</param>
         /// <returns>L'astre correspondant ou null si aucun ne satisfait le nom passé en paramètre.</returns>

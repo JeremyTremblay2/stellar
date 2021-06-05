@@ -81,9 +81,9 @@ namespace Geometrie
         }
 
         /// <summary>
-        /// Permet d'afficher un point sous forme d'une paire de coordonées (x; y).
+        /// Permet d'afficher un point sous forme d'une paire de coordonnées (x; y).
         /// </summary>
-        /// <returns>Retourne la chaîne de caractère représentant les coordonées du point.</returns>
+        /// <returns>Retourne la chaîne de caractère représentant les coordonnées du point.</returns>
         public override string ToString()
         {
             return $"({X}; {Y})";
@@ -118,7 +118,7 @@ namespace Geometrie
 
         /// <summary>
         /// Permet la génération d'un HashCode, utilisé dans le cas des dictionnaires.
-        /// Ce hascode est définit par les coordonnées du point, en abscisses (x) et en ordonnées (y).
+        /// Ce hascode est défini par les coordonnées du point, en abscisses (x) et en ordonnées (y).
         /// </summary>
         /// <returns>Un entier représentant le hashcode de ce point.</returns>
         public override int GetHashCode()

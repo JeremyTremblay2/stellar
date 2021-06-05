@@ -25,7 +25,7 @@ namespace Espace
         public TypeEtoile Type { get; set; }
 
         /// <summary>
-        /// Propriété représentant la constellation sous forme de châine de caractères, dans laquelle se trouve l'étoile.
+        /// Propriété représentant la constellation sous forme de chaîne de caractères, dans laquelle se trouve l'étoile.
         /// </summary>
         [DataMember]
         [Required(ErrorMessage = "La constellation doit être renseignée.")]
@@ -45,7 +45,7 @@ namespace Espace
         public Etoile() { }
 
         /// <summary>
-        /// Constructeur d'étoiles. Il appele le constructeur de sa classe mère, Astre, afin qu'il soit initialisé.
+        /// Constructeur d'étoiles. Il appelle le constructeur de sa classe mère, Astre, afin qu'il soit initialisé.
         /// </summary>
         /// <param name="nom">Le nom de l'étoile.</param>
         /// <param name="description">Une courte description de l'étoile.</param>
@@ -90,7 +90,7 @@ namespace Espace
         }
 
         /// <summary>
-        /// Protocole d'égalité permettant de savoir si une étoile passée en paramètre est égal à this, donc si elle possède les mêmes 
+        /// Protocole d'égalité permettant de savoir si une étoile passée en paramètre est égale à this, donc si elle possède les mêmes 
         /// champs que la classe mère, ainsi que le même type, la même constellation et la même luminosité.
         /// </summary>
         /// <param name="autre">Une étoile que l'on souhaite comparer à this.</param>

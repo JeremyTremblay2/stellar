@@ -49,7 +49,7 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="16"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
@@ -85,7 +85,7 @@
                        VerticalAlignment="Center" Grid.Row="2" Margin="0 0 0 0"/>
             <TextBox Text="{Binding LaPlaneteEditable.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, 
                 NotifyOnValidationError=True}" Template="{StaticResource TextBoxRecherche}" Grid.Row="2" Grid.Column="1" Height="35" 
-                     AcceptsReturn="True" TextWrapping="Wrap" Margin="0 0 0 8" x:Name="Description">
+                     AcceptsReturn="True" TextWrapping="Wrap" Margin="0 0 0 0" x:Name="Description">
                 <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <StackPanel>

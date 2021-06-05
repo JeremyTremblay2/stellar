@@ -20,7 +20,7 @@ namespace Utilitaire
         {
             string valeur;
 
-            //On récupère le type de l'énumération, le mebre correspondant et on le transforme en chaîne.
+            //On récupère le type de l'énumération, le membre correspondant et on le transforme en chaîne.
             valeur = valeurEnumeration.GetType()
                                       .GetMember(valeurEnumeration.ToString())
                                       .FirstOrDefault()

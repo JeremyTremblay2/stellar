@@ -36,7 +36,7 @@ namespace Espace
         public ObservableCollection<Point> LesPoints { get; private set; } = new ObservableCollection<Point>();
 
         /// <summary>
-        /// Propriété observable en lecture seule concernant l'hashset de segments, qui sont l'ensembles des liens 
+        /// Propriété observable en lecture seule concernant l'hashset de segments, qui sont l'ensemble des liens 
         /// qui relient les étoiles entres elles.
         /// </summary>
         [DataMember]
@@ -81,7 +81,7 @@ namespace Espace
 
         /// <summary>
         /// Constructeur de Constellations. Prend plusieurs points en paramètre et plusieurs segments. 
-        /// Les ajoute ensuites aux ensembles.
+        /// Les ajoute ensuite aux ensembles.
         /// </summary>
         /// <param name="points">La collection de points à ajouter</param>
         /// <param name="segments">La collection de segments à ajouter</param>
@@ -102,7 +102,7 @@ namespace Espace
         }
 
         /// <summary>
-        /// Méthode permettant de relier deux points ensembles via un segment.
+        /// Méthode permettant de relier deux points ensemble via un segment.
         /// Si le point passé en paramètre ne se trouve pas dans la constellation, alors une exception est levée.
         /// </summary>
         /// <param name="point">Premier point à contenu dans la constellation.</param>
@@ -130,7 +130,7 @@ namespace Espace
         }
 
         /// <summary>
-        /// Permet de supprmimer tous les segments d'un point, et ce même point (dans le cas d'une suppression par exemple).
+        /// Permet de supprimer tous les segments d'un point, et ce même point (dans le cas d'une suppression par exemple).
         /// Lève une exception si le point passé en paramètre ne se trouve pas dans la constellation.
         /// </summary>
         /// <param name="point">Le point pour lequel on veut supprimer les liaisons.</param>
@@ -166,7 +166,7 @@ namespace Espace
         /// <summary>
         /// Permet de déplacer un point et les segments impliqués à un nouveau point de position.
         /// Si un des point est null ou que le point à déplacer ne se trouve pas dans la constellation, alors on lève une exception.
-        /// On récupère ensuite tous les segments qui contenaient l'ancien point dans une collection puis on les parcours. 
+        /// On récupère ensuite tous les segments qui contenaient l'ancien point dans une collection puis on les parcourt. 
         /// Pour chaque segment, on crée un nouveau segment en fonction des coordonnées du nouveau point cette fois-ci.
         /// A la fin, on l'ajoute dans nos données, et on supprime les anciens segments. On fait de même pour le nouveau point.
         /// </summary>
@@ -189,7 +189,7 @@ namespace Espace
             IEnumerable<Segment> tempo = lesSegments.Where(n => n.PtEquals(ancienPoint));
             List<Segment> addSeg = new List<Segment>();
 
-            //On parcours les segments récupérés précédemment, et on les recrée en fonction du nouveau point.
+            //On parcourt les segments récupérés précédemment, et on les recrée en fonction du nouveau point.
             foreach (Segment seg in tempo)
             {
                 if (seg.Point1.Equals(ancienPoint))
@@ -239,14 +239,14 @@ namespace Espace
             pilePt[i] = ptDeb;
             tailleLogique++;
 
-            //On parcours tous les points de la pile.
+            //On parcourt tous les points de la pile.
             while (pilePt[i] != null)
             {
-                //On récupère tous les segments qui partent du point que l'on traite, et on les parcours.
+                //On récupère tous les segments qui partent du point que l'on traite, et on les parcourt.
                 IEnumerable<Segment> tempoSeg = lesSegments.Where(seg => seg.PtEquals(pilePt[i]));
                 foreach (Segment seg in tempoSeg)
                 {
-                    //Pour chaque point du segment (le point 1 ou le point2), on vérifie que le point n'a pas déjà été visité, si c'est
+                    //Pour chaque point du segment (le point 1 ou le point 2), on vérifie que le point n'a pas déjà été visité, si c'est
                     //le cas, on l'ajoute à la pile. Il sera parcouru lui aussi par la suite.
                     if (seg.Point1.Equals(pilePt[i]))
                     {
@@ -315,14 +315,14 @@ namespace Espace
         }
 
         /// <summary>
-        /// Méthode permettant de savoir si une constelaltion contient le point passé en paramètre.
+        /// Méthode permettant de savoir si une constellation contient le point passé en paramètre.
         /// </summary>
         /// <param name="point">Le point dont on veut savoir s'il est contenu dans la constellation.</param>
         /// <returns>Un booléen indiquant si le point est contenu dans la constellation ou non.</returns>
         public bool ContientLePoint(Point point) => lesPoints.Contains(point) ? true : false;
 
         /// <summary>
-        /// Protocole d'égalité permettant de savoir si une constellation passée en paramètre est égal à this, donc si elle possède 
+        /// Protocole d'égalité permettant de savoir si une constellation passée en paramètre est égale à this, donc si elle possède 
         /// les mêmes points, mêmes segments au sein de ses collections.
         /// </summary>
         /// <param name="autre">Une constellation que l'on souhaite comparer à this, afin de voir si elles sont égales.</param>
@@ -374,8 +374,8 @@ namespace Espace
         }
 
         /// <summary>
-        /// Permet la génération d'un hashcode, utilisé dans le cas des dictionnaire.
-        /// Ce hashcode est définit par les points et segments contenus dans les collections de la constellation.
+        /// Permet la génération d'un hashcode, utilisé dans le cas des dictionnaires.
+        /// Ce hashcode est défini par les points et segments contenus dans les collections de la constellation.
         /// </summary>
         /// <returns>Un entier représentatif du hashcode de cette constellation.</returns>
         public override int GetHashCode()
@@ -386,13 +386,13 @@ namespace Espace
         /// <summary>
         /// Méthode permettant de supprimer les points qui n'ont pas de liaison avec d'autres points.
         /// Pour cela, on vérifie s'il n'y a plus de segments dans la constellation, et si c'est le cas, on peut effacer tous les points.
-        /// Sinon, pour chaque point on parcours tous les segments, et on vérifie que le point est au moins contenu dans un segement.
+        /// Sinon, pour chaque point on parcourt tous les segments, et on vérifie que le point est au moins contenu dans un segement.
         /// Si ce n'est pas le cas, alors on l'ajoute à une collection.
         /// A la fin du traitement de tous les points, on supprime de notre hashset tous les points qui se trouvent dans la collection.
         /// </summary>
         private void SuppressionPoints()
         {
-            //Les points qui seront effacés après le parcour se trouveront dans cette collection.
+            //Les points qui seront effacés après le parcours se trouveront dans cette collection.
             HashSet<Point> pointsASupprimer = new HashSet<Point>();
             bool ptDansLesSegment = false;
 

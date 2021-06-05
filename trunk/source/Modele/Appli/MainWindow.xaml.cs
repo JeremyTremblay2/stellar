@@ -25,17 +25,17 @@ namespace Appli
         private const int decalageHorizontalCanvas = 350;
         private const int decalageVerticalCanvas = 50;
 
-        //Les attributs permettant d'effectuer les tris. Ils sont modifiés lors des clis sur les boutons.
+        //Les attributs permettant d'effectuer les tris. Ils sont modifiés lors des clics sur les boutons.
         private bool triOrdreAlphabetique = false;
         private byte filtrePersonnalisation = 3;
         private Type filtreType = typeof(Astre);
         private bool filtreFavoris = false;
         private string filtreNom;
 
-        //Permet de savoir quand est pressé la touche "Controle"
+        //Permet de savoir quand est pressée la touche "Controle"
         private bool CtrlOk = false;
 
-        //Permet de savoir quels sont les boutons activé sur la carte, de manière à ce que un seul puisse être activé à la fois.
+        //Permet de savoir quels sont les boutons activés sur la carte, de manière à ce qu'un seul puisse être activé à la fois.
         private bool modeSpectateurActive = false;
         private Dictionary<string, bool> boutonsCarteActifs = new Dictionary<string, bool>()
         {
@@ -69,10 +69,13 @@ namespace Appli
             UCPopup Popup = new UCPopup();
         }
 
+        //Partie "Carte" ou éditeur.
+        //Contient les diverses méthodes permettant de réaliser des actions sur la carte.
+
         /// <summary>
         /// Permet de cacher le master lorque le bouton spectateur est cliqué.
         /// On vient modifier l'image du bouton spectateur, puis cacher la plupart des autes boutons.
-        /// Si l'action inverses est effectuée, alors on effectue l'inverse également.
+        /// Si l'action inverse est effectuée, alors on effectue l'inverse également.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -137,8 +140,9 @@ namespace Appli
         }
 
         /// <summary>
-        /// Événement lié au clic du bouton Modifier.
+        /// Événement lié au clic du bouton Modifier, on vient changer sa couleur.
         /// Il permet de modifier un astre personnalisé.
+        /// Si le bouton est cliqué alors qu'il était déjà actif, alors on inverse son état.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -154,6 +158,8 @@ namespace Appli
                 boutonsCarteActifs["modifier"] = true;
                 modifier.Fill = "Red";
 
+                //On passe tous les astres modifiables en Cyan sur la carte, de manière à ce que l'utilisateur puisse se rendre compte
+                //facilement des astres modifiables.
                 foreach (KeyValuePair<Geometrie.Point, Astre> kvp in Manager.Carte.LesAstres)
                 {
                     if (kvp.Value.Personnalise)
@@ -164,7 +170,9 @@ namespace Appli
             }
         }
         /// <summary>
-        /// Événement lié au clic du bouton d'ajout d'une étoile. Il permet d'ajouter une étoile.
+        /// Événement lié au clic du bouton Etoile, on vient changer sa couleur.
+        /// Il permet de créer une étoile. Cet évènement se déclenchera au prochain clic sur le caneva.
+        /// Si le bouton est cliqué alors qu'il était déjà actif, alors on inverse son état.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -184,7 +192,9 @@ namespace Appli
         }
 
         /// <summary>
-        /// Événement lié au clic du bouton d'ajout de planète. Il permet d'ajouter une planète.
+        /// Événement lié au clic du bouton Planète, on vient changer sa couleur.
+        /// Il permet de créer une planète. Cet évènement se déclenchera au prochain clic sur le caneva.
+        /// Si le bouton est cliqué alors qu'il était déjà actif, alors on inverse son état.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -203,7 +213,9 @@ namespace Appli
             }
         }
         /// <summary>
-        /// Événement lié au clic du bouton relier. Il permet de relier deux astres.
+        /// Événement lié au clic du bouton Relier, on vient changer sa couleur.
+        /// Il permet de relier deux étoiles entre elles. Cet évènement se déclenchera lorsque deux étoiles seront cliquées sur la carte.
+        /// Si le bouton est cliqué alors qu'il était déjà actif, alors on inverse son état.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -223,7 +235,10 @@ namespace Appli
         }
 
         /// <summary>
-        /// Événement lié au clic du bouton gomme. Il permet de d'effacer un astre.
+        /// Événement lié au clic du bouton Effacer, on vient changer sa couleur.
+        /// Il permet d'effacer un astre de la carte et ses constellations. Cet évènement se déclenchera au prochaine clic d'un astre
+        /// sur la carte.
+        /// Si le bouton est cliqué alors qu'il était déjà actif, alors on inverse son état.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -243,7 +258,10 @@ namespace Appli
         }
 
         /// <summary>
-        /// Événement lié au clic du bouton déplacer. Il permet de d'éplacer un astre.
+        /// Événement lié au clic du bouton Deplacer, on vient changer sa couleur.
+        /// Il permet de déplacer un astre à une autre position sur la carte. Cet évènement se déclenchera lors du prochain clic d'un astre,
+        /// puis lorsque que la carte sera cliquée à un autre endroit.
+        /// Si le bouton est cliqué alors qu'il était déjà actif, alors on inverse son état.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -264,7 +282,9 @@ namespace Appli
         }
 
         /// <summary>
-        /// Événement lié au clic du bouton ouvrir. Ouvre une message permettant de sélectionner le fichier à charger.
+        /// Événement lié au clic du bouton Ouvrir.
+        /// Cette méthode permet d'ouvrir une fenêtre de l'explorateur windows qui permet de charger le fichier de données d'une carte.
+        /// Si l'utilisateur choisi un fichier valide, alors il sera ouvert puis les données chargées.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -272,17 +292,22 @@ namespace Appli
         {
             bool carteVide = false;
             MessageBoxResult resultat = MessageBoxResult.No;
+
+            //Ouverture de l'explorateur. On n'accepte que les fichiers XML.
             OpenFileDialog chargementFichier = new OpenFileDialog();
             chargementFichier.Filter = "XML files (*.xml)|*.xml";
 
+            //Si l'utilisateur a choisi un fichier.
             if (chargementFichier.ShowDialog() == true)
             {
                 Debug.WriteLine(chargementFichier.FileName);
 
+                //Si la carte est vide, on vient passer cette variable à vrai, ce qui fait que l'on ne demande pas confirmation pour le chargement.
                 if (!Manager.Carte.LesAstres.Any())
                 {
                     carteVide = true;
                 }
+                //Sinon on demande confirmation pour le chargement de la carte.
                 else
                 {
                     resultat = MessageBox.Show("Ouvrir un nouveau projet effacera la carte actuelle, êtes-vous sûr de vouloir ouvrir" +
@@ -291,6 +316,7 @@ namespace Appli
                                                 MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 }
 
+                //Si l'utilisateur accepte, on charge le fichier.
                 if (resultat == MessageBoxResult.Yes || carteVide)
                 {
                     try
@@ -308,30 +334,38 @@ namespace Appli
                 }
             }
         }
+
         /// <summary>
-        /// Événement lié au clic du bouton sauvegarder. Ouvre une message permettant de sélectionner le fichier à enregister.
+        /// Événement lié au clic du bouton sauvegarder. 
+        /// Cette méthode ouvre un explorateur de fichier windows dans lequel l'utilisateur est invité à sélectionner un nom de fichier 
+        /// dans lequel sa carte sera sauvegardée. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SauvegardeClic(object sender, MouseButtonEventArgs e)
         {
+            //Ouverture de l'explorateur.
             SaveFileDialog sauvegardeFichier = new SaveFileDialog();
             sauvegardeFichier.Filter = "XML file (*.xml)|*.xml";
 
+            //Si l'utilisateur a choisi un nom de fichier et a sauvegardé, alors on appelle la méthode de sauvegarde avec le chemin d'où
+            //se trouve le fichier.
             if (sauvegardeFichier.ShowDialog() == true)
             {
                 Debug.WriteLine(sauvegardeFichier.FileName);
                 Manager.SauvegardeDonneesCarte(sauvegardeFichier.FileName);
             }
         }
+
         /// <summary>
-        /// Événement lié au clic du bouton poubelle. Il permet de tout supprimer.
+        /// Événement lié au clic du bouton poubelle. 
+        /// Il permet de tout supprimer sur la carte.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void PoubelleClic(object sender, MouseButtonEventArgs e)
         {
-
+            //Avertissement et confirmation de la part de l'utilisateur.
             MessageBoxResult resultat = MessageBox.Show("Voulez-vous vraiment effacer toute la carte ?",
                                         "Supprimer",
                                         MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -344,28 +378,33 @@ namespace Appli
                     break;
             }
         }
+
         /// <summary>
-        /// Événement lié aux clics sur les astres. Transforme un clic en Point 
-        /// et appelle les méthodes necessaires celon les boutons d'outils cliqués
+        /// Événement lié aux clics sur les astres. 
+        /// Permet de réaliser diverses actions en fonction des boutons qui ont pu être actionnés.
+        /// Appelle les méthodes dans le Manager necessaire selon les boutons d'outils cliqués.
+        /// Pour cela on récupère les coordonnées de l'endroit où le clic a eu lieu, puis on appelle une méthode qui nous donne le point
+        /// de coordonnées de l'astre le plus proche de la zone cliquée.
+        /// On traite ensuite les divers cas en fonction des boutons qui peuvent être appuyés.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void PointClique(object sender, MouseButtonEventArgs e)
         {
+            //On récupère les coordonnées du clic, puis on récupère le point le plus proche correspondant à ces coordonnées.
             var point = new Geometrie.Point((int)e.GetPosition(this).X, (int)e.GetPosition(this).Y);
             Geometrie.Point pointSurCarte = RecupererPointClique(point);
 
-            //Debug.WriteLine($"Le point le plus proche de l'endroit cliqué est à {pointSurCarte}");
-
+            //Le mode spectateur doit être désactivé.
             if (pointSurCarte != null && !modeSpectateurActive)
             {
-                //Debug.WriteLine($"L'astre correspondant est {Manager.Carte.LesAstres[pointSurCarte]}");
-
+                //On efface l'astre correspondant si le bouton était actif.
                 if (boutonsCarteActifs["effacer"])
                 {
                     Manager.SupprimerUnAstre(pointSurCarte);
                 }
 
+                //Si le bouton our relier était actif, on vient vérifier si un point avait déjà été cliqué, s'il s'agit bien d'une étoile...
                 else if (boutonsCarteActifs["relier"])
                 {
                     if (pointClique == null)
@@ -382,6 +421,7 @@ namespace Appli
                         }
                     }
 
+                    //Une fois le deuxième point cliqué de cette manière, on vient appeller la méthode pour relier les deux points ensembles.
                     else if (!pointClique.Equals(pointSurCarte))
                     {
                         if (Manager.Carte.LesAstres[pointSurCarte] is Etoile)
@@ -397,6 +437,8 @@ namespace Appli
                         }
                     }
                 }
+
+                //Si le bouton de déplacement était actif, on vient sauvegarder le point qui a été cliqué dans une variable.
                 else if (boutonsCarteActifs["deplacer"])
                 {
                     if (pointClique == null)
@@ -409,6 +451,9 @@ namespace Appli
                         pointClique = pointSurCarte;
                     }
                 }
+
+                //Si c'était le bouton de modification qui était actif, alors on vient récupérer l'astre correspondant et vérifier que c'est
+                //un astre personnalisé.
                 else if (boutonsCarteActifs["modifier"])
                 {
                     var astre = Manager.Carte.LesAstres[pointSurCarte];
@@ -421,14 +466,18 @@ namespace Appli
                         return;
                     }
 
+                    //Etoile ou planète, les actions sont similaires.
                     if (astre is Etoile)
                     {
                         Manager.AstreSelectionne = null;
+
+                        //On vient créer une nouvelle fenêtre d'ajout d'étoile, et on vient setter l'astre que l'on a récupérer.
 
                         var nouvelleEtoile = new AjouterEtoile();
                         nouvelleEtoile.Owner = this;
                         nouvelleEtoile.LEtoile = (Etoile)astre;
 
+                        //On crée une copie de notre étoile, et on vient le setter à la version qui sera modifiée dans la fenêtre.
                         nouvelleEtoile.LEtoileEditable = new Etoile(nouvelleEtoile.LEtoile.Nom, nouvelleEtoile.LEtoile.Description,
                             nouvelleEtoile.LEtoile.Age, nouvelleEtoile.LEtoile.Masse, nouvelleEtoile.LEtoile.Temperature,
                             nouvelleEtoile.LEtoile.Constellation, nouvelleEtoile.LEtoile.Luminosite, nouvelleEtoile.LEtoile.Type,
@@ -437,6 +486,7 @@ namespace Appli
                         nouvelleEtoile.EstEnCoursDeCreation = false;
                         nouvelleEtoile.ShowDialog();
 
+                        //Si l'utilisateur valide, alors on appelle la méthode de modification qui viendra mettre à jour les données.
                         if (nouvelleEtoile.LEtoileEditable != null)
                         {
                             Manager.ModifierUnAstre(nouvelleEtoile.LEtoile, nouvelleEtoile.LEtoileEditable);
@@ -468,6 +518,7 @@ namespace Appli
                         }
                     }
                 }
+                //Sinon on affiche juste le popup de l'astre correspondant.
                 else
                 {
                     Manager.AstreSelectionne = Manager.Carte.LesAstres[pointSurCarte];
@@ -475,9 +526,11 @@ namespace Appli
                 }
             }
         }
+
         /// <summary>
-        /// Événement lié aux clics sur le Caneva. Transforme un clic en Point 
-        /// et appelle les méthodes necessaires celon les boutons d'outils cliqués
+        /// Événement lié aux clics sur le Caneva. Transforme un clic en Point de coordonnées.
+        /// Réalise ensuite diverses actions en fonction des outils cliqués.
+        /// La plupart concernent des ajouts de points sur la carte.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -485,11 +538,12 @@ namespace Appli
         {
             var point = new Geometrie.Point((int)e.GetPosition(this).X, (int)e.GetPosition(this).Y);
 
+            //On vérifie toujours que le clic ne se fait pas à côté d'un point, et que l'on ne clique pas sur le côté du menu.
             if (!RecherchePointAProximite(point) && point.X > 16 + decalageHorizontalCanvas)
             {
+                //Si le bouton déplacé était activé et que l'utilisateur avait déjà sélectionné un point, alors on vient le déplacer.
                 if (boutonsCarteActifs["deplacer"] && pointClique != null)
                 {
-
                     if (!point.Equals(pointClique))
                     {
                         point.Deplacer(point.X - 15 - decalageHorizontalCanvas, point.Y - decalageVerticalCanvas);
@@ -498,12 +552,14 @@ namespace Appli
                     }
                 }
 
+                //Si l'utilisateur avait appuyé sur le bouton d'ajout (étoile ou planète), alors on crée une nouvelle fenêtre d'ajout.
                 else if (boutonsCarteActifs["ajouterEtoile"])
                 {
                     var nouvelleEtoile = new AjouterEtoile();
                     nouvelleEtoile.Owner = this;
                     nouvelleEtoile.ShowDialog();
 
+                    //S'il valide, alors on vient ajouter l'astre correspondant.
                     if (nouvelleEtoile.LEtoileEditable != null)
                     {
                         EffacerDonneesCliquees();
@@ -513,6 +569,7 @@ namespace Appli
                     }
                 }
 
+                //La méthode est similaire.
                 else if (boutonsCarteActifs["ajouterPlanete"])
                 {
                     var nouvellePlanete = new AjouterPlanete();
@@ -528,6 +585,7 @@ namespace Appli
                     }
                 }
 
+                //S'il avait cliqué sur "ajouter à la carte" depuis la popup, alors on vient ajouter l'astre correspodant à la carte.
                 else if (astreAAjouter != null)
                 {
                     point.Deplacer(point.X - decalageHorizontalCanvas, point.Y - decalageVerticalCanvas);
@@ -536,11 +594,14 @@ namespace Appli
                 }
             }
         }
+
         /// <summary>
         /// Permet de rechercher si un point est à proximité d'un clic sur le caneva.
+        /// Permet d'éviter que des points se retrouvent surperposés.
+        /// Parcours les points de la carte et retourne vrai si un se trouve assez proche du point passé en paramètre.
         /// </summary>
         /// <param name="ptSelect">Point sélectionné lors d'un clic sur le caneva</param>
-        /// <returns>Retourne vrai si un point (Astre) est à proximité et faux si rien n'est trouvé</returns>
+        /// <returns>Un booléen, donc vrai si un point (Astre) est à proximité du point passé en paramètre et faux si rien n'est trouvé</returns>
         private bool RecherchePointAProximite(Geometrie.Point ptSelect)
         {
             foreach (Geometrie.Point pt in Manager.Carte.LesAstres.Keys)
@@ -556,13 +617,16 @@ namespace Appli
 
         /// <summary>
         /// Permet de récupérer le point (l'astre) qui a été cliqué à partir d'un point passé en paramètre.
+        /// Cette méthode parcourt les points de la carte et retourne le premier point le plus proche du point cliqué.
+        /// Retourne null sinon.
         /// </summary>
         /// <param name="ptSelect">Point cliqué sur le caneva</param>
-        /// <returns>Retourne le point (Astre) cliqué</returns>
+        /// <returns>Le point (Astre) cliqué.</returns>
         private Geometrie.Point RecupererPointClique(Geometrie.Point ptSelect)
         {
             foreach (Geometrie.Point pt in Manager.Carte.LesAstres.Keys)
             {
+                //Décalage de +/- 15 pixels à gauche et en haut du point cliqué.
                 if (ptSelect.X - decalageHorizontalCanvas >= pt.X && ptSelect.Y - decalageVerticalCanvas >= pt.Y 
                     && ptSelect.X - decalageHorizontalCanvas <= pt.X + 15 && ptSelect.Y - decalageVerticalCanvas <= pt.Y + 15)
                 {
@@ -578,7 +642,7 @@ namespace Appli
         //Corresond aux recherches, modifications des favoris.
 
         /// <summary>
-        /// Cette méthode est appelée lorsque l'utilsiateur clique sur le bouton pour ajouter un astre dans le popup, depuis la partie détail.
+        /// Cette méthode est appelée lorsque l'utilisateur clique sur le bouton pour ajouter un astre dans le popup, depuis la partie détail.
         /// On récupère ainsi le datacontexte de la popup, ce qui nous permet de récupérer l'astre que l'utilisateur va ajouter, au prochain
         /// clic sur la carte.
         /// </summary>
@@ -603,7 +667,7 @@ namespace Appli
         }
 
         /// <summary>
-        /// Modifie le favri d'un astre lorsque le bouton est cliqué.
+        /// Modifie le favori d'un astre lorsque le bouton est cliqué.
         /// Appelle la méthode de sauvegarde du Manager afin que les données soient enregistrées.
         /// </summary>
         /// <param name="sender"></param>
@@ -734,8 +798,8 @@ namespace Appli
         }
 
         /// <summary>
-        /// Efets visuels lors du survol de la souris des boutons.
-        /// Permet de montrer à l'utilisateur les endroits auxquel il est possible d'interagir.
+        /// Effets visuels lors du survol de la souris des boutons.
+        /// Permet de montrer à l'utilisateur les endroits auxquels il est possible d'interagir.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
