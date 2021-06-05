@@ -12,10 +12,10 @@ namespace Tests_Fonctionnels
     public static class Test_Manager
     {
         //Instanciation d'un manager.
-        static Manager manager = new Manager(new DataContractPers(), new Stub.Stub());
+        static Manager manager = new Manager(new Stub.Stub(), new Stub.Stub());
 
         /// <summary>
-        /// Méthode de test dans laquelle on vérifie si le manager est bien vide après sa création.
+        /// Méthode de test dans laquelle on vérifie si le manager est bien rempli et a bien été chargé de ses données après sa création.
         /// </summary>
         public static void TestCreationManager()
         {
@@ -42,11 +42,11 @@ namespace Tests_Fonctionnels
                                     TypePlanete.Tellurique,
                                     true));
 
-            Console.WriteLine("Le manager après ajout d'un astre :");
+            Console.WriteLine("Le manager après ajout d'un astre (qui se trouvait déjà dans sa liste de données):");
             Console.WriteLine(manager);
             Console.WriteLine("-----------------------------------------------");
 
-            manager.AjouterUnAstre(new FabriqueDePlanete().Initialiser("Pluton")
+            manager.AjouterUnAstre(new FabriqueDePlanete().Initialiser("Planete non existante")
                                        .AvecDescription("Pluton, officiellement désigné par (134340) Pluton, est une planète naine, la plus volumineuse " +
                                        "connue dans le Système solaire, et la deuxième en ce qui concerne sa masse. Après sa découverte par l'astronome " +
                                        "américain Clyde Tombaugh en 1930, Pluton était considérée comme la neuvième planète du Système solaire.")
@@ -63,11 +63,11 @@ namespace Tests_Fonctionnels
             Console.WriteLine(manager);
             Console.WriteLine("-----------------------------------------------");
 
+            //Devrait rester qu'un astre, la Terre était personnalisée.
             manager.SupprimerTout();
             Console.WriteLine("Le manager après supression de tous les astres :");
             Console.WriteLine(manager);
             Console.WriteLine("-----------------------------------------------");
         }
-
     }
 }

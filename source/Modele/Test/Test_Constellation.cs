@@ -15,8 +15,9 @@ namespace Test
     public static class Test_Constellation
     {
         static Constellation constel = new Constellation(new Point(42, 42), new Point(56, 56));
+
         /// <summary>
-        /// Test de la méthode Relier
+        /// Test de la méthode Relier.
         /// </summary>
         public static void TestRelier()
         {
@@ -39,43 +40,46 @@ namespace Test
         }
 
         /// <summary>
-        /// Test de la méthode Supprimer
+        /// Test de la méthode Supprimer. La constellation devrait normalement être vide.
         /// </summary>
         public static void TestSupprimer()
         {
             Point pt = new Point(42, 42);
             constel.SupprimerLesLiens(pt);
-            Console.WriteLine($"Suppression du point {pt}:\n{constel.ToString()}");
+            Console.WriteLine($"Suppression du point {pt}:\n{constel}");
         }
 
         /// <summary>
-        /// Test de la méthode DeplaceEtoile
+        /// Test de la méthode DeplaceEtoile.
         /// </summary>
         public static void TestDeplaceEtoile()
         {
             Point pt = new Point(42, 42);
             Point nvPt = new Point(43, 43);
             constel.DeplacePoint(pt, nvPt);
-            Console.WriteLine($"Déplacer le point {pt}:\n{constel.ToString()}");
+            Console.WriteLine($"Déplacer le point {pt}:\n{constel}");
         }
 
         /// <summary>
-        /// Test de la méthode FusionnerAvec
+        /// Test de la méthode FusionnerAvec.
         /// </summary>
         public static void TestFusion()
         {
             Constellation constel2 = new Constellation(new Point(13, 13), new Point(25, 100));
             constel.FusionnerAvec(constel2, new Point(42,42), new Point(13, 13));
-            Console.WriteLine($"fusion :\n{constel.ToString()}");
+            Console.WriteLine($"fusion :\n{constel}");
         }
 
+        /// <summary>
+        /// Méthod permettant de tester le parcours lors de la division d'une constellation.
+        /// </summary>
         public static void TestParcours()
         {
             Constellation constel3 = constel.DiviserConstellation();
-            Console.WriteLine($"Parcours :\n{constel.ToString()}");
+            Console.WriteLine($"Parcours :\n{constel}");
             if (constel3 != null)
             {
-                Console.WriteLine($"ParcoursRejeton :\n{constel3.ToString()}");
+                Console.WriteLine($"ParcoursRejeton :\n{constel3}");
             }
             
         }

@@ -137,6 +137,14 @@ namespace Modele
             LesAstresObservables[position] = astre;
         }
 
+        /// <summary>
+        /// Méthode permettant la modification d'un astre. On lui envoie l'ancien astre en paramètre ainsi que sa version modifiée.
+        /// L'astre originel doit être présent dans this. Si ce n'est pas le cas, une exception est levée.
+        /// On récupère ensuite la position de l'astre dans le dictionnaire. On le supprime.
+        /// On ajoute enfin sa nouvelle version modifiée.
+        /// </summary>
+        /// <param name="astreOriginel">L'astre avant modification (il doit être présent dans this).</param>
+        /// <param name="astreModifie">La version modifiée de cet astre.</param>
         public void ModifierUnAstre(Astre astreOriginel, Astre astreModifie)
         {
             if (!lesAstres.ContainsValue(astreOriginel))
@@ -191,6 +199,7 @@ namespace Modele
                 }
             }
 
+            //On remet sa couleur verte.
             if (astreADeplacer is Planete)
             {
                 nouvellePosition.Couleur = "#008000";

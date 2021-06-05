@@ -16,8 +16,14 @@ namespace Appli
     /// </summary>
     public partial class App : Application
     {
+        /// <summary>
+        /// On instancie notre Manager.
+        /// </summary>
         public Manager LeManager { get; private set; } = new Manager(new DataContractPers(), new DataContractPers());
-
+        
+        /// <summary>
+        /// Constructeur même de notre application. Appelle la méthode de chargement des données du Manager.
+        /// </summary>
         public App()
         {
             LeManager.ChargeDonnees();

@@ -59,9 +59,10 @@ namespace Tests_Unitaires
 
             manager.LesAstres.Should().HaveCount(2);
 
-            //Il ne devrait plus rien rester dans la liste.
+            //Il devrait rester les deux astres, cela ne fait que les supprimer de la carte.
             manager.SupprimerTout();
-            manager.LesAstres.Should().HaveCount(0);
+            manager.LesAstres.Should().HaveCount(2);
+            manager.Carte.LesAstres.Should().HaveCount(0);
         }
 
         /// <summary>
@@ -111,12 +112,12 @@ namespace Tests_Unitaires
             //Suppression du premier astre "Sirius" à partir de sa position.
             manager.SupprimerUnAstre(new Point(23, 12));
             manager.Carte.LesAstres.Should().HaveCount(1);
-            manager.LesAstres.Should().HaveCount(1);
+            manager.LesAstres.Should().HaveCount(2);
 
             //On efface tout.
             manager.SupprimerTout();
             manager.Carte.LesAstres.Should().BeEmpty();
-            manager.LesAstres.Should().BeEmpty();
+            manager.LesAstres.Should().HaveCount(2);
         }
     }
 }

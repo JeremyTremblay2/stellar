@@ -24,7 +24,7 @@ namespace Espace
         /// Propriété permettant de représenter la présence de vie ou non de la planète, sous forme de chaîne de caractères.
         /// </summary>
         [DataMember]
-		[MaxLength(20, ErrorMessage = "Informations trop longues.")]
+		[MaxLength(20, ErrorMessage = "Trop long.")]
         public string Vie { get; set; }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Espace
         /// <param name="type">Le type de planète</param>
         /// <param name="vie">Une chaîne de caractère donnant des indications sur une éventuelle vie sur la planète en question</param>
         /// <param name="eauPresente">un booléen indiquant si l'eau est présente ou non</param>
-        /// <param name="systeme">Un chaîne de caractères indiquant dans quel système stellaire se trouve la planète</param>
+        /// <param name="systeme">Une chaîne de caractères indiquant dans quel système stellaire se trouve la planète</param>
         /// <param name="image">Une image de l'étoile sous forme de chemin en chaîne de caractères.</param>
         public Planete(string nom, string description, long age, float masse, int temperature, string vie, bool eauPresente, string systeme, 
             TypePlanete type = TypePlanete.Naine, bool personnalise = false, string image = "planète.jpg")

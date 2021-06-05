@@ -25,15 +25,17 @@ namespace Appli
         private const int decalageHorizontalCanvas = 350;
         private const int decalageVerticalCanvas = 50;
 
-        //Les attributs permettant d'effectuer les tris.
+        //Les attributs permettant d'effectuer les tris. Ils sont modifiés lors des clis sur les boutons.
         private bool triOrdreAlphabetique = false;
         private byte filtrePersonnalisation = 3;
         private Type filtreType = typeof(Astre);
         private bool filtreFavoris = false;
         private string filtreNom;
+
+        //Permet de savoir quand est pressé la touche "Controle"
         private bool CtrlOk = false;
 
-        //Permet de savoir quels sont les boutons enclenchés.
+        //Permet de savoir quels sont les boutons activé sur la carte, de manière à ce que un seul puisse être activé à la fois.
         private bool modeSpectateurActive = false;
         private Dictionary<string, bool> boutonsCarteActifs = new Dictionary<string, bool>()
         {
@@ -54,6 +56,11 @@ namespace Appli
         //Le manager.
         public Manager Manager => (Application.Current as App).LeManager;
 
+        /// <summary>
+        /// Le constructeur de la fenêtre principale.
+        /// On précise le DataContexte qui est ici le Manager.
+        /// Puis on vient spécifier l'image du mode spectateur.
+        /// </summary>
         public MainWindow()
         { 
             InitializeComponent();
@@ -63,7 +70,9 @@ namespace Appli
         }
 
         /// <summary>
-        /// Permet de cacher le master lorque le bouton spectateur est cliqué
+        /// Permet de cacher le master lorque le bouton spectateur est cliqué.
+        /// On vient modifier l'image du bouton spectateur, puis cacher la plupart des autes boutons.
+        /// Si l'action inverses est effectuée, alors on effectue l'inverse également.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -98,6 +107,8 @@ namespace Appli
 
         /// <summary>
         /// Permet de réinitialiser l'affichage de la carte.
+        /// Désactive tous les boutons qui pouvaient être cliqués.
+        /// Rétablit les couleurs des points de la carte, car ils pouvaient éventuellement avoir été modifiés.
         /// </summary>
         private void EffacerDonneesCliquees()
         {
@@ -124,8 +135,10 @@ namespace Appli
                 }
             }
         }
+
         /// <summary>
-        /// Événement lié au clic du bouton Modifier. Il permet de modifier un astre personnalisé.
+        /// Événement lié au clic du bouton Modifier.
+        /// Il permet de modifier un astre personnalisé.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -561,6 +574,16 @@ namespace Appli
 
         /**********************************************************************************************/
 
+        //Partie "Master" (menu latéral).
+        //Corresond aux recherches, modifications des favoris.
+
+        /// <summary>
+        /// Cette méthode est appelée lorsque l'utilsiateur clique sur le bouton pour ajouter un astre dans le popup, depuis la partie détail.
+        /// On récupère ainsi le datacontexte de la popup, ce qui nous permet de récupérer l'astre que l'utilisateur va ajouter, au prochain
+        /// clic sur la carte.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UCPopup_AjouterAstre(object sender, RoutedEventArgs e)
         {
             EffacerDonneesCliquees();
@@ -580,7 +603,8 @@ namespace Appli
         }
 
         /// <summary>
-        /// Modifie les favoris lorsque le bouton favoris est cliqué.
+        /// Modifie le favri d'un astre lorsque le bouton est cliqué.
+        /// Appelle la méthode de sauvegarde du Manager afin que les données soient enregistrées.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -591,8 +615,9 @@ namespace Appli
             astre.ModifierFavori();
             Manager.SauvegardeDonnees();
         }
+
         /// <summary>
-        /// Permet d'éffectuer la recherche demandé.
+        /// Permet d'éffectuer la recherche demandée, en fonction des différents paramètres activés.
         /// </summary>
         private void FaireLaRecherche()
         {
@@ -607,6 +632,7 @@ namespace Appli
         /// <param name="e"></param>
         private void BoutonTriAlphabetique(object sender, MouseButtonEventArgs e)
         {
+            //On modifie le "Path" qui correspond à l'image de la flèche de tri, en fonction de l'état du bouton.
             if (triOrdreAlphabetique)
             {
                 triOrdreAlphabetique = false;
@@ -619,13 +645,16 @@ namespace Appli
             }
             FaireLaRecherche();
         }
+
         /// <summary>
-        /// Événement lié au bouton des favoris. Mets à jour la recherche lorsque le bouton est cliqué
+        /// Événement lié au bouton des favoris. 
+        /// Mets à jour la recherche lorsque le bouton est cliqué, et relance une recherche.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void BoutonFiltreFavori(object sender, MouseButtonEventArgs e)
         {
+            //On modifie le "Path" qui correspond à l'image du coeur vide ou plein, en fonction de l'état du bouton.
             if (filtreFavoris)
             {
                 filtreFavoris = false;
@@ -639,13 +668,16 @@ namespace Appli
             }
             FaireLaRecherche();
         }
+
         /// <summary>
-        /// Événement lié au bouton de tri par astre personnalisé. Mets à jour la recherche lorsque le bouton est cliqué
+        /// Événement lié au bouton de tri par astre personnalisé. 
+        /// Mets à jour la recherche lorsque le bouton est cliqué, et relance une recherche.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void BoutonFiltrePersonnalisation(object sender, RoutedEventArgs e)
         {
+            //En fonction de l'état du bouton, on vient modifier son texte et sa valeur. La recherche est modifiée en conséquence.
             if (filtrePersonnalisation == 1)
             {
                 filtrePersonnalisation = 3;
@@ -664,12 +696,14 @@ namespace Appli
             FaireLaRecherche();
         }
         /// <summary>
-        /// Événement lié au bouton de tri par type d'astre. Mets à jour la recherche lorsque le bouton est cliqué
+        /// Événement lié au bouton de tri par type d'astre. 
+        /// Mets à jour la recherche lorsque le bouton est cliqué, et relance une recherche.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void BoutonFiltreType(object sender, RoutedEventArgs e)
         {
+            //En fonction de l'état du bouton, on vient modifier son image et sa valeur. La recherche est modifiée en conséquence.
             if (filtreType == typeof(Etoile))
             {
                 filtreType = typeof(Planete);
@@ -687,8 +721,9 @@ namespace Appli
             }
             FaireLaRecherche();
         }
+
         /// <summary>
-        /// Événement lié à la barre de recherche. Mets à jour la recherche selon les caractères entrés dans la textbox
+        /// Événement lié à la barre de recherche. Mets à jour la recherche selon les caractères entrés dans la boîte de dialogue.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -698,6 +733,12 @@ namespace Appli
             FaireLaRecherche();
         }
 
+        /// <summary>
+        /// Efets visuels lors du survol de la souris des boutons.
+        /// Permet de montrer à l'utilisateur les endroits auxquel il est possible d'interagir.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SurvolBouton(object sender, MouseEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Hand;
@@ -709,13 +750,12 @@ namespace Appli
         }
 
         /// <summary>
-        /// Raccourcis clavier
+        /// Raccourcis clavier, permettant d'améliorer l'ergonomie de l'application, et facilitant l'usage des outils de la partie Carte.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void RaccourcisClavier(object sender, KeyEventArgs e)
         {
-
             if (e.Key == Key.LeftCtrl)
                 CtrlOk = true;
 
@@ -753,18 +793,19 @@ namespace Appli
             {
                 ModifierClic(null, null);
             }
+            else if (CtrlOk && e.Key == Key.U)
+            {
+                PoubelleClic(null, null);
+            }
             else if (e.Key == Key.F12)
             {
                 SpectateurClic(null, null);
             }
-            else if (e.Key == Key.U)
-            {
-                PoubelleClic(null, null);
-            }
         }
 
         /// <summary>
-        /// Mets à false CtrlUp lorsque le bouton LeftCtrl est relaché.
+        /// Mets à false CtrlUp lorsque le bouton LeftCtrl est relaché. 
+        /// Permet concrètement de pouvoir effectuer plusieurs raccourcis clavier.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

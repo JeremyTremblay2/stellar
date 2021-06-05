@@ -58,7 +58,7 @@ namespace Espace
         /// Constructeur de Constellations. Prend deux points en paramètre et trace un segment.
         /// </summary>
         /// <param name="point1">Premier point de la constellation.</param>
-        /// <param name="point2">Seconde point de la constellation.</param>
+        /// <param name="point2">Second point de la constellation.</param>
         public Constellation(Point point1, Point point2)
         {
             if (point1 == null || point2 == null)
@@ -72,7 +72,9 @@ namespace Espace
             lesPoints.Add(point1);
             lesPoints.Add(point2);
             lesSegments.Add(s);
-            MiseAJourCollections();
+            LesPoints.Add(point1);
+            LesPoints.Add(point2);
+            LesSegments.Add(s);
 
             Vide = false;
         }
@@ -81,8 +83,8 @@ namespace Espace
         /// Constructeur de Constellations. Prend plusieurs points en paramètre et plusieurs segments. 
         /// Les ajoute ensuites aux ensembles.
         /// </summary>
-        /// <param name="points"></param>
-        /// <param name="segments"></param>
+        /// <param name="points">La collection de points à ajouter</param>
+        /// <param name="segments">La collection de segments à ajouter</param>
         private Constellation(IEnumerable<Point> points, IEnumerable<Segment> segments)
         {
             if (points.Contains(null) || segments.Contains(null))
@@ -121,7 +123,10 @@ namespace Espace
             {
                 LesPoints.Add(nouveauPoint);
             }
-            MiseAJourCollections();
+            if (!LesSegments.Contains(seg))
+            {
+                LesSegments.Add(seg);
+            }
         }
 
         /// <summary>
@@ -141,7 +146,13 @@ namespace Espace
             IEnumerable<Segment> tempo = lesSegments.Where(n => n.PtEquals(point));
             lesSegments.ExceptWith(tempo);
 
-            MiseAJourCollections();
+            foreach(Segment seg in tempo)
+            {
+                if (LesSegments.Contains(seg))
+                {
+                    LesSegments.Remove(seg);
+                }
+            }
 
             //Appel d'une méthode permettant de retirer de la constellation les étoiles seules (pas reliées).
             SuppressionPoints();
@@ -227,12 +238,16 @@ namespace Espace
             //parcours en largeur
             pilePt[i] = ptDeb;
             tailleLogique++;
+
+            //On parcours tous les points de la pile.
             while (pilePt[i] != null)
             {
-
+                //On récupère tous les segments qui partent du point que l'on traite, et on les parcours.
                 IEnumerable<Segment> tempoSeg = lesSegments.Where(seg => seg.PtEquals(pilePt[i]));
                 foreach (Segment seg in tempoSeg)
                 {
+                    //Pour chaque point du segment (le point 1 ou le point2), on vérifie que le point n'a pas déjà été visité, si c'est
+                    //le cas, on l'ajoute à la pile. Il sera parcouru lui aussi par la suite.
                     if (seg.Point1.Equals(pilePt[i]))
                     {
                         if (!visite.Contains(seg.Point2) && !pilePt.Contains(seg.Point2))
@@ -259,11 +274,13 @@ namespace Espace
                 i++;
             }
 
-            //resultat
+            //Si la constellation est encore connexe, alors on retourne null.
             if (tailleLogique >= TaillePhysique)
             {
                 return null;
             }
+
+            //Sinon on retourne une nouvelle constellation qui contient le reste des points et des segments.
             else
             {
                 HashSet<Point> lesPt = new HashSet<Point>();
@@ -370,7 +387,7 @@ namespace Espace
         /// Méthode permettant de supprimer les points qui n'ont pas de liaison avec d'autres points.
         /// Pour cela, on vérifie s'il n'y a plus de segments dans la constellation, et si c'est le cas, on peut effacer tous les points.
         /// Sinon, pour chaque point on parcours tous les segments, et on vérifie que le point est au moins contenu dans un segement.
-        /// Si ce n'est pas le as, alors on l'ajoute à une collection.
+        /// Si ce n'est pas le cas, alors on l'ajoute à une collection.
         /// A la fin du traitement de tous les points, on supprime de notre hashset tous les points qui se trouvent dans la collection.
         /// </summary>
         private void SuppressionPoints()

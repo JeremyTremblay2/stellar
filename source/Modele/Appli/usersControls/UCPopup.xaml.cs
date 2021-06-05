@@ -18,39 +18,71 @@ using System.Windows.Shapes;
 namespace Appli.usersControls
 {
     /// <summary>
-    /// Logique d'interaction pour UCPopup.xaml
+    /// Logique d'interaction pour UCPopup.xaml.
+    /// Il s'agit de la partie Détail de l'application, dans laquelle on retrouve la plupart des informations.
     /// </summary>
     public partial class UCPopup : UserControl
     {
+        //Ne vaut pas null lorsque l'utilisateur décide d'ajouter l'astre à la carte.
         private Astre astreAAjouter;
 
         public Manager LeManager => (Application.Current as App).LeManager;
 
+        /// <summary>
+        /// Constructeur de notre fenêtre popup. Par défaut la fenêtre est cachée.
+        /// </summary>
         public UCPopup()
         {
             InitializeComponent();
             (Application.Current.MainWindow as MainWindow).Popup.Visibility = Visibility.Hidden;
         }
 
+        /// <summary>
+        /// Evenement permettant de notifier le programmer principal que l'utilisateur souhaite ajouter l'astre sur la carte.
+        /// </summary>
         public static readonly RoutedEvent AjouterAstreSurCarteEvent = EventManager.RegisterRoutedEvent("AjouterAstreSurCarte", 
             RoutingStrategy.Direct, typeof(RoutedEventHandler), typeof(UCPopup));
 
+        /// <summary>
+        /// Permet d'abonner ou de désabonner l'évènement.
+        /// </summary>
         public event RoutedEventHandler AjouterAstreSurCarte
         {
             add { AddHandler(AjouterAstreSurCarteEvent, value); }
             remove { RemoveHandler(AjouterAstreSurCarteEvent, value); }
         }
 
+        /// <summary>
+        /// Lorsqu'on clique à l'extérieur de la popup, on la fait disparaître.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             (Application.Current.MainWindow as MainWindow).Popup.Visibility = Visibility.Hidden;
         }
 
+        /// <summary>
+        /// Lorsqu'on clique sur la croix, on fait disparaître la popup.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonPopupClicCroix(object sender, MouseButtonEventArgs e)
         {
             (Application.Current.MainWindow as MainWindow).Popup.Visibility = Visibility.Hidden;
         }
 
+        /// <summary>
+        /// Méthode appellée lorsque l'utilisateur clique sur le bouton pour ajouter l'astre à la carte.
+        /// On récupère alors l'astre sélectionné.
+        /// On vérifie ensuite que cet astre précisémment ne se trouve aps sur la carte. Pour cela, on vient parcourir les données de la
+        /// Carte, et on passe un booléen à True si l'astre est déjà présent. 
+        /// Enfin, s'il ne s'agit aps d'un astre personnalisé et qu'il ne se trouve pas déjà sur la carte, alors on envoie un évènement
+        /// à la fenêtre principale qui pourra gérer l'ajout sur la carte.
+        /// Sinon on affiche une messageBox indiquant à l'utilisateur que l'action n'est pas possible.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AjouterAstre(object sender, MouseButtonEventArgs e)
         {
             bool astreExistantSurCarte = false;
@@ -82,6 +114,7 @@ namespace Appli.usersControls
 
         /****************************************************************************************************/
 
+        //Ce sont ici des dependency property sur la plupart des binding qui seront réalisé à l'intérieur même de ce usercontrol.
 
         public string ImageAstre
         {

@@ -24,6 +24,12 @@ namespace Appli.usersControls
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// Quelques effets visuels au survol de la souris...
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SpecEnter(object sender, MouseEventArgs e)
         {
             PathButton.Opacity = 0.6;
@@ -36,6 +42,9 @@ namespace Appli.usersControls
             Mouse.OverrideCursor = Cursors.Arrow;
         }
 
+        /// <summary>
+        /// Mutateur sur le contenu même du "chemin" qui va pouvoir représenter une image.
+        /// </summary>
         public string Path
         {
             set
@@ -44,6 +53,9 @@ namespace Appli.usersControls
             }
         }
 
+        /// <summary>
+        /// Mutateur sur la couleur de l'image. PErmet de mieux faire ressortir les boutons.
+        /// </summary>
         public string Fill
         {
             set

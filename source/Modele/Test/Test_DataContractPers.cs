@@ -8,8 +8,14 @@ using System.Threading.Tasks;
 
 namespace Tests_Fonctionnels
 {
+    /// <summary>
+    /// Classe permettant de tester la persistance en DataContract.
+    /// </summary>
     public static class Test_DataContractPers
     {
+        /// <summary>
+        /// Méthode permettant de tester le chargement en Datacontract.
+        /// </summary>
         public static void TestChargement()
         {
             //Création du manager et chargement du stub.
@@ -25,19 +31,6 @@ namespace Tests_Fonctionnels
             Manager manager2 = new Manager(new DataContractPersistance.DataContractPers(), new DataContractPersistance.DataContractPers());
             manager2.ChargeDonnees();
             Console.WriteLine(manager2);
-
-            //Création du manager et chargement du stub.
-            Manager manager3 = new Manager(new Stub.Stub(), new Stub.Stub());
-            manager3.ChargeDonnees();
-
-            //Sauvegarde en datacontract des données.
-            manager3.Persistance = new JSONPersistance.JSONPers();
-            manager3.SauvegardeDonnees();
-
-            //Chargement des données précédemment sauvegardées après instanciation d'un nouveau manager.
-            Manager manager4 = new Manager(new JSONPersistance.JSONPers(), new DataContractPersistance.DataContractPers());
-            manager4.ChargeDonnees();
-            Console.WriteLine(manager4);
         }
     }
 }

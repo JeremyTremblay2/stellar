@@ -17,6 +17,7 @@ namespace Appli.usersControls
 {
     /// <summary>
     /// Logique d'interaction pour UCImageAstre.xaml
+    /// permet d'afficher l'image de l'astre.
     /// </summary>
     public partial class UCImageAstre : UserControl
     {
@@ -25,6 +26,9 @@ namespace Appli.usersControls
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Mutateur sur la largeur de l'image.
+        /// </summary>
         public int Largeur
         {
             set
@@ -33,6 +37,9 @@ namespace Appli.usersControls
             }
         }
 
+        /// <summary>
+        /// Mutateur sur la hauteur de l'image.
+        /// </summary>
         public int Hauteur
         {
             set
@@ -41,6 +48,9 @@ namespace Appli.usersControls
             }
         }
 
+        /// <summary>
+        /// Propriété sur k'image de l'astre et dependency Property.
+        /// </summary>
         public string ImageAstre
         {
             get { return (string)GetValue(ImageAstrePropriete); }
