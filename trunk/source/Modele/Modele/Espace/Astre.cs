@@ -89,7 +89,7 @@ namespace Espace
         }
 
         /// <summary>
-        /// Propriété permettant de savoir si l'astre est un astre personnalisé (= crée par l'utilisateur) ou non, représente par un booléen.
+        /// Propriété permettant de savoir si l'astre est un astre personnalisé (= crée par l'utilisateur) ou non, représenté par un booléen.
         /// </summary>
         [DataMember(EmitDefaultValue = false, Order = 7)]
         public bool Personnalise { get; internal set; }
@@ -101,7 +101,7 @@ namespace Espace
         public string Image { get; set; }
 
         /// <summary>
-        /// Permet de vérifier la cohérence des données lors d'entrées utilisateur avec les décorateurs placées sur les propriétées 
+        /// Permet de vérifier la cohérence des données lors d'entrées utilisateur avec les décorateurs placés sur les propriétées 
         /// précédentes. Peut éventuellement retourner des messages d'erreurs.
         /// </summary>
         /// <param name="columnName">Une colonne associée en réalité à la propriété dont on veut tester la cohérence des données.</param>

@@ -7,8 +7,16 @@ using Modele;
 
 namespace Stub
 {
+    /// <summary>
+    /// Le stub est un mode de sérialisation fictif qui implémente nos interfaces de chargement / sauvegarde.
+    /// </summary>
     public class Stub : IPersistanceManager, IPersistanceCarte
     {
+        /// <summary>
+        /// Méthode de chargement des données, implémentée depuis l'inetrface du Manager.
+        /// Instancie une liste d'astres avec les données en dur, puis la retourne.
+        /// </summary>
+        /// <returns>Une liste d'astres.</returns>
         public IEnumerable<Astre> ChargeDonnees()
         {
             var fabriqueDetoile = new FabriqueDEtoile();
@@ -238,16 +246,33 @@ namespace Stub
             return astres;
         }
 
+        /// <summary>
+        /// Méthode de sauvegarde ne faisant rien.
+        /// Simule un enregistrement des données.
+        /// </summary>
+        /// <param name="astres">Une liste d'astres à enregistrer.</param>
         public void SauvegardeDonnees(IEnumerable<Astre> astres)
         {
             Debug.WriteLine("Sauvegarde demandée.");
         }
 
+        /// <summary>
+        /// Méthode de chargement des données de la Carte.
+        /// Simule un chargement des données, ne fait rien en réalité.
+        /// </summary>
+        /// <param name="cheminFichier">Le chemin du fichier dans lequel les données seront chargées.</param>
+        /// <returns>Deux colelctions de données vides.</returns>
         public (Dictionary<Point, Astre> astres, IEnumerable<Constellation> constellations) ChargeDonneesCarte(string cheminFichier)
         {
             return (new Dictionary<Point, Astre>(), new List<Constellation>());
         }
 
+        /// <summary>
+        /// Méthode de sauvegarde des données fictive, qui ne fait rien en réalité.
+        /// </summary>
+        /// <param name="astres">Un dictionnaire d'astres à sérialiser.</param>
+        /// <param name="constellations">Une collection de constellations à enregistrer.</param>
+        /// <param name="cheminFichier">Le chemin du fichier dans lequel enregistrer les données.</param>
         public void SauvegardeDonneesCarte(Dictionary<Point, Astre> astres, IEnumerable<Constellation> constellations, string cheminFichier)
         {
             Debug.WriteLine("Sauvegarde de la carte demandée.");

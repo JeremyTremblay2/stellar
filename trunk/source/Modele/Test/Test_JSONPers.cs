@@ -9,8 +9,14 @@ using System.Diagnostics;
 
 namespace Tests_Fonctionnels
 {
+    /// <summary>
+    /// Classe permettant de tester le chargement en JSON.
+    /// </summary>
     public static class Test_JSONPers
     {
+        /// <summary>
+        /// Méthode permettant de tester la persistance en JSON du manager.
+        /// </summary>
         public static void TestChargement()
         {
             //Création du manager et chargement du stub.

@@ -65,6 +65,7 @@ namespace Modele
                 {
                     astreSelectionne = value;
                     OnPropertyChanged(nameof(AstreSelectionne));
+                    OnPropertyChanged(nameof(AstreSelectionne));
                 }
             }
         }
@@ -81,7 +82,7 @@ namespace Modele
         /// Constructeur de Manager. Il ne prend pas de paramètre.
         /// On instancie notre liste d'astre et notre Carte. On vient instancie nos méthodes de persistance pour la Carte et le Manager.
         /// <param name="persistance">Le type de persistance utilisé par le Manager.</param>
-        /// <param name="persistanceCarte">LE type de persistance utilisé par la Carte.</param>
+        /// <param name="persistanceCarte">Le type de persistance utilisé par la Carte.</param>
         /// </summary>
         public Manager(IPersistanceManager persistance, IPersistanceCarte persistanceCarte)
         {
@@ -203,6 +204,12 @@ namespace Modele
             }
         }
 
+        /// <summary>
+        /// Méthode permettant la modification d'un astre. Cette méthode vient d'abord déléguer la modification à la carte, et si elle a
+        /// lieu avec succès, alors on fait de même dans le Manager. On modifie l'astre en question.
+        /// </summary>
+        /// <param name="astreOriginel">L'astre originel avant modifications.</param>
+        /// <param name="astreModifie">L'astre après modifications.</param>
         public void ModifierUnAstre(Astre astreOriginel, Astre astreModifie)
         {
             Carte.ModifierUnAstre(astreOriginel, astreModifie);

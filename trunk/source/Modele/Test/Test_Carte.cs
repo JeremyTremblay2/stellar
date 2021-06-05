@@ -122,7 +122,7 @@ namespace Test
             Console.WriteLine("Nous allons déplacer quelques astres de la carte.");
             Console.WriteLine("On déplace le point (42, 42) aux coordonnées (45, 67).");
             uneCarte.DeplacerUnAstre(new Point(42, 42), new Point(45, 67));
-            Console.WriteLine($"DeplacerUnAstre : {uneCarte.ToString()}");
+            Console.WriteLine($"DeplacerUnAstre : {uneCarte}");
             Console.WriteLine("----------------------------------------------");
         }
 
@@ -133,20 +133,20 @@ namespace Test
         {
             Console.WriteLine("Nous allons relier plusieurs étoiles.");
             uneCarte.RelierDeuxEtoiles(new Point(42, 42), new Point(56, 56));
-            Console.WriteLine($"On relie deux étoiles aux positions (42, 42) et (56, 56). Voici la carte : {uneCarte.ToString()}");
+            Console.WriteLine($"On relie deux étoiles aux positions (42, 42) et (56, 56). Voici la carte : {uneCarte}");
             uneCarte.RelierDeuxEtoiles(new Point(42, 42), new Point(20, 98));
-            Console.WriteLine($"On relie deux étoiles aux positions (42, 42) et (20, 98). Voici la carte : {uneCarte.ToString()}");
+            Console.WriteLine($"On relie deux étoiles aux positions (42, 42) et (20, 98). Voici la carte : {uneCarte}");
             uneCarte.RelierDeuxEtoiles(new Point(20, 98), new Point(75, 56));
-            Console.WriteLine($"On relie deux étoiles aux positions (20, 98) et (75, 56). Voici la carte : {uneCarte.ToString()}");
+            Console.WriteLine($"On relie deux étoiles aux positions (20, 98) et (75, 56). Voici la carte : {uneCarte}");
             uneCarte.RelierDeuxEtoiles(new Point(56, 56), new Point(45, 98));
-            Console.WriteLine($"On relie deux étoiles aux positions (56, 56) et (45, 98). Voici la carte : {uneCarte.ToString()}");
+            Console.WriteLine($"On relie deux étoiles aux positions (56, 56) et (45, 98). Voici la carte : {uneCarte}");
             uneCarte.RelierDeuxEtoiles(new Point(75, 56), new Point(58, 12));
-            Console.WriteLine($"On relie deux étoiles aux positions (75, 56) et (58, 12). Voici la carte : {uneCarte.ToString()}");
+            Console.WriteLine($"On relie deux étoiles aux positions (75, 56) et (58, 12). Voici la carte : {uneCarte}");
             uneCarte.RelierDeuxEtoiles(new Point(45, 98), new Point(78, 64));
-            Console.WriteLine($"On relie deux étoiles aux positions (45, 98) et (78, 64). Voici la carte : {uneCarte.ToString()}");
+            Console.WriteLine($"On relie deux étoiles aux positions (45, 98) et (78, 64). Voici la carte : {uneCarte}");
 
 
-            Console.WriteLine($"Voici la carte finale : {uneCarte.ToString()}");
+            Console.WriteLine($"Voici la carte finale : {uneCarte}");
             Console.WriteLine("----------------------------------------------");
         }
 
@@ -158,7 +158,7 @@ namespace Test
             Point p = new Point(42, 42);
             Console.WriteLine($"Suppression d'un astre se trouvant à la positon {p}");
             uneCarte.SupprimerUnAstre(new Point(42, 42));
-            Console.WriteLine($"Voici la carte après suppression du point : {uneCarte.ToString()}");
+            Console.WriteLine($"Voici la carte après suppression du point : {uneCarte}");
             Console.WriteLine("----------------------------------------------");
         }
     }
