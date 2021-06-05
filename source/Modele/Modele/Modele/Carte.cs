@@ -107,7 +107,7 @@ namespace Modele
         }
 
         /// <summary>
-        /// Méthode permettant de sauvegarder les données de la Carte actuelle dans un fcihier, dont le nom est passé en paramètre.
+        /// Méthode permettant de sauvegarder les données de la Carte actuelle dans un fichier, dont le nom est passé en paramètre.
         /// Cette méthode ne fait que déléguer la sauvegarde au type de persistance instancié.
         /// </summary>
         /// <param name="nomFichier">Le nom du fichier dans lequel les données seront sauvegardées.</param>
@@ -215,8 +215,8 @@ namespace Modele
         /// Supprime un Astre en fonction d'un point cliqué. On vérifie que le point cliqué correspond bien à un astre qui se trouve 
         /// dans le dictionnaire et que le point n'est pas null, sinon on retourne une exception.
         /// S'il s'agit d'une étoile dans une constellation les segments reliés à l'étoile seront supprimés.
-        /// Par la suite, on divise la constellations tant qu'elle n'est pas connexe avec tous ces points, et on
-        /// enregistre les nouvelles constelaltions qui ont étét créées suite à cette opération, dans la liste.
+        /// Par la suite, on divise la constellation tant qu'elle n'est pas connexe avec tous ces points, et on
+        /// enregistre les nouvelles constellations qui ont été créées suite à cette opération, dans la liste.
         /// On vérifie par la suite si cette constellation est devenue vide suite à cela, si c'est le cas, on la supprime de la liste.
         /// Si par contre il ne s'agit pas d'une étoile ou bien que l'étoile ne se trouve pas dans une constellation, alors on supprime
         /// directement l'astre du dictionnaire, et on retourne cet astre supprimé.
@@ -341,7 +341,7 @@ namespace Modele
 
         /// <summary>
         /// Méthode permettant l'affichage de la Carte. Une Carte affiche d'abord tous ses Astres (Point de l'astre et le nom de l'astre).
-        /// On vient ensuite afficher toutes les constellation
+        /// On vient ensuite afficher toutes les constellations
         /// </summary>
         /// <returns>Une chaîne de caractères contenant les différents éléments de cette carte.</returns>
         public override string ToString()
@@ -374,7 +374,7 @@ namespace Modele
         }
 
         /// <summary>
-        /// Protocole d'égalité permettant de savoir si une carte passée en paramètre est égal à this, donc si elle possède les mêmes
+        /// Protocole d'égalité permettant de savoir si une carte passée en paramètre est égale à this, donc si elle possède les mêmes
         /// constelations, points et astres.
         /// </summary>
         /// <param name="autre">Une carte que l'on souhaite comparer à this.</param>
@@ -404,7 +404,7 @@ namespace Modele
 
         /// <summary>
         /// Permet la génération d'un HashCode, utilisé dans le cas des dictionnaires.
-        /// Ce hascode est définit par le dictionnaire de points et d'astres, ainsi que la liste de constellations de la carte.
+        /// Ce hascode est défini par le dictionnaire de points et d'astres, ainsi que la liste de constellations de la carte.
         /// </summary>
         /// <returns>Un entier représentant le hashcode de cette carte.</returns>
         public override int GetHashCode()

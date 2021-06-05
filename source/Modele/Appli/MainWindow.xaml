@@ -343,10 +343,21 @@
         </Grid>
 
         
-        <!-- ajouter notes -->
+        <!-- 
+        Ces lignes génèrent des erreurs de binding dès que l'on clique sur un astre dans la partie "master".
+        En effet, on envoie au usercontrol toutes les proprietes à binder, même les propriétées des étoiles et des planètes.
+        Donc s'il s'agit d'une étoile, nous allons lui envoyer des propriétés de la planète qui n'existent pas, des erreurs de liaison
+        vont donc se produire, et inversement dans le cas d'une Planète.
+        Nous n'avons pas réussis à résoudre le problème. 
+        Avec deux DataTemplates et en utilisant le DataType, un bug de clic se produisait. Il devenait nécéssaire d'effectuer des 
+        double click lorsque le type de l'astre cliqué changeait.
+        Face à ce problème, nous avons préféré favoriser l'ergonomie, et donc à n'avoir à faire qu'un seul clic, aux erreurs de liaison.
+        Ces lignes sont donc responsables des erreurs de binding de notre application.
+        -->
+        
         <ContentControl  Grid.Column="1" Content="{Binding AstreSelectionne, Mode=TwoWay}" x:Name="Popup">
-            <ContentControl.Resources>
-                <DataTemplate DataType="{x:Type espace:Etoile}">
+            <ContentControl.ContentTemplate>
+                <DataTemplate>
 
                     <usersControls:UCPopup AjouterAstreSurCarte="UCPopup_AjouterAstre"
                                            ImageAstre="{Binding Image}"
@@ -357,22 +368,13 @@
                                            TemperatureAstre="{Binding Temperature}"
                                            ConstellationEtoile="{Binding Constellation}"
                                            TypeEtoile="{Binding Type}"
-                                           LuminositeEtoile="{Binding Luminosite}"/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type espace:Planete}">
-                    <usersControls:UCPopup AjouterAstreSurCarte="UCPopup_AjouterAstre"
-                                           ImageAstre="{Binding Image}"
-                                           NomAstre="{Binding Nom}"
-                                           DescriptionAstre="{Binding Description}"
-                                           AgeAstre="{Binding Age}"
-                                           MasseAstre="{Binding Masse}"
-                                           TemperatureAstre="{Binding Temperature}"
+                                           LuminositeEtoile="{Binding Luminosite}"
                                            SystemePlanete="{Binding Systeme}"
                                            TypePlanete="{Binding Type}"
                                            PresenceDeViePlanete="{Binding Vie}"
                                            EauPresentePlanete="{Binding EauPresente}"/>
                 </DataTemplate>
-            </ContentControl.Resources>
+            </ContentControl.ContentTemplate>
         </ContentControl>
     </Grid>
 </Window>

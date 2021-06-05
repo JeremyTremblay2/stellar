@@ -75,9 +75,9 @@ namespace Appli.usersControls
         /// <summary>
         /// Méthode appellée lorsque l'utilisateur clique sur le bouton pour ajouter l'astre à la carte.
         /// On récupère alors l'astre sélectionné.
-        /// On vérifie ensuite que cet astre précisémment ne se trouve aps sur la carte. Pour cela, on vient parcourir les données de la
+        /// On vérifie ensuite que cet astre précisémment ne se trouve pas sur la carte. Pour cela, on vient parcourir les données de la
         /// Carte, et on passe un booléen à True si l'astre est déjà présent. 
-        /// Enfin, s'il ne s'agit aps d'un astre personnalisé et qu'il ne se trouve pas déjà sur la carte, alors on envoie un évènement
+        /// Enfin, s'il ne s'agit pas d'un astre personnalisé et qu'il ne se trouve pas déjà sur la carte, alors on envoie un évènement
         /// à la fenêtre principale qui pourra gérer l'ajout sur la carte.
         /// Sinon on affiche une messageBox indiquant à l'utilisateur que l'action n'est pas possible.
         /// </summary>
@@ -114,7 +114,7 @@ namespace Appli.usersControls
 
         /****************************************************************************************************/
 
-        //Ce sont ici des dependency property sur la plupart des binding qui seront réalisé à l'intérieur même de ce usercontrol.
+        //Ce sont ici des dependency property sur la plupart des binding qui seront réalisés à l'intérieur même de ce usercontrol.
 
         public string ImageAstre
         {

@@ -42,7 +42,7 @@ namespace Espace
         public string Systeme { get; set; }
 
         /// <summary>
-        /// Constructeur de planète. Il appele le constructeur de sa classe mère, Astre, afin qu'il soit initialisé.
+        /// Constructeur de planète. Il appelle le constructeur de sa classe mère, Astre, afin qu'il soit initialisé.
         /// </summary>
         /// <param name="nom">Le nom de la planète</param>
         /// <param name="description">Une courte description de la planète</param>
@@ -79,7 +79,7 @@ namespace Espace
         }
 
         /// <summary>
-        /// Permet d'afficher une Planète. Pour cela, on affiche les données générale de l'astre, 
+        /// Permet d'afficher une Planète. Pour cela, on affiche les données générales de l'astre, 
         /// puis ensuite les données spécifiques propres à la planète (vie, eau, système stellaire, type).
         /// </summary>
         /// <returns>Retourne la chaîne de caratères représentant la planète.</returns>

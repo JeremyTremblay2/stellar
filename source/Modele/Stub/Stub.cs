@@ -261,7 +261,7 @@ namespace Stub
         /// Simule un chargement des données, ne fait rien en réalité.
         /// </summary>
         /// <param name="cheminFichier">Le chemin du fichier dans lequel les données seront chargées.</param>
-        /// <returns>Deux colelctions de données vides.</returns>
+        /// <returns>Deux collections de données vides.</returns>
         public (Dictionary<Point, Astre> astres, IEnumerable<Constellation> constellations) ChargeDonneesCarte(string cheminFichier)
         {
             return (new Dictionary<Point, Astre>(), new List<Constellation>());

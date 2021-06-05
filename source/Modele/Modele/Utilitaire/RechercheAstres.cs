@@ -16,7 +16,7 @@ namespace Utilitaire
         /// </summary>
         /// <param name="lesAstres">La liste d'astres à filtrer.</param>
         /// <param name="nom">La chaîne de caractères qui va être recherchée dans le nom de tous les astres de la liste.</param>
-        /// <returns>Une nouvelle liste d'astres qui ne contiennent que le nom fournit en paramètre.</returns>
+        /// <returns>Une nouvelle liste d'astres qui ne contiennent que le nom fourni en paramètre.</returns>
         public static List<Astre> RechercheParNom(this List<Astre> lesAstres, string nom)
             => lesAstres.Where(astre => astre.Nom.ToLower().Contains(nom.ToLower())).ToList();
 
@@ -27,7 +27,7 @@ namespace Utilitaire
         /// <param name="lesAstres">La liste d'astres à trier.</param>
         /// <param name="ordre">Un booléen indiquant l'ordre (ascendant ou descendant) du tri.
         ///                     -true -> ascendant
-        ///                     -false -> descandant
+        ///                     -false -> descendant
         /// </param>
         /// <returns>Une nouvelle liste d'astres triée par ordre alphabétique du nom des astres.</returns>
         public static List<Astre> TriParOrdreAlphabetique(this List<Astre> lesAstres, bool ordre)
@@ -63,8 +63,8 @@ namespace Utilitaire
         /// type en fonction de celui passé en paramètre.
         /// </summary>
         /// <param name="lesAstres">La liste d'astres à filtrer.</param>
-        /// <param name="type">Le type de l'astre a conserver (Etoile ou Planete).</param>
-        /// <returns>Une nouvelle liste d'astres qui ne contiennent que le type d'astre fournit en paramètre.</returns>
+        /// <param name="type">Le type de l'astre à conserver (Etoile ou Planete).</param>
+        /// <returns>Une nouvelle liste d'astres qui ne contiennent que le type d'astre fourni en paramètre.</returns>
         public static List<Astre> RechercheParType(this List<Astre> lesAstres, Type type)
             => lesAstres.Where(astre => astre.GetType() == type).ToList();
 

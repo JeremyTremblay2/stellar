@@ -88,7 +88,7 @@ namespace Geometrie
 
         /// <summary>
         /// Permet la génération d'un HashCode, utilisé dans le cas des dictionnaires.
-        /// Ce hascode est définit par les deux points du segment.
+        /// Ce hascode est défini par les deux points du segment.
         /// </summary>
         /// <returns>Un entier représentant le hashcode de ce point.</returns>
         public override int GetHashCode()

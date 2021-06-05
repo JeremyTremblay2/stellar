@@ -10,7 +10,7 @@ using Utilitaire;
 namespace Tests_Unitaires
 {
     /// <summary>
-    /// Classe de test unitaires portant sur les Astres (Etoiles + Planetes). Divers tests de comparaison, d'égalité ont lieux.
+    /// Classe de test unitaires portant sur les Astres (Etoiles + Planetes). Divers tests de comparaison, d'égalité ont lieu.
     /// </summary>
     [TestClass]
     public class Test_Astre_Unit
@@ -49,7 +49,7 @@ namespace Tests_Unitaires
             sirius.Personnalise.Should().BeFalse();
 
             sirius.Nom.Should().NotBeEmpty();
-            //Vérification du type étoile apr défaut, qui doit être "NaineBlanche".
+            //Vérification du type étoile par défaut, qui doit être "NaineBlanche".
             sirius.Type.Should().Be(TypeEtoile.NaineBlanche);
             sirius.Constellation.Should().BeEquivalentTo("Grand Chien");
             sirius.Temperature.Should().Be(9900);
