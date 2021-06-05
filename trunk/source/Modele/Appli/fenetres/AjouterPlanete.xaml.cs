@@ -127,7 +127,6 @@ namespace Appli.fenetres
         private void SurvolBouton(object sender, MouseEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Hand;
-            Opacity = 0.5;
         }
 
         private void FinSurvolBouton(object sender, MouseEventArgs e)
