@@ -174,7 +174,7 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-        <Image Source="images/fonds/fondCarte2.jpg" Grid.Column="1" Stretch="UniformToFill"/>
+        <Image Source="images/fonds/fondCarte1.jpg" Grid.Column="1" Stretch="UniformToFill"/>
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>

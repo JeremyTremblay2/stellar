@@ -146,14 +146,6 @@ namespace Espace
             IEnumerable<Segment> tempo = lesSegments.Where(n => n.PtEquals(point));
             lesSegments.ExceptWith(tempo);
 
-            foreach(Segment seg in tempo)
-            {
-                if (LesSegments.Contains(seg))
-                {
-                    LesSegments.Remove(seg);
-                }
-            }
-
             //Appel d'une méthode permettant de retirer de la constellation les étoiles seules (pas reliées).
             SuppressionPoints();
 
@@ -161,6 +153,7 @@ namespace Espace
             {
                 Vide = true;
             }
+            MiseAJourCollections();
         }
 
         /// <summary>
