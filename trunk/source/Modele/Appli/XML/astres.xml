@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAstre xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/Espace">
+  <Astre i:type="Etoile">
+    <Nom>Sirius</Nom>
+    <Age>250000000</Age>
+    <Description>Sirius, également appelée Alpha Canis Majoris (α Canis Majoris/α CMa) par la désignation de Bayer, est l'étoile principale de la constellation du Grand Chien. Vue de la Terre, Sirius est l'étoile la plus brillante du ciel après le Soleil.</Description>
+    <Masse>1.03</Masse>
+    <Temperature>9900</Temperature>
+    <Image>sirius.jpeg</Image>
+    <Constellation>Grand Chien</Constellation>
+    <Luminosite>26.1</Luminosite>
+    <Type>NaineBlanche</Type>
+  </Astre>
+  <Astre i:type="Etoile">
+    <Nom>Soleil</Nom>
+    <Age>460000000</Age>
+    <Description>Le Soleil est l’étoile du Système solaire. Dans la classification astronomique, c’est une étoile de type naine jaune d'une masse d'environ 1,989 1 × 1030 kg, composée d’hydrogène et d’hélium.</Description>
+    <Masse>1</Masse>
+    <Temperature>5773</Temperature>
+    <Image>soleil.jpg</Image>
+    <Constellation>Aucune</Constellation>
+    <Luminosite>1</Luminosite>
+    <Type>NaineJaune</Type>
+  </Astre>
+  <Astre i:type="Etoile">
+    <Nom>Bételgeuse</Nom>
+    <Age>8000000</Age>
+    <Description>Bételgeuse (α Orionis) est une étoile variable semi-régulière de type supergéante rouge, dans la constellation d’Orion, située à une distance très difficile à établir.</Description>
+    <Masse>15</Masse>
+    <Temperature>3600</Temperature>
+    <Image>bételgeuse.jpg</Image>
+    <Constellation>Orion</Constellation>
+    <Luminosite>17</Luminosite>
+    <Type>SupergeanteRouge</Type>
+  </Astre>
+  <Astre i:type="Etoile">
+    <Nom>Castor</Nom>
+    <Age>370000000</Age>
+    <Description>Castor (ou Alpha Geminorum) est la seconde étoile la plus brillante de la constellation des Gémeaux et une des plus brillantes étoiles du ciel nocturne.</Description>
+    <Masse>1.7</Masse>
+    <Temperature>8840</Temperature>
+    <Image>castor.jpg</Image>
+    <Constellation>Gémeaux</Constellation>
+    <Luminosite>14</Luminosite>
+    <Type>NaineBlanche</Type>
+  </Astre>
+  <Astre i:type="Etoile">
+    <Nom>Pollux</Nom>
+    <Age>7400000000</Age>
+    <Description>Pollux (β Gem / Beta Geminorum) est l'étoile la plus brillante de la constellation des Gémeaux et l'une des plus brillantes du ciel nocturne.</Description>
+    <Masse>1.86</Masse>
+    <Temperature>4865</Temperature>
+    <Image>pollux.jpg</Image>
+    <Constellation>Gémeaux</Constellation>
+    <Luminosite>32</Luminosite>
+    <Type>GeanteRouge</Type>
+  </Astre>
+  <Astre i:type="Etoile">
+    <Nom>Polaris</Nom>
+    <Age>70000000</Age>
+    <Description>Polaris ou Alpha Ursae Minoris est une étoile multiple. Elle est l’étoile la plus brillante de la constellation de la Petite Ourse. Elle est aussi connue sous le nom de l’Étoile polaire car elle correspond à la direction du pôle nord céleste</Description>
+    <Masse>4.5</Masse>
+    <Temperature>7000</Temperature>
+    <Image>pollux.jpg</Image>
+    <Constellation>Petite Ourse</Constellation>
+    <Luminosite>2</Luminosite>
+    <Type>SupergeanteRouge</Type>
+  </Astre>
+  <Astre i:type="Etoile">
+    <Nom>Spica</Nom>
+    <Age>12500000</Age>
+    <Description>Spica ou α Virginis. C'est l'étoile la plus lumineuse de la constellation de la Vierge. On peut remarquer un scintillement lorsqu'on l'observe car Spica est une étoile binaire spectroscopique et une étoile variable ellipsoïdale. </Description>
+    <Masse>11.43</Masse>
+    <Temperature>25300</Temperature>
+    <Image>pollux.jpg</Image>
+    <Constellation>Vierge</Constellation>
+    <Luminosite>20512</Luminosite>
+    <Type>GeanteBleu</Type>
+  </Astre>
+  <Astre i:type="Etoile">
+    <Nom>Antarès</Nom>
+    <Age>11000000</Age>
+    <Description>Antarès ou α Scorpii est une étoile binaire en fin de vie.</Description>
+    <Masse>18</Masse>
+    <Temperature>3570</Temperature>
+    <Image>Antarès.jpg</Image>
+    <Constellation>Scorpion</Constellation>
+    <Luminosite>97700</Luminosite>
+    <Type>SupergeanteRouge</Type>
+  </Astre>
+  <Astre i:type="Planete">
+    <Nom>Mars</Nom>
+    <Age>4500000000</Age>
+    <Description>Mars est la quatrième planète par ordre croissant de la distance au Soleil et la deuxième par ordre croissant de la taille et de la masse.</Description>
+    <Masse>0.107</Masse>
+    <Temperature>210</Temperature>
+    <Image>mars.jpg</Image>
+    <EauPresente>false</EauPresente>
+    <Systeme>Solaire</Systeme>
+    <Type>Tellurique</Type>
+    <Vie>En cours de recherches</Vie>
+  </Astre>
+  <Astre i:type="Planete">
+    <Nom>Vénus</Nom>
+    <Age>4500000000</Age>
+    <Description>Vénus est la deuxième planète du Système solaire par ordre d'éloignement au Soleil, et la sixième plus grosse aussi bien par la masse que le diamètre. Elle doit son nom à la déesse romaine de l'amour.</Description>
+    <Masse>0.815</Masse>
+    <Temperature>737</Temperature>
+    <Image>venus.jpg</Image>
+    <EauPresente>false</EauPresente>
+    <Systeme>Solaire</Systeme>
+    <Type>Tellurique</Type>
+    <Vie>Non</Vie>
+  </Astre>
+  <Astre i:type="Planete">
+    <Nom>Terre</Nom>
+    <Age>4500000000</Age>
+    <Description>La Terre est la troisième planète par ordre d'éloignement au Soleil et la cinquième plus grande du Système solaire aussi bien par la masse que le diamètre. Par ailleurs, elle est le seul objet céleste connu pour abriter la vie.</Description>
+    <Masse>1</Masse>
+    <Temperature>288</Temperature>
+    <Image>terre.jpg</Image>
+    <EauPresente>true</EauPresente>
+    <Systeme>Solaire</Systeme>
+    <Type>Tellurique</Type>
+    <Vie>Oui</Vie>
+  </Astre>
+  <Astre i:type="Planete">
+    <Nom>Mercure</Nom>
+    <Age>4000000000</Age>
+    <Description>Mercure est la planète la plus proche du Soleil et la moins massive du Système solaire. Son éloignement au Soleil est compris entre 0,31 et 0,47 unité astronomique.</Description>
+    <Masse>0.055</Masse>
+    <Temperature>440</Temperature>
+    <Image>mercure.jpg</Image>
+    <EauPresente>false</EauPresente>
+    <Systeme>Solaire</Systeme>
+    <Type>Tellurique</Type>
+    <Vie>Non</Vie>
+  </Astre>
+  <Astre i:type="Planete">
+    <Nom>Jupiter</Nom>
+    <Age>4500000000</Age>
+    <Description>Jupiter est une planète géante gazeusea. Il s'agit de la plus grosse planète du Système solaire, plus volumineuse et massive que toutes les autres planètes réunies, et la cinquième planète par sa distance au Soleil.</Description>
+    <Masse>317.8</Masse>
+    <Temperature>125</Temperature>
+    <Image>jupiter.jpg</Image>
+    <EauPresente>false</EauPresente>
+    <Systeme>Solaire</Systeme>
+    <Type>Gazeuse</Type>
+    <Vie>Non</Vie>
+  </Astre>
+  <Astre i:type="Planete">
+    <Nom>Saturne</Nom>
+    <Age>4500000000</Age>
+    <Description>Saturne est la sixième planète du Système solaire par ordre d'éloignement au Soleil, et la deuxième plus grande par la taille et la masse après Jupiter, qui est comme elle une planète géante gazeuse.</Description>
+    <Masse>95.15</Masse>
+    <Temperature>93</Temperature>
+    <Image>saturne.jpg</Image>
+    <EauPresente>false</EauPresente>
+    <Systeme>Solaire</Systeme>
+    <Type>Gazeuse</Type>
+    <Vie>Non</Vie>
+  </Astre>
+  <Astre i:type="Planete">
+    <Nom>Uranus</Nom>
+    <Age>4500000000</Age>
+    <Description>Uranus est la septième planète du Système solaire par ordre d'éloignement au Soleil. Elle est la première planète découverte à l’époque moderne avec un télescope et non connue depuis l'Antiquité.</Description>
+    <Masse>14.53</Masse>
+    <Temperature>61</Temperature>
+    <Image>uranus.jpg</Image>
+    <EauPresente>false</EauPresente>
+    <Systeme>Solaire</Systeme>
+    <Type>Gazeuse</Type>
+    <Vie>Non</Vie>
+  </Astre>
+  <Astre i:type="Planete">
+    <Nom>Neptune</Nom>
+    <Age>4500000000</Age>
+    <Description>Neptune est la huitième planète par ordre d'éloignement au Soleil et la plus éloignée connue du Système solaire. La distance de la planète à la Terre lui donnant une très faible taille apparente, son étude est difficile avec des télescopes situés sur la Terre.</Description>
+    <Masse>17.14</Masse>
+    <Temperature>58</Temperature>
+    <Image>neptune.jpg</Image>
+    <EauPresente>false</EauPresente>
+    <Systeme>Solaire</Systeme>
+    <Type>Gazeuse</Type>
+    <Vie>Non</Vie>
+  </Astre>
+  <Astre i:type="Planete">
+    <Nom>Pluton</Nom>
+    <Age>4500000000</Age>
+    <Description>Pluton, officiellement désigné par (134340) Pluton, est une planète naine, la plus volumineuse connue dans le Système solaire, et la deuxième en ce qui concerne sa masse. Elle ne fait plus partie du système solaire.</Description>
+    <Masse>0.002</Masse>
+    <Temperature>48</Temperature>
+    <Image>pluton.jpg</Image>
+    <EauPresente>false</EauPresente>
+    <Systeme>Solaire externe</Systeme>
+    <Type>Naine</Type>
+    <Vie>Non</Vie>
+  </Astre>
+</ArrayOfAstre>

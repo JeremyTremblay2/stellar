@@ -16,7 +16,7 @@ namespace JSONPersistance
         /// <summary>
         /// Le chemin vers le fichier.
         /// </summary>
-        public string CheminFichier { get; set; } = Path.Combine(Directory.GetCurrentDirectory(), "..//JSON");
+        public string CheminFichier { get; set; } = Path.Combine(Directory.GetCurrentDirectory(), "/JSON");
 
         /// <summary>
         /// Propriété concernant le nom de notre fichier.
