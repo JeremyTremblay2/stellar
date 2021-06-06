@@ -11,22 +11,28 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="images\fonds\fondCarte1.jpg" />
-    <None Remove="images\fonds\fondCarte2.jpg" />
-    <None Remove="images\fonds\fondCarte3.jpg" />
-    <None Remove="images\fonds\fond_ciel.jpg" />
-    <None Remove="images\fonds\fontCarte1.jpg" />
-    <None Remove="images\fonds\fontCarte2.jpg" />
-    <None Remove="images\icones\coeurPlein.png" />
-    <None Remove="images\icones\coeurVide.png" />
-    <None Remove="images\icones\etoile.png" />
-    <None Remove="images\icones\icone.png" />
-    <None Remove="images\icones\ordreAlphabetiqueCroissant.png" />
-    <None Remove="images\icones\ordreAlphabetiqueDecroissant.png" />
-    <None Remove="images\icones\planete.png" />
-    <None Remove="images\icones\recherche.png" />
-    <None Remove="images\icones\tousLesAstres.png" />
-    <None Remove="images\UI\popup.png" />
+    <None Remove="images\Antarès.jpg" />
+    <None Remove="images\astre.jpg" />
+    <None Remove="images\bételgeuse.jpg" />
+    <None Remove="images\castor.jpg" />
+    <None Remove="images\jupiter.jpg" />
+    <None Remove="images\mars.jpg" />
+    <None Remove="images\mercure.jpg" />
+    <None Remove="images\neptune.jpg" />
+    <None Remove="images\planete neuf.jpg" />
+    <None Remove="images\planete.png" />
+    <None Remove="images\planète.jpg" />
+    <None Remove="images\pluton.jpg" />
+    <None Remove="images\pollux.jpg" />
+    <None Remove="images\saturne.jpg" />
+    <None Remove="images\sirius.jpeg" />
+    <None Remove="images\soleil.jpg" />
+    <None Remove="images\terre.jpg" />
+    <None Remove="images\uranus.jpg" />
+    <None Remove="images\vénus.jpg" />
+    <None Remove="images\étoile.jpg" />
+    <None Remove="JSON\astres.json" />
+    <None Remove="XML\astres.xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +50,24 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="images\fonds\fondCarte3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="JSON\astres.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XML\astres.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Antarès.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\astre.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\bételgeuse.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\castor.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="images\icones\coeurPlein.png">
@@ -73,6 +97,54 @@
     <Resource Include="images\icones\tousLesAstres.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Content Include="images\jupiter.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\mars.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\mercure.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\neptune.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\planete neuf.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\planete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\planète.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\pluton.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\pollux.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\saturne.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\sirius.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\soleil.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\terre.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\uranus.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\vénus.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\étoile.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stub", "Stub\Stub.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataContractPersistance", "DataContractPersistance\DataContractPersistance.csproj", "{4D7D5BE6-9083-4A47-A53D-27259C30B2EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSONPersistance", "JSONPersistance\JSONPersistance.csproj", "{51A83A67-6E7F-4447-9FD9-64CF761D3600}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JSONPersistance", "JSONPersistance\JSONPersistance.csproj", "{51A83A67-6E7F-4447-9FD9-64CF761D3600}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "StellarSetup", "StellarSetup\StellarSetup.vdproj", "{4EEBFB0F-C32A-4461-90FC-87430623A514}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,8 @@ Global
 		{51A83A67-6E7F-4447-9FD9-64CF761D3600}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51A83A67-6E7F-4447-9FD9-64CF761D3600}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51A83A67-6E7F-4447-9FD9-64CF761D3600}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EEBFB0F-C32A-4461-90FC-87430623A514}.Debug|Any CPU.ActiveCfg = Debug
+		{4EEBFB0F-C32A-4461-90FC-87430623A514}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
