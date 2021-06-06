@@ -10,7 +10,7 @@ namespace Appli.convertisseurs
         public static string cheminImages;
         static ConvertisseurDeTexteEnImage()
         {
-            cheminImages = Path.Combine(Directory.GetCurrentDirectory(), @"..\images\");
+            cheminImages = Path.Combine(Directory.GetCurrentDirectory(), @"images\astres");
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

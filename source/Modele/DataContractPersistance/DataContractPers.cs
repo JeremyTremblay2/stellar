@@ -18,7 +18,7 @@ namespace DataContractPersistance
         /// <summary>
         /// Propriété concernant le chemin du fichier dans lequel seront chargées ou sauvegardées les données.
         /// </summary>
-        public string CheminFichier { get; set; } = Path.Combine(Directory.GetCurrentDirectory(), "..//XML");
+        public string CheminFichier { get; set; } = Path.Combine(Directory.GetCurrentDirectory(), "XML");
 
         /// <summary>
         /// Propriété concernant le nom du fichier.
@@ -149,5 +149,6 @@ namespace DataContractPersistance
 
             return (data.Dico, data.Constellations);
         }
+
     }
 }

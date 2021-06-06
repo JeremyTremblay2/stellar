@@ -199,7 +199,7 @@ namespace Appli.fenetres
             {
                 FileInfo fi = new FileInfo(fileName);
 
-                fileName = @"..\..\StellarBin\images\" + fileName;
+                fileName = @".\images\astres\" + fileName;
 
                 BitmapFrame frame = BitmapFrame.Create(img);
                 encoder.Frames.Add(frame);
