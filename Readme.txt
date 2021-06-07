@@ -62,7 +62,7 @@ avec l'outil dossier.
 **  Ergonomie / accessibilité  **
 
 Des textes aparaissent au survol de la plupart des boutons pour spécifier leur rôle.
-Des raccourcis claviers peuvent être utilisés pour utiliser de la carte.
+Des raccourcis claviers peuvent être utilisés pour utiliser les outils de la carte.
 Il est possible de changer de boîte de dialogue en appuyant sur "tab" lors de la création ou modification d'un astre.
 La barre de recherche ne tient pas compte de la casse des lettres majuscules / minuscules.
 Le nom des astres sur la carte s'affiche lorsqu'on survole les points avec le curseur.
