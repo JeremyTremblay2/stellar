@@ -37,7 +37,7 @@ Deux méthodes existent pour lancer l'appli.
 	-Visual demande de redémarrer avec d'autres informations d'identification, accepter, il redémarre.
 	-Refaire la deuxième manoeuvre, et l'application devrait se lancer.
 -Avec le setup :
-	-Executer le fichier "setup.exe" dans le dossier trunk\source\Modele\StellarSetup\Debug (il faut également posséder le fichier "StellarSetup.msi").
+	-Executer le fichier "StellarSetup.msi" dans le dossier trunk\source\Modele\StellarSetup\Release
 	-Suivre les étapes lors de l'installation.
 	-Ouvrir l'application en cliquant sur l'icône qui a dû apparaître sur le bureau. L'application devrait demander les droits
 pour enregistrer les données, accepter. L'application devrait fonctionner.

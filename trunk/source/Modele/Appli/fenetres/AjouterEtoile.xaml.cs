@@ -157,8 +157,8 @@ namespace Appli.fenetres
                                                     };
             //Les fomats autorisés. Par défaut, le dossier "Images" sera utilisé s'il existe.
             dlg.FileName = "Images";
-            dlg.DefaultExt = ".jpg | .png | .gif"; 
-            dlg.Filter = "All images files (.jpg, .png, .gif)|*.jpg;*.png;*.gif|JPG files (.jpg)|*.jpg|PNG files (.png)|*.png|GIF files (.gif)|*.gif";
+            dlg.DefaultExt = ".jpg | .png"; 
+            dlg.Filter = "All images files (.jpg, .png)|*.jpg;*.png|JPG files (.jpg)|*.jpg|PNG files (.png)|*.png";
 
             bool? result = dlg.ShowDialog();
 
