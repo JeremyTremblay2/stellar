@@ -15,13 +15,13 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_413494FCE391459EA4890D2B1F9DEABE"
+        "MsmKey" = "8:_909ADA74FE394EFB82CB9683D618DE3D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_909ADA74FE394EFB82CB9683D618DE3D"
+        "MsmKey" = "8:_CF1EC787C25F4190A399140D75A80B5D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -33,7 +33,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\StellarSetup.msi"
+        "OutputFilename" = "8:Release\\StellarSetup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -82,6 +82,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -114,9 +122,9 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_413494FCE391459EA4890D2B1F9DEABE"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CF1EC787C25F4190A399140D75A80B5D"
             {
-            "SourcePath" = "8:C:\\Users\\jtrem\\Downloads\\icone.ico"
+            "SourcePath" = "8:..\\Appli\\images\\icones\\icone.ico"
             "TargetName" = "8:icone.ico"
             "Tag" = "8:"
             "Folder" = "8:_493C7DD126674CCD82552FF855A0C344"
@@ -202,7 +210,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Stellar"
         "ProductCode" = "8:{B50988D2-7D77-4336-ABDC-B4A222257060}"
-        "PackageCode" = "8:{E5B165B1-F9BB-47A4-BBF7-A5E152F90679}"
+        "PackageCode" = "8:{71618A97-4848-42E5-88E0-FFC7A1A94126}"
         "UpgradeCode" = "8:{E412EE97-4C0B-48A6-B99B-CFAEEDA31224}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"
@@ -322,7 +330,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_99CB5C30FF3B43B0A992E215BCECFDFE"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_0B4FC0C7FAD64E1B8663842EE76D45B2"
             {
             "Name" = "8:Stellar"
             "Arguments" = "8:"
@@ -333,7 +341,21 @@
             "Target" = "8:_909ADA74FE394EFB82CB9683D618DE3D"
             "Folder" = "8:_26694DA29C2D401E84AA3D178E71E284"
             "WorkingFolder" = "8:_493C7DD126674CCD82552FF855A0C344"
-            "Icon" = "8:_413494FCE391459EA4890D2B1F9DEABE"
+            "Icon" = "8:_CF1EC787C25F4190A399140D75A80B5D"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A2D3F3AE3DC645A4B12F55FFBB37166F"
+            {
+            "Name" = "8:Stellar"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_909ADA74FE394EFB82CB9683D618DE3D"
+            "Folder" = "8:_9F5443BF276E427F94DB65A08D17CF44"
+            "WorkingFolder" = "8:_493C7DD126674CCD82552FF855A0C344"
+            "Icon" = "8:_CF1EC787C25F4190A399140D75A80B5D"
             "Feature" = "8:"
             }
         }

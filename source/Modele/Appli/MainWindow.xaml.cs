@@ -334,6 +334,8 @@ namespace Appli
                     }
                 }
             }
+
+            CtrlOk = false;
         }
 
         /// <summary>
@@ -356,6 +358,7 @@ namespace Appli
                 Debug.WriteLine(sauvegardeFichier.FileName);
                 Manager.SauvegardeDonneesCarte(sauvegardeFichier.FileName);
             }
+            CtrlOk = false;
         }
 
         /// <summary>
@@ -378,6 +381,7 @@ namespace Appli
                 case MessageBoxResult.No:
                     break;
             }
+            CtrlOk = false;
         }
 
         /// <summary>
