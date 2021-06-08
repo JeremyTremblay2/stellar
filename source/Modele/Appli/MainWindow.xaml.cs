@@ -836,10 +836,12 @@ namespace Appli
             } 
             else if (CtrlOk && e.Key == Key.O)
             {
+                CtrlOk = false;
                 ChargementClic(null, null);
             }
             else if(CtrlOk && e.Key == Key.S)
             {
+                CtrlOk = false;
                 SauvegardeClic(null, null);
             }
             else if (CtrlOk && e.Key == Key.E)
@@ -860,6 +862,7 @@ namespace Appli
             }
             else if (CtrlOk && e.Key == Key.U)
             {
+                CtrlOk = false;
                 PoubelleClic(null, null);
             }
             else if (e.Key == Key.F12)
