@@ -277,11 +277,11 @@
                 
             </Grid>
 
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" x:Name="carte">
                 <ItemsControl ItemsSource="{Binding Path=Carte.LesConstellations}" Grid.Column="1">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <Canvas />
+                            <Canvas/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
 
