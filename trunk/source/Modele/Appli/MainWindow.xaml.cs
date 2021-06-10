@@ -13,6 +13,7 @@ using Appli.usersControls;
 using Microsoft.Win32;
 using System.IO;
 using System.Runtime.Serialization;
+using System.Printing;
 
 namespace Appli
 {
@@ -565,7 +566,7 @@ namespace Appli
                     nouvelleEtoile.ShowDialog();
 
                     //S'il valide, alors on vient ajouter l'astre correspondant.
-                    if (nouvelleEtoile.LEtoileEditable != null)
+                    if (nouvelleEtoile.LEtoileEditable != null && !string.IsNullOrWhiteSpace(nouvelleEtoile.LEtoileEditable.Nom))
                     {
                         EffacerDonneesCliquees();
                         point.Deplacer(point.X - 15 - decalageHorizontalCanvas, point.Y - decalageVerticalCanvas);
@@ -581,7 +582,7 @@ namespace Appli
                     nouvellePlanete.Owner = this;
                     nouvellePlanete.ShowDialog();
 
-                    if (nouvellePlanete.LaPlaneteEditable != null)
+                    if (nouvellePlanete.LaPlaneteEditable != null && !string.IsNullOrWhiteSpace(nouvellePlanete.LaPlaneteEditable.Nom))
                     {
                         EffacerDonneesCliquees();
                         point.Deplacer(point.X - 15 - decalageHorizontalCanvas, point.Y - decalageVerticalCanvas);
