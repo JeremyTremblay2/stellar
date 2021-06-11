@@ -65,7 +65,6 @@ namespace Modele
                 {
                     astreSelectionne = value;
                     OnPropertyChanged(nameof(AstreSelectionne));
-                    OnPropertyChanged(nameof(AstreSelectionne));
                 }
             }
         }

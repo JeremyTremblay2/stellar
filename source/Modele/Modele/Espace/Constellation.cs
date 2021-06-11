@@ -450,7 +450,6 @@ namespace Espace
         {
             System.Drawing.Color c = System.Drawing.Color.FromArgb(255, generateurCouleur.Next(256),
                 generateurCouleur.Next(256), generateurCouleur.Next(256));
-            c.ToArgb();
 			return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");        }
 
         /// <summary>
