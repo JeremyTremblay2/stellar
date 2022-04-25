@@ -2,7 +2,13 @@
 
 ## Description
 
-Cette application Stellar est un master-detail portant sur les astres (les étoiles et planètes de manière plus précise). Il est possible d'obtenir des informations sur ces objets stellaire, mais aussi de les mettre en favoris pour les retrouver plus facilement. L'application possède une partie "éditeur" dans laquelle l'utilisateur peut créer ses propres cartes du ciel, de manière interactive.
+Cette application Stellar est un master-detail portant sur les astres (les étoiles et planètes de manière plus précise). Il est possible d'obtenir des informations sur ces objets stellaire, mais aussi de les mettre en favoris pour les retrouver plus facilement. L'application possède une partie "éditeur" dans laquelle l'utilisateur peut créer ses propres cartes du ciel, de manière interactive.  
+
+![capture d'écran infos](documentation/ecranPrincipal.jpg)  
+*Capture d'écran du menu principal de Stellar. On retrouve le master à gauche et l'éditeur et ses outils à droite*
+
+![capture d'écran infos](documentation/informations.jpg)  
+*Capture d'écran du détail d'une étoile depuis Stellar. La fenêtre est riche en informations à propos de l'astre sélectionné* 
     
 ## Eléments importants du code
 
